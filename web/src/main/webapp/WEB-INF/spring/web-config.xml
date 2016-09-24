@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd	
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<!-- 自动扫描 -->
+	<context:component-scan base-package="com.yueny.cropui.controller"/>
+	
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<!-- can read and write byte arrays from the HTTP request and response -->
+			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			
+			<ref bean="stringHttpMessageConverter"/>
+			
+			<bean class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+			
+			<!-- can read and write form data from the HTTP request and response -->
+			<bean class="com.yueny.rapid.lang.json.CustomAllEncompassingFormHttpMessageConverter">
+				<constructor-arg name="charset" value="UTF-8" />
+			</bean>
+			
+			<ref bean="mappingJackson2HttpMessageConverter"/>
+			<ref bean="fastJsonHttpMessageConverter"/>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- StringHttpMessageConverter编码为UTF-8，防止乱码.
+				can read and write Strings from the HTTP request and response -->
+	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+	    <constructor-arg value="UTF-8" index="0"/>
+        <property name="writeAcceptCharset" value="false"/>
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+	</bean>
+	<bean id="mappingJackson2HttpMessageConverter" class="com.yueny.rapid.lang.json.CustomMappingJackson2HttpMessageConverter">
+		<constructor-arg name="charset" value="UTF-8" />
+	</bean>
+    <!-- json转换器.避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+		    <list>
+		        <value>application/json;charset=UTF-8</value>
+		        <value>text/html;charset=UTF-8</value>
+		    </list>
+		</property>
+	</bean>
+	 
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving
+        up static resources  -->
+    <mvc:resources mapping="/assets/**" location="/assets/"/>
+    <mvc:resources mapping="/upload/**" location="/upload/"/>
+     
+	<!-- or ContentNegotiating  -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">  
+        <property name="mediaTypes">
+			<map>
+				<entry key="html" value="text/html" />  
+                <entry key="json" value="application/json" />  
+                <entry key="xml" value="application/xml" />
+                <entry key="xls" value="application/excel" />  
+                <entry key="pdf" value="application/pdf" /> 
+			</map>
+		</property>
+		<property name="ignoreAcceptHeader" value="true"></property>
+        <property name="defaultContentType" value="text/html"/>
+    </bean>
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+		<property name="order" value="0"/>
+		<property name="viewResolvers">
+			<list>
+				<!-- 针对freemarker的视图解析配置 -->
+				<bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+					p:prefix="/" p:suffix=".ftl">
+					<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+					<property name="order" value="2"/>
+					<property name="contentType" value="text/html; charset=utf-8" />
+					<property name="cache" value="true"></property>
+					<property name="exposeRequestAttributes" value="true"></property>
+					<property name="exposeSessionAttributes" value="true"></property>
+					<property name="exposeSpringMacroHelpers" value="true"></property>
+					<property name="requestContextAttribute" value="request"/>
+				</bean>
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+                    <!-- 配置页面路径 -->
+                    <property name="prefix" value="/WEB-INF/jsp/" />
+                    <!-- 文件以value值结尾 -->
+                    <property name="suffix" value=".jsp"/>
+                    <property name="order" value="3"/>
+                </bean>
+			</list>
+		</property>
+		<property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+                    <property name="prettyPrint" value="true" />
+                    <property name="contentType" value="application/json" />
+                </bean>
+            </list>  
+        </property>
+	</bean>
+	
+	<!-- 
+	Allows for mapping the DispatcherServlet to "/" by forwarding static resource 
+	requests to the container's default Servlet
+	 -->
+	<mvc:default-servlet-handler/>
+	
+	<!-- 总拦截器，用于处理权限 -->
+	<mvc:interceptors>
+		<!-- 1、建立日志MDC上下文属性的拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+			<bean class="com.yueny.superclub.util.log.mdc.WebLogMDCHandlerInterceptor"/>
+		</mvc:interceptor>
+		
+		<!-- 2、CsrfIntercepter拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+			<bean class="com.yueny.blog.service.intercepter.CsrfIntercepter"/>
+		</mvc:interceptor>
+		
+		<!-- 2、Context 服务上下文初始化拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.yueny.superclub.service.rest.context.ServiceContextInterceptor"/>
+			<!-- 
+			<bean class="com.yueny.superclub.service.rest.context.ServiceContextInterceptor"
+				p:systemCode="${app.system.code}"/>
+			 -->
+		</mvc:interceptor>
+		
+		<!-- 3、web,service日志摘要(web)  -->
+		<mvc:interceptor>
+            <mvc:mapping path="/services/**"/>
+            <mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+            <bean class="com.yueny.superclub.util.log.digest.web.WebDigestLogHandlerInterceptor"
+                  c:loggerName="SERVICE-DIGEST-LOGGER" p:slowDumpThreshold="100" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/services/**"/>
+            <mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+            <bean class="com.yueny.superclub.util.log.digest.web.WebDigestLogHandlerInterceptor"
+                  c:loggerName="PAGE-DIGEST-LOGGER" p:slowDumpThreshold="100"/>
+        </mvc:interceptor>
+        
+		<!-- 3、系统响应时间 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+			<bean class="com.yueny.superclub.util.web.security.interceptors.MeasurementTimesInterceptor"/>
+		</mvc:interceptor>
+		<!-- 4、UserAgent  -->
+		<mvc:interceptor>
+		 	<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+		 	<bean class="com.yueny.rapid.lang.agent.handler.UserAgentResolverHandlerInterceptor"/>
+		</mvc:interceptor>
+ 		
+		<!-- 控制管理访问信息拦截器
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/static/**" />
+			<bean class="com.yueny.codelets.web.interceptors.security.access.AdminAccessHandlerInterceptor">
+				<property name="debug" value="${tomcat.web.security.access.debug}" />
+				<property name="enable" value="${tomcat.access.interceptor.enable}" />
+			</bean>
+		</mvc:interceptor>
+		
+		<bean name="requestDataValueProcessor" class="com.yueny.cropui.service.csrf.session.CSRFSessionRequestDataValueProcessor"/>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/cropui/static/**"/>
+			<bean class="com.yueny.cropui.service.csrf.session.CSRFSessionHandlerInterceptor"
+				p:loginUrl="${login.url}"/>
+		</mvc:interceptor>
+		-->
+		 <!-- 排除地址
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			
+			<mvc:exclude-mapping path="/welcome**" />
+			<mvc:exclude-mapping path="/index.jsp/**" />
+			<mvc:exclude-mapping path="/static/**" />
+			<mvc:exclude-mapping path="/aboutme" />
+			<mvc:exclude-mapping path="/api/login/**"/>
+			<mvc:exclude-mapping path="/api/register/**"/>
+			<bean class="com.yueny.codelets.web.interceptors.login.WebLoginCheckInterceptor">
+				<property name="loginUrl" value="${url.default.request.login.in}" />
+			</bean>
+		</mvc:interceptor>
+		 -->
+	</mvc:interceptors>
+	
+</beans>

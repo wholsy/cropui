@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<configuration>
+		 <custom-converters>
+			<converter type="com.yueny.rapid.lang.dozer.DateConverter">
+				<class-a>java.util.Date</class-a>
+				<class-b>java.lang.String</class-b>
+			</converter>
+			<converter type="com.yueny.rapid.lang.dozer.MoneyConverter">
+				<class-a>org.joda.money.Money</class-a>
+				<class-b>java.lang.Long</class-b>
+			</converter>
+			<converter type="com.yueny.rapid.lang.dozer.CommonEnumConverter">
+				<class-a>java.lang.Enum</class-a>
+				<class-b>java.lang.String</class-b>
+			</converter>
+			<converter type="com.yueny.rapid.lang.dozer.CommonEnumConverter">
+				<class-a>java.lang.Enum</class-a>
+				<class-b>java.lang.Number</class-b>
+			</converter>
+			
+			<converter type="com.yueny.blog.service.util.dozer.SetsConverter">
+				<class-a>java.util.Set</class-a>
+				<class-b>java.lang.String</class-b>
+			</converter>
+		</custom-converters>
+	</configuration>
+	 
+</mappings>

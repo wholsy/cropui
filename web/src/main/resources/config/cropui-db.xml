@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+	
+	<description>
+		本文件是为了统一不同环境下的spring配置，正常情况下本文件只存储通用配置，不通用的配置请放在别的文件中，并import该文件
+	</description>
+	
+	<import resource="classpath*:/config/spring-common.xml"/>
+	
+    <!-- Druid DataSource -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+    	init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${db.mysql.jdbc.driverClassName}"/>
+        <property name="url" value="${db.mysql.jdbc.url}"/>
+        <property name="username" value="${db.mysql.jdbc.username}"/>
+        <property name="connectProperties">
+            <props>
+                <prop key="password">${db.mysql.jdbc.password}</prop>
+                <prop key="druid.stat.logSlowSql">true</prop>
+                <prop key="druid.stat.slowSqlMillis">5000</prop>
+                <prop key="connectTimeout">1000</prop>
+                <prop key="socketTimeout">5000</prop>
+            </props>
+        </property>
+        <property name="passwordCallback">
+            <bean class="com.yueny.superclub.util.storage.db.EncryptedPasswordCallback"
+                  p:publicKeyPath="${db.mysql.jdbc.password_public_key_path}"/>
+        </property>
+        
+        <!-- 配置初始化大小、最小、最大  -->
+        <property name="initialSize" value="2"/>
+        <property name="minIdle" value="2"/>
+        <property name="maxActive" value="10"/>
+		
+		<!-- 配置获取连接等待超时的时间  -->
+        <property name="maxWait" value="1000"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+		<!-- 每隔5分钟将监控日志输出到日志文件中，单位是毫秒。 -->
+        <property name="timeBetweenLogStatsMillis" value="300000"/>
+
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+		<!-- 
+		打开PSCache，并且指定每个连接上PSCache的大小 .
+		如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。
+		分库分表较多的数据库，建议配置为false。
+		-->
+        <property name="poolPreparedStatements" value="false"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+		
+		<!-- 超时回收机制:此配置项会影响性能，只在排查的时候打开。系统运行时最好关闭。
+		removeAbandoned: 超过时间限制是否回收;
+		removeAbandonedTimeout: 超时时间；单位为秒。180秒=3分钟;
+		logAbandoned: 关闭abanded连接时输出错误日志
+		 -->
+		<!-- 
+		<property name="removeAbandoned" value="true" />  
+		<property name="removeAbandonedTimeout" value="180" />  
+		<property name="" value="true" />
+		-->  
+		 
+		<!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat, slf4j"/>
+        
+        <property name="proxyFilters">
+            <list>
+                <ref bean="wall-filter"/>
+                <ref bean="stat-filter"/>
+                <ref bean="log-filter"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="dbType" value="mysql"/>
+    </bean>
+   	<!-- Druid输出执行超过3秒的sql语句 -->
+    <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <property name="slowSqlMillis" value="3000"/>
+        <property name="logSlowSql" value="true" />
+        <property name="mergeSql" value="true" />
+    </bean>
+    <bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+        <!-- <property name="resultSetLogEnabled" value="false" /> -->
+        <!-- <property name="statementExecutableSqlLogEnable" value="true" /> -->
+    </bean>
+	
+</beans>

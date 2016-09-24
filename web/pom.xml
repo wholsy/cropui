@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.yueny.blog</groupId>
+		<artifactId>nodes</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../</relativePath>
+	</parent>
+  
+	<artifactId>blog-web</artifactId>
+	<packaging>war</packaging>
+	
+	<dependencies>
+		<dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-service</artifactId>
+            <version>${cropui.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-bo</artifactId>
+            <version>${cropui.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-dao</artifactId>
+           <version>${cropui.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-entry</artifactId>
+            <version>${cropui.version}</version>
+        </dependency>
+        
+        <!-- passport
+        <dependency>
+            <groupId>com.yueny.passport</groupId>
+            <artifactId>passport-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+         -->
+        
+        <dependency>
+		    <groupId>com.yueny.rapid.util</groupId>
+		    <artifactId>rapid-util-web-common</artifactId>
+		    <version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+        <!-- freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+		<!-- 添加Servlet支持 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>taglibs</groupId>
+		    <artifactId>standard</artifactId>
+		</dependency>
+	</dependencies>
+  
+	<build>
+		<finalName>blog</finalName>
+		 <plugins>
+		 	<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+                    <execution>
+                        <id>make-binary-pacakge</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>job-deploy</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>src/main/resources/assemble-descriptor.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				</configuration>
+				<executions>
+                     <execution>
+                         <phase>package</phase>
+                         <goals>
+                             <goal>war</goal>
+                         </goals>
+                         <configuration>
+                             <classifier>${env}</classifier>
+                         </configuration>
+                     </execution>
+				</executions>
+			</plugin>
+		 </plugins>
+	 </build>
+	 
+	 <profiles>
+	 	<profile>
+	 		<id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>dev</env>
+                
+                <!-- 如何配置端口 -->
+                <pom.logs.home>D:/var/logs/javalog/blog/runtime/blog</pom.logs.home>
+                <pom.logs.level>debug</pom.logs.level>
+                <pom.logs.level.digest>info</pom.logs.level.digest>
+                <pom.log.root.appender>file-log</pom.log.root.appender>
+            </properties>
+	 	</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env>prod</env>
+				
+				<pom.logs.home>/data/var/logs/javalog/blog/runtime/blog</pom.logs.home>
+                <pom.logs.level>info</pom.logs.level>
+                <pom.logs.level.digest>info</pom.logs.level.digest>
+                <pom.log.root.appender>file-log</pom.log.root.appender>
+			</properties>
+		</profile>
+	 </profiles>
+	
+</project>

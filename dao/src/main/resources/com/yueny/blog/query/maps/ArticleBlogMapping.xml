@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yueny.blog.dao.article.IArticleBlogMapper">
+  <resultMap id="resultMap" type="com.yueny.blog.entry.article.ArticleBlogEntry" >
+  		<result column="ARTICLE_BLOG_ID" property="articleBlogId"/>
+  		<result column="ARTICLE_ID" property="articleId"/>
+  		<result column="ARTICLE_PREVIOUS_BLOG_ID" property="articlePreviousBlogId"/>
+  		<result column="ARTICLE_TITLE" property="articleTitle"/>
+  		<result column="SEL_TYPE_CODE" property="selTypeCode"/>
+  		<result column="ARTICLE_CONTEXT" property="articleContext"/>
+  		<result column="ARTICLE_DIGEST" property="articleDigest"/>
+  		<result column="ARTICLE_TAG_IDS" property="articleTagIds"/>
+  		<result column="OWENER_TAG_IDS" property="owenerTagIds"/>
+  		<result column="CATEGORY_TAG_CODES" property="categoryTagCodes"/>
+  		<result column="ARTICLE_MORE" property="articleMore"/>
+  		<result column="UID" property="uid"/>
+  		<result column="MODIFY_USER" property="modifyUser"/>
+  		<result column="VERSION" property="version"/>
+  		<result column="UPDATE_TIME" property="updateTime"/>
+  		<result column="CREATE_TIME" property="createTime"/>
+  </resultMap>
+			
+  <resultMap id="detailMap" type="com.yueny.blog.entry.article.ArticleBlogEntry" extends="resultMap">
+  </resultMap>
+
+</mapper>

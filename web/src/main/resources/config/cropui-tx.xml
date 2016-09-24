@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- tomcat部署 -->
+	<bean id="transactionManager" 
+		  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+	    <property name="dataSource" ref="dataSource" />  
+	</bean>
+	<!-- 注意：Jdbc的TransactionManager不支持事务隔离级别，可以使用jta
+	<bean id="corpuiTxManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+		<property name="transactionSynchronizationRegistryName" 
+						value="java:comp/env/TransactionSynchronizationRegistry" />
+	</bean>
+    --> 
+    
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+<!--     配置事务通知属性   -->
+<!--     <tx:advice id="txAdvice" transaction-manager="transactionManager">   -->
+<!--         定义事务传播属性   -->
+<!--         <tx:attributes>   -->
+<!--             <tx:method name="insert*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="update*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="edit*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="save*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="add*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="new*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="set*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="remove*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="delete*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="change*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="check*" propagation="REQUIRED" />   -->
+<!--             <tx:method name="get*" propagation="REQUIRED" read-only="true" />   -->
+<!--             <tx:method name="find*" propagation="REQUIRED" read-only="true" />   -->
+<!--             <tx:method name="load*" propagation="REQUIRED" read-only="true" />   -->
+<!--             <tx:method name="*" propagation="REQUIRED" read-only="true" />   -->
+<!--         </tx:attributes>   -->
+<!--     </tx:advice> -->
+    <!-- 配置事务切面
+    <aop:config>  
+        <aop:pointcut id="serviceOperation"  
+            expression="execution(* com.yueny.service.*.*(..))" />  
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />  
+    </aop:config>
+     -->
+     
+    <bean name="TxTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager"/>
+		<!--ISOLATION_DEFAULT 表示由使用的数据库决定 -->
+		<property name="isolationLevelName" value="ISOLATION_DEFAULT"/>
+		<property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"/>
+		<property name="readOnly" value="false"/>
+		<property name="timeout" value="30"/> <!-- in seconds -->
+	</bean>
+    
+</beans>
