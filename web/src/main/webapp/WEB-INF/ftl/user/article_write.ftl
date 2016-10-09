@@ -168,10 +168,10 @@
 	</div>
 </form>
 	
-	<script src="${ctx}/assets/plugins/kindeditor/kindeditor-all.js" type="text/javascript"></script>
 	<#--
-	<script src="http://static.yueny.site/plugins/kindeditor/kindeditor-all.js" type="text/javascript"></script>
+	<script src="${ctx}/assets/plugins/kindeditor/kindeditor-all.js" type="text/javascript"></script>
 	-->
+	<script src="http://static.yueny.site/plugins/kindeditor/kindeditor-all.js" type="text/javascript"></script>
 	<script src="http://static.yueny.site/plugins/kindeditor/lang/zh-CN.js" type="text/javascript"></script>
 	
 	<script src='http://static.yueny.site/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
