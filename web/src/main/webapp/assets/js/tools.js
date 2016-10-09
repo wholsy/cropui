@@ -13,10 +13,12 @@ tools.success = function (val) {
 tools.upload_success = function (resp){
 	return tools.success(resp.code);
 };
+
 /* 获取上传结果文本 */
 tools.upload_msg_text = function (resp){
    return resp.message;
 };
+
 /* 获取上传结果的地址列表  */
 tools.upload_urls = function (resp){
    return resp.data;
@@ -46,6 +48,7 @@ tools.hasVal = function (e) {
 tools.urlHas = function (s) {
     return window.location.href.toLowerCase().indexOf(s.toLowerCase()) > 0;
 };
+
 /*获取一个指定长度随机数*/
 tools.random = function (len) {
     if (!len) len = 5;
@@ -58,6 +61,7 @@ tools.toJSON = function (data) {
     if (typeof data == "string") data = eval("(" + data + ")");
     return data;
 };
+
 /*q:参数名; url:可选*/
 tools.getQuery = function (q, url) {
     if (!url) url = window.location + '';
@@ -67,6 +71,7 @@ tools.getQuery = function (q, url) {
     if (re) return decodeURIComponent(re[2].replace(/[+]/g,' '));
     else return "";
 };
+
 tools.format = function (s, pars) {
     if (!s) return "";
     if (pars == null) return s;
@@ -86,6 +91,7 @@ tools.format = function (s, pars) {
     }
     return s;
 };
+
 tools.isArray = function (val) {
     return !!(val &&
         typeof val == "object" &&
@@ -94,6 +100,7 @@ tools.isArray = function (val) {
         !(val.propertyIsEnumerable('length'))
         );
 };
+
 tools.htmlEncode = function (s) {
     if (!s) return "";
 
@@ -150,9 +157,43 @@ tools.getArticleId = function (val) {
     }
     return 0;
 };
+
 /*从cookie获取用户名*/
 tools.getUN = function () {
     var m = document.cookie.match(new RegExp("(^| )UserName=([^;]*)(;|$)"));
     if (m) return m[2];
     else return '';
+};
+
+/* 编辑器按钮 */
+tools.editorBtn = function (val) {
+	var bugTools =
+		[ 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic','underline', '|', 
+		'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|',
+		'emoticons', 'image', 'code', 'link', '|', 'removeformat','undo', 'redo', 'fullscreen', 'source'];
+
+	var simpleTools = 
+		[ 'source', '|', 'preview', 'code', '|', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic','underline', '|', 
+		  'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|',
+		  'emoticons', 'image', 'code', 'link', '|', 'removeformat','undo', 'redo', 'fullscreen', 'source'];
+
+	var fullTools = 
+		[ 'source', '|', 'undo', 'redo', '|', 
+		  'preview', 'template', 'table', 'code', 'cut', 'copy', 'paste', 'selectall', '|', 'plainpaste', 'wordpaste', '|', 
+		'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', '|', 
+		'insertorderedlist', 'insertunorderedlist', '|', 
+		'indent', 'outdent', 'subscript', 'superscript', '|', 'fullscreen', '/',// '/' 为换行
+		'formatblock', 'fontname', 'fontsize', 'lineheight' , '|', 
+		'forecolor', 'hilitecolor', '|', 'bold', 'italic', 'underline', 'strikethrough', '|',
+		'removeformat', 'clearhtml', 'quickformat', '|', 'image', 'multiimage',
+		'flash', 'media', 'insertfile', '|', 'hr', 'emoticons', 'baidumap', 'anchor', '|', 
+		'link', 'unlink'];
+	
+	if(val == "bug"){
+		return bugTools;
+	}
+	if(val == "simple"){
+		return simpleTools;
+	}
+	return fullTools;
 };

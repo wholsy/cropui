@@ -1,3 +1,5 @@
+/* unused */
+
 function format_string(src, args){
     return src.replace(/\{(\d+)\}/g, function(m, i){
 	return args[i];
