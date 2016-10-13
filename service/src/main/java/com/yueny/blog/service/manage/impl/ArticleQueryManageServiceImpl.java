@@ -27,7 +27,7 @@ import com.yueny.rapid.lang.date.DateUtil;
 import com.yueny.rapid.lang.enums.BaseErrorType;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.superclub.api.page.core.PageCond;
-import com.yueny.superclub.util.exec.core.IMultiThreadService;
+import com.yueny.superclub.util.exec.MultiThreadSupport;
 import com.yueny.superclub.util.exec.executor.IExecutor;
 
 import lombok.SneakyThrows;
@@ -47,7 +47,7 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
 	@Autowired
-	private IMultiThreadService multiThreadService;
+	private MultiThreadSupport multiThreadSupport;
 	@Autowired
 	private IOwenerTagService owenerTagService;
 
@@ -92,21 +92,19 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 	@Override
 	@SneakyThrows(value = { DataVerifyAnomalyException.class })
 	public ArticleBlogViewBo getArticleInfo(final String articleBlogId) {
-		// 从缓存获取信息,并增加一次阅读量,不关注成败
-
 		// 增加一次阅读量,不关注成败,转异步
-		multiThreadService.processJobs(new IExecutor<String>() {
+		multiThreadSupport.processJobs(new IExecutor<String>() {
 			@Override
 			public void execute(final List<String> ts) {
-				for (final String articleBlogId : ts) {
+				for (final String blogId : ts) {
 					try {
-						articleBlogService.plusReadTimes(articleBlogId);
+						articleBlogService.plusReadTimes(blogId);
 					} catch (final Exception e) {
 						logger.error("阅读量增加增加失败!", e);
 					}
 				}
 			}
-		}, articleBlogId);
+		}, Lists.newArrayList(articleBlogId));
 
 		// 获取文章的基本信息
 		final ArticleBlogBo articleBlog = articleBlogService.findByBlogId(articleBlogId);

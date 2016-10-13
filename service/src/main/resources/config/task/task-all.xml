@@ -5,17 +5,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 	
-	<bean class="com.yueny.superclub.util.exec.core.MultiThreadServiceImpl"/>
-
 	<import resource="classpath*:/config/task/task-biz-bean.xml"/>
 	
 	<task:scheduler id="scheduler" pool-size="10"/>
+	
 	<!-- 通过线程池执行
     <task:annotation-driven scheduler="scheduler" executor="executor" 
     	proxy-target-class="true"/>
      -->	
 	
-	<!-- 如下实现是通过线程池执行的
+	<!-- old method
     <task:scheduler id="mailSendExecutor" pool-size="10"/>
      -->
     <!-- 邮件发送线程管理
