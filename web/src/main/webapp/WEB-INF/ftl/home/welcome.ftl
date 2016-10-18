@@ -2,7 +2,9 @@
 
 <@m.page_header title='${title}'/>
 
-<p>:)</p>
+<p>
+:)
+</p>
 
 <ul class="posts">
 	<#list articleBlogs as articleBlog>

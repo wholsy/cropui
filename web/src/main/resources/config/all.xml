@@ -10,6 +10,7 @@
 		classpath:applicationContext.xml只加入本项目根目录下的applicationContext.xml文件，不依赖其它jar包的配置文件时推荐这样写，以避免冲突。
 		 -->
 	<import resource="classpath*:/config/cropui-**.xml"/>
+	
 	<!-- 
 	<import resource="classpath*:/config/dubbo-provider**.xml"/>
 	 -->

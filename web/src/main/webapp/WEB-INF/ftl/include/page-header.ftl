@@ -36,7 +36,12 @@
 			<div class="navbar">
 				<div class="navbar-inner">
 					<div class="container-narrow">
-						<a class="brand" href="${ctx}/">正值少年<small> Thinking all about tech & life </small></a>
+						<a class="brand" href="${ctx}/">
+							正值少年
+							<small>
+								 So do it,and change it,no regret!
+							</small>
+						</a>
 						
 						<ul class="nav">
 							<li><a href="${ctx}/">主页</a></li>

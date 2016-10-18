@@ -16,7 +16,6 @@
 	<bean id="performanceMonitoringHelper" scope="prototype"
 		class="com.yueny.blog.service.common.PerformanceMonitoringHelper">
 	</bean>
-	
 	<bean id="performanceMonitoringAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor" scope="prototype">
 		<property name="advice" ref="performanceMonitoringHelper" />
 		<property name="pattern" value="com.yueny.cropui.controller..*" />

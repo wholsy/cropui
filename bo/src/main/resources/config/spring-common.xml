@@ -26,8 +26,8 @@
 	<mvc:annotation-driven/>
 	
 	<!-- 激活自动代理功能
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-	-->
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+	-->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 	
 </beans>
