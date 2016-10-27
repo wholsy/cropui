@@ -7,7 +7,7 @@
 	<link href="${ctx}/assets/css/write/main.css" rel="stylesheet" type="text/css">
 	
 <form method="post" action="${ctx}/article/postedit/">
-	<div id="editType"  style="display:none">0</div>
+	<div id="editType" style="display:none">0</div>
 	<p class="subtit">
 		文章标题
 		<script>

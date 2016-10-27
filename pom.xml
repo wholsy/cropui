@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<cropui.version>0.0.1-SNAPSHOT</cropui.version>
+		<metrics.version>3.1.0</metrics.version>
 	</properties>
 	
 	<dependencies>
@@ -269,21 +270,6 @@
 			<artifactId>mybatis-spring</artifactId>
 		</dependency>
 		
-        <!-- 添加shiro支持 
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-spring</artifactId>
-		</dependency>
-		-->
-		
 		<!-- 添加jsoup支持 -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -368,7 +354,14 @@
 			<artifactId>ehcache-core</artifactId>
 		</dependency>
 		 -->
-
+		
+		<!-- 监控 -->
+	    <dependency>
+	        <groupId>io.dropwizard.metrics</groupId>
+	        <artifactId>metrics-core</artifactId>
+	        <version>${metrics.version}</version>
+	    </dependency>
+		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
