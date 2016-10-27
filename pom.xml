@@ -16,7 +16,6 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<cropui.version>0.0.1-SNAPSHOT</cropui.version>
-		<metrics.version>3.1.0</metrics.version>
 	</properties>
 	
 	<dependencies>
@@ -354,13 +353,6 @@
 			<artifactId>ehcache-core</artifactId>
 		</dependency>
 		 -->
-		
-		<!-- 监控 -->
-	    <dependency>
-	        <groupId>io.dropwizard.metrics</groupId>
-	        <artifactId>metrics-core</artifactId>
-	        <version>${metrics.version}</version>
-	    </dependency>
 		
 		<dependency>
 			<groupId>org.hibernate</groupId>
