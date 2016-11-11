@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +46,7 @@ public class ChartsController extends BaseController {
 	 */
 	@RequestMapping(value = "/charts/front-end.json", method = { RequestMethod.POST })
 	@ResponseBody
+	@CrossOrigin // 允许跨域
 	public NormalJsonResponse<ChartData> chartsFrontEndJson(final HttpServletResponse response) {
 		final NormalJsonResponse<ChartData> res = new NormalJsonResponse<>();
 		try {
