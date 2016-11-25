@@ -59,6 +59,7 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 	 * superclub.api.page.core.PageCond)
 	 */
 	@Override
+	// RedisCacheManager
 	@Cacheable(value = "getArchiveByPageable", keyGenerator = "customKeyGenerator")
 	public List<ArchiveData> getArchive(final PageCond pageable) throws DataVerifyAnomalyException {
 		final List<ArticleBlogBo> lists = articleBlogService.findPageList(pageable);

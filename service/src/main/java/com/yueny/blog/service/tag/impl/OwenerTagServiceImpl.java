@@ -12,9 +12,10 @@ import org.springframework.stereotype.Service;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.dao.tag.IOwenerTagDao;
 import com.yueny.blog.entry.tag.OwenerTagEntry;
-import com.yueny.blog.service.CacheBaseBiz;
+import com.yueny.blog.service.BaseBiz;
+import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.tag.IOwenerTagService;
-import com.yueny.rapid.lang.util.collect.ArrayUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 
 /**
@@ -26,7 +27,9 @@ import com.yueny.rapid.topic.profiler.ProfilerLog;
  *
  */
 @Service
-public class OwenerTagServiceImpl extends CacheBaseBiz<OwenerTagBo> implements IOwenerTagService {
+public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
+	@Autowired
+	private CacheService<OwenerTagBo> cacheService;
 	@Autowired
 	private IOwenerTagDao owenerTagDao;
 
@@ -43,7 +46,7 @@ public class OwenerTagServiceImpl extends CacheBaseBiz<OwenerTagBo> implements I
 	@Override
 	@ProfilerLog
 	public List<OwenerTagBo> queryAllByUid(final String uid) {
-		return this.cacheList(ArrayUtil.newArray("queryAllByUid", uid), new ICacheExecutor<List<OwenerTagBo>>() {
+		return cacheService.cacheList(new ICacheExecutor<List<OwenerTagBo>>() {
 			@Override
 			public List<OwenerTagBo> execute() {
 				final List<OwenerTagEntry> entrys = owenerTagDao.queryAllByUid(uid);
@@ -53,28 +56,27 @@ public class OwenerTagServiceImpl extends CacheBaseBiz<OwenerTagBo> implements I
 
 				return map(entrys, OwenerTagBo.class);
 			}
-		}, 2, TimeUnit.SECONDS);
+		}, 2L, TimeUnit.SECONDS, "queryAllByUid", uid);
 	}
 
 	@Override
 	public List<OwenerTagBo> queryByCategoriesTagCode(final String categoriesTagCode) {
-		return this.cacheList(ArrayUtil.newArray("queryByCategoriesTagCode", categoriesTagCode),
-				new ICacheExecutor<List<OwenerTagBo>>() {
-					@Override
-					public List<OwenerTagBo> execute() {
-						final List<OwenerTagEntry> entrys = owenerTagDao.queryByCategoriesTagCode(categoriesTagCode);
-						if (CollectionUtils.isEmpty(entrys)) {
-							Collections.emptyList();
-						}
+		return cacheService.cacheList(new ICacheExecutor<List<OwenerTagBo>>() {
+			@Override
+			public List<OwenerTagBo> execute() {
+				final List<OwenerTagEntry> entrys = owenerTagDao.queryByCategoriesTagCode(categoriesTagCode);
+				if (CollectionUtils.isEmpty(entrys)) {
+					Collections.emptyList();
+				}
 
-						return map(entrys, OwenerTagBo.class);
-					}
-				});
+				return map(entrys, OwenerTagBo.class);
+			}
+		}, "queryByCategoriesTagCode", categoriesTagCode);
 	}
 
 	@Override
 	public OwenerTagBo queryById(final long primaryId) {
-		return this.cache(ArrayUtil.newArray("queryById", primaryId), new ICacheExecutor<OwenerTagBo>() {
+		return cacheService.cache(new ICacheExecutor<OwenerTagBo>() {
 			@Override
 			public OwenerTagBo execute() {
 				final OwenerTagEntry entry = owenerTagDao.queryByID(primaryId);
@@ -84,12 +86,12 @@ public class OwenerTagServiceImpl extends CacheBaseBiz<OwenerTagBo> implements I
 
 				return map(entry, OwenerTagBo.class);
 			}
-		}, 2, TimeUnit.SECONDS);
+		}, 2L, TimeUnit.SECONDS, "queryById", primaryId);
 	}
 
 	@Override
 	public List<OwenerTagBo> queryById(final Set<Long> owenerTagIds) {
-		return this.cacheList(ArrayUtil.newArray(owenerTagIds), new ICacheExecutor<List<OwenerTagBo>>() {
+		return cacheService.cacheList(owenerTagIds, new ICacheExecutor<List<OwenerTagBo>>() {
 			@Override
 			public List<OwenerTagBo> execute() {
 				final List<OwenerTagEntry> entrys = owenerTagDao.queryByID(owenerTagIds);
@@ -99,13 +101,13 @@ public class OwenerTagServiceImpl extends CacheBaseBiz<OwenerTagBo> implements I
 
 				return map(entrys, OwenerTagBo.class);
 			}
-		}, 2, TimeUnit.SECONDS);
+		}, 2L);
 	}
 
 	@Override
 	@ProfilerLog
 	public List<OwenerTagBo> queryByUid(final String uid) {
-		return this.cacheList(ArrayUtil.newArray("queryByUid", uid), new ICacheExecutor<List<OwenerTagBo>>() {
+		return cacheService.cacheList(new ICacheExecutor<List<OwenerTagBo>>() {
 			@Override
 			public List<OwenerTagBo> execute() {
 				final List<OwenerTagEntry> entrys = owenerTagDao.queryByUid(uid);
@@ -115,7 +117,7 @@ public class OwenerTagServiceImpl extends CacheBaseBiz<OwenerTagBo> implements I
 
 				return map(entrys, OwenerTagBo.class);
 			}
-		}, 2L, TimeUnit.SECONDS);
+		}, 2L, TimeUnit.SECONDS, "queryByUid", uid);
 	}
 
 }

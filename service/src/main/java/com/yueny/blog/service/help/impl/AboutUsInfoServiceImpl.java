@@ -3,7 +3,6 @@ package com.yueny.blog.service.help.impl;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,11 @@ import com.google.common.collect.Lists;
 import com.yueny.blog.bo.help.AboutUsInfoBo;
 import com.yueny.blog.dao.help.IAboutUsInfoDao;
 import com.yueny.blog.entry.help.AboutUsInfoEntry;
-import com.yueny.blog.service.CacheBaseBiz;
+import com.yueny.blog.service.BaseBiz;
+import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.help.IAboutUsInfoService;
 import com.yueny.rapid.lang.util.StringUtil;
-import com.yueny.rapid.lang.util.collect.ArrayUtil;
 import com.yueny.superclub.api.constant.Constants;
 
 /**
@@ -28,13 +28,15 @@ import com.yueny.superclub.api.constant.Constants;
  *
  */
 @Service
-public class AboutUsInfoServiceImpl extends CacheBaseBiz<AboutUsInfoBo> implements IAboutUsInfoService {
+public class AboutUsInfoServiceImpl extends BaseBiz implements IAboutUsInfoService {
 	@Autowired
 	private IAboutUsInfoDao aboutUsInfoDao;
+	@Autowired
+	private CacheService<AboutUsInfoBo> cacheService;
 
 	@Override
 	public List<AboutUsInfoBo> queryAll() {
-		return this.cacheList(ArrayUtil.newArray("queryAll"), new ICacheExecutor<List<AboutUsInfoBo>>() {
+		return cacheService.cacheList("queryAll", new ICacheExecutor<List<AboutUsInfoBo>>() {
 			@Override
 			public List<AboutUsInfoBo> execute() {
 				final List<AboutUsInfoEntry> entrys = aboutUsInfoDao.queryAllData();
@@ -63,7 +65,7 @@ public class AboutUsInfoServiceImpl extends CacheBaseBiz<AboutUsInfoBo> implemen
 				}
 				return lists;
 			}
-		}, 10, TimeUnit.MINUTES);
+		}, 10 * 60L);
 	}
 
 }

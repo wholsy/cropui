@@ -2,7 +2,6 @@ package com.yueny.blog.service.article.impl;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.dao.article.IArticleBlogDao;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
-import com.yueny.blog.service.CacheBaseBiz;
+import com.yueny.blog.service.BaseBiz;
+import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
 import com.yueny.blog.service.article.IArticleBlogService;
+import com.yueny.blog.service.env.CacheService;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 import com.yueny.superclub.api.page.IPageable;
@@ -24,9 +25,11 @@ import com.yueny.superclub.api.page.IPageable;
  *
  */
 @Service
-public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implements IArticleBlogService {
+public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogService {
 	@Autowired
 	private IArticleBlogDao blogDao;
+	@Autowired
+	private CacheService<ArticleBlogBo> cacheService;
 
 	/*
 	 * (non-Javadoc)
@@ -37,7 +40,7 @@ public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implemen
 	 */
 	@Override
 	public ArticleBlogBo findByBlogId(final String articleBlogId) {
-		return this.cache(ArrayUtil.newArray("findByBlogId", articleBlogId), new ICacheExecutor<ArticleBlogBo>() {
+		return cacheService.cache(new ICacheExecutor<ArticleBlogBo>() {
 			@Override
 			public ArticleBlogBo execute() {
 				final ArticleBlogEntry entry = blogDao.queryByBlogId(articleBlogId);
@@ -46,12 +49,12 @@ public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implemen
 				}
 				return map(entry, ArticleBlogBo.class);
 			}
-		}, 5, TimeUnit.SECONDS);
+		}, 5L, "findByBlogId", articleBlogId);
 	}
 
 	@Override
 	public ArticleBlogBo findById(final Long primaryId) {
-		return this.cache(ArrayUtil.newArray("findById", primaryId), new ICacheExecutor<ArticleBlogBo>() {
+		return cacheService.cache(new ICacheExecutor<ArticleBlogBo>() {
 			@Override
 			public ArticleBlogBo execute() {
 				final ArticleBlogEntry entry = blogDao.queryByID(primaryId);
@@ -61,28 +64,27 @@ public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implemen
 
 				return map(entry, ArticleBlogBo.class);
 			}
-		});
+		}, "findById", primaryId);
 	}
 
 	@Override
 	public List<ArticleBlogBo> findByOwenerTagId(final Long owenerTagId) {
-		return this.cacheList(ArrayUtil.newArray("findByOwenerTagId", owenerTagId),
-				new ICacheExecutor<List<ArticleBlogBo>>() {
-					@Override
-					public List<ArticleBlogBo> execute() {
-						final List<ArticleBlogEntry> entrys = blogDao.findByOwenerTagId(owenerTagId);
-						if (CollectionUtils.isEmpty(entrys)) {
-							return Collections.emptyList();
-						}
+		return cacheService.cacheList(new ICacheExecutor<List<ArticleBlogBo>>() {
+			@Override
+			public List<ArticleBlogBo> execute() {
+				final List<ArticleBlogEntry> entrys = blogDao.findByOwenerTagId(owenerTagId);
+				if (CollectionUtils.isEmpty(entrys)) {
+					return Collections.emptyList();
+				}
 
-						return map(entrys, ArticleBlogBo.class);
-					}
-				}, 5, TimeUnit.SECONDS);
+				return map(entrys, ArticleBlogBo.class);
+			}
+		}, 5L, "findByOwenerTagId", owenerTagId);
 	}
 
 	@Override
 	public ArticleBlogBo findByPreviousBlogId(final String articlePreviousBlogId) {
-		return this.cache(ArrayUtil.newArray("findByPreviousBlogId", articlePreviousBlogId),
+		return cacheService.cache(ArrayUtil.newArray("findByPreviousBlogId", articlePreviousBlogId),
 				new ICacheExecutor<ArticleBlogBo>() {
 					@Override
 					public ArticleBlogBo execute() {
@@ -103,7 +105,7 @@ public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implemen
 	 */
 	@Override
 	public ArticleBlogBo findLatestBlog() {
-		return this.cache(ArrayUtil.newArray("findLatestBlog"), new ICacheExecutor<ArticleBlogBo>() {
+		return cacheService.cache("findLatestBlog", new ICacheExecutor<ArticleBlogBo>() {
 			@Override
 			public ArticleBlogBo execute() {
 				final ArticleBlogEntry entry = blogDao.queryLatestBlog();
@@ -113,12 +115,12 @@ public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implemen
 
 				return map(entry, ArticleBlogBo.class);
 			}
-		}, 2, TimeUnit.SECONDS);
+		}, 2L);
 	}
 
 	@Override
 	public ArticleBlogBo findLatestBlog(final String uid) {
-		return this.cache(ArrayUtil.newArray("findLatestBlog", uid), new ICacheExecutor<ArticleBlogBo>() {
+		return cacheService.cache(new ICacheExecutor<ArticleBlogBo>() {
 			@Override
 			public ArticleBlogBo execute() {
 				final ArticleBlogEntry entry = blogDao.queryLatestBlog(uid);
@@ -128,7 +130,7 @@ public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implemen
 
 				return map(entry, ArticleBlogBo.class);
 			}
-		}, 2, TimeUnit.SECONDS);
+		}, 2L, "findLatestBlog", uid);
 	}
 
 	/*
@@ -145,18 +147,17 @@ public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implemen
 
 	@Override
 	public List<ArticleBlogBo> findPageList(final IPageable pageable) {
-		return this.cacheList(ArrayUtil.newArray("findPageList", pageable.toString()),
-				new ICacheExecutor<List<ArticleBlogBo>>() {
-					@Override
-					public List<ArticleBlogBo> execute() {
-						final List<ArticleBlogEntry> entrys = blogDao.queryList(pageable);
-						if (CollectionUtils.isEmpty(entrys)) {
-							return Collections.emptyList();
-						}
+		return cacheService.cacheList(new ICacheExecutor<List<ArticleBlogBo>>() {
+			@Override
+			public List<ArticleBlogBo> execute() {
+				final List<ArticleBlogEntry> entrys = blogDao.queryList(pageable);
+				if (CollectionUtils.isEmpty(entrys)) {
+					return Collections.emptyList();
+				}
 
-						return map(entrys, ArticleBlogBo.class);
-					}
-				}, 5, TimeUnit.SECONDS);
+				return map(entrys, ArticleBlogBo.class);
+			}
+		}, 5L, "findPageList", pageable.toString());
 	}
 
 	@Override
@@ -173,7 +174,7 @@ public class ArticleBlogServiceImpl extends CacheBaseBiz<ArticleBlogBo> implemen
 
 	@Override
 	public boolean update(final ArticleBlogBo bo) {
-		cacheDelete(ArrayUtil.newArray("findByBlogId", bo.getArticleBlogId()),
+		cacheService.cacheDelete(ArrayUtil.newArray("findByBlogId", bo.getArticleBlogId()),
 				ArrayUtil.newArray("findById", bo.getArticleId()),
 				ArrayUtil.newArray("findByPreviousBlogId", bo.getArticleBlogId()), ArrayUtil.newArray("findLatestBlog"),
 				ArrayUtil.newArray("findLatestBlog", bo.getUid()));

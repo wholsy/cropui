@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yueny.rapid.lang.util.mask.pojo.instance.AbstractMaskBo;
+import com.yueny.rapid.lang.mask.pojo.instance.AbstractMaskBo;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

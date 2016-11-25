@@ -52,7 +52,8 @@ public abstract class BaseBiz implements IBiz {
 
 		final List<T> targetList = new ArrayList<T>(sourceList.size());
 		for (final S entry : sourceList) {
-			targetList.add(mapper.map(entry, targetInfo));
+			// targetList.add(mapper.map(entry, targetInfo));
+			targetList.add(map(entry, targetInfo));
 		}
 		return targetList;
 	}

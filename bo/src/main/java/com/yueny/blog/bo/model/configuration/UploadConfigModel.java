@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Maps;
-import com.yueny.rapid.lang.util.mask.pojo.instance.AbstractMaskBo;
+import com.yueny.rapid.lang.mask.pojo.instance.AbstractMaskBo;
 
 import lombok.Getter;
 import lombok.Setter;

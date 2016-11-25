@@ -2,7 +2,7 @@ package com.yueny.cropui.controller.upload;
 
 import java.io.Serializable;
 
-import com.yueny.rapid.lang.util.mask.pojo.instance.AbstractMaskBo;
+import com.yueny.rapid.lang.mask.pojo.instance.AbstractMaskBo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

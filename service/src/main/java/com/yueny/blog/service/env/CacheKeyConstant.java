@@ -1,4 +1,4 @@
-package com.yueny.blog.service.common;
+package com.yueny.blog.service.env;
 
 import java.util.Collection;
 

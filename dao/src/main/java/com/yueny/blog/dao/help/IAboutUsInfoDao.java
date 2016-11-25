@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.yueny.blog.entry.help.AboutUsInfoEntry;
 import com.yueny.kapo.api.ISingleTableDao;
-import com.yueny.kapo.api.IWholeTableQuery;
+import com.yueny.kapo.api.IWholeTableQueryDao;
 
 /**
  * 关于我们信息
@@ -14,7 +14,7 @@ import com.yueny.kapo.api.IWholeTableQuery;
  * @DATE 2016年9月11日 上午11:09:12
  *
  */
-public interface IAboutUsInfoDao extends ISingleTableDao<AboutUsInfoEntry>, IWholeTableQuery<AboutUsInfoEntry> {
+public interface IAboutUsInfoDao extends ISingleTableDao<AboutUsInfoEntry>, IWholeTableQueryDao<AboutUsInfoEntry> {
 	/**
 	 * @return 全表查询
 	 */

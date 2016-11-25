@@ -28,12 +28,12 @@ import com.yueny.blog.service.manage.IArticleQueryManageService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.blog.service.tag.IOwenerTagService;
 import com.yueny.cropui.controller.BaseController;
+import com.yueny.rapid.data.resp.pojo.response.ListResponse;
+import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
 import com.yueny.rapid.lang.agent.UserAgentResource;
 import com.yueny.rapid.lang.enums.BaseErrorType;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.rapid.lang.util.StringUtil;
-import com.yueny.superclub.service.rest.response.ListResponse;
-import com.yueny.superclub.service.rest.response.NormalResponse;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
 /**

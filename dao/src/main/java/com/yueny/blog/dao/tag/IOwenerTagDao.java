@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.yueny.blog.entry.tag.OwenerTagEntry;
 import com.yueny.kapo.api.ISingleTableDao;
-import com.yueny.kapo.api.IWholeTableQuery;
+import com.yueny.kapo.api.IWholeTableQueryDao;
 
 /**
  * 个人分类类目持久层操作
@@ -13,7 +13,7 @@ import com.yueny.kapo.api.IWholeTableQuery;
  * @author 袁洋 2015年8月24日 下午1:45:35
  *
  */
-public interface IOwenerTagDao extends ISingleTableDao<OwenerTagEntry>, IWholeTableQuery<OwenerTagEntry> {
+public interface IOwenerTagDao extends ISingleTableDao<OwenerTagEntry>, IWholeTableQueryDao<OwenerTagEntry> {
 	/**
 	 * 文章数目增加step
 	 *

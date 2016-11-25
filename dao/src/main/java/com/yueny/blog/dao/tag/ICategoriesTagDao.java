@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.yueny.blog.entry.tag.CategoriesTagEntry;
 import com.yueny.kapo.api.ISingleTableDao;
-import com.yueny.kapo.api.IWholeTableQuery;
+import com.yueny.kapo.api.IWholeTableQueryDao;
 
 /**
  * 文章分类类目持久层操作
@@ -13,7 +13,8 @@ import com.yueny.kapo.api.IWholeTableQuery;
  * @author 袁洋 2015年8月24日 下午1:45:35
  *
  */
-public interface ICategoriesTagDao extends ISingleTableDao<CategoriesTagEntry>, IWholeTableQuery<CategoriesTagEntry> {
+public interface ICategoriesTagDao
+		extends ISingleTableDao<CategoriesTagEntry>, IWholeTableQueryDao<CategoriesTagEntry> {
 	/**
 	 * 获取父级分类编号的孩子
 	 *

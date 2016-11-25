@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -12,6 +11,8 @@ import com.yueny.blog.bo.model.document.ChartData;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
+import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.manage.ITagQueryManageService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.blog.service.tag.IOwenerTagService;
@@ -27,6 +28,8 @@ import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
  */
 @Service
 public class TagQueryManageServiceImpl extends BaseBiz implements ITagQueryManageService {
+	@Autowired
+	private CacheService<ChartData> cacheService;
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
 	@Autowired
@@ -77,31 +80,35 @@ public class TagQueryManageServiceImpl extends BaseBiz implements ITagQueryManag
 	}
 
 	@Override
-	@Cacheable(value = "getChartData", keyGenerator = "customKeyGenerator")
 	public ChartData getChartData() throws DataVerifyAnomalyException {
-		final CategoriesTagBo root = categoriesTagService.findByCode("-1");
-		final ChartData chartData = new ChartData(root.getCategoriesTagCode(), root.getCategoriesId(),
-				root.getCategoriesName());
+		return cacheService.cache(new ICacheExecutor<ChartData>() {
+			@Override
+			public ChartData execute() {
+				final CategoriesTagBo root = categoriesTagService.findByCode("-1");
+				final ChartData chartData = new ChartData(root.getCategoriesTagCode(), root.getCategoriesId(),
+						root.getCategoriesName());
 
-		final List<CategoriesTagBo> categories = categoriesTagService.findArticleCategoriesTree();
-		if (CollectionUtils.isEmpty(categories)) {
-			return chartData;
-		}
+				final List<CategoriesTagBo> categories = categoriesTagService.findArticleCategoriesTree();
+				if (CollectionUtils.isEmpty(categories)) {
+					return chartData;
+				}
 
-		// 添加全站标签
-		for (final CategoriesTagBo categoriesTagBo : categories) {
-			final ChartData node = new ChartData(categoriesTagBo.getCategoriesTagCode(),
-					categoriesTagBo.getCategoriesId(), categoriesTagBo.getCategoriesName());
+				// 添加全站标签
+				for (final CategoriesTagBo categoriesTagBo : categories) {
+					final ChartData node = new ChartData(categoriesTagBo.getCategoriesTagCode(),
+							categoriesTagBo.getCategoriesId(), categoriesTagBo.getCategoriesName());
 
-			if (CollectionUtils.isNotEmpty(categoriesTagBo.getChildren())) {
-				node.addChildrenNodes(eachChildren(categoriesTagBo.getChildren()));
+					if (CollectionUtils.isNotEmpty(categoriesTagBo.getChildren())) {
+						node.addChildrenNodes(eachChildren(categoriesTagBo.getChildren()));
+					}
+					chartData.addChildrenNodes(node);
+				}
+
+				// 根据全站标签,获取最底层非叶子节点的叶子节点数据
+				eachChildrenChartData(chartData.getChildren());
+
+				return chartData;
 			}
-			chartData.addChildrenNodes(node);
-		}
-
-		// 根据全站标签,获取最底层非叶子节点的叶子节点数据
-		eachChildrenChartData(chartData.getChildren());
-
-		return chartData;
+		}, "getChartData_", "ROOT");
 	}
 }

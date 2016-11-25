@@ -4,9 +4,9 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.yueny.rapid.lang.util.mask.annotation.Mask;
+import com.yueny.rapid.data.resp.pojo.request.BaseRequest;
+import com.yueny.rapid.lang.mask.annotation.Mask;
 import com.yueny.superclub.api.annnotation.et.UnUsed;
-import com.yueny.superclub.util.common.pojo.BaseRequest;
 
 import lombok.Getter;
 import lombok.Setter;

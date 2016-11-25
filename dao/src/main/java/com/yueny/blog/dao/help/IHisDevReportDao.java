@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.yueny.blog.entry.help.HisDevReportEntry;
 import com.yueny.kapo.api.ISingleTableDao;
-import com.yueny.kapo.api.IWholeTableQuery;
+import com.yueny.kapo.api.IWholeTableQueryDao;
 
 /**
  * 历史开发报告
@@ -13,8 +13,7 @@ import com.yueny.kapo.api.IWholeTableQuery;
  *
  * @date 2015年8月9日 下午7:16:58
  */
-public interface IHisDevReportDao extends ISingleTableDao<HisDevReportEntry>,
-		IWholeTableQuery<HisDevReportEntry> {
+public interface IHisDevReportDao extends ISingleTableDao<HisDevReportEntry>, IWholeTableQueryDao<HisDevReportEntry> {
 	/**
 	 * @return 全表查询
 	 */

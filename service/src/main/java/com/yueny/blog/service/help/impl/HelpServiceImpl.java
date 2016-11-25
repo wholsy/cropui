@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.yueny.blog.bo.help.HisDevReportBo;
@@ -19,10 +18,13 @@ import com.yueny.blog.bo.model.statistics.month.HisYearDevReportMonthData;
 import com.yueny.blog.dao.help.IHisDevReportDao;
 import com.yueny.blog.entry.help.HisDevReportEntry;
 import com.yueny.blog.service.BaseBiz;
+import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.help.IHelpService;
 import com.yueny.rapid.lang.date.DateFormatType;
 import com.yueny.rapid.lang.date.DateTimeUtil;
 import com.yueny.rapid.lang.date.DateUtil;
+import com.yueny.rapid.lang.json.JsonUtil;
 
 /**
  * 帮助服务
@@ -34,51 +36,58 @@ import com.yueny.rapid.lang.date.DateUtil;
 @Service
 public class HelpServiceImpl extends BaseBiz implements IHelpService {
 	@Autowired
-	private IHisDevReportDao hisDevReportDao;
+	private CacheService<String> cacheService;
 	@Autowired
-	private RedisTemplate<String, HisDevReportDayData> redisReportDayTemplate;
+	private IHisDevReportDao hisDevReportDao;
 
 	@Override
 	public HisDevReportDayData queryHisDevReportsDay() {
-		final List<HisDevReportEntry> entrys = hisDevReportDao.queryAll();
+		final String json = cacheService.cache("", new ICacheExecutor<String>() {
+			@Override
+			public String execute() {
+				final List<HisDevReportEntry> entrys = hisDevReportDao.queryAll();
 
-		// 对数据格式进行封装
-		final Map<String, Set<HisDevReportBo>> hisYearDevReportMap = new HashMap<String, Set<HisDevReportBo>>();
-		for (final HisDevReportEntry entry : entrys) {
-			final HisDevReportBo dayHisDevReport = map(entry, HisDevReportBo.class);
-			// 覆盖,格式为 MM-dd
-			dayHisDevReport.setReportTime(DateUtil.format(entry.getReportTime(), DateFormatType.MM_DD));
+				// 对数据格式进行封装
+				final Map<String, Set<HisDevReportBo>> hisYearDevReportMap = new HashMap<String, Set<HisDevReportBo>>();
+				for (final HisDevReportEntry entry : entrys) {
+					final HisDevReportBo dayHisDevReport = map(entry, HisDevReportBo.class);
+					// 覆盖,格式为 MM-dd
+					dayHisDevReport.setReportTime(DateUtil.format(entry.getReportTime(), DateFormatType.MM_DD));
 
-			final String currentYear = String.valueOf(DateTimeUtil.thisYear(entry.getReportTime()));
-			/* 年度数据已经存在 */
-			if (hisYearDevReportMap.containsKey(currentYear)) {
-				hisYearDevReportMap.get(currentYear).add(dayHisDevReport);
-				continue;
+					final String currentYear = String.valueOf(DateTimeUtil.thisYear(entry.getReportTime()));
+					/* 年度数据已经存在 */
+					if (hisYearDevReportMap.containsKey(currentYear)) {
+						hisYearDevReportMap.get(currentYear).add(dayHisDevReport);
+						continue;
+					}
+
+					/* 年度数据不存在。java 7的钻石石写法(构造器后面的尖括号中不需要写类型) */
+					final Set<HisDevReportBo> monthData = new TreeSet<>();
+					monthData.add(dayHisDevReport);
+
+					hisYearDevReportMap.put(currentYear, monthData);
+				}
+
+				// 转换为年度
+				final Set<HisYearDevReportDayData> hisYearDevReports = new TreeSet<>();
+				/* 年度遍历 */
+				for (final Map.Entry<String, Set<HisDevReportBo>> yearEntry : hisYearDevReportMap.entrySet()) {
+					final HisYearDevReportDayData yearDevReportDayData = new HisYearDevReportDayData();
+					yearDevReportDayData.setYear(Integer.parseInt(yearEntry.getKey()));
+					yearDevReportDayData.setHisDayDevReports(yearEntry.getValue());
+
+					hisYearDevReports.add(yearDevReportDayData);
+				}
+
+				final HisDevReportDayData hisDevReportData = new HisDevReportDayData();
+				hisDevReportData.setTitle("cropui 开发日度报告");
+				hisDevReportData.setHisYearDevReports(hisYearDevReports);
+
+				return JsonUtil.toJson(hisDevReportData);
 			}
+		});
 
-			/* 年度数据不存在。java 7的钻石石写法(构造器后面的尖括号中不需要写类型) */
-			final Set<HisDevReportBo> monthData = new TreeSet<>();
-			monthData.add(dayHisDevReport);
-
-			hisYearDevReportMap.put(currentYear, monthData);
-		}
-
-		// 转换为年度
-		final Set<HisYearDevReportDayData> hisYearDevReports = new TreeSet<>();
-		/* 年度遍历 */
-		for (final Map.Entry<String, Set<HisDevReportBo>> yearEntry : hisYearDevReportMap.entrySet()) {
-			final HisYearDevReportDayData yearDevReportDayData = new HisYearDevReportDayData();
-			yearDevReportDayData.setYear(Integer.parseInt(yearEntry.getKey()));
-			yearDevReportDayData.setHisDayDevReports(yearEntry.getValue());
-
-			hisYearDevReports.add(yearDevReportDayData);
-		}
-
-		final HisDevReportDayData hisDevReportData = new HisDevReportDayData();
-		hisDevReportData.setTitle("cropui 开发日度报告");
-		hisDevReportData.setHisYearDevReports(hisYearDevReports);
-
-		return hisDevReportData;
+		return JsonUtil.fromJson(json, HisDevReportDayData.class);
 	}
 
 	/*

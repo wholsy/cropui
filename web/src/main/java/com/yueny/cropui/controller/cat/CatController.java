@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yueny.cropui.controller.BaseController;
-import com.yueny.superclub.service.rest.response.NormalResponse;
+import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
 
 /**
  * 愉快聊天控制器
@@ -31,8 +31,7 @@ public class CatController extends BaseController {
 	 * @return 发布聊天信息
 	 */
 	@RequestMapping(value = "/pushCat/", method = { RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public NormalResponse<String> pushCat(final HttpServletRequest request,
-			final HttpServletResponse res) {
+	public NormalResponse<String> pushCat(final HttpServletRequest request, final HttpServletResponse res) {
 		final NormalResponse<String> response = new NormalResponse<>();
 
 		return response;

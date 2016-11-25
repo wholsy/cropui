@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.cropui.service.task.cron.CronExpressionManager;
-import com.yueny.superclub.service.rest.response.NormalResponse;
+import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
 
 /**
  * 任务控制器

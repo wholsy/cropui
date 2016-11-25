@@ -12,10 +12,11 @@ import org.springframework.stereotype.Service;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.dao.tag.ICategoriesTagDao;
 import com.yueny.blog.entry.tag.CategoriesTagEntry;
-import com.yueny.blog.service.CacheBaseBiz;
+import com.yueny.blog.service.BaseBiz;
+import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.rapid.lang.util.StringUtil;
-import com.yueny.rapid.lang.util.collect.ArrayUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 
 /**
@@ -25,9 +26,11 @@ import com.yueny.rapid.topic.profiler.ProfilerLog;
  *
  */
 @Service
-public class CategoriesTagServiceImpl extends CacheBaseBiz<CategoriesTagBo> implements ICategoriesTagService {
+public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagService {
 	@Autowired
 	private ICategoriesTagDao articleCategoriesDao;
+	@Autowired
+	private CacheService<CategoriesTagBo> cacheService;
 
 	/**
 	 * 递归处理
@@ -56,7 +59,7 @@ public class CategoriesTagServiceImpl extends CacheBaseBiz<CategoriesTagBo> impl
 	@Override
 	@ProfilerLog
 	public List<CategoriesTagBo> findArticleCategoriesTree() {
-		return this.cacheList("findArticleCategoriesTree", new ICacheExecutor<List<CategoriesTagBo>>() {
+		return cacheService.cacheList("findArticleCategoriesTree", new ICacheExecutor<List<CategoriesTagBo>>() {
 			@Override
 			public List<CategoriesTagBo> execute() {
 				/* 获取顶级文章分类类目 */
@@ -93,27 +96,26 @@ public class CategoriesTagServiceImpl extends CacheBaseBiz<CategoriesTagBo> impl
 	 */
 	@Override
 	public List<CategoriesTagBo> findByCode(final Set<String> categoriesCodes) {
-		return this.cacheList(ArrayUtil.newArray("findByCode", categoriesCodes),
-				new ICacheExecutor<List<CategoriesTagBo>>() {
-					@Override
-					public List<CategoriesTagBo> execute() {
-						if (CollectionUtils.isEmpty(categoriesCodes)) {
-							return Collections.emptyList();
-						}
+		return cacheService.cacheList(new ICacheExecutor<List<CategoriesTagBo>>() {
+			@Override
+			public List<CategoriesTagBo> execute() {
+				if (CollectionUtils.isEmpty(categoriesCodes)) {
+					return Collections.emptyList();
+				}
 
-						final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByTagCode(categoriesCodes);
-						if (CollectionUtils.isEmpty(entrys)) {
-							return Collections.emptyList();
-						}
+				final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByTagCode(categoriesCodes);
+				if (CollectionUtils.isEmpty(entrys)) {
+					return Collections.emptyList();
+				}
 
-						return map(entrys, CategoriesTagBo.class);
-					}
-				});
+				return map(entrys, CategoriesTagBo.class);
+			}
+		}, "findByCode", categoriesCodes);
 	}
 
 	@Override
 	public CategoriesTagBo findByCode(final String categoriesCode) {
-		return this.cache(categoriesCode, new ICacheExecutor<CategoriesTagBo>() {
+		return cacheService.cache(categoriesCode, new ICacheExecutor<CategoriesTagBo>() {
 			@Override
 			public CategoriesTagBo execute() {
 				final CategoriesTagEntry entry = articleCategoriesDao.queryByTagCode(categoriesCode);
@@ -128,7 +130,7 @@ public class CategoriesTagServiceImpl extends CacheBaseBiz<CategoriesTagBo> impl
 
 	@Override
 	public CategoriesTagBo findByID(final Long categoriesId) {
-		return this.cache(categoriesId, new ICacheExecutor<CategoriesTagBo>() {
+		return cacheService.cache(categoriesId, new ICacheExecutor<CategoriesTagBo>() {
 			@Override
 			public CategoriesTagBo execute() {
 				final CategoriesTagEntry entry = articleCategoriesDao.queryByID(categoriesId);
@@ -143,7 +145,7 @@ public class CategoriesTagServiceImpl extends CacheBaseBiz<CategoriesTagBo> impl
 
 	@Override
 	public List<CategoriesTagBo> findByParentCode(final String categoriesParentCode) {
-		return this.cacheList(categoriesParentCode, new ICacheExecutor<List<CategoriesTagBo>>() {
+		return cacheService.cacheList(categoriesParentCode, new ICacheExecutor<List<CategoriesTagBo>>() {
 			@Override
 			public List<CategoriesTagBo> execute() {
 				final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByParentTagCode(categoriesParentCode);

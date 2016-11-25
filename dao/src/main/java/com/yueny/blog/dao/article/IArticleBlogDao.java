@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.kapo.api.ISingleTableDao;
-import com.yueny.kapo.api.IWholeTableQuery;
+import com.yueny.kapo.api.IWholeTableQueryDao;
 import com.yueny.superclub.api.page.IPageable;
 
 /**
@@ -13,7 +13,7 @@ import com.yueny.superclub.api.page.IPageable;
  * @author 袁洋 2015年8月24日 下午1:45:35
  *
  */
-public interface IArticleBlogDao extends ISingleTableDao<ArticleBlogEntry>, IWholeTableQuery<ArticleBlogEntry> {
+public interface IArticleBlogDao extends ISingleTableDao<ArticleBlogEntry>, IWholeTableQueryDao<ArticleBlogEntry> {
 	/**
 	 * 获取存在于用户个人分类的博文
 	 */
