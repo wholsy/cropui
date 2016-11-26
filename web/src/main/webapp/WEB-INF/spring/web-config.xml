@@ -180,7 +180,7 @@
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
-			<bean class="com.yueny.blog.service.intercepter.CsrfIntercepter"/>
+			<bean class="com.yueny.cropui.controller.intercepter.CsrfIntercepter"/>
 		</mvc:interceptor>
 		<!-- 3、系统响应时间 -->
 		<mvc:interceptor>

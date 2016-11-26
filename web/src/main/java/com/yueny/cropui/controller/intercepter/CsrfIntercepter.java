@@ -1,4 +1,4 @@
-package com.yueny.blog.service.intercepter;
+package com.yueny.cropui.controller.intercepter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
