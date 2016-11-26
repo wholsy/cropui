@@ -14,6 +14,7 @@ import com.yueny.blog.dao.tag.ICategoriesTagDao;
 import com.yueny.blog.entry.tag.CategoriesTagEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.rapid.lang.util.StringUtil;
@@ -29,6 +30,8 @@ import com.yueny.rapid.topic.profiler.ProfilerLog;
 public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagService {
 	@Autowired
 	private ICategoriesTagDao articleCategoriesDao;
+	@Autowired
+	private CacheListService<CategoriesTagBo> cacheListService;
 	@Autowired
 	private CacheService<CategoriesTagBo> cacheService;
 
@@ -59,7 +62,7 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 	@Override
 	@ProfilerLog
 	public List<CategoriesTagBo> findArticleCategoriesTree() {
-		return cacheService.cacheList("findArticleCategoriesTree", new ICacheExecutor<List<CategoriesTagBo>>() {
+		return cacheListService.cache("findArticleCategoriesTree", new ICacheExecutor<List<CategoriesTagBo>>() {
 			@Override
 			public List<CategoriesTagBo> execute() {
 				/* 获取顶级文章分类类目 */
@@ -96,7 +99,7 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 	 */
 	@Override
 	public List<CategoriesTagBo> findByCode(final Set<String> categoriesCodes) {
-		return cacheService.cacheList(new ICacheExecutor<List<CategoriesTagBo>>() {
+		return cacheListService.cache(new ICacheExecutor<List<CategoriesTagBo>>() {
 			@Override
 			public List<CategoriesTagBo> execute() {
 				if (CollectionUtils.isEmpty(categoriesCodes)) {
@@ -145,7 +148,7 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 
 	@Override
 	public List<CategoriesTagBo> findByParentCode(final String categoriesParentCode) {
-		return cacheService.cacheList(categoriesParentCode, new ICacheExecutor<List<CategoriesTagBo>>() {
+		return cacheListService.cache(categoriesParentCode, new ICacheExecutor<List<CategoriesTagBo>>() {
 			@Override
 			public List<CategoriesTagBo> execute() {
 				final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByParentTagCode(categoriesParentCode);

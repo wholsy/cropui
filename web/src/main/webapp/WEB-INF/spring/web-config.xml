@@ -121,33 +121,16 @@
 	
 	<!-- 总拦截器，用于处理权限 -->
 	<mvc:interceptors>
-		<!-- 1、建立日志MDC上下文属性的拦截器 -->
+		<!-- 1、建立日志MDC上下文属性的拦截器, logId暂时不由负载生成 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
-			<bean class="com.yueny.superclub.util.log.mdc.WebLogMDCHandlerInterceptor"/>
+			<bean class="com.yueny.superclub.util.log.mdc.WebLogMDCHandlerInterceptor"
+				p:generateLogId="true"/>
 		</mvc:interceptor>
 		
-		<!-- 2、CsrfIntercepter拦截器 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/static/**"/>
-			<mvc:exclude-mapping path="/content/**"/>
-			<bean class="com.yueny.blog.service.intercepter.CsrfIntercepter"/>
-		</mvc:interceptor>
-		
-		<!-- 2、Context 服务上下文初始化拦截器 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<bean class="com.yueny.superclub.service.rest.context.ServiceContextInterceptor"/>
-			<!-- 
-			<bean class="com.yueny.superclub.service.rest.context.ServiceContextInterceptor"
-				p:systemCode="${app.system.code}"/>
-			 -->
-		</mvc:interceptor>
-		
-		<!-- 3、web,service日志摘要(web)  -->
+		<!-- 2、web,service日志摘要(web)  -->
 		<mvc:interceptor>
             <mvc:mapping path="/services/**"/>
             <mvc:exclude-mapping path="/static/**"/>
@@ -164,6 +147,41 @@
                   c:loggerName="PAGE-DIGEST-LOGGER" p:slowDumpThreshold="100"/>
         </mvc:interceptor>
         
+        <!-- 3、Context 服务上下文初始化拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.yueny.superclub.service.rest.context.ServiceContextInterceptor"/>
+			<!-- 
+			<bean class="com.yueny.superclub.service.rest.context.ServiceContextInterceptor"
+				p:systemCode="${app.system.code}"/>
+			 -->
+		</mvc:interceptor>
+		
+        <!-- 4、控制管理访问信息拦截器
+	    <mvc:interceptor>
+	    	<mvc:mapping path="/user/**"/>
+			<bean class="com.yueny.rapid.util.web.core.interceptor.WebLoginCheckInterceptor"
+				p:loginDistName="SESSION_USER_NAME">
+			</bean>
+		</mvc:interceptor>
+		  -->
+		  
+		<!-- 8、IAccessOpts  -->
+		<mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yueny.rapid.util.web.core.interceptor.AccessHandlerInterceptor"
+            	p:needTraceLogByRequest="true">
+            </bean>
+        </mvc:interceptor>
+		
+		
+		<!-- 2、CsrfIntercepter拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+			<bean class="com.yueny.blog.service.intercepter.CsrfIntercepter"/>
+		</mvc:interceptor>
 		<!-- 3、系统响应时间 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
@@ -178,40 +196,6 @@
 			<mvc:exclude-mapping path="/content/**"/>
 		 	<bean class="com.yueny.rapid.lang.agent.handler.UserAgentResolverHandlerInterceptor"/>
 		</mvc:interceptor>
- 		
-		<!-- 控制管理访问信息拦截器
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/static/**" />
-			<bean class="com.yueny.codelets.web.interceptors.security.access.AdminAccessHandlerInterceptor">
-				<property name="debug" value="${tomcat.web.security.access.debug}" />
-				<property name="enable" value="${tomcat.access.interceptor.enable}" />
-			</bean>
-		</mvc:interceptor>
-		
-		<bean name="requestDataValueProcessor" class="com.yueny.cropui.service.csrf.session.CSRFSessionRequestDataValueProcessor"/>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/cropui/static/**"/>
-			<bean class="com.yueny.cropui.service.csrf.session.CSRFSessionHandlerInterceptor"
-				p:loginUrl="${login.url}"/>
-		</mvc:interceptor>
-		-->
-		 <!-- 排除地址
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			
-			<mvc:exclude-mapping path="/welcome**" />
-			<mvc:exclude-mapping path="/index.jsp/**" />
-			<mvc:exclude-mapping path="/static/**" />
-			<mvc:exclude-mapping path="/aboutme" />
-			<mvc:exclude-mapping path="/api/login/**"/>
-			<mvc:exclude-mapping path="/api/register/**"/>
-			<bean class="com.yueny.codelets.web.interceptors.login.WebLoginCheckInterceptor">
-				<property name="loginUrl" value="${url.default.request.login.in}" />
-			</bean>
-		</mvc:interceptor>
-		 -->
 	</mvc:interceptors>
 	
 </beans>

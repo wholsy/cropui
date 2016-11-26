@@ -13,6 +13,7 @@ import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
 import com.yueny.blog.service.article.IArticleBlogService;
+import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.env.CacheService;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
@@ -28,6 +29,8 @@ import com.yueny.superclub.api.page.IPageable;
 public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogService {
 	@Autowired
 	private IArticleBlogDao blogDao;
+	@Autowired
+	private CacheListService<ArticleBlogBo> cacheListService;
 	@Autowired
 	private CacheService<ArticleBlogBo> cacheService;
 
@@ -69,7 +72,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	@Override
 	public List<ArticleBlogBo> findByOwenerTagId(final Long owenerTagId) {
-		return cacheService.cacheList(new ICacheExecutor<List<ArticleBlogBo>>() {
+		return cacheListService.cache(new ICacheExecutor<List<ArticleBlogBo>>() {
 			@Override
 			public List<ArticleBlogBo> execute() {
 				final List<ArticleBlogEntry> entrys = blogDao.findByOwenerTagId(owenerTagId);
@@ -147,7 +150,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	@Override
 	public List<ArticleBlogBo> findPageList(final IPageable pageable) {
-		return cacheService.cacheList(new ICacheExecutor<List<ArticleBlogBo>>() {
+		return cacheListService.cache(new ICacheExecutor<List<ArticleBlogBo>>() {
 			@Override
 			public List<ArticleBlogBo> execute() {
 				final List<ArticleBlogEntry> entrys = blogDao.queryList(pageable);

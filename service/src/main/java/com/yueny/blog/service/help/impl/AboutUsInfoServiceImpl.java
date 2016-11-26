@@ -14,7 +14,7 @@ import com.yueny.blog.dao.help.IAboutUsInfoDao;
 import com.yueny.blog.entry.help.AboutUsInfoEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
-import com.yueny.blog.service.env.CacheService;
+import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.help.IAboutUsInfoService;
 import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.superclub.api.constant.Constants;
@@ -32,11 +32,11 @@ public class AboutUsInfoServiceImpl extends BaseBiz implements IAboutUsInfoServi
 	@Autowired
 	private IAboutUsInfoDao aboutUsInfoDao;
 	@Autowired
-	private CacheService<AboutUsInfoBo> cacheService;
+	private CacheListService<AboutUsInfoBo> cacheListService;
 
 	@Override
 	public List<AboutUsInfoBo> queryAll() {
-		return cacheService.cacheList("queryAll", new ICacheExecutor<List<AboutUsInfoBo>>() {
+		return cacheListService.cache("queryAll", new ICacheExecutor<List<AboutUsInfoBo>>() {
 			@Override
 			public List<AboutUsInfoBo> execute() {
 				final List<AboutUsInfoEntry> entrys = aboutUsInfoDao.queryAllData();

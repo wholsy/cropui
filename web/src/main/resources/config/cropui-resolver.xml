@@ -41,10 +41,10 @@
 	        <map>
 	            <entry key="xml_escape" value-ref="fmXmlEscape" />
 	            <entry key="indexOf">
-					<bean class="com.yueny.superclub.util.web.common.freemarker.template.IndexOfMethod" />
+					<bean class="com.yueny.rapid.util.web.freemarker.template.IndexOfMethod" />
 				</entry>
 				<entry key="unixTimeFormat">
-					<bean class="com.yueny.superclub.util.web.common.freemarker.template.UnixTimeFormat" />
+					<bean class="com.yueny.rapid.util.web.freemarker.template.UnixTimeFormat" />
 				</entry>
 	        </map>
 	    </property>

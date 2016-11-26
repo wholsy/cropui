@@ -41,11 +41,13 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
          -->
-        
         <dependency>
 		    <groupId>com.yueny.rapid.util</groupId>
-		    <artifactId>rapid-util-web-common</artifactId>
-		    <version>1.0.0-SNAPSHOT</version>
+		    <artifactId>rapid-util-web-core</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.yueny.rapid.util</groupId>
+		    <artifactId>rapid-util-web-freemarker</artifactId>
 		</dependency>
 
         <!-- freemarker -->
@@ -71,11 +73,18 @@
 		    <groupId>taglibs</groupId>
 		    <artifactId>standard</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
   
 	<build>
+		<!--  -->
 		<finalName>blog</finalName>
-		 <plugins>
+		<plugins>
 		 	<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>

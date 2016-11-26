@@ -3,6 +3,7 @@
  */
 package com.yueny.blog.service.env;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Component;
@@ -17,13 +18,12 @@ import com.yueny.blog.service.CacheBaseBiz;
  * @DATE 2016年11月17日 下午2:14:14
  */
 @Component
-public class CacheService<T> extends CacheBaseBiz<T> {
-
+public class CacheListService<T> extends CacheBaseBiz<List<T>> {
 	/**
-	 * 缓存对象
+	 * 缓存列表
 	 */
-	public final T cache(final ICacheExecutor<T> handler, final Long timeout, final Object... args) {
-		return cache(handler, timeout, TimeUnit.SECONDS, args);
+	public final List<T> cache(final ICacheExecutor<List<T>> handler, final Long timeout, final Object... argses) {
+		return cache(handler, timeout, TimeUnit.SECONDS, argses);
 	}
 
 }

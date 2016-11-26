@@ -8,9 +8,8 @@
 	
 	<!-- 2 redisTemplate模板 集成  -->
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-		p:connection-factory-ref="jedisConnectionFactory"/>
-	<bean id="redisStringTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
-		p:connection-factory-ref="jedisConnectionFactory"/> 
+		p:connection-factory-ref="jedisConnectionFactory">
+	</bean>
 	
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${redis.maxIdle}"/>
