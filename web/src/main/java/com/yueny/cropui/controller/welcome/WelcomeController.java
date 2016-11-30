@@ -17,7 +17,7 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 import com.yueny.superclub.util.web.security.context.VisitContextHolder;
 
 /**
- * 热点信息控制器
+ * 首页控制器
  *
  * @author 袁洋 2015年8月6日 下午2:05:09
  *
