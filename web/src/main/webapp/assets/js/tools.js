@@ -1,5 +1,15 @@
+/*
+ * tools - v1.1.0
+ * A jQuery Tools
+ *
+ * Made by yunshao <yueny09@163.com>
+ * Since 1.0.0 20160926
+ * Modify 1.1.0 20161202
+ */
 var tools = tools || function () { };
 
+/* Since 1.0.0 20160926 */
+/* Modify 1.1.0 20161202 */
 tools.doing = false;
 tools.ck_un = "UserName";
 tools.ck_user = "UserInfo";
@@ -24,7 +34,7 @@ tools.upload_urls = function (resp){
    return resp.data;
 };
 
-tools.isArray = function () {
+tools.isArray = function (val) {
     return !!(val &&
         typeof val == "object" &&
         typeof val.length == 'number' &&
@@ -92,15 +102,6 @@ tools.format = function (s, pars) {
     return s;
 };
 
-tools.isArray = function (val) {
-    return !!(val &&
-        typeof val == "object" &&
-        typeof val.length == 'number' &&
-        typeof val.splice == 'function' &&
-        !(val.propertyIsEnumerable('length'))
-        );
-};
-
 tools.htmlEncode = function (s) {
     if (!s) return "";
 
@@ -147,17 +148,6 @@ Date.prototype.format = function (fmt) {
     return fmt;
 };
 
-/*通过文章URL获取ID，传入url或id*/
-tools.getArticleId = function (val) {
-    if (val.indexOf("http://") == 0) {
-        var mats = /(\/(\d+)\.aspx)|(details\/(\d+))/i.exec(val);
-        if (mats) return (mats[0].split('/')[1].split('.')[0]);
-    } else if (!isNaN(val)) {
-        return (val);
-    }
-    return 0;
-};
-
 /*从cookie获取用户名*/
 tools.getUN = function () {
     var m = document.cookie.match(new RegExp("(^| )UserName=([^;]*)(;|$)"));
@@ -196,4 +186,15 @@ tools.editorBtn = function (val) {
 		return simpleTools;
 	}
 	return fullTools;
+};
+
+/*通过文章URL获取ID，传入url或id*/
+tools.getArticleId = function (val) {
+  if (val.indexOf("http://") == 0) {
+      var mats = /(\/(\d+)\.aspx)|(details\/(\d+))/i.exec(val);
+      if (mats) return (mats[0].split('/')[1].split('.')[0]);
+  } else if (!isNaN(val)) {
+      return (val);
+  }
+  return 0;
 };
