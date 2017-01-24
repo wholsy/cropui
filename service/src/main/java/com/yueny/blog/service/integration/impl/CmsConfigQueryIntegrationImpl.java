@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.yueny.blog.service.integration.ICmsConfigQueryIntegration;
 import com.yueny.cms.api.enums.SystemParameterType;
 import com.yueny.cms.api.response.ro.FunctionOpenRo;
@@ -34,16 +34,17 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	 */
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Reference
+	// @Reference
+	@Autowired
 	private IOpenQueryService openQueryService;
 
 	/** 系统编号 */
 	@Value("${app.system.code}")
 	private String systemCode;
 
-	@Reference
+	@Autowired
 	private ISystemParameterQueryService systemParameterQueryService;
-	@Reference
+	@Autowired
 	private ISystemQueryService systemQueryService;
 
 	@Override
