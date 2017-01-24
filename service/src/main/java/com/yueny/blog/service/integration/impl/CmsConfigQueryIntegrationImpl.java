@@ -49,6 +49,10 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 
 	@Override
 	public FunctionOpenRo queryFunctionOpenByCode(String functionCode) {
+		if (openQueryService == null) {
+			logger.warn("服务未发现：{}！", openQueryService);
+		}
+
 		// 查询系统的功能开放配置
 		final NormalResponse<FunctionOpenRo> resp = openQueryService.queryByFunctionCode(systemCode, functionCode);
 
@@ -64,6 +68,10 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	 */
 	@Override
 	public List<FunctionOpenRo> queryFunctionOpens() {
+		if (openQueryService == null) {
+			logger.warn("服务未发现：{}！", openQueryService);
+		}
+
 		// 查询系统的功能开放配置
 		final ListResponse<FunctionOpenRo> resp = openQueryService.queryAll(systemCode);
 
@@ -73,6 +81,10 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 
 	@Override
 	public SubSystemRo querySubSystem() {
+		if (systemQueryService == null) {
+			logger.warn("服务未发现：{}！", systemQueryService);
+		}
+
 		final NormalResponse<SubSystemRo> resp = systemQueryService.queryByCode(systemCode);
 
 		logger.debug("获取当前子系统配置信息：{}！", resp);
@@ -81,6 +93,10 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 
 	@Override
 	public List<SubSystemRo> querySubSystemList() {
+		if (systemQueryService == null) {
+			logger.warn("服务未发现：{}！", systemQueryService);
+		}
+
 		final ListResponse<SubSystemRo> resp = systemQueryService.queryAll();
 
 		logger.debug("获取所有子系统配置信息：{}！", resp);
@@ -89,6 +105,10 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 
 	@Override
 	public SystemParameterRo querySystemParameterByCode(SystemParameterType systemParameterCode) {
+		if (systemParameterQueryService == null) {
+			logger.warn("服务未发现：{}！", systemParameterQueryService);
+		}
+
 		final NormalResponse<SystemParameterRo> resp = systemParameterQueryService.queryByType(systemParameterCode);
 
 		logger.debug("查询指定的系统参数配置：{}！", resp);
