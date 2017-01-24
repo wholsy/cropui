@@ -1,5 +1,6 @@
 package com.yueny.blog.service.integration.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -56,7 +57,11 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 		// 查询系统的功能开放配置
 		final NormalResponse<FunctionOpenRo> resp = openQueryService.queryByFunctionCode(systemCode, functionCode);
 
-		logger.debug("获取指定功能开放配置信息：{},{}！", functionCode, resp);
+		logger.info("获取指定功能开放配置信息：{},{}！", functionCode, resp);
+		if (resp == null) {
+			return null;
+		}
+
 		return resp.getData();
 	}
 
@@ -75,7 +80,11 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 		// 查询系统的功能开放配置
 		final ListResponse<FunctionOpenRo> resp = openQueryService.queryAll(systemCode);
 
-		logger.debug("获取功能开放状态配置信息：{}！", resp);
+		logger.info("获取功能开放状态配置信息：{}！", resp);
+		if (resp == null) {
+			return Collections.emptyList();
+		}
+
 		return resp.getData();
 	}
 
@@ -87,7 +96,11 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 
 		final NormalResponse<SubSystemRo> resp = systemQueryService.queryByCode(systemCode);
 
-		logger.debug("获取当前子系统配置信息：{}！", resp);
+		logger.info("获取当前子系统配置信息：{}！", resp);
+		if (resp == null) {
+			return null;
+		}
+
 		return resp.getData();
 	}
 
@@ -99,7 +112,11 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 
 		final ListResponse<SubSystemRo> resp = systemQueryService.queryAll();
 
-		logger.debug("获取所有子系统配置信息：{}！", resp);
+		logger.info("获取所有子系统配置信息：{}！", resp);
+		if (resp == null) {
+			return Collections.emptyList();
+		}
+
 		return resp.getData();
 	}
 
@@ -111,7 +128,11 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 
 		final NormalResponse<SystemParameterRo> resp = systemParameterQueryService.queryByType(systemParameterCode);
 
-		logger.debug("查询指定的系统参数配置：{}！", resp);
+		logger.info("查询指定的系统参数配置：{}！", resp);
+		if (resp == null) {
+			return null;
+		}
+
 		return resp.getData();
 	}
 

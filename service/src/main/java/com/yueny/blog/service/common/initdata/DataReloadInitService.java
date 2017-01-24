@@ -50,11 +50,6 @@ public final class DataReloadInitService extends AbstractDataInitService {
 		final Map<String, Object> pushData = Maps.newHashMap();
 
 		try {
-			final List<SubSystemRo> allSubSystem = cmsConfigQueryIntegration.querySubSystemList();
-			for (final SubSystemRo ro : allSubSystem) {
-				pushData.put(ro.getSystemCode(), ro.getDomainUrl());
-			}
-
 			/* 功能开放状态配置 */
 			final List<FunctionOpenRo> functionOpens = cmsConfigQueryIntegration.queryFunctionOpens();
 			for (final FunctionOpenRo ro : functionOpens) {
@@ -64,6 +59,12 @@ public final class DataReloadInitService extends AbstractDataInitService {
 				}
 				pushData.put(ro.getFunctionCode(), enableType.enable());
 			}
+
+			final List<SubSystemRo> allSubSystem = cmsConfigQueryIntegration.querySubSystemList();
+			for (final SubSystemRo ro : allSubSystem) {
+				pushData.put(ro.getSystemCode(), ro.getDomainUrl());
+			}
+
 		} catch (final Exception e) {
 			logger.error("配置数据初始化异常！", e);
 		}

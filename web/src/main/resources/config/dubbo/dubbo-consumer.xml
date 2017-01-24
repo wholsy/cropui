@@ -16,9 +16,9 @@
 	 
 	<!--  -->
 	<dubbo:reference id="openQueryService" interface="com.yueny.cms.api.service.IOpenQueryService"
-		async="true" check="false"/>
+		check="false"/>
 	<dubbo:reference id="systemParameterQueryService" interface="com.yueny.cms.api.service.ISystemParameterQueryService"
-		async="true" check="false"/>
+		check="false"/>
 	<dubbo:reference id="systemQueryService" interface="com.yueny.cms.api.service.ISystemQueryService"
 		async="true" check="false"/>
 	
