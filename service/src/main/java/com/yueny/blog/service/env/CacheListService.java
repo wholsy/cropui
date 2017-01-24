@@ -22,7 +22,7 @@ public class CacheListService<T> extends CacheBaseBiz<List<T>> {
 	/**
 	 * 缓存列表
 	 */
-	public final List<T> cache(final ICacheExecutor<List<T>> handler, final Long timeout, final Object... argses) {
+	public final List<T> cache(final CacheDataHandler<List<T>> handler, final Long timeout, final Object... argses) {
 		return cache(handler, timeout, TimeUnit.SECONDS, argses);
 	}
 

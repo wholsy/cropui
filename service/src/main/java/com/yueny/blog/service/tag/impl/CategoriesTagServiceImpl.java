@@ -13,7 +13,7 @@ import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.dao.tag.ICategoriesTagDao;
 import com.yueny.blog.entry.tag.CategoriesTagEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
@@ -62,9 +62,9 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 	@Override
 	@ProfilerLog
 	public List<CategoriesTagBo> findArticleCategoriesTree() {
-		return cacheListService.cache("findArticleCategoriesTree", new ICacheExecutor<List<CategoriesTagBo>>() {
+		return cacheListService.cache("findArticleCategoriesTree", new CacheDataHandler<List<CategoriesTagBo>>() {
 			@Override
-			public List<CategoriesTagBo> execute() {
+			public List<CategoriesTagBo> caller() {
 				/* 获取顶级文章分类类目 */
 				final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByParentTagCode("-1");
 				if (CollectionUtils.isEmpty(entrys)) {
@@ -99,9 +99,9 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 	 */
 	@Override
 	public List<CategoriesTagBo> findByCode(final Set<String> categoriesCodes) {
-		return cacheListService.cache(new ICacheExecutor<List<CategoriesTagBo>>() {
+		return cacheListService.cache(new CacheDataHandler<List<CategoriesTagBo>>() {
 			@Override
-			public List<CategoriesTagBo> execute() {
+			public List<CategoriesTagBo> caller() {
 				if (CollectionUtils.isEmpty(categoriesCodes)) {
 					return Collections.emptyList();
 				}
@@ -118,9 +118,9 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 
 	@Override
 	public CategoriesTagBo findByCode(final String categoriesCode) {
-		return cacheService.cache(categoriesCode, new ICacheExecutor<CategoriesTagBo>() {
+		return cacheService.cache(categoriesCode, new CacheDataHandler<CategoriesTagBo>() {
 			@Override
-			public CategoriesTagBo execute() {
+			public CategoriesTagBo caller() {
 				final CategoriesTagEntry entry = articleCategoriesDao.queryByTagCode(categoriesCode);
 				if (entry == null) {
 					return null;
@@ -133,9 +133,9 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 
 	@Override
 	public CategoriesTagBo findByID(final Long categoriesId) {
-		return cacheService.cache(categoriesId, new ICacheExecutor<CategoriesTagBo>() {
+		return cacheService.cache(categoriesId, new CacheDataHandler<CategoriesTagBo>() {
 			@Override
-			public CategoriesTagBo execute() {
+			public CategoriesTagBo caller() {
 				final CategoriesTagEntry entry = articleCategoriesDao.queryByID(categoriesId);
 				if (entry == null) {
 					return null;
@@ -148,9 +148,9 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 
 	@Override
 	public List<CategoriesTagBo> findByParentCode(final String categoriesParentCode) {
-		return cacheListService.cache(categoriesParentCode, new ICacheExecutor<List<CategoriesTagBo>>() {
+		return cacheListService.cache(categoriesParentCode, new CacheDataHandler<List<CategoriesTagBo>>() {
 			@Override
-			public List<CategoriesTagBo> execute() {
+			public List<CategoriesTagBo> caller() {
 				final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByParentTagCode(categoriesParentCode);
 				if (CollectionUtils.isEmpty(entrys)) {
 					return Collections.emptyList();

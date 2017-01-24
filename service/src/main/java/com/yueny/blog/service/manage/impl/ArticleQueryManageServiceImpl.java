@@ -18,6 +18,7 @@ import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.article.IArticleBlogService;
+import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.manage.IArticleQueryManageService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.blog.service.tag.IOwenerTagService;
@@ -27,6 +28,7 @@ import com.yueny.rapid.lang.date.DateUtil;
 import com.yueny.rapid.lang.enums.BaseErrorType;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.superclub.api.page.core.PageCond;
+import com.yueny.superclub.api.pojo.instance.AbstractBo;
 import com.yueny.superclub.util.exec.MultiThreadSupport;
 import com.yueny.superclub.util.exec.executor.IExecutor;
 
@@ -44,6 +46,8 @@ import lombok.SneakyThrows;
 public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQueryManageService {
 	@Autowired
 	private IArticleBlogService articleBlogService;
+	@Autowired
+	private CacheService<AbstractBo> cacheService;
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
 	@Autowired

@@ -1,6 +1,7 @@
 package com.yueny.blog.service.env;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -19,33 +20,47 @@ public class CacheKeyConstant {
 	public static final String REDIS_PREFIX_KEY = "blog_redis_key_";
 
 	/**
+	 * key组装
+	 */
+	public static String assmebledKeys(final List<Object> keys) {
+		return getPrefis(keys);
+	}
+
+	/**
+	 * key组装
+	 */
+	public static String assmebledKeys(final Object... keys) {
+		return getPrefis(keys);
+	}
+
+	/**
 	 * 获取缓存标识
 	 *
 	 * @param key
 	 *            附加值
 	 */
-	public static String getPrefis(final Object... keyArgs) {
-		final StringBuilder sb = new StringBuilder();
-		sb.append(REDIS_PREFIX_KEY);
+	private static String getPrefis(final Object... keyArgs) {
+		final StringBuilder ks = new StringBuilder();
+		ks.append(REDIS_PREFIX_KEY);
 
 		for (final Object key : keyArgs) {
 			if (key instanceof java.util.Collection) {
-				sb.append(Joiner.on(Constants.UNDERLINE).join(Lists.newArrayList(((Collection<?>) key))));
-				sb.append(Constants.UNDERLINE);
+				ks.append(Joiner.on(Constants.UNDERLINE).skipNulls().join(Lists.newArrayList(((Collection<?>) key))));
+				ks.append(Constants.UNDERLINE);
 				continue;
 			}
 
 			if (key instanceof Object[]) {
-				sb.append(Joiner.on(Constants.UNDERLINE).join(Lists.newArrayList(((Object[]) key))));
-				sb.append(Constants.UNDERLINE);
+				ks.append(Joiner.on(Constants.UNDERLINE).skipNulls().join(Lists.newArrayList(((Object[]) key))));
+				ks.append(Constants.UNDERLINE);
 				continue;
 			}
 
-			sb.append(key);
-			sb.append(Constants.UNDERLINE);
+			ks.append(key);
+			ks.append(Constants.UNDERLINE);
 		}
 
-		return sb.toString();
+		return ks.toString();
 	}
 
 }

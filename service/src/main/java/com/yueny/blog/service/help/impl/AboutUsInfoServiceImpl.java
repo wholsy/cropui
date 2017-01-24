@@ -13,7 +13,7 @@ import com.yueny.blog.bo.help.AboutUsInfoBo;
 import com.yueny.blog.dao.help.IAboutUsInfoDao;
 import com.yueny.blog.entry.help.AboutUsInfoEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.help.IAboutUsInfoService;
 import com.yueny.rapid.lang.util.StringUtil;
@@ -36,9 +36,9 @@ public class AboutUsInfoServiceImpl extends BaseBiz implements IAboutUsInfoServi
 
 	@Override
 	public List<AboutUsInfoBo> queryAll() {
-		return cacheListService.cache("queryAll", new ICacheExecutor<List<AboutUsInfoBo>>() {
+		return cacheListService.cache("queryAll", new CacheDataHandler<List<AboutUsInfoBo>>() {
 			@Override
-			public List<AboutUsInfoBo> execute() {
+			public List<AboutUsInfoBo> caller() {
 				final List<AboutUsInfoEntry> entrys = aboutUsInfoDao.queryAllData();
 				if (CollectionUtils.isEmpty(entrys)) {
 					Collections.emptyList();

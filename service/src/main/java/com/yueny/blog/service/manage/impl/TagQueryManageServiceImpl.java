@@ -11,7 +11,7 @@ import com.yueny.blog.bo.model.document.ChartData;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.manage.ITagQueryManageService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
@@ -81,9 +81,9 @@ public class TagQueryManageServiceImpl extends BaseBiz implements ITagQueryManag
 
 	@Override
 	public ChartData getChartData() throws DataVerifyAnomalyException {
-		return cacheService.cache(new ICacheExecutor<ChartData>() {
+		return cacheService.cache(new CacheDataHandler<ChartData>() {
 			@Override
-			public ChartData execute() {
+			public ChartData caller() {
 				final CategoriesTagBo root = categoriesTagService.findByCode("-1");
 				final ChartData chartData = new ChartData(root.getCategoriesTagCode(), root.getCategoriesId(),
 						root.getCategoriesName());

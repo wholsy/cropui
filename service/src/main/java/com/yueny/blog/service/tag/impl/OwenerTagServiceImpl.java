@@ -13,7 +13,7 @@ import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.dao.tag.IOwenerTagDao;
 import com.yueny.blog.entry.tag.OwenerTagEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.tag.IOwenerTagService;
@@ -49,9 +49,9 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	@Override
 	@ProfilerLog
 	public List<OwenerTagBo> queryAllByUid(final String uid) {
-		return cacheListService.cache(new ICacheExecutor<List<OwenerTagBo>>() {
+		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
 			@Override
-			public List<OwenerTagBo> execute() {
+			public List<OwenerTagBo> caller() {
 				final List<OwenerTagEntry> entrys = owenerTagDao.queryAllByUid(uid);
 				if (CollectionUtils.isEmpty(entrys)) {
 					Collections.emptyList();
@@ -64,9 +64,9 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 
 	@Override
 	public List<OwenerTagBo> queryByCategoriesTagCode(final String categoriesTagCode) {
-		return cacheListService.cache(new ICacheExecutor<List<OwenerTagBo>>() {
+		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
 			@Override
-			public List<OwenerTagBo> execute() {
+			public List<OwenerTagBo> caller() {
 				final List<OwenerTagEntry> entrys = owenerTagDao.queryByCategoriesTagCode(categoriesTagCode);
 				if (CollectionUtils.isEmpty(entrys)) {
 					Collections.emptyList();
@@ -79,9 +79,9 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 
 	@Override
 	public OwenerTagBo queryById(final long primaryId) {
-		return cacheService.cache(new ICacheExecutor<OwenerTagBo>() {
+		return cacheService.cache(new CacheDataHandler<OwenerTagBo>() {
 			@Override
-			public OwenerTagBo execute() {
+			public OwenerTagBo caller() {
 				final OwenerTagEntry entry = owenerTagDao.queryByID(primaryId);
 				if (entry == null) {
 					return null;
@@ -94,9 +94,9 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 
 	@Override
 	public List<OwenerTagBo> queryById(final Set<Long> owenerTagIds) {
-		return cacheListService.cache(owenerTagIds, new ICacheExecutor<List<OwenerTagBo>>() {
+		return cacheListService.cache(owenerTagIds, new CacheDataHandler<List<OwenerTagBo>>() {
 			@Override
-			public List<OwenerTagBo> execute() {
+			public List<OwenerTagBo> caller() {
 				final List<OwenerTagEntry> entrys = owenerTagDao.queryByID(owenerTagIds);
 				if (CollectionUtils.isEmpty(entrys)) {
 					Collections.emptyList();
@@ -110,9 +110,9 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	@Override
 	@ProfilerLog
 	public List<OwenerTagBo> queryByUid(final String uid) {
-		return cacheListService.cache(new ICacheExecutor<List<OwenerTagBo>>() {
+		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
 			@Override
-			public List<OwenerTagBo> execute() {
+			public List<OwenerTagBo> caller() {
 				final List<OwenerTagEntry> entrys = owenerTagDao.queryByUid(uid);
 				if (CollectionUtils.isEmpty(entrys)) {
 					Collections.emptyList();

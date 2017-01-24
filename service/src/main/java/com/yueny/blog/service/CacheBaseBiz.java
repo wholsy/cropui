@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheKeyConstant;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
 
@@ -19,20 +20,6 @@ import com.yueny.rapid.lang.util.collect.ArrayUtil;
  */
 public abstract class CacheBaseBiz<L> extends BaseBiz {
 	/**
-	 * 缓存数据执行器
-	 *
-	 * @author yueny09 <deep_blue_yang@163.com>
-	 *
-	 * @DATE 2016年11月17日 下午2:15:41
-	 */
-	public interface ICacheExecutor<L> {
-		/**
-		 * @return Objs or collections
-		 */
-		L execute();
-	}
-
-	/**
 	 * 缓存默认过期时间,15秒
 	 */
 	protected static final Long DEFAULT_EXPIRE_SECOND = 15L;
@@ -40,15 +27,15 @@ public abstract class CacheBaseBiz<L> extends BaseBiz {
 	private RedisTemplate<String, L> redisTemplate;
 
 	/**
-	 * 缓存对象
+	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
 	 */
-	public final L cache(final ICacheExecutor<L> cacheExecutor, final Long timeout, final TimeUnit unit,
+	public final L cache(final CacheDataHandler<L> cacheExecutor, final Long timeout, final TimeUnit unit,
 			final Object... args) {
 		// TODO redis异常处理
 		// .
 
-		// TODO getClass() is 'CacheListService'
-		final String redisKey = CacheKeyConstant.getPrefis(getClass().getSimpleName(), args);
+		// getClass() is 'CacheListService'
+		final String redisKey = CacheKeyConstant.assmebledKeys(getClass().getSimpleName(), args);
 
 		L t = redisTemplate.opsForValue().get(redisKey);
 		if (t != null) {
@@ -56,7 +43,11 @@ public abstract class CacheBaseBiz<L> extends BaseBiz {
 			return t;
 		}
 
-		t = cacheExecutor.execute();
+		t = cacheExecutor.caller();
+
+		if (t == null) {
+			return t;
+		}
 
 		redisTemplate.opsForValue().set(redisKey, t);
 		redisTemplate.expire(redisKey, timeout, unit);
@@ -64,30 +55,36 @@ public abstract class CacheBaseBiz<L> extends BaseBiz {
 	}
 
 	/**
-	 * 缓存对象
+	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
 	 */
-	public final L cache(final ICacheExecutor<L> cacheExecutor, final Object... args) {
+	public final L cache(final CacheDataHandler<L> cacheExecutor, final Object... args) {
 		return cache(cacheExecutor, DEFAULT_EXPIRE_SECOND, TimeUnit.SECONDS, args);
 	}
 
 	/**
-	 * 缓存对象
+	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
 	 */
-	public final L cache(final Object args, final ICacheExecutor<L> cacheExecutor) {
+	public final L cache(final Object args, final CacheDataHandler<L> cacheExecutor) {
 		return cache(cacheExecutor, ArrayUtil.newArray(args));
 	}
 
 	/**
-	 * 缓存对象
+	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
+	 *
+	 * @param args
+	 *            缓存键值串,缓存key, 调用此接口,请确保该key在全局唯一
+	 * @param handler
+	 * @param timeout
+	 *            失效时间,秒 缓存对象
 	 */
-	public final L cache(final Object args, final ICacheExecutor<L> cacheExecutor, final Long timeout) {
+	public final L cache(final Object args, final CacheDataHandler<L> cacheExecutor, final Long timeout) {
 		return cache(cacheExecutor, timeout, TimeUnit.SECONDS, args);
 	}
 
 	/**
-	 * 缓存对象
+	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
 	 */
-	public final L cache(final Object args, final ICacheExecutor<L> cacheExecutor, final Long timeout,
+	public final L cache(final Object args, final CacheDataHandler<L> cacheExecutor, final Long timeout,
 			final TimeUnit unit) {
 		return cache(cacheExecutor, timeout, TimeUnit.SECONDS, ArrayUtil.newArray(args));
 	}
@@ -96,7 +93,7 @@ public abstract class CacheBaseBiz<L> extends BaseBiz {
 	 * 缓存对象删除,会删除对象和列表中的缓存值
 	 */
 	public final void cacheDelete(final Object... args) {
-		final String redisKey = CacheKeyConstant.getPrefis(getClass().getSimpleName(), args);
+		final String redisKey = CacheKeyConstant.assmebledKeys(getClass().getSimpleName(), args);
 
 		try {
 			redisTemplate.delete(redisKey);

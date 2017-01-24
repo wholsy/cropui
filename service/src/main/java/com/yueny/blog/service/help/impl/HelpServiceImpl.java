@@ -18,7 +18,7 @@ import com.yueny.blog.bo.model.statistics.month.HisYearDevReportMonthData;
 import com.yueny.blog.dao.help.IHisDevReportDao;
 import com.yueny.blog.entry.help.HisDevReportEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
+import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheService;
 import com.yueny.blog.service.help.IHelpService;
 import com.yueny.rapid.lang.date.DateFormatType;
@@ -42,9 +42,9 @@ public class HelpServiceImpl extends BaseBiz implements IHelpService {
 
 	@Override
 	public HisDevReportDayData queryHisDevReportsDay() {
-		final String json = cacheService.cache("", new ICacheExecutor<String>() {
+		final String json = cacheService.cache("", new CacheDataHandler<String>() {
 			@Override
-			public String execute() {
+			public String caller() {
 				final List<HisDevReportEntry> entrys = hisDevReportDao.queryAll();
 
 				// 对数据格式进行封装

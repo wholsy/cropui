@@ -18,11 +18,12 @@ import com.yueny.blog.service.CacheBaseBiz;
  */
 @Component
 public class CacheService<T> extends CacheBaseBiz<T> {
+	// <T extends ICacheWidget>
 
 	/**
 	 * 缓存对象
 	 */
-	public final T cache(final ICacheExecutor<T> handler, final Long timeout, final Object... args) {
+	public final T cache(final CacheDataHandler<T> handler, final Long timeout, final Object... args) {
 		return cache(handler, timeout, TimeUnit.SECONDS, args);
 	}
 

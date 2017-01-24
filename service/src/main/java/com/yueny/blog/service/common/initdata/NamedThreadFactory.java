@@ -34,8 +34,7 @@ public class NamedThreadFactory implements ThreadFactory {
 		mPrefix = prefix + "-thread-";
 		mDaemo = daemo;
 		final SecurityManager s = System.getSecurityManager();
-		mGroup = (s == null) ? Thread.currentThread().getThreadGroup() : s
-				.getThreadGroup();
+		mGroup = (s == null) ? Thread.currentThread().getThreadGroup() : s.getThreadGroup();
 	}
 
 	public ThreadGroup getThreadGroup() {
@@ -47,6 +46,9 @@ public class NamedThreadFactory implements ThreadFactory {
 		final String name = mPrefix + mThreadNum.getAndIncrement();
 		final Thread ret = new Thread(mGroup, runnable, name, 0);
 		ret.setDaemon(mDaemo);
+
+		// 生成该线程的MDC上下文
+		// .
 		return ret;
 	}
 }

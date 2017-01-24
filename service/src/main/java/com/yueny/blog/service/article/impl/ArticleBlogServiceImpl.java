@@ -11,8 +11,8 @@ import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.dao.article.IArticleBlogDao;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.CacheBaseBiz.ICacheExecutor;
 import com.yueny.blog.service.article.IArticleBlogService;
+import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.env.CacheService;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
@@ -43,9 +43,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 */
 	@Override
 	public ArticleBlogBo findByBlogId(final String articleBlogId) {
-		return cacheService.cache(new ICacheExecutor<ArticleBlogBo>() {
+		return cacheService.cache(new CacheDataHandler<ArticleBlogBo>() {
 			@Override
-			public ArticleBlogBo execute() {
+			public ArticleBlogBo caller() {
 				final ArticleBlogEntry entry = blogDao.queryByBlogId(articleBlogId);
 				if (entry == null) {
 					return null;
@@ -57,9 +57,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	@Override
 	public ArticleBlogBo findById(final Long primaryId) {
-		return cacheService.cache(new ICacheExecutor<ArticleBlogBo>() {
+		return cacheService.cache(new CacheDataHandler<ArticleBlogBo>() {
 			@Override
-			public ArticleBlogBo execute() {
+			public ArticleBlogBo caller() {
 				final ArticleBlogEntry entry = blogDao.queryByID(primaryId);
 				if (entry == null) {
 					return null;
@@ -72,9 +72,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	@Override
 	public List<ArticleBlogBo> findByOwenerTagId(final Long owenerTagId) {
-		return cacheListService.cache(new ICacheExecutor<List<ArticleBlogBo>>() {
+		return cacheListService.cache(new CacheDataHandler<List<ArticleBlogBo>>() {
 			@Override
-			public List<ArticleBlogBo> execute() {
+			public List<ArticleBlogBo> caller() {
 				final List<ArticleBlogEntry> entrys = blogDao.findByOwenerTagId(owenerTagId);
 				if (CollectionUtils.isEmpty(entrys)) {
 					return Collections.emptyList();
@@ -88,9 +88,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	@Override
 	public ArticleBlogBo findByPreviousBlogId(final String articlePreviousBlogId) {
 		return cacheService.cache(ArrayUtil.newArray("findByPreviousBlogId", articlePreviousBlogId),
-				new ICacheExecutor<ArticleBlogBo>() {
+				new CacheDataHandler<ArticleBlogBo>() {
 					@Override
-					public ArticleBlogBo execute() {
+					public ArticleBlogBo caller() {
 						final ArticleBlogEntry entry = blogDao.queryByPreviousBlogId(articlePreviousBlogId);
 						if (entry == null) {
 							return null;
@@ -108,9 +108,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 */
 	@Override
 	public ArticleBlogBo findLatestBlog() {
-		return cacheService.cache("findLatestBlog", new ICacheExecutor<ArticleBlogBo>() {
+		return cacheService.cache("findLatestBlog", new CacheDataHandler<ArticleBlogBo>() {
 			@Override
-			public ArticleBlogBo execute() {
+			public ArticleBlogBo caller() {
 				final ArticleBlogEntry entry = blogDao.queryLatestBlog();
 				if (entry == null) {
 					return null;
@@ -123,9 +123,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	@Override
 	public ArticleBlogBo findLatestBlog(final String uid) {
-		return cacheService.cache(new ICacheExecutor<ArticleBlogBo>() {
+		return cacheService.cache(new CacheDataHandler<ArticleBlogBo>() {
 			@Override
-			public ArticleBlogBo execute() {
+			public ArticleBlogBo caller() {
 				final ArticleBlogEntry entry = blogDao.queryLatestBlog(uid);
 				if (entry == null) {
 					return null;
@@ -150,9 +150,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	@Override
 	public List<ArticleBlogBo> findPageList(final IPageable pageable) {
-		return cacheListService.cache(new ICacheExecutor<List<ArticleBlogBo>>() {
+		return cacheListService.cache(new CacheDataHandler<List<ArticleBlogBo>>() {
 			@Override
-			public List<ArticleBlogBo> execute() {
+			public List<ArticleBlogBo> caller() {
 				final List<ArticleBlogEntry> entrys = blogDao.queryList(pageable);
 				if (CollectionUtils.isEmpty(entrys)) {
 					return Collections.emptyList();
