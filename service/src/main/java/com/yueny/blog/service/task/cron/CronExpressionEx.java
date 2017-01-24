@@ -1,4 +1,4 @@
-package com.yueny.cropui.service.task.cron;
+package com.yueny.blog.service.task.cron;
 
 import java.text.ParseException;
 import java.util.StringTokenizer;
@@ -11,7 +11,7 @@ import lombok.Getter;
  * @author 袁洋 2015年8月12日 上午9:31:49
  *
  */
-public class CronExpressionEx extends CronExpression {
+public final class CronExpressionEx {
 	/**
 	 * ALL_SPEC
 	 */
@@ -20,10 +20,7 @@ public class CronExpressionEx extends CronExpression {
 	 * NO_SPEC_INT
 	 */
 	public static final int NO_SPEC_INT = 98;
-	/**
-	 * Comment for <code>serialVersionUID</code>
-	 */
-	private static final long serialVersionUID = 1L;
+	private final CronExpression cronExp;
 	@Getter
 	private final String daysOfMonthExp;
 	@Getter
@@ -44,7 +41,7 @@ public class CronExpressionEx extends CronExpression {
 	 *             ParseException异常
 	 */
 	public CronExpressionEx(final String cronExpression) throws ParseException {
-		super(cronExpression);
+		cronExp = new CronExpression(cronExpression);
 
 		final StringTokenizer exprsTok = new StringTokenizer(cronExpression, " \t", false);
 		this.secondsExp = exprsTok.nextToken().trim();
@@ -53,6 +50,10 @@ public class CronExpressionEx extends CronExpression {
 		this.daysOfMonthExp = exprsTok.nextToken().trim();
 		this.monthsExp = exprsTok.nextToken().trim();
 		this.daysOfWeekExp = exprsTok.nextToken().trim();
+	}
+
+	public final CronExpression exp() {
+		return this.cronExp;
 	}
 
 }

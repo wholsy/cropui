@@ -2,7 +2,7 @@
 
 <#-- 文章发布 -->
 <@m.page_header title='${title}'/>
-	<link href="http://static.yueny.site/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
+	<link href="http://static.yueny.website/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
 	<link href="${ctx}/assets/css/write/write.css" rel="stylesheet" type="text/css">
 	<link href="${ctx}/assets/css/write/main.css" rel="stylesheet" type="text/css">
 	
@@ -171,10 +171,10 @@
 	<#--
 	<script src="${ctx}/assets/plugins/kindeditor/kindeditor-all.js" type="text/javascript"></script>
 	-->
-	<script src="http://static.yueny.site/plugins/kindeditor/kindeditor-all.js" type="text/javascript"></script>
-	<script src="http://static.yueny.site/plugins/kindeditor/lang/zh-CN.js" type="text/javascript"></script>
+	<script src="http://static.yueny.website/plugins/kindeditor/kindeditor-all.js" type="text/javascript"></script>
+	<script src="http://static.yueny.website/plugins/kindeditor/lang/zh-CN.js" type="text/javascript"></script>
 	
-	<script src='http://static.yueny.site/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
+	<script src='http://static.yueny.website/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
 	<script src="${ctx}/assets/js/write/posteditnew.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">

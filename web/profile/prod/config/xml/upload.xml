@@ -2,7 +2,7 @@
 <settings>
 	<!-- blog站点的静态资源地址  -->
     <root>/data/www/static/project/blog</root>
-    <uri>http://static.yueny.site/blog</uri>
+    <uri>http://static.yueny.website/blog</uri>
 	<upload-base>uploads</upload-base>
     
     <uploads>

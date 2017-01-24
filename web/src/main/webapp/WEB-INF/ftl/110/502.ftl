@@ -6,15 +6,15 @@
 
     <title>oh~ 我勒个去！服务呢 T.T</title>
 
-	<link rel="shortcut icon" href="http://static.yueny.site/favicon.ico"/>
+	<link rel="shortcut icon" href="http://static.yueny.website/favicon.ico"/>
     <!-- Bootstrap-->
-    <link rel="stylesheet" href="http://static.yueny.site/js/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://static.yueny.website/js/bootstrap/3.3.5/css/bootstrap.min.css"/>
 	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="http://static.yueny.site/plugins/libs/html5shiv.min.js"></script>
-        <script src="http://static.yueny.site/plugins/libs/respond.min.js"></script>
+        <script src="http://static.yueny.website/plugins/libs/html5shiv.min.js"></script>
+        <script src="http://static.yueny.website/plugins/libs/respond.min.js"></script>
     <![endif]-->
 
     <style>
@@ -64,9 +64,9 @@
 	</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="http://static.yueny.site/js/jquery/jquery-1.11.1.min.js"></script>
+	<script src="http://static.yueny.website/js/jquery/jquery-1.11.1.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="http://static.yueny.site/js/bootstrap/3.3.5/bootstrap.min.js"></script>
+	<script src="http://static.yueny.website/js/bootstrap/3.3.5/bootstrap.min.js"></script>
 	
 
 </body>

@@ -3,9 +3,9 @@
 	<contextName>blog</contextName>
 	
 	<property name="LOG_HOME" value="${pom.logs.home}" />
-	<property name="DEFAULT_PATTERN" value="%d %-5level [%X{ctxLogId}][%thread] %logger{5} - %msg%n" />
-	<property name="DIGEST_PATTERN" value="%d %-5level [%X{ctxLogId}][%thread] - %msg%n" />
-	<property name="SERVICE_DIGEST_PATTERN" value="%d %-5level [%X{ctxLogId}][%thread][%X{ctxSrcSys}] - %msg%n" />
+	<property name="DEFAULT_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread] %logger{5} - %msg%n" />
+	<property name="DIGEST_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread] - %msg%n" />
+	<property name="SERVICE_DIGEST_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread][%X{ctxSrcSys}] - %msg%n" />
 	<property name="STAT_PATTERN" value="%d - %msg%n" />
 	<property name="CHARSET" value="UTF-8" />
 	<property name="LEVEL" value="${pom.logs.level}" />

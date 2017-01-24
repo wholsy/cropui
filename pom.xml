@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   
 	<parent>
-		<groupId>com.yueny</groupId>
+		<groupId>com.yueny.base</groupId>
 		<artifactId>parent</artifactId>
 		<version>1.1.1-SNAPSHOT</version>
 	</parent>
@@ -22,6 +22,135 @@
 	
 	<dependencyManagement>
 		<dependencies>
+			<!-- kapo-jpa -->
+			<dependency>
+				<groupId>com.yueny.kapo</groupId>
+		        <artifactId>kapo-api</artifactId>
+				<version>${kapo.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.kapo</groupId>
+		        <artifactId>kapo-core</artifactId>
+				<version>${kapo.version}</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>com.yueny.rapid</groupId>
+				<artifactId>api</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+	
+			<!-- service -->
+			<dependency>
+			    <groupId>com.yueny.rapid.service</groupId>
+				<artifactId>rapid-service-rest</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.yueny.rapid.data</groupId>
+				<artifactId>rapid-data-storage-db</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.data</groupId>
+				<artifactId>rapid-data-storage-redis</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-mask</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-userAgent</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-util</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-timer</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-json</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-exception</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-dozer</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-date</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.data</groupId>
+				<artifactId>rapid-data-log-core</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.yueny.rapid.topic</groupId>
+				<artifactId>rapid-topic-profiler</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.yueny.rapid.util</groupId>
+				<artifactId>rapid-util-strategy</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.util</groupId>
+				<artifactId>rapid-util-crypt</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.util</groupId>
+				<artifactId>rapid-util-exec</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.util</groupId>
+				<artifactId>rapid-util-scheduler</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.util</groupId>
+				<artifactId>rapid-util-log</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.yueny.rapid.util</groupId>
+			    <artifactId>rapid-util-common</artifactId>
+			    <version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.yueny.rapid.util</groupId>
+				<artifactId>rapid-util-test</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.yueny.rapid.util</groupId>
+			    <artifactId>rapid-util-web-security</artifactId>
+			    <version>1.0.0-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-web-core</artifactId>
@@ -40,132 +169,104 @@
 		<dependency>
 			<groupId>com.yueny.kapo</groupId>
 	        <artifactId>kapo-api</artifactId>
-			<version>${kapo.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yueny.kapo</groupId>
 	        <artifactId>kapo-core</artifactId>
-			<version>${kapo.version}</version>
 		</dependency>
 		
 		<dependency>
 		    <groupId>com.yueny.rapid</groupId>
 			<artifactId>api</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
 		<!-- service -->
 		<dependency>
 		    <groupId>com.yueny.rapid.service</groupId>
 			<artifactId>rapid-service-rest</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-strategy</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-crypt</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-exec</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-scheduler</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-log</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.yueny.rapid.util</groupId>
-		    <artifactId>rapid-util-common</artifactId>
-		    <version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.yueny.rapid.data</groupId>
 			<artifactId>rapid-data-storage-db</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yueny.rapid.data</groupId>
 			<artifactId>rapid-data-storage-redis</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-mask</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-userAgent</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-util</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-timer</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-json</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-exception</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-dozer</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-date</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.lang</groupId>
+			<artifactId>rapid-lang-userAgent</artifactId>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.yueny.rapid.topic</groupId>
 			<artifactId>rapid-topic-profiler</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-test</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<artifactId>rapid-util-strategy</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.util</groupId>
+			<artifactId>rapid-util-crypt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.util</groupId>
+			<artifactId>rapid-util-exec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.util</groupId>
+			<artifactId>rapid-util-scheduler</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.util</groupId>
+			<artifactId>rapid-util-log</artifactId>
 		</dependency>
 		<dependency>
 		    <groupId>com.yueny.rapid.util</groupId>
-		    <artifactId>rapid-util-web-security</artifactId>
-		    <version>1.0.0-SNAPSHOT</version>
+		    <artifactId>rapid-util-common</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.yueny.rapid.util</groupId>
+			<artifactId>rapid-util-test</artifactId>
 		</dependency>
 		
 	    <!--  task -->
 		<dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
-            <version>2.1.6</version>
         </dependency>
         <dependency>
 		    <groupId>org.quartz-scheduler</groupId>

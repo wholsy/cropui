@@ -1,10 +1,9 @@
-package com.yueny.cropui.service.task;
+package com.yueny.blog.service.task;
 
 import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 /**
  * autoReload
@@ -13,11 +12,9 @@ import org.springframework.stereotype.Service;
  *
  * @category tag
  */
-@Service
 public class DemoDateInitTask {
 	/** 日志 */
-	private static final Logger logger = LoggerFactory
-			.getLogger(DemoDateInitTask.class);
+	private static final Logger logger = LoggerFactory.getLogger(DemoDateInitTask.class);
 
 	/**
 	 * 定时初始化任务

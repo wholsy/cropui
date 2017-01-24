@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<dubbo:registry protocol="${dubbo.consumer.registry.protocol}" 
+		address="${dubbo.consumer.registry.address}" 
+		timeout="${dubbo.consumer.registry.timeout}"/>
+    
+    <!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类
+	<dubbo:annotation package="com.yueny.blog.service.integration"/>
+	 -->
+	 
+	<!--  -->
+	<dubbo:reference id="openQueryService" interface="com.yueny.cms.api.service.IOpenQueryService"
+		async="true" check="false"/>
+	<dubbo:reference id="systemParameterQueryService" interface="com.yueny.cms.api.service.ISystemParameterQueryService"
+		async="true" check="false"/>
+	<dubbo:reference id="systemQueryService" interface="com.yueny.cms.api.service.ISystemQueryService"
+		async="true" check="false"/>
+	
+</beans>

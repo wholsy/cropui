@@ -126,7 +126,7 @@
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
-			<bean class="com.yueny.superclub.util.log.mdc.WebLogMDCHandlerInterceptor"
+			<bean class="com.yueny.rapid.data.log.web.filter.mdc.WebLogMdcHandlerInterceptor"
 				p:generateLogId="true"/>
 		</mvc:interceptor>
 		

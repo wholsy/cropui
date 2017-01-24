@@ -6,10 +6,10 @@ import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
+import com.yueny.blog.service.common.initdata.NamedThreadFactory;
 import com.yueny.blog.service.disruptor.event.LogEvent;
 import com.yueny.blog.service.disruptor.factory.LogEventFactory;
 import com.yueny.blog.service.disruptor.handler.LogEventHandler;
-import com.yueny.cropui.service.initdata.NamedThreadFactory;
 
 public class LogEventMain {
 	public static void main(final String[] args) throws Exception {

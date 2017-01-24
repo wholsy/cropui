@@ -14,7 +14,7 @@ import com.yueny.kapo.api.annnotation.TableSeg;
 import com.yueny.kapo.core.condition.builder.QueryBuilder;
 import com.yueny.kapo.core.condition.column.operand.enums.BasicSqlOperand;
 import com.yueny.kapo.core.dao.SingleTableDao;
-import com.yueny.superclub.util.common.enums.EnableType;
+import com.yueny.rapid.lang.util.enums.EnableType;
 
 /**
  * 个人分类类目持久层操作

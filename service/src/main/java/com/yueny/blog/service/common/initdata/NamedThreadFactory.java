@@ -1,4 +1,4 @@
-package com.yueny.cropui.service.initdata;
+package com.yueny.blog.service.common.initdata;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

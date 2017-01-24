@@ -1,4 +1,4 @@
-package com.yueny.cropui.service.task;
+package com.yueny.blog.service.task;
 
 import java.util.Date;
 

@@ -6,7 +6,7 @@ var editor = null;
 function pageInit() {
 	KindEditor.ready(function(K) {
 		editor = K.create('textarea[name="articleContext"]', {
-			cssPath : ['http://static.yueny.site/plugins/prettify/prettify.css'],
+			cssPath : ['http://static.yueny.website/plugins/prettify/prettify.css'],
 			allowFileManager : true,
 			fileManagerJson : ctxy + '/file_manager_json',
 			allowImageUpload : true,

@@ -34,13 +34,10 @@
             <version>${cropui.version}</version>
         </dependency>
         
-        <!-- passport
         <dependency>
-            <groupId>com.yueny.passport</groupId>
-            <artifactId>passport-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-         -->
+			<groupId>com.yueny.rapid.data</groupId>
+			<artifactId>rapid-data-log-core</artifactId>
+		</dependency>
         <dependency>
 		    <groupId>com.yueny.rapid.util</groupId>
 		    <artifactId>rapid-util-web-core</artifactId>
@@ -49,7 +46,11 @@
 		    <groupId>com.yueny.rapid.util</groupId>
 		    <artifactId>rapid-util-web-freemarker</artifactId>
 		</dependency>
-
+		<dependency>
+		    <groupId>com.yueny.rapid.util</groupId>
+		    <artifactId>rapid-util-web-security</artifactId>
+		</dependency>
+			
         <!-- freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>

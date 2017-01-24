@@ -41,8 +41,8 @@ title: 页面页脚
 	</div>
 	<#-- container-narrow End -->
 	
-	<script src="http://static.yueny.site/plugins/bootstrap/2.3.2/js/bootstrap.js"></script>
-	<script src="http://static.yueny.site/plugins/prettify/prettify.js" type="text/javascript"></script>
+	<script src="http://static.yueny.website/plugins/bootstrap/2.3.2/js/bootstrap.js"></script>
+	<script src="http://static.yueny.website/plugins/prettify/prettify.js" type="text/javascript"></script>
 	<script src="${ctx}/assets/js/tools.js"></script>
 	</body>
 </html>

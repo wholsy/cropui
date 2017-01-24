@@ -1,0 +1,97 @@
+package com.yueny.blog.service.integration.impl;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.yueny.blog.service.integration.ICmsConfigQueryIntegration;
+import com.yueny.cms.api.enums.SystemParameterType;
+import com.yueny.cms.api.response.ro.FunctionOpenRo;
+import com.yueny.cms.api.response.ro.SubSystemRo;
+import com.yueny.cms.api.response.ro.SystemParameterRo;
+import com.yueny.cms.api.service.IOpenQueryService;
+import com.yueny.cms.api.service.ISystemParameterQueryService;
+import com.yueny.cms.api.service.ISystemQueryService;
+import com.yueny.rapid.data.resp.pojo.response.ListResponse;
+import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
+
+/**
+ * 外部服务
+ *
+ * @author yueny09 <deep_blue_yang@163.com>
+ *
+ * @DATE 2017年1月24日 上午11:05:23
+ * @since
+ */
+@Service
+public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration {
+	/**
+	 * Logger available to subclasses.
+	 */
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+
+	@Reference
+	private IOpenQueryService openQueryService;
+
+	/** 系统编号 */
+	@Value("${app.system.code}")
+	private String systemCode;
+
+	@Reference
+	private ISystemParameterQueryService systemParameterQueryService;
+	@Reference
+	private ISystemQueryService systemQueryService;
+
+	@Override
+	public FunctionOpenRo queryFunctionOpenByCode(String functionCode) {
+		// 查询系统的功能开放配置
+		final NormalResponse<FunctionOpenRo> resp = openQueryService.queryByFunctionCode(systemCode, functionCode);
+
+		logger.debug("获取指定功能开放配置信息：{},{}！", functionCode, resp);
+		return resp.getData();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.service.integration.ICmsConfigQueryIntegration#
+	 * queryFunctionOpens()
+	 */
+	@Override
+	public List<FunctionOpenRo> queryFunctionOpens() {
+		// 查询系统的功能开放配置
+		final ListResponse<FunctionOpenRo> resp = openQueryService.queryAll(systemCode);
+
+		logger.debug("获取功能开放状态配置信息：{}！", resp);
+		return resp.getData();
+	}
+
+	@Override
+	public SubSystemRo querySubSystem() {
+		final NormalResponse<SubSystemRo> resp = systemQueryService.queryByCode(systemCode);
+
+		logger.debug("获取当前子系统配置信息：{}！", resp);
+		return resp.getData();
+	}
+
+	@Override
+	public List<SubSystemRo> querySubSystemList() {
+		final ListResponse<SubSystemRo> resp = systemQueryService.queryAll();
+
+		logger.debug("获取所有子系统配置信息：{}！", resp);
+		return resp.getData();
+	}
+
+	@Override
+	public SystemParameterRo querySystemParameterByCode(SystemParameterType systemParameterCode) {
+		final NormalResponse<SystemParameterRo> resp = systemParameterQueryService.queryByType(systemParameterCode);
+
+		logger.debug("查询指定的系统参数配置：{}！", resp);
+		return resp.getData();
+	}
+
+}

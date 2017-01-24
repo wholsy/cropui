@@ -1,4 +1,4 @@
-package com.yueny.cropui.service.task.cron;
+package com.yueny.blog.service.task.cron;
 
 import java.util.Date;
 import java.util.Map;
@@ -81,7 +81,8 @@ public class CronExpressionManager {
 			final StringBuffer executePlan = new StringBuffer();
 			executePlan.append("计划执行时间:\n");
 			for (int i = 1; i <= step; i++) {
-				date = exp.getNextValidTimeAfter(date);
+				date = exp.exp().getNextValidTimeAfter(date);
+				// 时间格式化
 				executePlan.append(i + ": " + DateUtil.formatLongWeb(date) + "\n");
 				date = new Date(date.getTime() + 1000L);
 			}

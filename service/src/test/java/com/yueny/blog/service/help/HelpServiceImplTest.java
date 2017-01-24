@@ -1,4 +1,4 @@
-package com.yueny.cropui.service.help.impl;
+package com.yueny.blog.service.help;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

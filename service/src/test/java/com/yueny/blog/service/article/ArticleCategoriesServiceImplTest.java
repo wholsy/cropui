@@ -1,4 +1,4 @@
-package com.yueny.cropui.service.article.impl;
+package com.yueny.blog.service.article;
 
 import java.util.List;
 

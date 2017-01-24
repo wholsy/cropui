@@ -11,7 +11,6 @@
 		 -->
 	<import resource="classpath*:/config/cropui-**.xml"/>
 	
-	<!-- 
-	<import resource="classpath*:/config/dubbo-provider**.xml"/>
-	 -->
+	<import resource="classpath*:/config/dubbo/dubbo-**.xml"/>
+	
 </beans>
