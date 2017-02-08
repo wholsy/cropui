@@ -12,6 +12,7 @@ import com.yueny.rapid.lang.date.DateUtil;
  * @author 袁洋 2015年8月12日 上午9:35:46
  *
  */
+@Deprecated
 public class CronExpressionManager {
 	// 日
 	private static final Map<Integer, String> jCB_DD_Map = new TreeMap<Integer, String>();

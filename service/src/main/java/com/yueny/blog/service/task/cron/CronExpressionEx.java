@@ -11,6 +11,7 @@ import lombok.Getter;
  * @author 袁洋 2015年8月12日 上午9:31:49
  *
  */
+@Deprecated
 public final class CronExpressionEx {
 	/**
 	 * ALL_SPEC
