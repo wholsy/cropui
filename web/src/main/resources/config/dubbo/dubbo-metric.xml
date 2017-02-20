@@ -29,4 +29,8 @@
     <dubbo:protocol name="webservice" port="8892"/>
 	 -->
     
+    <!--  -->
+	<dubbo:consumer timeout="${dubbo.registry.server.timeout}"
+		filter="${dubbo.consumer.filter}"/>
+	
 </beans>

@@ -3,114 +3,46 @@
 	<contextName>blog</contextName>
 	
 	<property name="LOG_HOME" value="${pom.logs.home}" />
+	<property name="STDOUT_PATTERN" value="%d{HH:mm:ss.SSS} %-5level [%X{ctxTraceId}] [%X{ctxLogId}] %logger{5} - %msg%n" />
 	<property name="DEFAULT_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread] %logger{5} - %msg%n" />
 	<property name="DIGEST_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread] - %msg%n" />
-	<property name="SERVICE_DIGEST_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread][%X{ctxSrcSys}] - %msg%n" />
-	<property name="STAT_PATTERN" value="%d - %msg%n" />
+	<property name="SERVICE_DIGEST_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread] [%X{ctxSrcSys}] - %msg%n" />
+	<property name="STAT_PATTERN" value="%d - %msg%n"/>
 	<property name="CHARSET" value="UTF-8" />
 	<property name="LEVEL" value="${pom.logs.level}" />
 	<property name="LEVEL_DIGEST" value="${pom.logs.level.digest}" />
+	<!-- 获取时间戳字符串， 使用时， ${bySecond}  -->
+	<timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
 	
 	<!-- 控制台打印 -->
-	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<filter class="ch.qos.logback.classic.filter.LevelFilter">
 			<level>ERROR</level>
 			<onMatch>DENY</onMatch>
 			<onMismatch>ACCEPT</onMismatch>
 		</filter>
 		<encoder>
-			<pattern>[%-5level] %date{HH:mm:ss.SSS} %logger{36} - %msg%n
-			</pattern>
+			<pattern>${STDOUT_PATTERN}</pattern>
 		</encoder>
 	</appender>
-	<appender name="CONSOLE_ERROR" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="STDOUT_ERROR" class="ch.qos.logback.core.ConsoleAppender">
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>ERROR</level>
 		</filter>
 		<target>System.err</target>
 		<encoder>
-			<pattern>[%-5level] %date{HH:mm:ss.SSS} %logger{36} - %msg%n
-			</pattern>
+			<pattern>%date{HH:mm:ss.SSS} [%-5level] %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender>
-	
-	<logger name="com.yueny.cropui" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="com.yueny.kapo" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="com.alibaba.druid" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="druid.sql.DataSource" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="druid.sql.Connection" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="druid.sql" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="druid.sql.ResultSet" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="java.sql.ResultSet" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="org.mybatis" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="org.apache.ibatis" level="${LEVEL}">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="org.springframework" level="INFO">
-		<appender-ref ref="CONSOLE" />
-		<appender-ref ref="CONSOLE_ERROR" />
-	</logger>
-	<logger name="org.apache.commons.beanutils.converters" level="INFO"/>
-	<logger name="org.apache.commons.beanutils.ConvertUtils" level="INFO"/>
-	<logger name="org.dozer" level="INFO"/>
-	<logger name="org.springframework.test.context.transaction.TransactionalTestExecutionListener"
-		level="INFO"/>
-	<logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory"
-		level="ERROR">
-		<!--这里必须配置成error，如果配置成info，此处会输出大量的bean初始化信息 -->
-		<!--eclipse的console在做正则表达式的分析时会消耗大量cpu资源 -->
-	</logger>
 	
 	
 	<!-- 文件切割 -->
-	<!-- spring 相关日志 -->
-	<appender name="MISC" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_HOME}/misc.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/misc.log</fileNamePattern>
-			<maxHistory>30</maxHistory>
-			<cleanHistoryOnStart>true</cleanHistoryOnStart>
-		</rollingPolicy>
-		<encoder>
-			<pattern>${DEFAULT_PATTERN}</pattern>
-			<charset>${CHARSET}</charset>
-		</encoder>
-	</appender>
-	
-	<appender name="DEFAULT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="DEFAULT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/default.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/default.log</fileNamePattern>
 			<maxHistory>30</maxHistory>
-           		<cleanHistoryOnStart>true</cleanHistoryOnStart>
+           	<cleanHistoryOnStart>true</cleanHistoryOnStart>
 		</rollingPolicy>
 		<encoder>
 			<pattern>${DEFAULT_PATTERN}</pattern>
@@ -118,11 +50,12 @@
 		</encoder>
 	</appender>
 	
-	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/error.log</file>
 		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
 			<level>ERROR</level>
 		</filter>
+		<append>true</append>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/error.log</fileNamePattern>
 			<maxHistory>30</maxHistory>
@@ -133,8 +66,63 @@
 			<charset>${CHARSET}</charset>
 		</encoder>
 	</appender>
+	<!-- 数据持久层Appenders  -->
+	<appender name="DAL_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/dal.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- xxx_%d{yyyy-MM}.%i.log -->
+			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/dal.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+           	<cleanHistoryOnStart>true</cleanHistoryOnStart>
+           	<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+			<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${DEFAULT_PATTERN}</pattern>
+			<charset>${CHARSET}</charset>
+		</encoder>
+	</appender>
 	
-	<!-- Appenders : Digest -->
+	<appender name="WEB_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/web.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/web.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${DEFAULT_PATTERN}</pattern>
+			<charset>${CHARSET}</charset>
+		</encoder>
+	</appender>
+	<appender name="SERVICE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/service.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/service.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${DEFAULT_PATTERN}</pattern>
+			<charset>${CHARSET}</charset>
+		</encoder>
+	</appender>
+	
+	<appender name="SLA_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/sla.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/sla.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${DEFAULT_PATTERN}</pattern>
+			<charset>${CHARSET}</charset>
+		</encoder>
+	</appender>
+	
+	<!-- Digest摘要 Appenders -->
 	<appender name="DAL-DIGEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/dal-digest.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -147,7 +135,6 @@
 			<charset>${CHARSET}</charset>
 		</encoder>
 	</appender>
-	
 	<appender name="SERVICE-DIGEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/service-digest.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -160,7 +147,6 @@
 			<charset>${CHARSET}</charset>
 		</encoder>
 	</appender>
-	
 	<appender name="SAL-DIGEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/sal-digest.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -173,7 +159,6 @@
 			<charset>${CHARSET}</charset>
 		</encoder>
 	</appender>
-	
 	<appender name="PAGE-DIGEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/page-digest.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -187,7 +172,7 @@
 		</encoder>
 	</appender>
 	
-	<!-- Appenders : Stat -->
+	<!-- 监控 Stat Appenders -->
 	<appender name="JVM-STAT" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/stat/jvm-stat.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -200,7 +185,6 @@
 			<charset>${CHARSET}</charset>
 		</encoder>
 	</appender>
-	
 	<appender name="OS-STAT" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/stat/os-stat.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -214,163 +198,129 @@
 		</encoder>
 	</appender>
 	
-	<!-- Appenders: App Details -->
-	<appender name="DAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_HOME}/dal.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/dal.log</fileNamePattern>
-			<!-- <fileNamePattern>${LOG_HOME}/codelets_dal_%d{yyyy-MM}.%i.log -->
-			<maxHistory>30</maxHistory>
-           	<cleanHistoryOnStart>true</cleanHistoryOnStart>
-           	<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>100MB</maxFileSize>
-			</timeBasedFileNamingAndTriggeringPolicy>
-		</rollingPolicy>
-		<encoder>
-			<pattern>${DEFAULT_PATTERN}</pattern>
-			<charset>${CHARSET}</charset>
-		</encoder>
-	</appender>
 	
-	<appender name="WEB" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_HOME}/web.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/web.log</fileNamePattern>
-			<maxHistory>30</maxHistory>
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
-		</rollingPolicy>
-		<encoder>
-			<pattern>${DEFAULT_PATTERN}</pattern>
-			<charset>${CHARSET}</charset>
-		</encoder>
-	</appender>
-	
-	<appender name="SERVICE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_HOME}/service.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/service.log</fileNamePattern>
-			<maxHistory>30</maxHistory>
-            <cleanHistoryOnStart>true</cleanHistoryOnStart>
-		</rollingPolicy>
-		<encoder>
-			<pattern>${DEFAULT_PATTERN}</pattern>
-			<charset>${CHARSET}</charset>
-		</encoder>
-	</appender>
-	
-	<appender name="SLA" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_HOME}/sla.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/sla.log</fileNamePattern>
-			<maxHistory>30</maxHistory>
-            		<cleanHistoryOnStart>true</cleanHistoryOnStart>
-		</rollingPolicy>
-		<encoder>
-			<pattern>${DEFAULT_PATTERN}</pattern>
-			<charset>${CHARSET}</charset>
-		</encoder>
-	</appender>
-	
-	<!-- Loggers -->
-	<!-- Loggers : Digest -->
+	<!-- 摘要 Loggers -->
 	<logger name="DAL-DIGEST-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
+		<appender-ref ref="STDOUT" />
 		<appender-ref ref="DAL-DIGEST" />
-		<appender-ref ref="ERROR" />
 	</logger>
-
 	<logger name="SERVICE-DIGEST-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
+		<appender-ref ref="STDOUT" />
 		<appender-ref ref="SERVICE-DIGEST" />
-		<appender-ref ref="ERROR" />
 	</logger>
-	
 	<logger name="SAL-DIGEST-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
+		<appender-ref ref="STDOUT" />
 		<appender-ref ref="SAL-DIGEST" />
-		<appender-ref ref="ERROR" />
 	</logger>
-	
 	<logger name="PAGE-DIGEST-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
+		<appender-ref ref="STDOUT" />
 		<appender-ref ref="PAGE-DIGEST" />
-		<appender-ref ref="ERROR" />
+	</logger>
+	<!-- 监控 Loggers -->
+	<logger name="JVM-STAT-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="JVM-STAT" />
+	</logger>
+	<logger name="OS-STAT-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="OS-STAT" />
 	</logger>
 	
 	<!-- Loggers : App Details -->
-	<logger name="com.yueny.blog.dao" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
-	</logger>
-	<logger name="com.yueny.kapo.core" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
-	</logger>
 	<logger name="com.yueny.blog.service" level="${LEVEL}" additivity="false">
-		<appender-ref ref="SERVICE" />
-		<appender-ref ref="ERROR" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="SERVICE_FILE" />
+		<appender-ref ref="ERROR_FILE" />
 	</logger>
 	<logger name="com.yueny.cropui.service" level="${LEVEL}" additivity="false">
-		<appender-ref ref="SERVICE" />
-		<appender-ref ref="ERROR" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="SERVICE_FILE" />
+		<appender-ref ref="ERROR_FILE" />
 	</logger>
 	<logger name="com.yueny.cropui.controller" level="${LEVEL}" additivity="false">
-		<appender-ref ref="WEB" />
-		<appender-ref ref="ERROR" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="WEB_FILE" />
+		<appender-ref ref="ERROR_FILE" />
+	</logger>
+	<logger name="com.yueny.blog.controller" level="${LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="WEB_FILE" />
+		<appender-ref ref="ERROR_FILE" />
+	</logger>
+	<logger name="com.yueny.blog.dao" level="${LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="DAL_FILE" />
+		<appender-ref ref="ERROR_FILE" />
+	</logger>
+	<logger name="com.yueny.cropui" level="${LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="DEFAULT_FILE"/>
+		<appender-ref ref="ERROR_FILE" />
 	</logger>
 	
-	<!-- Loggers : Sla-->
-	<logger name="com.yueny.superclub.util.sla" level="${LEVEL}" additivity="false">
-		<appender-ref ref="SLA" />
-		<appender-ref ref="ERROR" />
+	<logger name="com.yueny.kapo.core" level="${LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="DAL_FILE" />
+		<appender-ref ref="ERROR_FILE" />
 	</logger>
-	
-	<!-- Loggers : Stat -->
-	<logger name="JVM-STAT-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
-		<appender-ref ref="JVM-STAT" />
-		<appender-ref ref="ERROR" />
-	</logger>
-
-	<logger name="OS-STAT-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
-		<appender-ref ref="OS-STAT" />
-		<appender-ref ref="ERROR" />
-	</logger>
-	
-	<!-- Loggers : Misc -->
 	<logger name="com.alibaba.druid" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="DAL_FILE" />
+		<appender-ref ref="ERROR_FILE" />
 	</logger>
-	<logger name="druid.sql.DataSource" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
-	</logger>
-	<logger name="druid.sql.Connection" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
-	</logger>
-	<logger name="druid.sql.Statement" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
-	</logger>
-	<logger name="druid.sql.ResultSet" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
+	<logger name="druid.sql" level="${LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="DAL_FILE" />
+		<appender-ref ref="ERROR_FILE" />
 	</logger>
 	<logger name="org.mybatis" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="DAL_FILE" />
+		<appender-ref ref="ERROR_FILE" />
 	</logger>
 	<logger name="org.apache.ibatis" level="${LEVEL}" additivity="false">
-		<appender-ref ref="DAL" />
-		<appender-ref ref="ERROR" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="DAL_FILE" />
+		<appender-ref ref="ERROR_FILE" />
 	</logger>
 	
 	<logger name="org.springframework" level="${LEVEL}" additivity="false">
-		<appender-ref ref="MISC" />
-		<appender-ref ref="ERROR" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="DEFAULT_FILE"/>
+		<appender-ref ref="ERROR_FILE" />
+	</logger>
+	<logger name="com.yueny.superclub.util.sla" level="${LEVEL}" additivity="false">
+		<appender-ref ref="SLA_FILE" />
+		<appender-ref ref="DEFAULT_FILE" />
+	</logger>
+	
+	<logger name="org.apache.commons.beanutils.converters" level="INFO"/>
+	<logger name="org.apache.commons.beanutils.ConvertUtils" level="INFO"/>
+	<logger name="org.dozer" level="INFO"/>
+	<logger name="org.springframework.test.context.transaction.TransactionalTestExecutionListener"
+		level="INFO"/>
+	<logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory"
+		level="ERROR">
+		<!--这里必须配置成error，如果配置成info，此处会输出大量的bean初始化信息 -->
+		<!--eclipse的console在做正则表达式的分析时会消耗大量cpu资源 -->
 	</logger>
 	
 	<!-- Loggers : Root Logger -->
 	<root level="${LEVEL}">
-		<appender-ref ref="ERROR" />
-		<appender-ref ref="DEFAULT" />
+		<appender-ref ref="ERROR_FILE" />
+		<appender-ref ref="DEFAULT_FILE" />
 	</root>
-		
+	
 </configuration>
