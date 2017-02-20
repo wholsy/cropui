@@ -3,6 +3,7 @@
 	<contextName>blog</contextName>
 	
 	<property name="LOG_HOME" value="${pom.logs.home}" />
+	<property name="STDOUT_PATTERN" value="%d{HH:mm:ss.SSS} %-5level [%X{ctxTraceId}] [%X{ctxLogId}] %logger{5} - %msg%n" />
 	<property name="DEFAULT_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread] %logger{5} - %msg%n" />
 	<property name="DIGEST_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread] - %msg%n" />
 	<property name="SERVICE_DIGEST_PATTERN" value="%d %-5level [%X{ctxTraceId}] [%X{ctxLogId}] [%thread] [%X{ctxSrcSys}] - %msg%n" />
@@ -21,7 +22,7 @@
 			<onMismatch>ACCEPT</onMismatch>
 		</filter>
 		<encoder>
-			<pattern>%date{HH:mm:ss.SSS} [%-5level] %logger{36} - %msg%n</pattern>
+			<pattern>${STDOUT_PATTERN}</pattern>
 		</encoder>
 	</appender>
 	<appender name="STDOUT_ERROR" class="ch.qos.logback.core.ConsoleAppender">
