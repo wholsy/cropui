@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.yueny.base</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.1.1-SNAPSHOT</version>
+		<version>1.1.1-RELEASE</version>
 	</parent>
 	
 	<groupId>com.yueny.blog</groupId>
@@ -17,7 +17,13 @@
 		<java.version>1.8</java.version>
 		<cropui.version>0.0.1-SNAPSHOT</cropui.version>
 		
-		<kapo.version>1.2.0-SNAPSHOT</kapo.version>
+		<superclub.kapo.version>1.2.0-SNAPSHOT</superclub.kapo.version>
+		<superclub.api.version>1.0.1-SNAPSHOT</superclub.api.version>
+		<superclub.data.version>1.0.1-SNAPSHOT</superclub.data.version>
+		<superclub.lang.version>1.0.1-SNAPSHOT</superclub.lang.version>
+		<superclub.topic.version>1.0.1-SNAPSHOT</superclub.topic.version>
+		<superclub.util.version>1.0.1-SNAPSHOT</superclub.util.version>
+		<superclub.service.version>1.0.1-SNAPSHOT</superclub.service.version>
 	</properties>
 	
 	<dependencyManagement>
@@ -26,140 +32,140 @@
 			<dependency>
 				<groupId>com.yueny.kapo</groupId>
 		        <artifactId>kapo-api</artifactId>
-				<version>${kapo.version}</version>
+				<version>${superclub.kapo.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.kapo</groupId>
 		        <artifactId>kapo-core</artifactId>
-				<version>${kapo.version}</version>
+				<version>${superclub.kapo.version}</version>
 			</dependency>
 			
 			<dependency>
 			    <groupId>com.yueny.rapid</groupId>
 				<artifactId>api</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.api.version}</version>
 			</dependency>
 	
 			<!-- service -->
 			<dependency>
 			    <groupId>com.yueny.rapid.service</groupId>
 				<artifactId>rapid-service-rest</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.service.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-storage-db</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.data.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-storage-redis</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>com.yueny.rapid.lang</groupId>
-				<artifactId>rapid-lang-mask</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.yueny.rapid.lang</groupId>
-				<artifactId>rapid-lang-userAgent</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.yueny.rapid.lang</groupId>
-				<artifactId>rapid-lang-util</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.yueny.rapid.lang</groupId>
-				<artifactId>rapid-lang-timer</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.yueny.rapid.lang</groupId>
-				<artifactId>rapid-lang-json</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.yueny.rapid.lang</groupId>
-				<artifactId>rapid-lang-exception</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.yueny.rapid.lang</groupId>
-				<artifactId>rapid-lang-dozer</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>com.yueny.rapid.lang</groupId>
-				<artifactId>rapid-lang-date</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.data.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-log-core</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.data.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.topic</groupId>
 				<artifactId>rapid-topic-profiler</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.topic.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-mask</artifactId>
+				<version>${superclub.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-userAgent</artifactId>
+				<version>${superclub.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-util</artifactId>
+				<version>${superclub.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-timer</artifactId>
+				<version>${superclub.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-json</artifactId>
+				<version>${superclub.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-exception</artifactId>
+				<version>${superclub.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-dozer</artifactId>
+				<version>${superclub.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.lang</groupId>
+				<artifactId>rapid-lang-date</artifactId>
+				<version>${superclub.lang.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-strategy</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.util.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-crypt</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.util.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-exec</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.util.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-scheduler</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.util.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-log</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.util.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-common</artifactId>
-			    <version>1.0.0-SNAPSHOT</version>
+			    <version>${superclub.util.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-test</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${superclub.util.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-web-security</artifactId>
-			    <version>1.0.0-SNAPSHOT</version>
+			    <version>${superclub.util.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-web-core</artifactId>
-			    <version>1.0.0-SNAPSHOT</version>
+			    <version>${superclub.util.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-web-freemarker</artifactId>
-			    <version>1.0.0-SNAPSHOT</version>
+			    <version>${superclub.util.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
