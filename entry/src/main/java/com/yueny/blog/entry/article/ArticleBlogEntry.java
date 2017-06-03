@@ -14,7 +14,6 @@ import lombok.EqualsAndHashCode;
  * @author yueny09 <deep_blue_yang@163.com>
  *
  * @DATE 2016年9月1日 下午5:23:14
- *
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

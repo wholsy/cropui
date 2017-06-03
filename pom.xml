@@ -18,12 +18,7 @@
 		<cropui.version>0.0.1-SNAPSHOT</cropui.version>
 		
 		<superclub.kapo.version>1.2.0-SNAPSHOT</superclub.kapo.version>
-		<superclub.api.version>1.0.1-SNAPSHOT</superclub.api.version>
-		<superclub.data.version>1.0.1-SNAPSHOT</superclub.data.version>
-		<superclub.lang.version>1.0.1-SNAPSHOT</superclub.lang.version>
-		<superclub.topic.version>1.0.1-SNAPSHOT</superclub.topic.version>
-		<superclub.util.version>1.0.1-SNAPSHOT</superclub.util.version>
-		<superclub.service.version>1.0.1-SNAPSHOT</superclub.service.version>
+		<rapid.version>1.0.1-SNAPSHOT</rapid.version>
 	</properties>
 	
 	<dependencyManagement>
@@ -43,129 +38,129 @@
 			<dependency>
 			    <groupId>com.yueny.rapid</groupId>
 				<artifactId>api</artifactId>
-				<version>${superclub.api.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 	
 			<!-- service -->
 			<dependency>
 			    <groupId>com.yueny.rapid.service</groupId>
 				<artifactId>rapid-service-rest</artifactId>
-				<version>${superclub.service.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-storage-db</artifactId>
-				<version>${superclub.data.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-storage-redis</artifactId>
-				<version>${superclub.data.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-log-core</artifactId>
-				<version>${superclub.data.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.topic</groupId>
 				<artifactId>rapid-topic-profiler</artifactId>
-				<version>${superclub.topic.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.lang</groupId>
 				<artifactId>rapid-lang-mask</artifactId>
-				<version>${superclub.lang.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.lang</groupId>
 				<artifactId>rapid-lang-userAgent</artifactId>
-				<version>${superclub.lang.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.lang</groupId>
 				<artifactId>rapid-lang-util</artifactId>
-				<version>${superclub.lang.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.lang</groupId>
 				<artifactId>rapid-lang-timer</artifactId>
-				<version>${superclub.lang.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.lang</groupId>
 				<artifactId>rapid-lang-json</artifactId>
-				<version>${superclub.lang.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.lang</groupId>
 				<artifactId>rapid-lang-exception</artifactId>
-				<version>${superclub.lang.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.lang</groupId>
 				<artifactId>rapid-lang-dozer</artifactId>
-				<version>${superclub.lang.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.lang</groupId>
 				<artifactId>rapid-lang-date</artifactId>
-				<version>${superclub.lang.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-strategy</artifactId>
-				<version>${superclub.util.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-crypt</artifactId>
-				<version>${superclub.util.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-exec</artifactId>
-				<version>${superclub.util.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-scheduler</artifactId>
-				<version>${superclub.util.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-log</artifactId>
-				<version>${superclub.util.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-common</artifactId>
-			    <version>${superclub.util.version}</version>
+			    <version>${rapid.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-test</artifactId>
-				<version>${superclub.util.version}</version>
+				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-web-security</artifactId>
-			    <version>${superclub.util.version}</version>
+			    <version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-web-core</artifactId>
-			    <version>${superclub.util.version}</version>
+			    <version>${rapid.version}</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.yueny.rapid.util</groupId>
 			    <artifactId>rapid-util-web-freemarker</artifactId>
-			    <version>${superclub.util.version}</version>
+			    <version>${rapid.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -571,15 +566,15 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

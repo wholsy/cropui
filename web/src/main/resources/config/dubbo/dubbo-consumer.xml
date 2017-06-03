@@ -11,5 +11,9 @@
 	
 	<dubbo:reference id="systemParameterQueryService" check="false"
 		interface="com.yueny.cms.api.service.ISystemParameterQueryService"/>
+	<dubbo:reference id="systemQueryService" check="false"
+		interface="com.yueny.cms.api.service.ISystemQueryService"/>
+ 	<dubbo:reference id="openQueryService" check="false"
+		interface="com.yueny.cms.api.service.IOpenQueryService"/>
     
 </beans>

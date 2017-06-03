@@ -7,14 +7,20 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.yueny.blog.bo.article.ArticleBlogBo;
+import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
 import com.yueny.blog.dao.article.IArticleBlogDao;
+import com.yueny.blog.dao.cd.ArticleBlogCd;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.article.IArticleBlogService;
 import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.env.CacheService;
+import com.yueny.rapid.lang.date.DateFormatType;
+import com.yueny.rapid.lang.date.DateUtil;
+import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 import com.yueny.superclub.api.page.IPageable;
@@ -148,6 +154,13 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 		return blogDao.queryLatestBlogId(uid);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.yueny.blog.service.article.IArticleBlogService#findPageList(com.yueny
+	 * .superclub.api.page.IPageable)
+	 */
 	@Override
 	public List<ArticleBlogBo> findPageList(final IPageable pageable) {
 		return cacheListService.cache(new CacheDataHandler<List<ArticleBlogBo>>() {
@@ -164,6 +177,53 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
+	public List<ArticleSimpleBlogBo> findPageListForSimple(IPageable pageable) {
+		final List<ArticleBlogBo> lists = findPageList(pageable);
+
+		final List<ArticleSimpleBlogBo> ls = Lists.newArrayList();
+		lists.stream().forEach(blog -> {
+			final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
+			simpleBlog.setArticleBlogId(blog.getArticleBlogId());
+			simpleBlog.setArticleTitle(blog.getArticleTitle());
+			simpleBlog.setArticleAlias(blog.getArticleAlias());
+			simpleBlog.setToday(DateUtil.format(blog.getCreateTime(), DateFormatType.TIME_LEFT_DIAGONAL));
+			simpleBlog.setCreateTime(blog.getCreateTime());
+			simpleBlog.setModifyUser(blog.getModifyUser());
+			simpleBlog.setUpdateTime(blog.getUpdateTime());
+
+			ls.add(simpleBlog);
+		});
+
+		return ls;
+	}
+
+	@Override
+	public List<ArticleSimpleBlogBo> findPageListForSimpleWithTitle(IPageable pageable, String articleTitle) {
+		final List<ArticleBlogEntry> entrys = blogDao
+				.queryByCd(ArticleBlogCd.builder().pageable(pageable).articleTitle(articleTitle).build());
+		if (CollectionUtils.isEmpty(entrys)) {
+			return Collections.emptyList();
+		}
+		final List<ArticleBlogBo> lists = map(entrys, ArticleBlogBo.class);
+
+		final List<ArticleSimpleBlogBo> ls = Lists.newArrayList();
+		lists.stream().forEach(blog -> {
+			final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
+			simpleBlog.setArticleBlogId(blog.getArticleBlogId());
+			simpleBlog.setArticleTitle(blog.getArticleTitle());
+			simpleBlog.setArticleAlias(blog.getArticleAlias());
+			simpleBlog.setToday(DateUtil.format(blog.getCreateTime(), DateFormatType.TIME_LEFT_DIAGONAL));
+			simpleBlog.setCreateTime(blog.getCreateTime());
+			simpleBlog.setModifyUser(blog.getModifyUser());
+			simpleBlog.setUpdateTime(blog.getUpdateTime());
+
+			ls.add(simpleBlog);
+		});
+
+		return ls;
+	}
+
+	@Override
 	@ProfilerLog
 	public Long insert(final ArticleBlogBo bo) {
 		final ArticleBlogEntry entry = map(bo, ArticleBlogEntry.class);
@@ -173,6 +233,19 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	@Override
 	public boolean plusReadTimes(final String articleBlogId) {
 		return blogDao.plusReadTimes(articleBlogId, 1);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.service.article.IArticleBlogService#queryAllCount()
+	 */
+	@Override
+	public Long queryAllCount(String articleTitle) {
+		if (StringUtil.isEmpty(articleTitle)) {
+			return blogDao.queryAllCount();
+		}
+		return blogDao.queryAllCount(articleTitle);
 	}
 
 	@Override

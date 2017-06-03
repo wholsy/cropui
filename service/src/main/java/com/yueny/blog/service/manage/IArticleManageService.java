@@ -28,6 +28,14 @@ public interface IArticleManageService {
 			throws DataVerifyAnomalyException;
 
 	/**
+	 * 删除博文
+	 *
+	 * @param articleBlogId
+	 *            文章对外ID
+	 */
+	boolean delBlog(String articleBlogId) throws DataVerifyAnomalyException;
+
+	/**
 	 * 修改博文
 	 *
 	 * @param uid

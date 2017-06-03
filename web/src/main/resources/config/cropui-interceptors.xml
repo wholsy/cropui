@@ -13,9 +13,9 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 	
-	<bean id="jvmStatCollector" class="com.yueny.superclub.util.log.stat.JvmStatCollector" 
+	<bean id="jvmStatCollector" class="com.yueny.rapid.data.log.stat.JvmStatCollector" 
 		  init-method="start" />
-	<bean id="osStatCollector" class="com.yueny.superclub.util.log.stat.OsStatCollector" 
+	<bean id="osStatCollector" class="com.yueny.rapid.data.log.stat.OsStatCollector" 
 		  init-method="start" />
 	
 	<!-- 摘要日志拦截器 -->
@@ -31,15 +31,5 @@
 		<aop:advisor advice-ref="dalDigestLogInterceptor" pointcut="within(com.yueny.cropui.dao..*)"/>
 		<aop:advisor advice-ref="salDigestLogInterceptor" pointcut="within(com.yueny.cropui.service.integration..*)"/>
 	</aop:config>
-	
-	<!-- 
-	<aop:config>
-		<aop:pointcut id="exceptionPointcut" expression="within(com.yueny.lily.action..*)" />
-		<aop:advisor advice-ref="exceptionInterceptor" pointcut-ref="exceptionPointcut" order="1" />
-			 -->	
-        <!-- 摘要日志拦截器
-		<aop:advisor advice-ref="digestLogInterceptor" pointcut="within(com.yueny.lily.biz..*) or within(com.yueny.lily.dao..*)"/>
-	</aop:config>
-		 -->
 	
 </beans>

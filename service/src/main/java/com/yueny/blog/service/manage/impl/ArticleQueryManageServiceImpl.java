@@ -29,8 +29,8 @@ import com.yueny.rapid.lang.enums.BaseErrorType;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.superclub.api.page.core.PageCond;
 import com.yueny.superclub.api.pojo.instance.AbstractBo;
-import com.yueny.superclub.util.exec.MultiThreadSupport;
-import com.yueny.superclub.util.exec.executor.IExecutor;
+import com.yueny.superclub.util.exec.multi.MultiThreadSupport;
+import com.yueny.superclub.util.exec.multi.executor.IExecutor;
 
 import lombok.SneakyThrows;
 

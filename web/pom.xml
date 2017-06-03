@@ -86,6 +86,7 @@
 		<!--  -->
 		<finalName>blog</finalName>
 		<plugins>
+			<!--
 		 	<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -106,6 +107,25 @@
                     </execution>
                 </executions>
 			</plugin>
+			-->
+			<!-- jetty -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.3.2.v20150730</version>
+                <configuration>
+                    <httpConnector>
+                        <port>8090</port>
+                    </httpConnector>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>org.eclipse.jetty.LEVEL</name>
+                            <value>DEBUG</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>

@@ -9,11 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import com.yueny.blog.dao.article.IArticleBlogDao;
 import com.yueny.blog.dao.article.IArticleBlogMapper;
+import com.yueny.blog.dao.cd.ArticleBlogCd;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.kapo.api.annnotation.DbSchemaType;
 import com.yueny.kapo.core.condition.builder.QueryBuilder;
 import com.yueny.kapo.core.condition.column.operand.enums.FuzzySqlOperand;
 import com.yueny.kapo.core.dao.SingleTableDao;
+import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.superclub.api.page.IPageable;
 
 /**
@@ -45,6 +47,14 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 		return articleBlogMapper.plusReadTimesByArticleBlogId(articleBlogId, step) == 1;
 	}
 
+	@Override
+	public Long queryAllCount(String articleTitle) {
+		final QueryBuilder builder = QueryBuilder.builder()
+				.where("ARTICLE_TITLE", FuzzySqlOperand.LIKE_RIGHT, articleTitle).build();
+
+		return super.queryCountByColumns(builder);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -57,6 +67,32 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 		whereColumns.put("ARTICLE_BLOG_ID", articleBlogId);
 
 		return super.queryByColumns(whereColumns);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.yueny.blog.dao.article.IArticleBlogDao#queryByCd(com.yueny.blog.dao.
+	 * cd.ArticleBlogCd)
+	 */
+	@Override
+	public List<ArticleBlogEntry> queryByCd(ArticleBlogCd cd) {
+		final QueryBuilder.InnerBuilder builder = QueryBuilder.builder();
+		if (StringUtil.isNotEmpty(cd.getArticleBlogId())) {
+			builder.where("ARTICLE_BLOG_ID", cd.getArticleBlogId());
+		}
+		if (StringUtil.isNotEmpty(cd.getArticleTitle())) {
+			builder.where("ARTICLE_TITLE", FuzzySqlOperand.LIKE_RIGHT, cd.getArticleTitle());
+		}
+		if (cd.getReadTimes() != null) {
+			builder.where("READ_TIMES", FuzzySqlOperand.GREATER_THAN_OR_EQUALS, cd.getReadTimes());
+		}
+
+		if (cd.getPageable() != null) {
+			return super.queryListByColumns(builder.build(), cd.getPageable());
+		}
+		return super.queryListByColumns(builder.build());
 	}
 
 	@Override

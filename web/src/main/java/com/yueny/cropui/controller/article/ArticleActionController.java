@@ -95,13 +95,13 @@ public class ArticleActionController extends BaseController {
 	}
 
 	/**
-	 * 写/编辑文章页面
+	 * 新建/修改文章页面
 	 *
 	 * @param articleBlogId
-	 *            文章扩展ID
+	 *            将要修改的文章扩展ID
 	 */
 	@RequestMapping(value = "/article/published.html", method = { RequestMethod.GET })
-	public String getPublishedPage(@RequestParam(value = "articleBlogId", defaultValue = "") final String articleBlogId,
+	public String getPublishedPage(@RequestParam(value = "articleBlogId") final String articleBlogId,
 			final HttpServletResponse response) {
 		setModelAttribute(WebAttributes.ACTION, "articleWrite");
 

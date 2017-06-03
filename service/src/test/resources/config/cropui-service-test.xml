@@ -17,7 +17,7 @@
 	<import resource="classpath:/config/cropui-service.xml" />
 	<import resource="classpath:/config/cropui-dao.xml" />
 
-	<bean class="com.yueny.superclub.util.exec.MultiThreadSupport"/>
+	<bean class="com.yueny.superclub.util.exec.multi.MultiThreadSupport"/>
 	
 	<!-- 导入属性配置文件 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

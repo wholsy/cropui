@@ -2,6 +2,7 @@ package com.yueny.blog.dao.article;
 
 import java.util.List;
 
+import com.yueny.blog.dao.cd.ArticleBlogCd;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.kapo.api.ISingleTableDao;
 import com.yueny.kapo.api.IWholeTableQueryDao;
@@ -30,12 +31,26 @@ public interface IArticleBlogDao extends ISingleTableDao<ArticleBlogEntry>, IWho
 	boolean plusReadTimes(String articleBlogId, int step);
 
 	/**
+	 * 查询符合文章标题的数据数量， 右模糊查询
+	 *
+	 * @param articleTitle
+	 *            文章标题
+	 * @return 总数
+	 */
+	Long queryAllCount(String articleTitle);
+
+	/**
 	 * 根据文章对外ID获取文章信息
 	 *
 	 * @param articleBlogId
 	 *            文章对外ID
 	 */
 	ArticleBlogEntry queryByBlogId(String articleBlogId);
+
+	/**
+	 * ArticleBlogCd模式查询
+	 */
+	List<ArticleBlogEntry> queryByCd(ArticleBlogCd cd);
 
 	/**
 	 * 根据此文章的'上一篇文章对外ID'获取此文章信息

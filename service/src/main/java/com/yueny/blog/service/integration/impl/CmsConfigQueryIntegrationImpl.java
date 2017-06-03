@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.yueny.blog.service.integration.ICmsConfigQueryIntegration;
 import com.yueny.cms.api.enums.SystemParameterType;
 import com.yueny.cms.api.response.ro.FunctionOpenRo;
@@ -36,22 +35,22 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	 */
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Reference
+	@Autowired(required = false)
 	private IOpenQueryService openQueryService;
 
 	/** 系统编号 */
 	@Value("${app.system.code}")
 	private String systemCode;
-
-	@Autowired
+	@Autowired(required = false)
 	private ISystemParameterQueryService systemParameterQueryService;
-	@Reference
+	@Autowired(required = false)
 	private ISystemQueryService systemQueryService;
 
 	@Override
 	public FunctionOpenRo queryFunctionOpenByCode(String functionCode) {
 		if (openQueryService == null) {
 			logger.warn("服务未发现：{}！", openQueryService);
+			return null;
 		}
 
 		// 查询系统的功能开放配置
@@ -75,6 +74,7 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	public List<FunctionOpenRo> queryFunctionOpens() {
 		if (openQueryService == null) {
 			logger.warn("服务未发现：{}！", openQueryService);
+			return Collections.emptyList();
 		}
 
 		// 查询系统的功能开放配置
@@ -92,6 +92,7 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	public SubSystemRo querySubSystem() {
 		if (systemQueryService == null) {
 			logger.warn("服务未发现：{}！", systemQueryService);
+			return null;
 		}
 
 		final NormalResponse<SubSystemRo> resp = systemQueryService.queryByCode(systemCode);
@@ -108,6 +109,7 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	public List<SubSystemRo> querySubSystemList() {
 		if (systemQueryService == null) {
 			logger.warn("服务未发现：{}！", systemQueryService);
+			return Collections.emptyList();
 		}
 
 		final ListResponse<SubSystemRo> resp = systemQueryService.queryAll();
@@ -124,6 +126,7 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	public SystemParameterRo querySystemParameterByCode(SystemParameterType systemParameterCode) {
 		if (systemParameterQueryService == null) {
 			logger.warn("服务未发现：{}！", systemParameterQueryService);
+			return null;
 		}
 
 		final NormalResponse<SystemParameterRo> resp = systemParameterQueryService.queryByType(systemParameterCode);

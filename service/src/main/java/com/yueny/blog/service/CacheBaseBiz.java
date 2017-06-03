@@ -39,7 +39,7 @@ public abstract class CacheBaseBiz<L> extends BaseBiz {
 
 		L t = redisTemplate.opsForValue().get(redisKey);
 		if (t != null) {
-			logger.debug("查询 {} 的键 {}，命中缓存：{}.", getClass().getSimpleName(), args, t);
+			logger.trace("查询 {} 的键 {}，命中缓存：{}.", getClass().getSimpleName(), args, t);
 			return t;
 		}
 

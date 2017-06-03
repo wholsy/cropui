@@ -3,6 +3,7 @@ package com.yueny.blog.service.article;
 import java.util.List;
 
 import com.yueny.blog.bo.article.ArticleBlogBo;
+import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
 import com.yueny.superclub.api.page.IPageable;
 
 /**
@@ -76,6 +77,24 @@ public interface IArticleBlogService {
 	List<ArticleBlogBo> findPageList(IPageable pageable);
 
 	/**
+	 * 简要博文分页查询
+	 *
+	 * @param pageable
+	 *            分页项
+	 */
+	List<ArticleSimpleBlogBo> findPageListForSimple(IPageable pageable);
+
+	/**
+	 * 根据title进行的简要博文分页模糊查询
+	 *
+	 * @param pageable
+	 *            分页项
+	 * @param articleTitle
+	 *            文章标题
+	 */
+	List<ArticleSimpleBlogBo> findPageListForSimpleWithTitle(IPageable pageable, String articleTitle);
+
+	/**
 	 * 新增
 	 *
 	 * @return 新增主键
@@ -89,6 +108,15 @@ public interface IArticleBlogService {
 	 *            博文对外ID
 	 */
 	boolean plusReadTimes(String articleBlogId);
+
+	/**
+	 * 查询文章数据数量
+	 *
+	 * @param articleTitle
+	 *            文章标题关键字
+	 * @return 总数
+	 */
+	Long queryAllCount(String articleTitle);
 
 	/**
 	 * 根据主键修改
