@@ -18,6 +18,7 @@
 	    <link href="http://static.yueny.website/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
 		
 	    <link href="${ctx}/assets/css/theme/gloal.css" rel="stylesheet" type="text/css">
+		<link href="${ctx}/assets/css/theme/gloal.y.css" rel="stylesheet" type="text/css">
 	    <link href="${ctx}/assets/css/style/style.css" rel="stylesheet" type="text/css">
 	    
 	    <!-- HTML5 Shim and Respond.js, for IE6-8 support of HTML5 elements and media queries -->

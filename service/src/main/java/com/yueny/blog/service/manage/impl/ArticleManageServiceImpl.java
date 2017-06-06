@@ -115,12 +115,13 @@ public class ArticleManageServiceImpl extends BaseBiz implements IArticleManageS
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.yueny.blog.service.manage.IArticleManageService#delBlog(java.lang.
-	 * String)
+	 * com.yueny.blog.service.manage.IArticleManageService#delArticleBlog(java.
+	 * lang. String)
 	 */
 	@Override
-	public boolean delBlog(String articleBlogId) throws DataVerifyAnomalyException {
+	public boolean delArticleBlog(String articleBlogId) throws DataVerifyAnomalyException {
 		// TODO Auto-generated method stub
+		// DataVerifyAnomalyException
 		return true;
 	}
 

@@ -1,60 +1,6 @@
-/**
- * style.default
- */
-* {
-	margin: 0;
+a.nolink,a.nolink:hover { 
+	color:#999; text-decoration:none;
 }
-
-html{
-	width:98%;
-	margin: 0 auto; 
-	height: 100%;
-	max-height: 100%;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust:100%;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	overflow: -moz-scrollbars-vertical;
-	
-	zoom:expression(function(ele){
-		ele.style.zoom = "1";
-		document.execCommand("BackgroundImageCache",false,true);
-	}
-	(this));
-}
-
-body {
-     /* 
-   font-family: "Merriweather", serif;
-    font-family: Century Gothic,Tahoma, "寰蒋闆呴粦", Arial;
-    letter-spacing: 0.01rem;
-    line-height: 1.75em;
-    color: #3A4145;
-    -webkit-font-feature-settings: 'kern' 1;
-    -moz-font-feature-settings: 'kern' 1;
-    -o-font-feature-settings: 'kern' 1;
-    height: 100%;
-	max-height: 100%;
-    */
-    background-color: #ddeef6;
-    /* background: #272D30; 榛戣壊 */
-    padding: 0;
-}
-
-
-/* 瓒呴摼鎺� */
-a {
-	text-decoration: none;
-}
-
-a:hover{
-	text-decoration:underline;
-}
-
-a:focus {
-  color: #005580;
-  text-decoration: underline;
-}
-
 /* 鑳屾櫙鍙樻繁鐨勮秴閾炬帴,eg:<a href="xxx" class="deep">xxx</a> */
 a.deep:hover, a.deep:focus{
   color: #ffffff;
@@ -69,16 +15,6 @@ a.deep:hover, a.deep:focus{
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
 }
 
-a:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-
-a:hover, a:active {
-  outline: 0;
-}
-
 /* 涓嶅彲鐢ㄦ敼鐨勮秴閾炬帴,缃伆.濡� <a href="#" class="disabled">鐧婚檰</a> */
 a.disabled, a.disabled:hover, a.deep:focus{
 	color: #999999;
@@ -90,6 +26,10 @@ a.disabled:hover, a.deep:focus{
 	background-image: none;
 	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
+
+a.up { background:url(../../images/arrow_up.gif) no-repeat 0 3px; padding-left:10px; }
+a.down { background:url(../../images/arrow_down.gif) no-repeat 0 3px; padding-left:10px; }
+a.up,a.down { *background-position:0px 1px; }
 
 /* 涓嶅彲鐢ㄦ敼鐨勮秴閾炬帴,缃伆.濡� <div class="disabled"><a href="#" id="login_btn">鐧婚檰</a></div> */
 .disabled > a,
@@ -121,4 +61,107 @@ a.disabled:hover, a.deep:focus{
   background-repeat: repeat-x;
   outline: 0;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+	.aw_tabbed_widget .tabs ul.nav li a:hover, .tabs ul.nav li.active a { 
+	color: #0099cc; 
+	}
+}
+@media screen and (max-width: 767px) {
+	.tabs ul.nav li a:hover, .tabs ul.nav li.active a { 
+	color: #0099cc; 
+	}
+}
+
+.tabs ul.nav li a:hover, 
+.tabs ul.nav li.active a, .dropcap, 
+.toggle.hover .toggle-title, 
+li.comment cite a:hover, h3.widget-title, .post-meta .meta-title:hover, 
+.the-latest a:hover h4, .aw_socialcounter_widget li a:hover, .aw_tabbed_widget #tab-latest-comments 
+a:hover { 
+	color: #0099cc; 
+}
+
+
+h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
+    margin-bottom: 16px
+}
+
+h1.smaller {
+    font-size: 31px
+}
+
+h1.bigger {
+    font-size: 33px
+}
+h2.smaller {
+    font-size: 25px
+}
+
+h2.bigger {
+    font-size: 27px
+}
+
+h3.smaller {
+    font-size: 21px
+}
+
+h3.bigger {
+    font-size: 23px
+}
+h4.smaller {
+    font-size: 17px
+}
+
+h4.bigger {
+    font-size: 19px
+}
+h5.smaller {
+    font-size: 14px
+}
+
+h5.bigger {
+    font-size: 16px
+}
+h6.smaller {
+    font-size: 12px
+}
+
+h6.bigger {
+    font-size: 14px
+}
+
+ol.margin-5, ul.margin-5 {
+    margin-left: 5px
+}
+
+ol.margin-10, ul.margin-10 {
+    margin-left: 10px
+}
+
+ol.margin-15, ul.margin-15 {
+    margin-left: 15px
+}
+
+ol.margin-20, ul.margin-20 {
+    margin-left: 20px
+}
+
+ul.nostyle { list-style:none; margin:0px; padding:0px; }
+ul.nostyle li { float:left; text-align:center; padding:0px 20px 20px 0px; }
+ul.nostyle li img { width:120px; height:100px; border:solid 1px #ccc; margin-bottom:10px; }
+
+.red { color:#ff5500; }
+.green { color:#339933; }
+.gray { color:#999; }
+.font12 { font-size:12px; font-weight:normal; }
+
+label.inline {
+    margin-bottom: 3px
+}
+
+/* pre in prettify */
+pre.prettyprint {
+    white-space: pre-wrap
 }

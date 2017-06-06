@@ -10,23 +10,6 @@
     text-decoration: none
 }
 
-html {
-    position: relative
-}
-
-body {
-    background-color: #E4E6E9;
-    padding-bottom: 0;
-    font-family: 'Open Sans';
-    font-size: 13px;
-    color: #393939;
-    line-height: 1.5
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
-}
-
 .main-container:before {
     display: block;
     content: "";
@@ -102,19 +85,11 @@ h1, h2, h3, h4, h5, h6 {
     color: #2679B5
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 400
-}
-
 .page-header h1 small {
     margin: 0 6px;
     font-size: 14px;
     font-weight: 400;
     color: #8089A0
-}
-
-h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
-    margin-bottom: 16px
 }
 
 .ajax-loading-overlay {
@@ -156,103 +131,6 @@ h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
 
 .ace-icon {
     text-align: center
-}
-
-h1 {
-    font-size: 32px
-}
-
-h1.smaller {
-    font-size: 31px
-}
-
-h1.bigger {
-    font-size: 33px
-}
-
-h2 {
-    font-size: 26px
-}
-
-h2.smaller {
-    font-size: 25px
-}
-
-h2.bigger {
-    font-size: 27px
-}
-
-h3 {
-    font-size: 22px
-}
-
-h3.smaller {
-    font-size: 21px
-}
-
-h3.bigger {
-    font-size: 23px
-}
-
-h4 {
-    font-size: 18px
-}
-
-h4.smaller {
-    font-size: 17px
-}
-
-h4.bigger {
-    font-size: 19px
-}
-
-h5 {
-    font-size: 15px
-}
-
-h5.smaller {
-    font-size: 14px
-}
-
-h5.bigger {
-    font-size: 16px
-}
-
-h6 {
-    font-size: 13px
-}
-
-h6.smaller {
-    font-size: 12px
-}
-
-h6.bigger {
-    font-size: 14px
-}
-
-ol, ul {
-    padding: 0;
-    margin: 0 0 10px 25px
-}
-
-ol.margin-5, ul.margin-5 {
-    margin-left: 5px
-}
-
-ol.margin-10, ul.margin-10 {
-    margin-left: 10px
-}
-
-ol.margin-15, ul.margin-15 {
-    margin-left: 15px
-}
-
-ol.margin-20, ul.margin-20 {
-    margin-left: 20px
-}
-
-li > ol, li > ul {
-    margin-left: 18px
 }
 
 .list-inline, .list-unstyled {
@@ -297,10 +175,6 @@ li.divider:before {
 
 .blockquote-reverse, blockquote, blockquote.pull-right {
     border-color: #E5EAF1
-}
-
-pre.prettyprint {
-    white-space: pre-wrap
 }
 
 .well h1, .well h2, .well h3, .well h4, .well h5, .well h6 {
@@ -8406,50 +8280,8 @@ button.btn:active {
     text-shadow: none
 }
 
-label {
-    font-weight: 400;
-    font-size: 14px
-}
-
 .form-group > label[class*=col-] {
     margin-bottom: 4px
-}
-
-td > label, th > label {
-    margin-bottom: 0;
-    line-height: inherit;
-    vertical-align: middle
-}
-
-label.inline {
-    margin-bottom: 3px
-}
-
-input[type=email], input[type=url], input[type=search], input[type=tel], input[type=color], input[type=text], input[type=password], input[type=datetime], input[type=datetime-local], input[type=date], input[type=month], input[type=time], input[type=week], input[type=number], textarea {
-    border-radius: 0 !important;
-    color: #858585;
-    background-color: #FFF;
-    border: 1px solid #D5D5D5;
-    padding: 5px 4px 6px;
-    font-size: 14px;
-    font-family: inherit;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    -webkit-transition-duration: .1s;
-    transition-duration: .1s
-}
-
-input[type=email]:hover, input[type=url]:hover, input[type=search]:hover, input[type=tel]:hover, input[type=color]:hover, input[type=text]:hover, input[type=password]:hover, input[type=datetime]:hover, input[type=datetime-local]:hover, input[type=date]:hover, input[type=month]:hover, input[type=time]:hover, input[type=week]:hover, input[type=number]:hover, textarea:hover {
-    border-color: #b5b5b5
-}
-
-input[type=email]:focus, input[type=url]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=color]:focus, input[type=text]:focus, input[type=password]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=date]:focus, input[type=month]:focus, input[type=time]:focus, input[type=week]:focus, input[type=number]:focus, textarea:focus {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: #696969;
-    border-color: #F59942;
-    background-color: #FFF;
-    outline: 0
 }
 
 .form-control::-webkit-input-placeholder, input::-webkit-input-placeholder {

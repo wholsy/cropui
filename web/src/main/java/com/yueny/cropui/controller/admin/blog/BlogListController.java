@@ -35,7 +35,7 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  */
 @Controller
 @RequestMapping(value = "/admin")
-public class BlogController extends BaseController {
+public class BlogListController extends BaseController {
 	@Autowired
 	private IArticleBlogService articleBlogService;
 	@Autowired
@@ -55,8 +55,8 @@ public class BlogController extends BaseController {
 		res.setData(false);
 
 		try {
-			final boolean rs = articleManageService.delBlog(articleBlogId);
-			res.setData(true);
+			final boolean rs = articleManageService.delArticleBlog(articleBlogId);
+			res.setData(rs);
 		} catch (final DataVerifyAnomalyException e) {
 			res.setCode(e.getErrorCode());
 			res.setMessage(e.getErrorMsg());
@@ -104,7 +104,7 @@ public class BlogController extends BaseController {
 	/**
 	 * 博客列表页面
 	 */
-	@RequestMapping(value = { "/list_blog.html" }, method = { RequestMethod.GET })
+	@RequestMapping(value = "/list_blog.html", method = RequestMethod.GET)
 	public String listBlogPage(final HttpServletResponse response) {
 		setModelAttribute(WebAttributes.ACTION, "LIST_BLOG");
 

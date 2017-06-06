@@ -33,7 +33,7 @@ public interface IArticleManageService {
 	 * @param articleBlogId
 	 *            文章对外ID
 	 */
-	boolean delBlog(String articleBlogId) throws DataVerifyAnomalyException;
+	boolean delArticleBlog(String articleBlogId) throws DataVerifyAnomalyException;
 
 	/**
 	 * 修改博文

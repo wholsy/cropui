@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
         </button>
         <div class="navbar-header pull-left">
-            <a href="/adm/index" class="navbar-brand">
+            <a href="${ctx}/admin/" class="navbar-brand">
                 <small>
                     <i class="fa fa-laptop"></i> Codealy Blog
                 </small>

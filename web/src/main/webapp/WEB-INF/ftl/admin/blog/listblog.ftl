@@ -38,7 +38,7 @@
                                 <input type="text" class="form-control input-sm" id="txt_q" placeholder="标题">
                             </div>
                             <button id="btn_q" type="button" class="btn btn-info btn-xs">
-                                搜索
+                                	搜索
                             </button>
                         </form>
                     </div>
@@ -92,7 +92,7 @@
         </td>
         <td>
             <a href="javascript:del({{value.articleBlogId}});">删除</a>
-            <a target="_self" href="/admin/wblog/?_id={{value.articleBlogId}}">编辑</a>
+            <a target="_self" href="/admin/article/published.html?articleBlogId={{value.articleBlogId}}">编辑</a>
             <a target="_blank" href="${ctx}/article/{{value.articleBlogId}}.html">预览</a>
         </td>
     </tr>
@@ -103,13 +103,18 @@
 <script>
     function del(articleBlogId) {
         if (confirm("确定删除吗?")) {
-            $.delete("${ctx}/admin/del.json?articleBlogId=" + articleBlogId + "", function (rs) {
-                if (rs["data"] == true) {
-                	window.location.reload();
-                }else {
-                	alert(rs["message"]);
-                }
-            });
+        	$.ajax({
+				url: "${ctx}/admin/del.json?articleBlogId=" + articleBlogId + "",
+				type: 'DELETE',
+				success: function(rs) {
+					if (rs["data"] == true) {
+						alert("删除成功");
+	                	window.location.reload();
+	                }else {
+	                	alert(rs["message"]);
+	                }
+				}
+			});
         }
     }
 
