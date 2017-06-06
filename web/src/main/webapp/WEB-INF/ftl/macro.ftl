@@ -43,7 +43,13 @@ title: 页面页脚
 	
 	<script src="http://static.yueny.website/plugins/bootstrap/2.3.2/js/bootstrap.js"></script>
 	<script src="http://static.yueny.website/plugins/prettify/prettify.js" type="text/javascript"></script>
+	<#-- tips -->
+	<script src="${ctx}/assets/js/jquery.sobox.js"></script>
+	<!-- lhg dialog js -->
+	<script src="${ctx}/assets/plugins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+	
 	<script src="${ctx}/assets/js/tools.js"></script>
+	
 	</body>
 </html>
 </#macro>

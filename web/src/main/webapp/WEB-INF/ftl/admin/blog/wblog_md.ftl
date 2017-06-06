@@ -1,7 +1,7 @@
 <#include "admin/common/header.ftl">
 
-<#-- kindeditor -->
-<link href="http://static.yueny.website/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
+<#-- editormd -->
+<link rel="stylesheet" href="${ctx}/adm/assets/js/editor.md/css/editormd.css"/>
 
 <link href="${ctx}/assets/css/write/write.css" rel="stylesheet" type="text/css">
 <link href="${ctx}/assets/css/write/main.css" rel="stylesheet" type="text/css">
@@ -37,6 +37,7 @@
             <div class="page-content">
                 <div class="row">
                     <div class="col-xs-12">
+                    
 			            <form method="post" action="" class="form-horizontal">
 							<input type="hidden" id="articleBlogId" name="articleBlogId" value="${(item.articleBlogId)!''}"/>
                             <input type="hidden" name="isdraft" value="${isdraft?string('1','0')}">
@@ -71,12 +72,13 @@
 								摘要：
 								<span class="gray">（默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）</span>
 							</p>
-							<div id="d_desc" style="display:none;">
-								<#--摘要区域-->
-                                <textarea id="articleDigest" name="articleDigest" rows="6" maxlength="200"
-									placeholder="摘要： （默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）"
-									style="width:99%;" >${(item.articleDigest)!''}
-								</textarea>
+							<div id="d_desc">
+								<#--内容区域-->
+                                <div id="editormd-digest">
+                                    <textarea id="articleDigest" name="articleDigest" rows="6" maxlength="200"
+                                    	placeholder="摘要： （默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）"
+                                    	style="width:99%;display:none;">${(item.articleDigest)!''}</textarea>
+                                </div>
 							</div>
 							
 							<p class="subtit">
@@ -86,11 +88,13 @@
 								<#-- <a href="/mdeditor" target="_blank">切换到MarkDown编辑器</a> -->
 							</p>
 							<div class="section">
-						        <textarea id="editor" name="articleContext" class="xheditor" rows="30" 
-						        	spellcheck=bool
-						        	style="width:99.4%;visibility:hidden;">
-						        	${(item.articleContext)!''}
-						        </textarea>
+								<div id="editormd-context">
+                                    <textarea name="articleContext" class="xheditor" rows="30" 
+							        	spellcheck=bool
+							        	style="width:99.4%;visibility:hidden;">
+							        	${(item.articleContext)!''}
+							        </textarea>
+                                </div>
 							</div>
 							
 							<#-- moreDiv start -->
@@ -197,15 +201,14 @@
 <#include "admin/common/endjs.ftl">
 
 <script type="text/javascript">
-	jsonData={point:'False',max_point:'100',tohome_max_cnt:'5',isClientUser:0,_0:'0'};
+	jsonData={articleBlogId:'0',point:'False',max_point:'100',tohome_max_cnt:'5',isClientUser:0,_0:'0'};
 	var utag2 = "Java".split(',');
 	var ctx = "${ctx}";
 </script>
 
-<#-- kindeditor -->
-<script src="${ctx}/assets/plugins/kindeditor/kindeditor-all.js"></script>
-<script src="http://static.yueny.website/plugins/kindeditor/lang/zh-CN.js"></script>
-<script src="${ctx}/adm/assets/js/wblog/wblog.js"></script>
+<#-- editormd -->
+<script src="${ctx}/adm/assets/js/editor.md/editormd.min.js"></script>
+<script src="${ctx}/adm/assets/js/wblog/wblog_md.js"></script>
 
 <script src='http://static.yueny.website/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
 

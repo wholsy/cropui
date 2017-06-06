@@ -45,8 +45,8 @@ public class ArticlePublishedCondition extends BaseRequest {
 	/** 文章标题 */
 	@NotEmpty(message = "文章标题不能为空！")
 	private String articleTitle;
-	// /** 全站文章分类编号, （到分类首页）,固定,单选 */
-	// private String categoryTagCode;
+	/** 全站文章分类编号, （到分类首页）,固定,单选 */
+	private String categoryTagCode;
 	/** 个人分类,多个分类之间用“,”分隔,包含已存在分类的主键,和新增分类,eg: '1,3,6,8,love' */
 	private String owenerTag;
 	/** 文章标题类型 */

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,19 +38,6 @@ public class WBlogPublishedController extends BaseController {
 	private IArticleManageService articleManageService;
 
 	/**
-	 * 新建/修改文章页面
-	 *
-	 * @param articleBlogId
-	 *            将要修改的文章扩展ID
-	 */
-	@Deprecated
-	@RequestMapping(value = "/article/published.html", method = RequestMethod.GET)
-	public String getPublishedPage(@RequestParam(value = "articleBlogId") final String articleBlogId,
-			final HttpServletResponse response) {
-		return "user/article_write";
-	}
-
-	/**
 	 * 写/编辑文章时根据文章标题和文章内容动态获取'推荐标签'
 	 */
 	@RequestMapping(value = "/article/published.html", method = { RequestMethod.POST })
@@ -78,7 +64,7 @@ public class WBlogPublishedController extends BaseController {
 	}
 
 	/**
-	 * 发布文章操作
+	 * 提交发布文章操作
 	 *
 	 * @param articlePublishedRequest
 	 *            文章发布请求实体

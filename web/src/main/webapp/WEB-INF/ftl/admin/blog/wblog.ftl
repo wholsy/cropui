@@ -2,8 +2,6 @@
 
 <#-- kindeditor -->
 <link href="http://static.yueny.website/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
-<#-- editormd -->
-<link rel="stylesheet" href="https://pandao.github.io/editor.md/css/editormd.css"/>
 
 <link href="${ctx}/assets/css/write/write.css" rel="stylesheet" type="text/css">
 <link href="${ctx}/assets/css/write/main.css" rel="stylesheet" type="text/css">
@@ -57,7 +55,7 @@
 								<select id="selType" name="selTypeCode">
 									<#list articleSelTypes as articleSelType>
 										<option value="${articleSelType.value}"
-											<#if articleBlog?? && articleBlog.selTypeCode==articleSelType>
+											<#if item?? && item.selTypeCode==articleSelType>
 									    		selected="selected"
 											</#if>
 								    	 >${articleSelType.desc}</option>
@@ -75,18 +73,10 @@
 								<span class="gray">（默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）</span>
 							</p>
 							<div id="d_desc">
-								<#--内容区域-->
-                                <div id="editormd-digest">
-                                    <textarea id="articleDigest" name="articleDigest" rows="6" maxlength="200"
-                                    	placeholder="摘要： （默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）"
-                                    	style="display:none;">${(item.articleDigest)!''}</textarea>
-                                    <#--
-                                    <textarea id="articleDigest" name="articleDigest" rows="6" maxlength="200"
-										placeholder="摘要： （默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）"
-										style="width:99%;" >${(item.articleDigest)!''}
-									</textarea>
-									-->
-                                </div>
+								<textarea id="articleDigest" name="articleDigest" rows="6" maxlength="200"
+									placeholder="摘要： （默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）"
+									style="width:99%;" >${(item.articleDigest)!''}
+								</textarea>
 							</div>
 							
 							<p class="subtit">
@@ -132,9 +122,8 @@
 													<#list owenerTags as owenerTag>
 												    	<td>
 												    		<input id="chk_tag_${owenerTag.owenerTagId}" type="checkbox" 
-													    		onclick="chkTag(this)" value="${owenerTag.owenerTagId}"
-													    		value='${(articleBlog.articleAlias)!''}'
-													    		<#list articleBlog.owenerTagIds as owenerTagId>
+													    		onclick="chkTag(this)" value="${owenerTag.owenerTagId}" 
+													    		<#list item.owenerTagIds as owenerTagId>
 															    	<#if owenerTagId==owenerTag.owenerTagId>
 													    				checked="checked"
 													    			</#if>
@@ -154,17 +143,18 @@
 								<div style="display:none;">
 									<input type="text" id="articleAliasName" name="articleAlias" 
 										style="width:60%; height:20px;" maxlength="30"
-										value='${(articleBlog.articleAlias)!''}'/>
+										value='${(item.articleAlias)!''}'/>
 									（只能使用数字、字母、横线和下划线）
 								</div>
-						
+
 								<p class="subtit">全站文章分类（到分类首页）</p>
 								<div class="radioBox channel">
 									<#list categoryTags as categoryTag>
 								    	<input type='radio' name='categoryTagCode' id='categoryChl-${categoryTag.categoriesId}' 
-								    		value='${categoryTag.categoriesCode}' 
-								    		<#if (articleBlog.categoryTagCode)?? && articleBlog.categoryTagCode==categoryTag.categoriesCode>
+								    		value='${categoryTag.categoriesTagCode}' 
+								    		<#if (item.categoryTagCodes)?? && ((item.categoryTagCodes)?size > 0) && (item.categoryTagCodes)?seq_contains(categoryTag.categoriesTagCode)>
 							    				checked
+							    			<#else>
 							    			</#if>
 							    		/>
 										<label for='categoryChl-${categoryTag.categoriesId}'>
@@ -216,42 +206,8 @@
 <script src="${ctx}/assets/plugins/kindeditor/kindeditor-all.js"></script>
 <script src="http://static.yueny.website/plugins/kindeditor/lang/zh-CN.js"></script>
 <script src="${ctx}/adm/assets/js/wblog/wblog.js"></script>
-<#-- editormd -->
-<script src="https://pandao.github.io/editor.md/editormd.min.js"></script>
-
-<script type="text/javascript">
-	var editormdDigest;
-	$(function () {
-		editormdDigest = new_md_editor("editormd-digest");
-    });
-</script>
 
 <script src='http://static.yueny.website/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
-
-<script>
-    function tag_init() {
-        var tag_input = $('#_tags');
-        try {
-            var tags = new Array();
-
-        <#if (obj._tags) ??>
-            <#list  obj._tags as one>
-                tags.push("${one._name}");
-            </#list>
-        </#if>
-
-            tag_input.tag(
-                    {
-                        placeholder: tag_input.attr('placeholder'),
-                        source: tags
-                    }
-            )
-        }
-        catch (e) {
-            tag_input.after('<textarea id="' + tag_input.attr('id') + '" name="' + tag_input.attr('name') + '" rows="3">' + tag_input.val() + '</textarea>').remove();
-        }
-    }
-</script>
 
 </body>
 </html>

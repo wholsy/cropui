@@ -42,6 +42,18 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	/*
 	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.yueny.blog.service.article.IArticleBlogService#deleteByBlogId(java.
+	 * lang.String)
+	 */
+	@Override
+	public boolean deleteByBlogId(String articleBlogId) {
+		return blogDao.deleteByBlogId(articleBlogId);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 *
 	 * @see
 	 * com.yueny.blog.service.article.IArticleBlogService#findByBlogId(java.lang

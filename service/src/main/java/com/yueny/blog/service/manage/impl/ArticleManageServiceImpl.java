@@ -89,20 +89,24 @@ public class ArticleManageServiceImpl extends BaseBiz implements IArticleManageS
 			articleBlogBo.setArticleDigest(HtmlRegexpUtil.filterHtmlTag(condition.getArticleDigest()));
 		}
 
+		// 文章标签,最多添加5个标签，多个标签之间用“,”分隔,eg: Java,自由分类
+		final Set<Long> articleTagIds = operationArticleTagIdsBySave(uid, condition.getArticleTag());
+		articleBlogBo.setArticleTagIds(articleTagIds);
+
 		// 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love'
 		final Map<Long, OwenerTagBo> owenerTags = operationOwenerTagIdsBySave(uid, condition.getOwenerTag());
 		articleBlogBo.setOwenerTagIds(owenerTags.keySet());
 
-		// 全站文章分类（到分类首页）
+		// 全站文章分类（到分类首页）， 如果发布文章时未选择，则使用‘个人分类’的默认全站分类
 		final Set<String> categoryTagCodes = Sets.newHashSet();
-		for (final Map.Entry<Long, OwenerTagBo> entry : owenerTags.entrySet()) {
-			categoryTagCodes.add(entry.getValue().getCategoriesTagCode());
+		if (StringUtil.isEmpty(condition.getCategoryTagCode())) {
+			for (final Map.Entry<Long, OwenerTagBo> entry : owenerTags.entrySet()) {
+				categoryTagCodes.add(entry.getValue().getCategoriesTagCode());
+			}
+		} else {
+			categoryTagCodes.add(condition.getCategoryTagCode());
 		}
 		articleBlogBo.setCategoryTagCodes(categoryTagCodes);
-
-		// 文章标签,最多添加5个标签，多个标签之间用“,”分隔,eg: Java,31231
-		final Set<Long> articleTagIds = operationArticleTagIdsBySave(uid, condition.getArticleTag());
-		articleBlogBo.setArticleTagIds(articleTagIds);
 
 		// TODO 保存浏览器信息
 		System.out.println("浏览器信息: " + agent);
@@ -120,9 +124,18 @@ public class ArticleManageServiceImpl extends BaseBiz implements IArticleManageS
 	 */
 	@Override
 	public boolean delArticleBlog(String articleBlogId) throws DataVerifyAnomalyException {
-		// TODO Auto-generated method stub
-		// DataVerifyAnomalyException
-		return true;
+		// 获取文章信息
+		final ArticleBlogBo blog = articleBlogService.findByBlogId(articleBlogId);
+
+		// 该文章分类信息下的使用次数首先减一
+		for (final Object owenerTagId : blog.getOwenerTagIds()) {
+			if (!owenerTagService.plusCorrelaArticle(Long.parseLong(owenerTagId.toString()), -1)) {
+				throw new DataVerifyAnomalyException(BaseErrorType.SYSTEM_ERROR);
+			}
+		}
+
+		// 删除blog
+		return articleBlogService.deleteByBlogId(articleBlogId);
 	}
 
 	/*
@@ -174,28 +187,31 @@ public class ArticleManageServiceImpl extends BaseBiz implements IArticleManageS
 			articleBlogBo.setArticleDigest(HtmlRegexpUtil.filterHtmlTag(condition.getArticleDigest()));
 		}
 
-		// 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love'
+		// 文章标签,最多添加5个标签，多个标签之间用“,”分隔,eg: Java,自由分类
+		final Set<Long> articleTagIds = operationArticleTagIdsBySave(uid, condition.getArticleTag());
+		articleBlogBo.setArticleTagIds(articleTagIds);
+
+		/* 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love' */
 		// 原分类信息下的使用次数首先全部减一
-		// TODO 此处经过dozer转出来的为String
 		for (final Object owenerTagId : articleBlogBo.getOwenerTagIds()) {
 			if (!owenerTagService.plusCorrelaArticle(Long.parseLong(owenerTagId.toString()), -1)) {
 				throw new DataVerifyAnomalyException(BaseErrorType.SYSTEM_ERROR);
 			}
 		}
+		// 重新维护次数关系
 		final Map<Long, OwenerTagBo> owenerTags = operationOwenerTagIdsBySave(uid, condition.getOwenerTag());
 		articleBlogBo.setOwenerTagIds(owenerTags.keySet());
 
-		// 全站文章分类（到分类首页）
+		// 全站文章分类（到分类首页）， 如果发布文章时未选择，则使用‘个人分类’的默认全站分类
 		final Set<String> categoryTagCodes = Sets.newHashSet();
-		for (final Map.Entry<Long, OwenerTagBo> entry : owenerTags.entrySet()) {
-			categoryTagCodes.add(entry.getValue().getCategoriesTagCode());
+		if (StringUtil.isEmpty(condition.getCategoryTagCode())) {
+			for (final Map.Entry<Long, OwenerTagBo> entry : owenerTags.entrySet()) {
+				categoryTagCodes.add(entry.getValue().getCategoriesTagCode());
+			}
+		} else {
+			categoryTagCodes.add(condition.getCategoryTagCode());
 		}
 		articleBlogBo.setCategoryTagCodes(categoryTagCodes);
-
-		// // 文章标签,最多添加5个标签，多个标签之间用“,”分隔,eg: Java,31231
-		// final Set<Long> articleTagIds = operationArticleTagIdsBySave(uid,
-		// condition.getArticleTag());
-		// articleBlogBo.setArticleTagIds(articleTagIds);
 
 		// TODO 保存浏览器信息
 		System.out.println("浏览器信息: " + agent);
@@ -223,7 +239,6 @@ public class ArticleManageServiceImpl extends BaseBiz implements IArticleManageS
 		for (final String articleTag : Splitter.on(Constants.COMMA).split(articleTagData)) {
 			// TODO 根据文章标签名称获取文章标签信息
 			final String articleTagName = articleTag;
-			System.out.println(articleTagName);
 			articleTagIds.add(99L);
 		}
 		return articleTagIds;

@@ -3,58 +3,12 @@ $(pageInit);
 var jsonData = { articleBlogId: '0' };
 //正文编辑器
 var editor = null;
+var editormdDigest;
 
 function pageInit() {
-	KindEditor.ready(function(K) {
-		editor = K.create('textarea[name="articleContext"]', {
-			cssPath : ['http://static.yueny.website/plugins/prettify/prettify.css'],
-			allowFileManager : true,
-			fileManagerJson : ctx + '/file_manager_json',
-			allowImageUpload : true,
-			uploadJson : ctx + "/upload_json",
-			autoHeightMode : true,
-			langType : 'zh-CN',
-			readonlyMode : false,
-			//0 禁止粘贴; 1 纯文本粘贴;2 HTML粘贴
-			pasteType : 2,
-			//default 默认风格;simple 简单风格
-			themeType : 'simple',
-			items : tools.editorBtn('full'),
-			afterCreate : function() {
-				this.loadPlugin('autoheight');
-			},
-			afterBlur : function(){ 
-				//Kindeditor下获取文本框信息
-				this.sync(); 
-			},
-			afterChange : function() {
-				//字数统计
-				K('.word_count').html(+this.count('text') + "/" + this.count());
-			}
-		});
-		
-		K('input[name=getHtml]').click(function(e) {
-			alert(editor.html());
-		});
-		K('input[name=isEmpty]').click(function(e) {
-			alert(editor.isEmpty());
-		});
-		K('input[name=getText]').click(function(e) {
-			alert(editor.text());
-		});
-		K('input[name=selectedHtml]').click(function(e) {
-			alert(editor.selectedHtml());
-		});
-		K('input[name=insertHtml]').click(function(e) {
-			editor.insertHtml('<strong>插入HTML</strong>');
-		});
-		K('input[name=clear]').click(function(e) {
-			editor.html('');
-		});
-		
-		prettyPrint();
-	});
-
+	editor = new_md_editor("editormd-context");
+	editormdDigest = new_md_editor("editormd-digest");
+	
 	tags_init();
 
     if (jsonData.isDeleted) {
@@ -103,6 +57,69 @@ function pageInit() {
             $("#joinblogcontest").hide();
             $("#joinblogcontest").attr("checked", false);
             $("#joinblogcontesttext").hide();
+        }
+    });
+}
+
+/**
+ * neweditor new_md_editor
+ */
+function new_md_editor(id) {
+	return editormd(id, {
+        width: "100%",
+        height: 300,
+        toolbarAutoFixed: true,
+        autoFocus: false,
+        //autoHeight: true,
+        watch: false, // 关闭实时预览
+        //searchReplace : true,
+        syncScrolling: "single",
+        //theme : "dark",
+        //previewTheme : "dark",
+        //editorTheme : "pastel-on-dark",
+//        markdown : md, //markdown数据
+//        htmlDecode : "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启
+//        toolbar  : false,             //关闭工具栏
+//        previewCodeHighlight : false, // 关闭预览 HTML 的代码块高亮，默认开启
+//        emoji : true,
+//        taskList : true,
+//        tocm            : true,         // Using [TOCM]
+//        tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+//        flowChart : true,             // 开启流程图支持，默认关闭
+//        sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
+//        dialogLockScreen : false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
+//        dialogShowMask : false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
+//        dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
+//        dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
+//        dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
+        codeFold : true,
+        saveHTMLToTextarea: true,  // 保存 HTML 到 Textarea
+        path: ctx + "/adm/assets/js/editor.md/lib/",
+        imageUpload: true,
+        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL: ctx + "/upload_json",
+        htmlDecode: true,
+//        onload : function() {
+//            console.log('onload', this);
+//            //this.fullscreen();
+//            //this.unwatch();
+//            //this.watch().fullscreen();
+//
+//            //this.setMarkdown("#PHP");
+//            //this.width("100%");
+//            //this.height(480);
+//            //this.resize("100%", 640);
+//        },
+        toolbarIcons: function () {
+            return [
+                "undo", "redo", "|",
+                "bold", "del", "italic", "quote", "|",
+                "h2", "h3", "h4", "|",
+                "list-ul", "list-ol", "hr", "|",
+                "watch", "preview", "fullscreen", "|",
+                "link", "image", "code-block", "table", "datetime", "html-entities",
+                "help", "info"
+            ];
         }
     });
 }
@@ -227,11 +244,11 @@ function save(isPub, auto) {
             } else {
             	//成功
                 showConfirm = false;
-                if (!isPub) { //草稿保存
+                if (!isPub) {//草稿保存
 //                	tools.val("articleBlogId") = ret.data;
                     showNote(tools.format("文章已保存{0} {1}", (jsonData.articleBlogId == '0' ? "为草稿" : ""), (new Date()).format("hh:mm:ss")));
                     $("#autosave_note").html('');
-                } else { //非草稿
+                } else {//非草稿
                 	saving = true; //保存后避免再次保存
                 	if (!auto) {//非
                 		showNote("正在跳转..."); // + "<a href='" + ret.data + "' target=_blank>点击查看</a>");
@@ -299,12 +316,12 @@ function getPostData() {
     var articleBlogId = $("input[name=articleBlogId]").val();
     var articleTitle = tools.val("articleTitle");
     
-    var articleContext = encodeURIComponent(tools.val("editor").replace(/<a\s/gi, '<a target=_blank '));  
     var articleContext_html = editor.html();
-    //var text = editor.text();
+    var articleContext_markdown = editor.getMarkdown();
     
-	//摘要
-    var articleDigest = tools.val("articleDigest");
+	//摘要editor
+    var articleDigest_html = editormdDigest.html();
+    var articleDigest_markdown = editormdDigest.getMarkdown();
     //个人分类
     var owenerTag = $("#owenerTag").data("ids");
     //文章标签 xxxx
@@ -329,7 +346,7 @@ function getPostData() {
     
     var data = "selTypeCode=" + selTypeCode + "&articleBlogId=" + articleBlogId + "&articleTitle=" + articleTitle 
     + "&articleContext=" + articleContext_html;
-    data += "&articleDigest=" + articleDigest + "&isdraft=" + isdraft;
+    data += "&articleDigest=" + articleDigest_html + "&isdraft=" + isdraft;
     data += "&articleTag=" + articleTag + "&owenerTag=" + owenerTag;
     data += "&articleAlias=" + articleAlias + "&categoryTagCode=" + categoryTagCode + "&comm=" + comm + "&level=" + 0;
     //data += "&checkcode=" + $("#txtCheckCode").val();

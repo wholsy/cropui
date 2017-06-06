@@ -16,6 +16,11 @@ import com.yueny.superclub.api.page.IPageable;
  */
 public interface IArticleBlogService {
 	/**
+	 * 根据文章对外ID删除博文<br>
+	 */
+	boolean deleteByBlogId(String articleBlogId);
+
+	/**
 	 * 根据文章对外ID获取博文信息<br>
 	 * 缓存5秒
 	 *

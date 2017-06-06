@@ -92,7 +92,8 @@
         </td>
         <td>
             <a href="javascript:del({{value.articleBlogId}});">删除</a>
-            <a target="_self" href="/admin/article/published.html?articleBlogId={{value.articleBlogId}}">编辑</a>
+            <#-- _blank or _self -->
+            <a target="_blank" href="${ctx}/admin/wblog.html?articleBlogId={{value.articleBlogId}}">编辑</a>
             <a target="_blank" href="${ctx}/article/{{value.articleBlogId}}.html">预览</a>
         </td>
     </tr>

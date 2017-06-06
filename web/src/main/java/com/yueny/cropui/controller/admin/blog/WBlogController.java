@@ -41,13 +41,13 @@ public class WBlogController extends BaseController {
 	private IOwenerTagService owenerTagService;
 
 	/**
-	 * 博客发布页面<br>
+	 * 博客MD发布页面<br>
 	 * 此页面存在两种情况：<br>
 	 * 写博客，此时页面只存在初始化加载数据<br>
 	 * 编辑博客，此时页面初始化加载，并加载博文数据
 	 */
-	@RequestMapping(value = "/wblog.html", method = RequestMethod.GET)
-	public String wblogPage(@RequestParam(value = "articleBlogId", defaultValue = "") final String articleBlogId,
+	@RequestMapping(value = "/wblog_md.html", method = RequestMethod.GET)
+	public String wblogMdPage(@RequestParam(value = "articleBlogId", defaultValue = "") final String articleBlogId,
 			final HttpServletResponse response) {
 		setModelAttribute(WebAttributes.ACTION, "WBLOG");
 
@@ -103,7 +103,70 @@ public class WBlogController extends BaseController {
 		final List<CategoriesTagBo> categoryTags = categoriesTagService.findArticleCategoriesTree();
 		setModelAttribute("categoryTags", categoryTags);
 
-		return "admin/blog/wblog";
+		return "admin/blog/wblog_md";
 	}
 
+	/**
+	 * 博客发布页面<br>
+	 * 此页面存在两种情况：<br>
+	 * 写博客，此时页面只存在初始化加载数据<br>
+	 * 编辑博客，此时页面初始化加载，并加载博文数据
+	 */
+	@RequestMapping(value = "/wblog.html", method = RequestMethod.GET)
+	public String wblogPage(@RequestParam(value = "articleBlogId", defaultValue = "") final String articleBlogId,
+			final HttpServletResponse response) {
+		setModelAttribute(WebAttributes.ACTION, "WBLOG");
+
+		/*
+		 * 存在文章则获取文章数据
+		 *
+		 * mode模式: 0新增, 1修改
+		 */
+		// 是否是草稿
+		setModelAttribute("isdraft", false);
+
+		if (StringUtil.isNotEmpty(articleBlogId)) {
+			try {
+				// 获取文章的基本信息
+				final ArticleBlogBo articleBlog = articleBlogService.findByBlogId(articleBlogId);
+				if (articleBlog != null) {
+					setModelAttribute("mode", 1);
+					setModelAttribute("title", "编辑文章:" + articleBlog.getArticleTitle());
+
+					setModelAttribute("item", articleBlog);
+				} else {
+					// 文章不存在,回首页
+					return redirectAction("/");
+				}
+			} catch (final Exception e) {
+				logger.error("【发布文章】出现错误!", e);
+				// 回首页
+				return redirectAction("/");
+			}
+		} else {
+			setModelAttribute("mode", 0);
+			setModelAttribute("title", "我的文章");
+			setModelAttribute("item", null);
+		}
+
+		/* 获取固定数据字典 */
+		// 获取 '文章标题类型' 列表
+		final List<ArticleSelType> articleSelTypes = Lists.newArrayList(ArticleSelType.values());
+		setModelAttribute("articleSelTypes", articleSelTypes);
+
+		// 获取 文章标签-'常用标签'
+		// TODO
+
+		// 获取 '个人分类' 列表
+		// 从session中获取uid
+		final String uid = "yuanyang";
+		final List<OwenerTagBo> owenerTags = owenerTagService.queryByUid(uid);
+		setModelAttribute("owenerTags", owenerTags);
+
+		// 获取'文章分类' 列表 delete
+		final List<CategoriesTagBo> categoryTags = categoriesTagService.findArticleCategoriesTree();
+		setModelAttribute("categoryTags", categoryTags);
+
+		return "admin/blog/wblog";
+	}
 }

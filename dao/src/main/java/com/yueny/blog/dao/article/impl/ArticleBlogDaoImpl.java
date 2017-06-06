@@ -12,6 +12,7 @@ import com.yueny.blog.dao.article.IArticleBlogMapper;
 import com.yueny.blog.dao.cd.ArticleBlogCd;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.kapo.api.annnotation.DbSchemaType;
+import com.yueny.kapo.core.condition.builder.DeleteBuilder;
 import com.yueny.kapo.core.condition.builder.QueryBuilder;
 import com.yueny.kapo.core.condition.column.operand.enums.FuzzySqlOperand;
 import com.yueny.kapo.core.dao.SingleTableDao;
@@ -30,8 +31,17 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 	@Autowired
 	private IArticleBlogMapper articleBlogMapper;
 
-	// final DeleteBuilder builder = DeleteBuilder.builder().where("TYPE",
-	// type.name()).build();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.yueny.blog.dao.article.IArticleBlogDao#deleteByBlogId(java.lang.
+	 * String)
+	 */
+	@Override
+	public boolean deleteByBlogId(String articleBlogId) {
+		final DeleteBuilder builder = DeleteBuilder.builder().where("ARTICLE_BLOG_ID", articleBlogId).build();
+		return super.deleteByColumns(builder) > 0;
+	}
 
 	@Override
 	public List<ArticleBlogEntry> findByOwenerTagId(final Long owenerTagId) {

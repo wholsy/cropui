@@ -13,6 +13,11 @@
 <#-- MetisMenu js -->
 <script src="${ctx}/adm/assets/js/metisMenu/v2.5.2/dist/metisMenu.js"></script>
 <script src="${ctx}/adm/assets/js/menu-2.js"></script>
+
+<#-- tips -->
+<script src="${ctx}/assets/js/jquery.sobox.js"></script>
+<!-- lhg dialog js -->
+<script src="${ctx}/assets/plugins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
 		
 <!-- ace scripts -->
 <script src="${ctx}/adm/assets/js/ace-elements.min.js"></script>
