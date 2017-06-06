@@ -116,13 +116,13 @@ function new_md_editor(id) {
         height: 300,
         toolbarAutoFixed: true,
         autoFocus: false,
-        autoHeight: true,
-        // watch: false, // 关闭实时预览
-        searchReplace : true,
+        //autoHeight: true,
+        watch: false, // 关闭实时预览
+        //searchReplace : true,
         syncScrolling: "single",
-        theme : "dark",
-        previewTheme : "dark",
-        editorTheme : "pastel-on-dark",
+        //theme : "dark",
+        //previewTheme : "dark",
+        //editorTheme : "pastel-on-dark",
 //        markdown : md, //markdown数据
 //        htmlDecode : "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启
 //        toolbar  : false,             //关闭工具栏
@@ -140,7 +140,7 @@ function new_md_editor(id) {
 //        dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
         codeFold : true,
         saveHTMLToTextarea: true,  // 保存 HTML 到 Textarea
-        path: "/adm/assets/js/editor.md/lib/",
+        path: ctx + "/adm/assets/js/editor.md/lib/",
         imageUpload: true,
         imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
         imageUploadURL: ctx + "/upload_json",
