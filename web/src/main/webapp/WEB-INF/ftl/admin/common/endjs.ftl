@@ -2,6 +2,11 @@
 <script type="text/javascript">
     if ('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/adm/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
+
+<script type="text/javascript">
+	var ctx = "${ctx}";
+</script>
+
 <script src="http://static.yueny.website/plugins/bootstrap/2.3.2/js/bootstrap.js"></script>
 <script src="http://static.yueny.website/plugins/prettify/prettify.js" type="text/javascript"></script>
 <script src="${ctx}/assets/js/tools.js"></script>

@@ -9,13 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
 	<link rel="icon" href="http://static.yueny.website/favicon.ico" type="image/x-icon">
-    <!-- bootstrap & fontawesome -->
+    <#-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="${ctx}/adm/assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="${ctx}/adm/assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
-    <!-- text fonts -->
+    <#-- text fonts -->
     <link rel="stylesheet" href="${ctx}/adm/assets/css/fonts.googleapis.com.css"/>
-    <!-- ace styles -->
+    <#-- ace styles -->
     <link rel="stylesheet" href="${ctx}/adm/assets/css/ace.min.css"/>
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="${ctx}/adm/assets/css/ace-part2.min.css"/>
@@ -107,24 +107,24 @@
                                     <div class="space-6"></div>
 
                                 </div>
-                                <!-- /.widget-main -->
+                                <#-- /.widget-main -->
                             </div>
-                            <!-- /.widget-body -->
+                            <#-- /.widget-body -->
                         </div>
-                        <!-- /.login-box -->
+                        <#-- /.login-box -->
                     </div>
-                    <!-- /.position-relative -->
+                    <#-- /.position-relative -->
                 </div>
             </div>
-            <!-- /.col -->
+            <#-- /.col -->
         </div>
-        <!-- /.row -->
+        <#-- /.row -->
     </div>
-    <!-- /.main-content -->
+    <#-- /.main-content -->
 </div>
-<!-- /.main-container -->
+<#-- /.main-container -->
 
-<!-- basic scripts -->
+<#-- basic scripts -->
 
 <script src="${ctx}/adm/assets/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
@@ -132,7 +132,7 @@
 </script>
 <script src="${ctx}/adm/assets/js/bootstrap.min.js"></script>
 
-<!-- inline scripts related to this page -->
+<#-- inline scripts related to this page -->
 <script type="text/javascript">
     $(function () {
         $("#btn_login").bind("click", function () {
@@ -141,13 +141,13 @@
             var username = $("#txt_username").val();
             var password = $("#txt_password").val();
             if (username && password) {
-                $.post("${ctx}/admin/dologin", {username: username, password: password}, function (rs) {
+                $.post("${ctx}/admin/login/dologin", {username: username, password: password}, function (rs) {
                     if (rs["data"] == false) {
                         $("#parent_msg_error").removeClass("hidden");
                         $("#msg_error").text(rs["message"]);
                     }
                     else {
-                        window.location.href = "${ctx}/admin/index";
+                        window.location.href = "${ctx}/admin/index.html";
                     }
                 });
 

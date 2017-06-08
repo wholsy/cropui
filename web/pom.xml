@@ -46,10 +46,6 @@
 		    <groupId>com.yueny.rapid.util</groupId>
 		    <artifactId>rapid-util-web-freemarker</artifactId>
 		</dependency>
-		<dependency>
-		    <groupId>com.yueny.rapid.util</groupId>
-		    <artifactId>rapid-util-web-security</artifactId>
-		</dependency>
 			
         <!-- freemarker -->
 		<dependency>

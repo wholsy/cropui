@@ -1,6 +1,7 @@
 package com.yueny.cropui.controller.admin.login;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yueny.blog.service.cas.admin.IAdminPassportService;
+import com.yueny.blog.service.cas.manager.ILoginManager;
+import com.yueny.blog.service.cas.manager.IUserDisplayManager;
+import com.yueny.blog.service.util.CurrentUserUtils;
+import com.yueny.blog.vo.article.cas.user.UserDisplayVo;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.JsonNormalResponse;
 import com.yueny.rapid.lang.enums.BaseErrorType;
+import com.yueny.rapid.lang.exception.invalid.InvalidException;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
 /**
@@ -24,28 +29,46 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  *
  */
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin/login")
 public class AdminLoginController extends BaseController {
 	@Autowired
-	private IAdminPassportService adminPassportService;
+	private ILoginManager loginManager;
+	@Autowired
+	private IUserDisplayManager userDisplayManager;
 
 	/**
-	 * 登录行为
+	 * 登录行为post
 	 */
 	@RequestMapping(value = "/dologin", method = { RequestMethod.POST })
 	@ResponseBody
 	public JsonNormalResponse<Boolean> dologin(@RequestParam(value = "username") final String username,
 			@RequestParam(value = "password") final String password, final HttpServletResponse response) {
 		final JsonNormalResponse<Boolean> res = new JsonNormalResponse<>();
+		res.setData(false);
 
 		try {
-			final String originalPassword = password;
-			final boolean getMatch = adminPassportService.getMatch(username, originalPassword);
-			res.setData(getMatch);
+			final HttpSession session = getSession();
+			if (session.getAttribute(CurrentUserUtils.LOGIN_DIST_NAME) != null) {
+				// 已登录
+				res.setData(true);
+			} else {
+				final boolean getMatch = loginManager.login(username, password);
+
+				if (getMatch) {
+					final UserDisplayVo dis = userDisplayManager.display(username);
+					session.setAttribute(CurrentUserUtils.LOGIN_DIST_NAME, dis);
+				}
+
+				res.setData(getMatch);
+			}
+		} catch (final InvalidException e) {
+			res.setCode(e.getErrorCode());
+			res.setMessage(e.getErrorMsg());
 		} catch (final Exception e) {
 			res.setCode(BaseErrorType.SYSTEM_BUSY.getCode());
 			res.setMessage(BaseErrorType.SYSTEM_BUSY.getMessage());
-			res.setData(false);
+
+			logger.error("用户登陆异常：", e);
 		}
 
 		return res;
@@ -56,11 +79,12 @@ public class AdminLoginController extends BaseController {
 	 */
 	@RequestMapping(value = "/dologout", method = { RequestMethod.POST })
 	@ResponseBody
-	public JsonNormalResponse<Boolean> dologout(@RequestParam(value = "username") final String username,
-			@RequestParam(value = "password") final String password, final HttpServletResponse response) {
-		// CurrentUserUtils.getInstance().setUser(null);
-
+	public JsonNormalResponse<Boolean> dologout(final HttpServletResponse response) {
 		final JsonNormalResponse<Boolean> res = new JsonNormalResponse<>();
+
+		final HttpSession session = getSession();
+		session.removeAttribute(CurrentUserUtils.LOGIN_DIST_NAME);
+
 		res.setData(true);
 
 		return res;
@@ -69,8 +93,14 @@ public class AdminLoginController extends BaseController {
 	/**
 	 * admin 登录页
 	 */
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/login.html")
 	public String login(final HttpServletResponse response) {
+		final HttpSession session = getSession();
+		if (session.getAttribute(CurrentUserUtils.LOGIN_DIST_NAME) != null) {
+			// 已登录，重定向到主页
+			return redirectAction("/admin/welcome.html");
+		}
+
 		setModelAttribute(WebAttributes.ACTION, "LOGIN");
 
 		return "admin/login";

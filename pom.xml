@@ -258,6 +258,10 @@
 		    <groupId>com.yueny.rapid.util</groupId>
 		    <artifactId>rapid-util-common</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>com.yueny.rapid.util</groupId>
+		    <artifactId>rapid-util-web-security</artifactId>
+		</dependency>
 		
 		<dependency>
 			<groupId>com.yueny.rapid.util</groupId>

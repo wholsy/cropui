@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.Lists;
 import com.yueny.blog.bo.model.condition.ArticlePublishedCondition;
-import com.yueny.blog.service.manage.IArticleManageService;
+import com.yueny.blog.service.manager.IArticleManageService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.ListResponse;
 import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
@@ -58,6 +58,7 @@ public class WBlogPublishedController extends BaseController {
 		} catch (final Exception e) {
 			resp.setCode(BaseErrorType.SYSTEM_BUSY.getCode());
 			resp.setMessage(BaseErrorType.SYSTEM_BUSY.getMessage());
+			logger.error("编辑文章异常：", e);
 		}
 
 		return resp;

@@ -2,14 +2,17 @@ package com.yueny.blog.service.article.impl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
+import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.dao.article.IArticleBlogDao;
 import com.yueny.blog.dao.cd.ArticleBlogCd;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
@@ -18,10 +21,14 @@ import com.yueny.blog.service.article.IArticleBlogService;
 import com.yueny.blog.service.env.CacheDataHandler;
 import com.yueny.blog.service.env.CacheListService;
 import com.yueny.blog.service.env.CacheService;
+import com.yueny.blog.service.tag.ICategoriesTagService;
+import com.yueny.blog.vo.article.ArticleBlogForCategoryTagModel;
+import com.yueny.blog.vo.article.ArticleTagBlogVo;
 import com.yueny.rapid.lang.date.DateFormatType;
 import com.yueny.rapid.lang.date.DateUtil;
 import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
+import com.yueny.rapid.lang.util.collect.CollectionUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 import com.yueny.superclub.api.page.IPageable;
 
@@ -39,10 +46,12 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	private CacheListService<ArticleBlogBo> cacheListService;
 	@Autowired
 	private CacheService<ArticleBlogBo> cacheService;
+	@Autowired
+	private ICategoriesTagService categoriesTagService;
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.yueny.blog.service.article.IArticleBlogService#deleteByBlogId(java.
 	 * lang.String)
@@ -210,7 +219,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
-	public List<ArticleSimpleBlogBo> findPageListForSimpleWithTitle(IPageable pageable, String articleTitle) {
+	public List<ArticleTagBlogVo> findPageListForSimpleWithTitle(IPageable pageable, String articleTitle) {
 		final List<ArticleBlogEntry> entrys = blogDao
 				.queryByCd(ArticleBlogCd.builder().pageable(pageable).articleTitle(articleTitle).build());
 		if (CollectionUtils.isEmpty(entrys)) {
@@ -218,9 +227,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 		}
 		final List<ArticleBlogBo> lists = map(entrys, ArticleBlogBo.class);
 
-		final List<ArticleSimpleBlogBo> ls = Lists.newArrayList();
+		final List<ArticleTagBlogVo> ls = Lists.newArrayList();
 		lists.stream().forEach(blog -> {
-			final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
+			final ArticleTagBlogVo simpleBlog = new ArticleTagBlogVo();
 			simpleBlog.setArticleBlogId(blog.getArticleBlogId());
 			simpleBlog.setArticleTitle(blog.getArticleTitle());
 			simpleBlog.setArticleAlias(blog.getArticleAlias());
@@ -228,6 +237,20 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 			simpleBlog.setCreateTime(blog.getCreateTime());
 			simpleBlog.setModifyUser(blog.getModifyUser());
 			simpleBlog.setUpdateTime(blog.getUpdateTime());
+
+			final List<CategoriesTagBo> ct = categoriesTagService.findByCode(blog.getCategoryTagCodes());
+			if (CollectionUtil.isEmpty(ct)) {
+				simpleBlog.setCategoryTagsForBlog(Collections.emptySet());
+			} else {
+				final Set<ArticleBlogForCategoryTagModel> ctb = Sets.newHashSet();
+				ct.stream().forEach(c -> {
+					final ArticleBlogForCategoryTagModel bo = new ArticleBlogForCategoryTagModel();
+					bo.setCategoryTagCode(c.getCategoriesTagCode());
+					bo.setCategoryTagName(c.getCategoriesName());
+					ctb.add(bo);
+				});
+				simpleBlog.setCategoryTagsForBlog(ctb);
+			}
 
 			ls.add(simpleBlog);
 		});

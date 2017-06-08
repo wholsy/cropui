@@ -110,7 +110,7 @@
 									</div>
 								</div>
 							
-								<p class="subtit">个人分类 [<a href="/xxxxcategory.html" target="_blank">编辑个人分类</a>]</p>
+								<p class="subtit">个人分类 [<a href="${ctx}/admin/owenerTags.html" target="_blank">编辑个人分类</a>]</p>
 								<div>
 									<input id="owenerTag" name="owenerTag" data-ids="" type="text" 
 										style="width:60%; height:20px;" maxlength="100" placeholder="请选择个人分类"/>
@@ -199,7 +199,6 @@
 <script type="text/javascript">
 	jsonData={articleBlogId:'0',point:'False',max_point:'100',tohome_max_cnt:'5',isClientUser:0,_0:'0'};
 	var utag2 = "Java".split(',');
-	var ctx = "${ctx}";
 </script>
 
 <#-- kindeditor -->

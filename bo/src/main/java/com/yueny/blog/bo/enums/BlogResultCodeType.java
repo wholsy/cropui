@@ -3,6 +3,8 @@ package com.yueny.blog.bo.enums;
 import com.yueny.superclub.api.enums.IResultCodeType;
 
 public enum BlogResultCodeType implements IResultCodeType {
+	/*** 博文不存在 */
+	BLOG_RECORD_NOT_EXIT("610006", "博文不存在!"),
 	/*** 上传根目录不存在 */
 	FILE_UPLOAD_DIRECTORY_NOT_EXIST("610014", "上传根目录不存在"),
 	/*** 上传根目录没有写权限 */

@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
 import com.yueny.blog.bo.resp.JsonListForPageResponse;
 import com.yueny.blog.service.article.IArticleBlogService;
-import com.yueny.blog.service.manage.IArticleManageService;
+import com.yueny.blog.service.manager.IArticleManageService;
 import com.yueny.blog.service.util.PageHtmlHelper;
+import com.yueny.blog.vo.article.ArticleTagBlogVo;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.JsonNormalResponse;
 import com.yueny.rapid.lang.enums.BaseErrorType;
@@ -78,17 +78,16 @@ public class BlogListController extends BaseController {
 	 */
 	@RequestMapping(value = "/do_show_list.json", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonListForPageResponse<ArticleSimpleBlogBo> listBlogData(@RequestParam(value = "pageno") int pageno,
+	public JsonListForPageResponse<ArticleTagBlogVo> listBlogData(@RequestParam(value = "pageno") int pageno,
 			@Param("title_q") String title_q, final HttpServletResponse response) {
 		if (pageno <= 0) {
 			pageno = 1;
 		}
 
-		final JsonListForPageResponse<ArticleSimpleBlogBo> res = new JsonListForPageResponse<>();
+		final JsonListForPageResponse<ArticleTagBlogVo> res = new JsonListForPageResponse<>();
 		try {
 			final PageCond pageable = new PageCond(pageno, 10);
-			final List<ArticleSimpleBlogBo> blogs = articleBlogService.findPageListForSimpleWithTitle(pageable,
-					title_q);
+			final List<ArticleTagBlogVo> blogs = articleBlogService.findPageListForSimpleWithTitle(pageable, title_q);
 			res.setData(blogs);
 
 			final String pages = PageHtmlHelper.getPageHtmlByPage(pageable.getItems(), pageno, pageable.getPageSize());
@@ -107,6 +106,7 @@ public class BlogListController extends BaseController {
 	@RequestMapping(value = "/list_blog.html", method = RequestMethod.GET)
 	public String listBlogPage(final HttpServletResponse response) {
 		setModelAttribute(WebAttributes.ACTION, "LIST_BLOG");
+		setModelAttribute("title", "博客列表");
 
 		return "admin/blog/listblog";
 	}

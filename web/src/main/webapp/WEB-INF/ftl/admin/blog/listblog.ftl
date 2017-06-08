@@ -51,6 +51,7 @@
                             <tr>
                                 <th>标识号</th>
                                 <th>标题</th>
+								<th>全站分类</th>
                                 <th>时间</th>
                                 <th>状态</th>
                                 <th>管理</th>
@@ -82,6 +83,13 @@
     <tr>
         <td>{{value.articleBlogId}}</td>
         <td>{{value.articleTitle}}</td>
+        <td>
+			{{each value.categoryTagsForBlog as categoryTagForBlog j}}
+					<a href="{{categoryTagForBlog.categoryTagCode}}">
+						{{categoryTagForBlog.categoryTagName}}
+					</a>
+			{{/each}}
+        </td>
         <td>{{value.today}}</td>
         <td>
         	{{if value._isdraft ==1 }} 
@@ -109,7 +117,7 @@
 				type: 'DELETE',
 				success: function(rs) {
 					if (rs["data"] == true) {
-						alert("删除成功");
+						$.dialog.tips("删除成功！");
 	                	window.location.reload();
 	                }else {
 	                	alert(rs["message"]);

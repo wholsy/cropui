@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
+import com.yueny.blog.vo.article.ArticleTagBlogVo;
 import com.yueny.superclub.api.page.IPageable;
 
 /**
@@ -97,7 +98,7 @@ public interface IArticleBlogService {
 	 * @param articleTitle
 	 *            文章标题
 	 */
-	List<ArticleSimpleBlogBo> findPageListForSimpleWithTitle(IPageable pageable, String articleTitle);
+	List<ArticleTagBlogVo> findPageListForSimpleWithTitle(IPageable pageable, String articleTitle);
 
 	/**
 	 * 新增

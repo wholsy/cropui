@@ -17,18 +17,26 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">
-                        <img class="nav-user-photo" src="${ctx}/adm/assets/images/avatars/user.jpg" alt="Jason's Photo">
+                        <img class="nav-user-photo" 
+                        	src="
+                        	<#if (distUser.userBaseInfoExp)?? && (distUser.userBaseInfoExp.headTinyImageIoId)??>
+	                    		${distUser.userBaseInfoExp.headTinyImageIoUrl}
+	                    	<#else>
+	                        	${ctx}/adm/assets/images/avatars/user.jpg
+	                        </#if>
+                        	" 
+                        	alt="${distUser.displayName}'s Photo" title="${distUser.displayName}'s Photo">
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
-                            <a href="/adm/settings">
+                            <a href="${ctx}/admin/settings">
                                 <i class="ace-icon fa fa-cog"></i>
                                 Settings
                             </a>
                         </li>
                         <li>
-                            <a href="/adm/settings">
+                            <a href="${ctx}/admin/settings">
                                 <i class="ace-icon fa fa-user"></i>
                                 Profile
                             </a>
@@ -39,7 +47,7 @@
                         <li>
                             <a id="a_logout" href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
-                                Logout
+                               ${distUser.displayName} Logout
                             </a>
                         </li>
                     </ul>
@@ -47,5 +55,5 @@
             </ul>
         </div>
     </div>
-    <!-- /.navbar-container -->
+    <#-- /.navbar-container -->
 </div>

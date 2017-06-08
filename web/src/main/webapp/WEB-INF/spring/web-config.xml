@@ -157,18 +157,18 @@
 			 -->
 		</mvc:interceptor>
 		
-        <!-- 4、控制管理访问信息拦截器
+        <!-- 4、控制管理访问信息拦截器  -->
 	    <mvc:interceptor>
-	    	<mvc:mapping path="/user/**"/>
+	    	<mvc:mapping path="/admin/**"/>
+	    	<mvc:exclude-mapping path="/admin/login/**"/>
 			<bean class="com.yueny.rapid.util.web.core.interceptor.WebLoginCheckInterceptor"
-				p:loginDistName="SESSION_USER_NAME">
+				p:loginDistName="distUser" p:loginUrl="/admin/login/login.html">
 			</bean>
 		</mvc:interceptor>
-		  -->
-		  
-		<!-- 8、IAccessOpts  -->
+		
+		<!-- 8、admin IAccessOpts  -->
 		<mvc:interceptor>
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/admin/**"/>
             <bean class="com.yueny.rapid.util.web.core.interceptor.AccessHandlerInterceptor"
             	p:needTraceLogByRequest="true">
             </bean>

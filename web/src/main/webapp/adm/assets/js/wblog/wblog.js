@@ -299,7 +299,6 @@ function getPostData() {
     var articleBlogId = $("input[name=articleBlogId]").val();
     var articleTitle = tools.val("articleTitle");
     
-    var articleContext = encodeURIComponent(tools.val("editor").replace(/<a\s/gi, '<a target=_blank '));  
     var articleContext_html = editor.html();
     //var text = editor.text();
     
