@@ -14,8 +14,8 @@ import com.yueny.cms.api.enums.SystemParameterType;
 import com.yueny.cms.api.response.ro.FunctionOpenRo;
 import com.yueny.cms.api.response.ro.SubSystemRo;
 import com.yueny.cms.api.response.ro.SystemParameterRo;
+import com.yueny.cms.api.service.IConfigureQueryService;
 import com.yueny.cms.api.service.IOpenQueryService;
-import com.yueny.cms.api.service.ISystemParameterQueryService;
 import com.yueny.cms.api.service.ISystemQueryService;
 import com.yueny.rapid.data.resp.pojo.response.ListResponse;
 import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
@@ -30,6 +30,9 @@ import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
  */
 @Service
 public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration {
+	@Autowired(required = false)
+	private IConfigureQueryService configureQueryService;
+
 	/**
 	 * Logger available to subclasses.
 	 */
@@ -37,12 +40,9 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 
 	@Autowired(required = false)
 	private IOpenQueryService openQueryService;
-
 	/** 系统编号 */
 	@Value("${app.system.code}")
 	private String systemCode;
-	@Autowired(required = false)
-	private ISystemParameterQueryService systemParameterQueryService;
 	@Autowired(required = false)
 	private ISystemQueryService systemQueryService;
 
@@ -122,14 +122,21 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 		return resp.getData();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.yueny.blog.service.integration.ICmsConfigQueryIntegration#
+	 * querySystemParameterByCode(com.yueny.cms.api.enums.SystemParameterType)
+	 */
 	@Override
-	public SystemParameterRo querySystemParameterByCode(SystemParameterType systemParameterCode) {
-		if (systemParameterQueryService == null) {
-			logger.warn("服务未发现：{}！", systemParameterQueryService);
+	public SystemParameterRo querySystemParameterByCode(SystemParameterType systemParameterType) {
+		if (configureQueryService == null) {
+			logger.warn("服务未发现：{}！", configureQueryService);
 			return null;
 		}
 
-		final NormalResponse<SystemParameterRo> resp = systemParameterQueryService.queryByType(systemParameterCode);
+		final NormalResponse<SystemParameterRo> resp = configureQueryService.queryByType(systemCode,
+				systemParameterType);
 
 		logger.info("查询指定的系统参数配置：{}！", resp);
 		if (resp == null) {

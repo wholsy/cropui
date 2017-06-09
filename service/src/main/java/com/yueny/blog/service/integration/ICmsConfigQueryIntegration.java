@@ -51,6 +51,6 @@ public interface ICmsConfigQueryIntegration {
 	 *            系统参数编号
 	 * @return
 	 */
-	SystemParameterRo querySystemParameterByCode(SystemParameterType systemParameterCode);
+	SystemParameterRo querySystemParameterByCode(SystemParameterType systemParameterType);
 
 }
