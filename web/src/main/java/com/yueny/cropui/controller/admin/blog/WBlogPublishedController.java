@@ -1,7 +1,5 @@
 package com.yueny.cropui.controller.admin.blog;
 
-import java.util.Collections;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -9,20 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.common.collect.Lists;
 import com.yueny.blog.bo.model.condition.ArticlePublishedCondition;
 import com.yueny.blog.service.manager.IArticleManageService;
 import com.yueny.cropui.controller.BaseController;
-import com.yueny.rapid.data.resp.pojo.response.ListResponse;
 import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
 import com.yueny.rapid.lang.agent.UserAgentResource;
-import com.yueny.rapid.lang.enums.BaseErrorType;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.rapid.lang.util.StringUtil;
-import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
 /**
  * 博客发布控制器
@@ -38,33 +33,6 @@ public class WBlogPublishedController extends BaseController {
 	private IArticleManageService articleManageService;
 
 	/**
-	 * 写/编辑文章时根据文章标题和文章内容动态获取'推荐标签'
-	 */
-	@RequestMapping(value = "/article/published.html", method = { RequestMethod.POST })
-	@ResponseBody
-	@Deprecated
-	public ListResponse<String> getPublishedTag(final String gettag, final HttpServletResponse response) {
-		setModelAttribute(WebAttributes.ACTION, "getPublishedTag");
-
-		final ListResponse<String> resp = new ListResponse<>();
-		if (StringUtil.isEmpty(gettag)) {
-			resp.setData(Collections.emptyList());
-			return resp;
-		}
-
-		try {
-			// '推荐标签'直接返回推荐的标签名称,不尽兴name的封装
-			resp.setData(Lists.newArrayList("Server"));
-		} catch (final Exception e) {
-			resp.setCode(BaseErrorType.SYSTEM_BUSY.getCode());
-			resp.setMessage(BaseErrorType.SYSTEM_BUSY.getMessage());
-			logger.error("编辑文章异常：", e);
-		}
-
-		return resp;
-	}
-
-	/**
 	 * 提交发布文章操作
 	 *
 	 * @param articlePublishedRequest
@@ -77,8 +45,9 @@ public class WBlogPublishedController extends BaseController {
 			RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public NormalResponse<String> publishedArticle(@Valid final ArticlePublishedCondition condition,
+			@RequestParam(value = "isHtml", defaultValue = "true") final Boolean isHtml,
 			final HttpServletResponse httpResponse) {
-		logger.info("【发布文章】请求参数:{}.", condition);
+		logger.info("【发布文章】请求参数:{}/{}.", isHtml, condition);
 
 		final NormalResponse<String> response = new NormalResponse<>();
 		try {

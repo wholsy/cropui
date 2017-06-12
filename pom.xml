@@ -162,6 +162,14 @@
 			    <artifactId>rapid-util-web-freemarker</artifactId>
 			    <version>${rapid.version}</version>
 			</dependency>
+			
+			<!-- HTML 2 MARKDOWN -->
+			<!-- markdownToHtml: 轻量级 Markdown 引擎 -->
+			<dependency>
+			    <groupId>org.pegdown</groupId>
+			    <artifactId>pegdown</artifactId>
+			    <version>1.6.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	

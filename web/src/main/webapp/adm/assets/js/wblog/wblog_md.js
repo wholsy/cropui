@@ -202,7 +202,7 @@ function save(isPub, auto) {
     showNote("正在保存。。。");
     //showErr("请输入验证码计算结果。");
     
-    data += "&stat=" + (isPub ? "publish" : "draft");
+    data += "&stat=" + (isPub ? "publish" : "draft") + "&isauto=0";;
     
 	var _form_parents = $("#btnPublish").parents("form");
 	if(_form_parents.length== 0){
@@ -317,11 +317,10 @@ function getPostData() {
     var articleTitle = tools.val("articleTitle");
     
     var articleContext_html = editor.html();
-    var articleContext_markdown = editor.getMarkdown();
+    var articleContextForMd = editor.getMarkdown();
     
 	//摘要editor
     var articleDigest_html = editormdDigest.html();
-    var articleDigest_markdown = editormdDigest.getMarkdown();
     //个人分类
     var owenerTag = $("#owenerTag").data("ids");
     //文章标签 xxxx
@@ -345,7 +344,7 @@ function getPostData() {
     }
     
     var data = "selTypeCode=" + selTypeCode + "&articleBlogId=" + articleBlogId + "&articleTitle=" + articleTitle 
-    + "&articleContext=" + articleContext_html;
+    + "&articleContext=" + articleContext_html + "&articleContextForMd=" + articleContextForMd;;
     data += "&articleDigest=" + articleDigest_html + "&isdraft=" + isdraft;
     data += "&articleTag=" + articleTag + "&owenerTag=" + owenerTag;
     data += "&articleAlias=" + articleAlias + "&categoryTagCode=" + categoryTagCode + "&comm=" + comm + "&level=" + 0;

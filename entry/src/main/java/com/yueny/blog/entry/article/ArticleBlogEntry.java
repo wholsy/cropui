@@ -26,6 +26,8 @@ public class ArticleBlogEntry extends BaseEntry {
 	private String articleBlogId;
 	/** 文章内容 */
 	private String articleContext;
+	/** 文章MARKDOWN内容 */
+	private String articleContextForMd;
 	/** 文章摘要 */
 	private String articleDigest;
 	/** 文章主键 */

@@ -77,7 +77,9 @@ public class ArticleManageServiceImpl extends BaseBiz implements IArticleManageS
 		articleBlogBo.setUid(uid);
 		articleBlogBo.setArticleAlias(HtmlRegexpUtil.filterHtmlTag(condition.getArticleAlias()));
 		articleBlogBo.setArticleTitle(HtmlRegexpUtil.filterHtmlTag(condition.getArticleTitle()));
+		// TODO 后续协商为前端传递的均为MD
 		articleBlogBo.setArticleContext(condition.getArticleContext());
+		articleBlogBo.setArticleContextForMd(condition.getArticleContextForMd());
 		articleBlogBo.setArticleMore(condition.getArticleMore());
 		articleBlogBo.setSelTypeCode(ArticleSelType.getTypeByValue(condition.getSelTypeCode()));
 		articleBlogBo.setReadTimes(0);
@@ -180,7 +182,9 @@ public class ArticleManageServiceImpl extends BaseBiz implements IArticleManageS
 		// 文章对外ID,阅读次数 不可被修改
 		articleBlogBo.setArticleAlias(HtmlRegexpUtil.filterHtmlTag(condition.getArticleAlias()));
 		articleBlogBo.setArticleTitle(HtmlRegexpUtil.filterHtmlTag(condition.getArticleTitle()));
+		// TODO 后续协商为前端传递的均为MD
 		articleBlogBo.setArticleContext(condition.getArticleContext());
+		articleBlogBo.setArticleContextForMd(condition.getArticleContextForMd());
 		articleBlogBo.setArticleMore(condition.getArticleMore());
 		articleBlogBo.setSelTypeCode(ArticleSelType.getTypeByValue(condition.getSelTypeCode()));
 

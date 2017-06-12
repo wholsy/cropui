@@ -185,7 +185,7 @@ function save(isPub, auto) {
     showNote("正在保存。。。");
     //showErr("请输入验证码计算结果。");
     
-    data += "&stat=" + (isPub ? "publish" : "draft");
+    data += "&stat=" + (isPub ? "publish" : "draft") + "&isauto=0";
     
 	var _form_parents = $("#btnPublish").parents("form");
 	if(_form_parents.length== 0){
@@ -301,6 +301,8 @@ function getPostData() {
     
     var articleContext_html = editor.html();
     //var text = editor.text();
+    var articleContextForMd = toMarkdown(articleContext_html);
+    $.dialog.tips(articleContextForMd);
     
 	//摘要
     var articleDigest = tools.val("articleDigest");
@@ -327,10 +329,11 @@ function getPostData() {
     }
     
     var data = "selTypeCode=" + selTypeCode + "&articleBlogId=" + articleBlogId + "&articleTitle=" + articleTitle 
-    + "&articleContext=" + articleContext_html;
+    + "&articleContext=" + articleContext_html + "&articleContextForMd=" + articleContextForMd;
     data += "&articleDigest=" + articleDigest + "&isdraft=" + isdraft;
     data += "&articleTag=" + articleTag + "&owenerTag=" + owenerTag;
     data += "&articleAlias=" + articleAlias + "&categoryTagCode=" + categoryTagCode + "&comm=" + comm + "&level=" + 0;
+    data += "&isHtml=" + "true";
     //data += "&checkcode=" + $("#txtCheckCode").val();
     //data += "&userinfo1=" + $("#userinfo2").val();   
 

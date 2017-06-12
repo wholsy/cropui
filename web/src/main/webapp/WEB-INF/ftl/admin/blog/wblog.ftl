@@ -83,10 +83,13 @@
 								文章内容
 								<span class="word_count" title="字数统计包含HTML代码/字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字"></span>
 								<span id="autosave_note"></span>
-								<#-- <a href="/mdeditor" target="_blank">切换到MarkDown编辑器</a> -->
+								<a id="wblog_md" 
+									href="${ctx}/admin/wblog_md.html?articleBlogId={{value.articleBlogId}}" 
+									target="_blank"
+									>切换到MarkDown编辑器</a>
 							</p>
 							<div class="section">
-						        <textarea name="articleContext" class="xheditor" rows="30" 
+						        <textarea id="articleContext" name="articleContext" class="xheditor" rows="30" 
 						        	spellcheck=bool
 						        	style="width:99.4%;visibility:hidden;">
 						        	${(item.articleContext)!''}
@@ -200,11 +203,29 @@
 	jsonData={articleBlogId:'0',point:'False',max_point:'100',tohome_max_cnt:'5',isClientUser:0,_0:'0'};
 	var utag2 = "Java".split(',');
 </script>
+<script>
+	//$(function () {
+	//    $("#wblog_md").bind("click", function () {
+	 //   	// $.dialog.tips($('#articleContext').val());
+	 //   	html_2_md($('#articleContext').val());
+	//    });
+	//});
 
+	function html_2_md(html) {
+		$('#output').val(toMarkdown(html));
+	}
+	function md_2_html(md) {
+		$('#output').val(markdown.toHTML(md));
+	}
+</script>
+			
 <#-- kindeditor -->
 <script src="${ctx}/assets/plugins/kindeditor/kindeditor-all.js"></script>
 <script src="http://static.yueny.website/plugins/kindeditor/lang/zh-CN.js"></script>
 <script src="${ctx}/adm/assets/js/wblog/wblog.js"></script>
+
+<script src="http://static.yueny.website/plugins/markdown/to-markdown.js"></script>
+<script src="http://static.yueny.website/plugins/markdown/markdown.min.js"></script>
 
 <script src='http://static.yueny.website/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
 

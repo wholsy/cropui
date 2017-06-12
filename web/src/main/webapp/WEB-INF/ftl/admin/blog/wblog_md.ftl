@@ -85,14 +85,17 @@
 								文章内容
 								<span class="word_count" title="字数统计包含HTML代码/字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字"></span>
 								<span id="autosave_note"></span>
-								<#-- <a href="/mdeditor" target="_blank">切换到MarkDown编辑器</a> -->
+								<a id="wblog_md" 
+									href="${ctx}/admin/wblog.html?articleBlogId={{value.articleBlogId}}" 
+									target="_blank"
+									>切换到HTML编辑器</a>
 							</p>
 							<div class="section">
 								<div id="editormd-context">
-                                    <textarea name="articleContext" class="xheditor" rows="30" 
+                                    <textarea name="articleContextForMd" class="xheditor" rows="30" 
 							        	spellcheck=bool
 							        	style="width:99.4%;visibility:hidden;">
-							        	${(item.articleContext)!''}
+							        	${(item.articleContextForMd)!''}
 							        </textarea>
                                 </div>
 							</div>
@@ -209,6 +212,9 @@
 <#-- editormd -->
 <script src="${ctx}/adm/assets/js/editor.md/editormd.min.js"></script>
 <script src="${ctx}/adm/assets/js/wblog/wblog_md.js"></script>
+
+<script src="http://static.yueny.website/plugins/markdown/to-markdown.js"></script>
+<script src="http://static.yueny.website/plugins/markdown/markdown.min.js"></script>
 
 <script src='http://static.yueny.website/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
 

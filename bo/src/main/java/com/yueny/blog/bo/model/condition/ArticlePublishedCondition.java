@@ -34,6 +34,10 @@ public class ArticlePublishedCondition extends BaseRequest {
 	@NotEmpty(message = "文章内容不能为空！")
 	@Mask(left = 80, right = 20)
 	private String articleContext;
+	/** 文章MARKDOWN内容 */
+	@NotEmpty(message = "文章内容不能为空！")
+	@Mask(left = 80, right = 20)
+	private String articleContextForMd;
 	/** 文章摘要 */
 	@Mask(left = 50, right = 20)
 	private String articleDigest;

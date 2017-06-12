@@ -28,8 +28,10 @@ public class ArticleBlogBo extends BaseBo {
 	private String articleAlias;
 	/** 文章对外ID */
 	private String articleBlogId;
-	/** 文章内容 */
+	/** 文章HTML内容 */
 	private String articleContext;
+	/** 文章MARKDOWN内容 */
+	private String articleContextForMd;
 	/** 文章摘要 */
 	private String articleDigest;
 	/** 文章主键 */

@@ -1,34 +1,34 @@
-<#include "../common/header.ftl">
+<#include "admin/common/header.ftl">
 <body class="no-skin">
-<#include "../common/navbar.ftl">
+<#include "admin/common/navbar.ftl">
 
 <div class="main-container ace-save-state" id="main-container">
-<#include "../common/sidebar.ftl">
+<#include "admin/common/sidebar-menu.ftl">
+
     <div class="main-content">
         <div class="main-content-inner">
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                <ul class="breadcrumb">
+               <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="/adm/index">Home</a>
+                        <a href="${ctx}/admin/">Home</a>
                     </li>
                     <li>
-                        <a href="#">标签管理</a>
+                        <a href="#">博客管理</a>
                     </li>
                     <li class="active">标签列表</li>
                 </ul>
             </div>
+            
             <div class="page-content">
-                <!-- /.ace-settings-container -->
-            <#--<div class="page-header">-->
-            <#--<h1>-->
-            <#--博客列表-->
-            <#--<small>-->
-            <#--<i class="ace-icon fa fa-angle-double-right"></i>-->
-            <#--</small>-->
-            <#--</h1>-->
-            <#--</div>-->
-                <!-- /.page-header -->
+	            <div class="page-header">
+		            <h1>
+		           	 	博客列表
+			            <small>
+			            	<i class="ace-icon fa fa-angle-double-right"></i>
+			            </small>
+		            </h1>
+	            </div>
 
                 <div class="row">
                     <div class="col-md-12">
@@ -37,7 +37,7 @@
                                 <input type="text" class="form-control input-sm" id="txt_q" placeholder="标签">
                             </div>
                             <button id="btn_q" type="button" class="btn btn-info btn-xs">
-                                搜索
+                                	搜索
                             </button>
                         </form>
                         <form class="form-inline">
@@ -72,13 +72,14 @@
                 </div>
 
             </div>
-            <!-- /.page-content -->
+            <#-- /.page-content -->
         </div>
     </div>
-<#include "../common/footer.ftl">
+<#include "admin/common/footer.ftl">
 </div>
 
-<#include  "../common/endjs.ftl">
+<#include "admin/common/endjs.ftl">
+
 <script id="template_list" type="text/html">
     {{each datas as value i}}
     <tr>
@@ -104,7 +105,8 @@
     }
 
     $(function () {
-        page(1);
+        //page(1);
+        
         $("#btn_q").bind("click", function () {
             page(1);
         });
