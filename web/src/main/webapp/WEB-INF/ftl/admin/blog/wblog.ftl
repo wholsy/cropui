@@ -5,7 +5,7 @@
 
 <link href="${ctx}/assets/css/write/write.css" rel="stylesheet" type="text/css">
 <link href="${ctx}/assets/css/write/main.css" rel="stylesheet" type="text/css">
-	
+
 <body class="no-skin">
 <#include "admin/common/navbar.ftl">
 
