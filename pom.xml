@@ -9,13 +9,12 @@
 	</parent>
 	
 	<groupId>com.yueny.blog</groupId>
-	<artifactId>nodes</artifactId>
+	<artifactId>blog-nodes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
   
 	<properties>
 		<java.version>1.8</java.version>
-		<cropui.version>0.0.1-SNAPSHOT</cropui.version>
 		
 		<superclub.kapo.version>1.2.0-SNAPSHOT</superclub.kapo.version>
 		<rapid.version>1.0.1-SNAPSHOT</rapid.version>
@@ -66,7 +65,12 @@
 			
 			<dependency>
 				<groupId>com.yueny.rapid.topic</groupId>
-				<artifactId>rapid-topic-profiler</artifactId>
+				<artifactId>rapid-topic-profiler-box</artifactId>
+				<version>${rapid.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.util</groupId>
+				<artifactId>rapid-util-adapter</artifactId>
 				<version>${rapid.version}</version>
 			</dependency>
 			
@@ -110,6 +114,11 @@
 				<artifactId>rapid-lang-date</artifactId>
 				<version>${rapid.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.yueny.rapid.topic</groupId>
+				<artifactId>rapid-topic-distributed-lock</artifactId>
+				<version>${rapid.version}</version>
+			</dependency>
 			
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
@@ -129,11 +138,6 @@
 			<dependency>
 				<groupId>com.yueny.rapid.util</groupId>
 				<artifactId>rapid-util-scheduler</artifactId>
-				<version>${rapid.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.yueny.rapid.util</groupId>
-				<artifactId>rapid-util-log</artifactId>
 				<version>${rapid.version}</version>
 			</dependency>
 			<dependency>
@@ -174,16 +178,6 @@
 	</dependencyManagement>
 	
 	<dependencies>
-		<!-- kapo-jpa -->
-		<dependency>
-			<groupId>com.yueny.kapo</groupId>
-	        <artifactId>kapo-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.kapo</groupId>
-	        <artifactId>kapo-core</artifactId>
-		</dependency>
-		
 		<dependency>
 		    <groupId>com.yueny.rapid</groupId>
 			<artifactId>api</artifactId>
@@ -239,7 +233,11 @@
 		
 		<dependency>
 			<groupId>com.yueny.rapid.topic</groupId>
-			<artifactId>rapid-topic-profiler</artifactId>
+			<artifactId>rapid-topic-profiler-box</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.util</groupId>
+			<artifactId>rapid-util-adapter</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -257,10 +255,6 @@
 		<dependency>
 			<groupId>com.yueny.rapid.util</groupId>
 			<artifactId>rapid-util-scheduler</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-log</artifactId>
 		</dependency>
 		<dependency>
 		    <groupId>com.yueny.rapid.util</groupId>

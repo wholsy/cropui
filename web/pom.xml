@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.yueny.blog</groupId>
-		<artifactId>nodes</artifactId>
+		<artifactId>blog-nodes</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
@@ -16,22 +16,22 @@
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-service</artifactId>
-            <version>${cropui.version}</version>
+            <version>${project.version}</version>
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-bo</artifactId>
-            <version>${cropui.version}</version>
+            <version>${project.version}</version>
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-dao</artifactId>
-           <version>${cropui.version}</version>
+           <version>${project.version}</version>
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-entry</artifactId>
-            <version>${cropui.version}</version>
+            <version>${project.version}</version>
         </dependency>
         
         <dependency>
@@ -46,18 +46,19 @@
 		    <groupId>com.yueny.rapid.util</groupId>
 		    <artifactId>rapid-util-web-freemarker</artifactId>
 		</dependency>
-			
         <!-- freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 		</dependency>
+		
 		<!-- 添加Servlet支持 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
@@ -76,34 +77,13 @@
 			<artifactId>jsp-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		 -->
 	</dependencies>
   
 	<build>
-		<!--  -->
 		<finalName>blog</finalName>
+		
 		<plugins>
-			<!--
-		 	<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<executions>
-                    <execution>
-                        <id>make-binary-pacakge</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <finalName>job-deploy</finalName>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>src/main/resources/assemble-descriptor.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                    </execution>
-                </executions>
-			</plugin>
-			-->
 			<!-- jetty -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
@@ -122,7 +102,7 @@
                     </systemProperties>
                 </configuration>
             </plugin>
-			<plugin>
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.2</version>

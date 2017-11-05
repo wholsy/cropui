@@ -25,7 +25,7 @@ public class ArticleBlogIdGenerate implements ISequenceNoStrategy<String> {
 	public String getOps(Object... avgs) {
 		final StringBuilder unId = new StringBuilder();
 
-		final String originId = UuidUtil.getSimpleUuid();
+		final String originId = UuidUtil.getUUIDForNumber12();
 		unId.append("1");
 		unId.append(originId);
 

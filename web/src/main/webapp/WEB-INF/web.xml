@@ -8,7 +8,7 @@
 	<!-- 对站台做出描述. -->
 	<description>for my wife</description>
 	<!-- 定义站台的名称. -->
-	<display-name>cropui</display-name>
+	<display-name>blog</display-name>
 	
 	<!-- 为做集群服务 -->
 	<distributable/>
@@ -27,17 +27,6 @@
 		<param-value>true</param-value>
 	</context-param>
 	
-	<!-- SpringSecurity必须的filter
-    <filter>  
-        <filter-name>springSecurityFilterChain</filter-name>  
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>  
-    </filter>  
-    <filter-mapping>  
-        <filter-name>springSecurityFilterChain</filter-name>  
-        <url-pattern>/*</url-pattern>  
-    </filter-mapping> 
-     -->  
-     
 	<!-- 编码过滤器 
     	CharacterEncodingFilter类具有encoding和forceEncoding两个属性，其中encoding是表示设置request的编码，forceEncoding表示是否同时设置response的编码。  
      -->
@@ -69,11 +58,6 @@
 	<listener>  
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
     </listener>
-    <!-- 
-    <listener>
-        <listener-class>com.service.impl.InitComponent</listener-class>  
-    </listener>
-     -->
 	
 	<filter>
 		<filter-name>HttpMethodFilter</filter-name>
@@ -102,20 +86,8 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>springMVC</servlet-name>
-        <url-pattern>*.json</url-pattern>
-    </servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>springMVC</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>springMVC</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
     
 	<session-config>
 		<session-timeout>10</session-timeout>
@@ -129,18 +101,6 @@
  	<error-page>
  		<exception-type>500</exception-type>
  		<location>/110/500.ftl</location>
- 	</error-page>
- 	<error-page>
- 		<error-code>403</error-code>
- 		<location>/110/403.jsp</location>
- 	</error-page>
- 	<error-page>
- 		<error-code>404</error-code>
- 		<location>/110/404.jsp</location>
- 	</error-page>
- 	<error-page>
- 		<error-code>405</error-code>
- 		<location>/110/405.jsp</location>
  	</error-page>
 	
 </web-app>

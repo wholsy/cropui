@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 /**
  * autoReload
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
  *
  * @category tag
  */
+@Service
 public class DemoDateInitTask {
 	/** 日志 */
 	private static final Logger logger = LoggerFactory.getLogger(DemoDateInitTask.class);
@@ -19,6 +22,7 @@ public class DemoDateInitTask {
 	/**
 	 * 定时初始化任务
 	 */
+	@Scheduled(cron = "0 0/35 * * * ?")
 	public void autoReload() {
 		logger.info("【demo】定时初始化任务-->开始触发，并每隔一分钟触发一次。开始初始化时间:{}", new Date());
 	}

@@ -4,10 +4,23 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.yueny.blog</groupId>
-		<artifactId>nodes</artifactId>
+		<artifactId>blog-nodes</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
 	
 	<artifactId>blog-entry</artifactId>
+	
+	<dependencies>
+		<!-- kapo-jpa -->
+		<dependency>
+			<groupId>com.yueny.kapo</groupId>
+	        <artifactId>kapo-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yueny.kapo</groupId>
+	        <artifactId>kapo-core</artifactId>
+		</dependency>
+	</dependencies>
+	
 </project>

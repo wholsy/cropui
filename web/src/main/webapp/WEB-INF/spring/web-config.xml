@@ -130,12 +130,21 @@
 				p:generateLogId="true"/>
 		</mvc:interceptor>
 		
-		<!-- 2、web,service日志摘要(web)  -->
+		<!-- 2、 日志摘要   -->
 		<mvc:interceptor>
             <mvc:mapping path="/services/**"/>
             <mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
-            <bean class="com.yueny.superclub.util.log.digest.web.WebDigestLogHandlerInterceptor"
+            <bean class="com.yueny.rapid.adapter.digest.web.interceptor.WebDigestLogHandlerInterceptor"
+                  c:loggerName="SLOWLY-SERVICE-DIGEST-LOGGER" 
+                  p:slowDumpThreshold="100" p:printDigstPigeonhole="true"/>
+        </mvc:interceptor>
+        <!-- 
+		<mvc:interceptor>
+            <mvc:mapping path="/services/**"/>
+            <mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+            <bean class="com.yueny.rapid.adapter.digest.web.interceptor.WebDigestLogHandlerInterceptor"
                   c:loggerName="SERVICE-DIGEST-LOGGER" p:slowDumpThreshold="100" />
         </mvc:interceptor>
         <mvc:interceptor>
@@ -143,9 +152,10 @@
             <mvc:exclude-mapping path="/services/**"/>
             <mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
-            <bean class="com.yueny.superclub.util.log.digest.web.WebDigestLogHandlerInterceptor"
+            <bean class="com.yueny.rapid.adapter.digest.web.interceptor.WebDigestLogHandlerInterceptor"
                   c:loggerName="PAGE-DIGEST-LOGGER" p:slowDumpThreshold="100"/>
         </mvc:interceptor>
+         -->
         
         <!-- 3、Context 服务上下文初始化拦截器 -->
 		<mvc:interceptor>

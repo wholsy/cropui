@@ -135,18 +135,7 @@
 			<charset>${CHARSET}</charset>
 		</encoder>
 	</appender>
-	<appender name="SERVICE-DIGEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${LOG_HOME}/service-digest.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/service-digest.log</fileNamePattern>
-			<maxHistory>30</maxHistory>
-           		<cleanHistoryOnStart>true</cleanHistoryOnStart>
-		</rollingPolicy>
-		<encoder>
-			<pattern>${SERVICE_DIGEST_PATTERN}</pattern>
-			<charset>${CHARSET}</charset>
-		</encoder>
-	</appender>
+	
 	<appender name="SAL-DIGEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_HOME}/sal-digest.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -197,16 +186,9 @@
 			<charset>${CHARSET}</charset>
 		</encoder>
 	</appender>
-	
-	
-	<!-- 摘要 Loggers -->
 	<logger name="DAL-DIGEST-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="DAL-DIGEST" />
-	</logger>
-	<logger name="SERVICE-DIGEST-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="SERVICE-DIGEST" />
 	</logger>
 	<logger name="SAL-DIGEST-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
 		<appender-ref ref="STDOUT" />
@@ -226,6 +208,30 @@
 		<appender-ref ref="OS-STAT" />
 	</logger>
 	
+	
+	
+	
+	
+	<!-- 摘要 Loggers -->
+	<appender name="SLOWLY-SERVICE-DIGEST" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_HOME}/service-slowly.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/%d{yyyyMMdd}/service-slowly.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+           		<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${SERVICE_DIGEST_PATTERN}</pattern>
+			<charset>${CHARSET}</charset>
+		</encoder>
+	</appender>
+	<logger name="SLOWLY-SERVICE-DIGEST-LOGGER" level="${LEVEL_DIGEST}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="SERVICE-DIGEST" />
+	</logger>
+	
+
+
 	<!-- Loggers : App Details -->
 	<logger name="com.yueny.blog.service" level="${LEVEL}" additivity="false">
 		<appender-ref ref="STDOUT" />

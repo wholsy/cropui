@@ -57,6 +57,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 * lang.String)
 	 */
 	@Override
+	@ProfilerLog
 	public boolean deleteByBlogId(String articleBlogId) {
 		return blogDao.deleteByBlogId(articleBlogId);
 	}
@@ -69,6 +70,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 * .String)
 	 */
 	@Override
+	@ProfilerLog
 	public ArticleBlogBo findByBlogId(final String articleBlogId) {
 		return cacheService.cache(new CacheDataHandler<ArticleBlogBo>() {
 			@Override
@@ -83,6 +85,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
+	@ProfilerLog
 	public ArticleBlogBo findById(final Long primaryId) {
 		return cacheService.cache(new CacheDataHandler<ArticleBlogBo>() {
 			@Override
@@ -98,6 +101,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
+	@ProfilerLog
 	public List<ArticleBlogBo> findByOwenerTagId(final Long owenerTagId) {
 		return cacheListService.cache(new CacheDataHandler<List<ArticleBlogBo>>() {
 			@Override
@@ -113,6 +117,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
+	@ProfilerLog
 	public ArticleBlogBo findByPreviousBlogId(final String articlePreviousBlogId) {
 		return cacheService.cache(ArrayUtil.newArray("findByPreviousBlogId", articlePreviousBlogId),
 				new CacheDataHandler<ArticleBlogBo>() {
@@ -134,6 +139,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 * @see com.yueny.blog.service.article.IArticleBlogService#findLatestBlog()
 	 */
 	@Override
+	@ProfilerLog
 	public ArticleBlogBo findLatestBlog() {
 		return cacheService.cache("findLatestBlog", new CacheDataHandler<ArticleBlogBo>() {
 			@Override
@@ -149,6 +155,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
+	@ProfilerLog
 	public ArticleBlogBo findLatestBlog(final String uid) {
 		return cacheService.cache(new CacheDataHandler<ArticleBlogBo>() {
 			@Override
@@ -171,6 +178,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 * lang.String)
 	 */
 	@Override
+	@ProfilerLog
 	public String findLatestBlogId(final String uid) {
 		return blogDao.queryLatestBlogId(uid);
 	}
@@ -183,6 +191,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 * .superclub.api.page.IPageable)
 	 */
 	@Override
+	@ProfilerLog
 	public List<ArticleBlogBo> findPageList(final IPageable pageable) {
 		return cacheListService.cache(new CacheDataHandler<List<ArticleBlogBo>>() {
 			@Override
@@ -198,6 +207,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
+	@ProfilerLog
 	public List<ArticleSimpleBlogBo> findPageListForSimple(IPageable pageable) {
 		final List<ArticleBlogBo> lists = findPageList(pageable);
 
@@ -219,6 +229,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
+	@ProfilerLog
 	public List<ArticleTagBlogVo> findPageListForSimpleWithTitle(IPageable pageable, String articleTitle) {
 		final List<ArticleBlogEntry> entrys = blogDao
 				.queryByCd(ArticleBlogCd.builder().pageable(pageable).articleTitle(articleTitle).build());
@@ -276,6 +287,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 * @see com.yueny.blog.service.article.IArticleBlogService#queryAllCount()
 	 */
 	@Override
+	@ProfilerLog
 	public Long queryAllCount(String articleTitle) {
 		if (StringUtil.isEmpty(articleTitle)) {
 			return blogDao.queryAllCount();
@@ -284,6 +296,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	}
 
 	@Override
+	@ProfilerLog
 	public boolean update(final ArticleBlogBo bo) {
 		cacheService.cacheDelete(ArrayUtil.newArray("findByBlogId", bo.getArticleBlogId()),
 				ArrayUtil.newArray("findById", bo.getArticleId()),

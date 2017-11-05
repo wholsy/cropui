@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.yueny.blog</groupId>
-		<artifactId>nodes</artifactId>
+		<artifactId>blog-nodes</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
@@ -15,7 +15,7 @@
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-entry</artifactId>
-            <version>${cropui.version}</version>
+            <version>${project.version}</version>
         </dependency>
 	</dependencies>
 	
