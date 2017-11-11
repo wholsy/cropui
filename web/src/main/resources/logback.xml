@@ -324,7 +324,7 @@
 	</logger>
 	
 	<!-- Loggers : Root Logger -->
-	<root level="${LEVEL}">
+	<root level="ROOT">
 		<appender-ref ref="ERROR_FILE" />
 		<appender-ref ref="DEFAULT_FILE" />
 	</root>

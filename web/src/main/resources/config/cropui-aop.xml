@@ -18,13 +18,9 @@
     
     <!-- 该方式可以避免在Dao方法上添加 @ProfilerLog从而实现耗时输出  -->
     <bean id="dalSlowlyDigestLogInterceptor" class="com.yueny.rapid.adapter.digest.web.method.BasicDigestLogMethodInterceptor" 
-    	c:loggerName="XXX-DIGEST-LOGGER" p:printDigstLogger="false" p:printArguments="${corpui.logs.digest.dal.arguments}"/>
-	<!-- 
-	<bean id="salSlowlyDigestLogInterceptor" class="com.yueny.rapid.adapter.digest.web.method.BasicDigestLogMethodInterceptor" 
-		c:loggerName="XXX-DIGEST-LOGGER" 
-		p:printArguments="${corpui.logs.digest.sal.arguments}" 
-		p:printResults="${corpui.logs.digest.sal.results}" />
-	 -->
+    	c:loggerName="DAL-DIGEST-LOGGER" 
+    	p:printDigstLogger="false" p:printArguments="${corpui.logs.digest.dal.arguments}"
+    	p:printResults="true"/>
 	
 	<!-- web,service日志摘要见web-config.xml mvc:interceptor -->
 	<aop:config>
@@ -32,13 +28,10 @@
 		<aop:advisor advice-ref="dalSlowlyDigestLogInterceptor" pointcut-ref="daoAnnotatedClass" order="20"/>
 		<aop:advisor advice-ref="dalSlowlyDigestLogInterceptor" 
 			pointcut="execution(* com.yueny.cropui.dao..*.*(..))"/>
-		
-		<!-- 
-		<aop:advisor advice-ref="salSlowlyDigestLogInterceptor" pointcut="within(com.yueny.blog.service.integration..*)"/>
-		 -->
 	</aop:config>
 	
 	
+	<!-- 
 	<bean id="performanceMonitoringHelper" scope="prototype"
 		class="com.yueny.blog.service.common.PerformanceMonitoringHelper">
 	</bean>
@@ -46,5 +39,6 @@
 		<property name="advice" ref="performanceMonitoringHelper" />
 		<property name="pattern" value="com.yueny.cropui.controller..*" />
 	</bean>
+	 -->
 	
 </beans>

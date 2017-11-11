@@ -10,15 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.yueny.blog.service.integration.ICmsConfigQueryIntegration;
-import com.yueny.cms.api.enums.SystemParameterType;
 import com.yueny.cms.api.response.ro.FunctionOpenRo;
 import com.yueny.cms.api.response.ro.SubSystemRo;
-import com.yueny.cms.api.response.ro.SystemParameterRo;
-import com.yueny.cms.api.service.IConfigureQueryService;
 import com.yueny.cms.api.service.IOpenQueryService;
 import com.yueny.cms.api.service.ISystemQueryService;
 import com.yueny.rapid.data.resp.pojo.response.ListResponse;
-import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
 
 /**
  * 外部服务
@@ -30,9 +26,6 @@ import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
  */
 @Service
 public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration {
-	@Autowired(required = false)
-	private IConfigureQueryService configureQueryService;
-
 	/**
 	 * Logger available to subclasses.
 	 */
@@ -45,24 +38,6 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	private String systemCode;
 	@Autowired(required = false)
 	private ISystemQueryService systemQueryService;
-
-	@Override
-	public FunctionOpenRo queryFunctionOpenByCode(String functionCode) {
-		if (openQueryService == null) {
-			logger.warn("服务未发现：{}！", openQueryService);
-			return null;
-		}
-
-		// 查询系统的功能开放配置
-		final NormalResponse<FunctionOpenRo> resp = openQueryService.queryByFunctionCode(systemCode, functionCode);
-
-		logger.info("获取指定功能开放配置信息：{},{}！", functionCode, resp);
-		if (resp == null) {
-			return null;
-		}
-
-		return resp.getData();
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -89,23 +64,6 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 	}
 
 	@Override
-	public SubSystemRo querySubSystem() {
-		if (systemQueryService == null) {
-			logger.warn("服务未发现：{}！", systemQueryService);
-			return null;
-		}
-
-		final NormalResponse<SubSystemRo> resp = systemQueryService.queryByCode(systemCode);
-
-		logger.info("获取当前子系统配置信息：{}！", resp);
-		if (resp == null) {
-			return null;
-		}
-
-		return resp.getData();
-	}
-
-	@Override
 	public List<SubSystemRo> querySubSystemList() {
 		if (systemQueryService == null) {
 			logger.warn("服务未发现：{}！", systemQueryService);
@@ -117,30 +75,6 @@ public class CmsConfigQueryIntegrationImpl implements ICmsConfigQueryIntegration
 		logger.info("获取所有子系统配置信息：{}！", resp);
 		if (resp == null) {
 			return Collections.emptyList();
-		}
-
-		return resp.getData();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.yueny.blog.service.integration.ICmsConfigQueryIntegration#
-	 * querySystemParameterByCode(com.yueny.cms.api.enums.SystemParameterType)
-	 */
-	@Override
-	public SystemParameterRo querySystemParameterByCode(SystemParameterType systemParameterType) {
-		if (configureQueryService == null) {
-			logger.warn("服务未发现：{}！", configureQueryService);
-			return null;
-		}
-
-		final NormalResponse<SystemParameterRo> resp = configureQueryService.queryByType(systemCode,
-				systemParameterType);
-
-		logger.info("查询指定的系统参数配置：{}！", resp);
-		if (resp == null) {
-			return null;
 		}
 
 		return resp.getData();

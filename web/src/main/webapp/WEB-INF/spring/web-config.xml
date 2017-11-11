@@ -132,7 +132,7 @@
 		
 		<!-- 2、 日志摘要   -->
 		<mvc:interceptor>
-            <mvc:mapping path="/services/**"/>
+            <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
             <bean class="com.yueny.rapid.adapter.digest.web.interceptor.WebDigestLogHandlerInterceptor"
