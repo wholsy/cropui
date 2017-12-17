@@ -270,6 +270,13 @@
 		<appender-ref ref="ERROR_FILE" />
 	</logger>
 	
+	<logger name="com.taobao.diamond" level="${LEVEL}" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDOUT_ERROR" />
+		<appender-ref ref="SERVICE_FILE" />
+		<appender-ref ref="ERROR_FILE" />
+	</logger>
+	
 	<logger name="com.yueny.kapo.core" level="${LEVEL}" additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="STDOUT_ERROR" />

@@ -39,7 +39,13 @@
 				<artifactId>api</artifactId>
 				<version>${rapid.version}</version>
 			</dependency>
-	
+			
+			<dependency>
+				<groupId>com.taobao.diamond</groupId>
+				<artifactId>diamond-client</artifactId>
+				<version>3.4-GA-SNAPSHOT</version>
+			</dependency>
+
 			<!-- service -->
 			<dependency>
 			    <groupId>com.yueny.rapid.service</groupId>
@@ -47,6 +53,12 @@
 				<version>${rapid.version}</version>
 			</dependency>
 			
+			<dependency>
+				<groupId>com.yueny.rapid.message</groupId>
+				<artifactId>rapid-message-email</artifactId>
+				<version>${rapid.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-storage-db</artifactId>

@@ -1,4 +1,4 @@
-redis.client.group.list=123.57.163.175:6579^1|123.57.163.175:6579^1
+redis.client.group.list=47.93.158.14:6579^1|47.93.158.14:6579^1
 
 #cluster
 
@@ -11,5 +11,5 @@ redis.testOnBorrow=true
 
 # redis client
 #redis.client.host=localhost
-redis.client.host=123.57.163.175
+redis.client.host=47.93.158.14
 redis.client.port=6579

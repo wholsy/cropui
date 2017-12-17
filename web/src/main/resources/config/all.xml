@@ -5,6 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
+	<import resource="classpath:/config/cfg-properties.xml"/>
 	<!-- classpath两种用法： 
 		classpath*:applicationContext.xml会加入本项目及所有jar包根目录下的applicationContext.xml文件，跨jar包依赖时使用 
 		classpath:applicationContext.xml只加入本项目根目录下的applicationContext.xml文件，不依赖其它jar包的配置文件时推荐这样写，以避免冲突。
