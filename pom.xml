@@ -9,7 +9,7 @@
 	</parent>
 	
 	<groupId>com.yueny.blog</groupId>
-	<artifactId>blog-nodes</artifactId>
+	<artifactId>blog-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
   
@@ -22,6 +22,12 @@
 	
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+			    <groupId>com.yueny.rapid</groupId>
+				<artifactId>api</artifactId>
+				<version>${rapid.version}</version>
+			</dependency>
+			
 			<!-- kapo-jpa -->
 			<dependency>
 				<groupId>com.yueny.kapo</groupId>
@@ -34,12 +40,7 @@
 				<version>${superclub.kapo.version}</version>
 			</dependency>
 			
-			<dependency>
-			    <groupId>com.yueny.rapid</groupId>
-				<artifactId>api</artifactId>
-				<version>${rapid.version}</version>
-			</dependency>
-			
+			<!-- cfg -->
 			<dependency>
 				<groupId>com.taobao.diamond</groupId>
 				<artifactId>diamond-client</artifactId>
@@ -179,6 +180,37 @@
 			    <version>${rapid.version}</version>
 			</dependency>
 			
+			<dependency>
+				<groupId>com.yueny.blog</groupId>
+				<artifactId>blog-bo</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.yueny.blog</groupId>
+				<artifactId>blog-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+	            <groupId>com.yueny.blog</groupId>
+	            <artifactId>blog-dao</artifactId>
+	           <version>${project.version}</version>
+	        </dependency>
+			<dependency>
+	            <groupId>com.yueny.blog</groupId>
+	            <artifactId>blog-entry</artifactId>
+	            <version>${project.version}</version>
+	        </dependency>
+			<dependency>
+				<groupId>com.yueny.blog</groupId>
+				<artifactId>blog-integration</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+            <groupId>com.yueny.blog</groupId>
+	            <artifactId>blog-service</artifactId>
+	            <version>${project.version}</version>
+	        </dependency>
+			
 			<!-- HTML 2 MARKDOWN -->
 			<!-- markdownToHtml: 轻量级 Markdown 引擎 -->
 			<dependency>
@@ -189,380 +221,6 @@
 		</dependencies>
 	</dependencyManagement>
 	
-	<dependencies>
-		<dependency>
-		    <groupId>com.yueny.rapid</groupId>
-			<artifactId>api</artifactId>
-		</dependency>
-
-		<!-- service -->
-		<dependency>
-		    <groupId>com.yueny.rapid.service</groupId>
-			<artifactId>rapid-service-rest</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.yueny.rapid.data</groupId>
-			<artifactId>rapid-data-storage-db</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.data</groupId>
-			<artifactId>rapid-data-storage-redis</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-mask</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-util</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-timer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-json</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-exception</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-dozer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-date</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-userAgent</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.yueny.rapid.topic</groupId>
-			<artifactId>rapid-topic-profiler-box</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-adapter</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-strategy</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-crypt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-exec</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-scheduler</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>com.yueny.rapid.util</groupId>
-		    <artifactId>rapid-util-common</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>com.yueny.rapid.util</groupId>
-		    <artifactId>rapid-util-web-security</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.yueny.rapid.util</groupId>
-			<artifactId>rapid-util-test</artifactId>
-		</dependency>
-		
-	    <!--  task -->
-		<dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-        </dependency>
-        <dependency>
-		    <groupId>org.quartz-scheduler</groupId>
-		    <artifactId>quartz-jobs</artifactId>
-		</dependency>
-		
-		<!-- Spring Dependencies -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-		</dependency>
-		<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-expression</artifactId>
-		</dependency>
-		
-		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-		</dependency>
-		
-		<dependency>
-	        <groupId>org.projectlombok</groupId>
-	        <artifactId>lombok</artifactId>
-	        <scope>provided</scope>
-	    </dependency>
-	    <dependency>
-			<groupId>net.sf.dozer</groupId>
-			<artifactId>dozer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.ezmorph</groupId>
-			<artifactId>ezmorph</artifactId>
-		</dependency>
-		
-		<!-- Log -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>log4j-over-slf4j</artifactId>
-		</dependency>		
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.logback-extensions</groupId>
-			<artifactId>logback-ext-spring</artifactId>
-		</dependency>
-		
-		<!-- jdbc驱动包  -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-		</dependency>
-		
-		<!-- mybatis dependency -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-		</dependency>
-		
-		<!-- 添加jsoup支持 -->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-		</dependency>
-		<!-- alibaba -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-		</dependency>
-		
-		<!-- cache -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-redis</artifactId>
-		</dependency>
-		<dependency>
-		  <groupId>redis.clients</groupId>
-		  <artifactId>jedis</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>javax.el</artifactId>
-		</dependency>
-
-		<!-- 用于处理包括ISO8601标准在内的date和time -->
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
-		<!-- 用于处理金额 -->
-		<dependency>
-			<groupId>org.joda</groupId>
-			<artifactId>joda-money</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-		</dependency>
-		<!-- apache公共包 -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.commons</groupId>
-		  <artifactId>commons-pool2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-		</dependency>
-		
-		<!-- 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-		</dependency>
-		<dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-		</dependency>
-		 -->
-		 
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.zookeeper</groupId>  
-		    <artifactId>zookeeper</artifactId>  
-		</dependency>
-		<dependency>
-			<groupId>com.101tec</groupId>
-			<artifactId>zkclient</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.netty</groupId>
-			<artifactId>netty</artifactId>
-		</dependency>
-		
-		<!-- test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-all</artifactId>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jmock</groupId>
-			<artifactId>jmock-junit4</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jmock</groupId>
-			<artifactId>jmock-legacy</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-		
 	<build>
 		<!-- 打包资源文件 -->
 		<resources>
@@ -598,10 +256,6 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 			</plugin>
 			
@@ -627,6 +281,7 @@
                     </execution>
                  </executions>
              </plugin>
+             
 			<!-- 文件动态加载(拷贝)，可以有多个execution，不同id即可
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -683,6 +338,8 @@
 		<module>bo</module>
 		<module>dao</module>
 		<module>entry</module>
+	    <module>integration</module>
+	    <module>common</module>
 	</modules>
   
 </project>

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.yueny.blog</groupId>
-		<artifactId>blog-nodes</artifactId>
+		<artifactId>blog-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
@@ -17,6 +17,7 @@
 			<groupId>com.yueny.kapo</groupId>
 	        <artifactId>kapo-api</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.yueny.kapo</groupId>
 	        <artifactId>kapo-core</artifactId>

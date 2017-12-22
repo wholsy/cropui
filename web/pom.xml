@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.yueny.blog</groupId>
-		<artifactId>blog-nodes</artifactId>
+		<artifactId>blog-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
@@ -16,23 +16,20 @@
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-service</artifactId>
-            <version>${project.version}</version>
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-bo</artifactId>
-            <version>${project.version}</version>
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-dao</artifactId>
-           <version>${project.version}</version>
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
             <artifactId>blog-entry</artifactId>
-            <version>${project.version}</version>
         </dependency>
+        
         
         <dependency>
 			<groupId>com.yueny.rapid.data</groupId>
@@ -46,6 +43,7 @@
 		    <groupId>com.yueny.rapid.util</groupId>
 		    <artifactId>rapid-util-web-freemarker</artifactId>
 		</dependency>
+		
         <!-- freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -58,26 +56,6 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>taglibs</groupId>
-		    <artifactId>standard</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		 -->
 	</dependencies>
   
 	<build>
@@ -102,6 +80,7 @@
                     </systemProperties>
                 </configuration>
             </plugin>
+            
             <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -121,6 +100,7 @@
                      </execution>
 				</executions>
 			</plugin>
+			
 		 </plugins>
 	 </build>
 	 
