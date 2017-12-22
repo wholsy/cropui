@@ -59,7 +59,12 @@
 				<artifactId>rapid-message-email</artifactId>
 				<version>${rapid.version}</version>
 			</dependency>
-
+			
+			<dependency>
+				<groupId>com.yueny.rapid.data</groupId>
+				<artifactId>rapid-data-resp</artifactId>
+				<version>${rapid.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-storage-db</artifactId>
@@ -220,6 +225,64 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<dependencies>
+		<dependency>
+		    <groupId>com.yueny.rapid</groupId>
+			<artifactId>api</artifactId>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.projectlombok</groupId>
+	        <artifactId>lombok</artifactId>
+	        <scope>provided</scope>
+	    </dependency>
+	    
+	    <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-junit4</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jmock</groupId>
+			<artifactId>jmock-legacy</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	
 	<build>
 		<!-- 打包资源文件 -->

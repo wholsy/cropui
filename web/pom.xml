@@ -30,10 +30,9 @@
             <artifactId>blog-entry</artifactId>
         </dependency>
         
-        
-        <dependency>
-			<groupId>com.yueny.rapid.data</groupId>
-			<artifactId>rapid-data-log-core</artifactId>
+       <dependency>
+		    <groupId>com.yueny.rapid.util</groupId>
+		    <artifactId>rapid-util-web-security</artifactId>
 		</dependency>
         <dependency>
 		    <groupId>com.yueny.rapid.util</groupId>
