@@ -15,11 +15,15 @@
 	<dependencies>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
-            <artifactId>blog-service</artifactId>
+            <artifactId>blog-bo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-common</artifactId>
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
-            <artifactId>blog-bo</artifactId>
+            <artifactId>blog-entry</artifactId>
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
@@ -27,7 +31,11 @@
         </dependency>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
-            <artifactId>blog-entry</artifactId>
+            <artifactId>blog-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-integration</artifactId>
         </dependency>
         
         <dependency>

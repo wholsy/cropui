@@ -18,6 +18,8 @@
 	</description>
 	
 	<context:annotation-config/>
+	<context:spring-configured/>
+ 
 	<!-- 自动扫描 -->
 	<context:component-scan base-package="com.yueny.cropui"/>
 	<context:component-scan base-package="com.yueny.blog"/>
@@ -28,6 +30,6 @@
 	<!-- 激活自动代理功能
 	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
 	-->
-	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<aop:aspectj-autoproxy/>
 	
 </beans>

@@ -54,10 +54,11 @@
 	<listener>
 		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
 	</listener>
-	<!-- Spring刷新Interceptor防止内存泄漏  -->
+	<!-- Spring刷新Interceptor防止内存泄漏
 	<listener>  
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
     </listener>
+	  -->
 	
 	<filter>
 		<filter-name>HttpMethodFilter</filter-name>
@@ -74,7 +75,6 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath*:config/cropui-properties.xml,
 				/WEB-INF/spring/web-config.xml
 			</param-value>
 		</init-param>

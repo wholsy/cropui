@@ -21,8 +21,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FigureDateInitTask implements InitializingBean, DisposableBean {
 	/** 日志 */
-	private static final Logger logger = LoggerFactory
-			.getLogger(FigureDateInitTask.class);
+	private static final Logger logger = LoggerFactory.getLogger(FigureDateInitTask.class);
 
 	@Override
 	public void afterPropertiesSet() throws Exception {

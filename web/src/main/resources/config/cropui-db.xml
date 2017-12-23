@@ -12,8 +12,6 @@
 		本文件是为了统一不同环境下的spring配置，正常情况下本文件只存储通用配置，不通用的配置请放在别的文件中，并import该文件
 	</description>
 	
-	<import resource="classpath*:/config/spring-common.xml"/>
-	
     <!-- Druid DataSource -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
     	init-method="init" destroy-method="close">
