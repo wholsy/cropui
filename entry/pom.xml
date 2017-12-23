@@ -22,6 +22,12 @@
 			<groupId>com.yueny.kapo</groupId>
 	        <artifactId>kapo-core</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.yueny.rapid.lang</groupId>
+			<artifactId>rapid-lang-util</artifactId>
+		</dependency>
+		
 	</dependencies>
 	
 </project>
