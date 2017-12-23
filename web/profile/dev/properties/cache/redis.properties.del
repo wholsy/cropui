@@ -1,7 +1,4 @@
-redis.client.group.list=47.93.158.14:6579^1|47.93.158.14:6579^1
-
-#cluster
-
+# redis common setting
 # auth client requirepass
 redis.client.password=liyu
 redis.maxIdle=300
@@ -9,7 +6,6 @@ redis.maxTotal=600
 redis.maxWaitMillis=1000
 redis.testOnBorrow=true
 
-# redis client
-#redis.client.host=localhost
+# redis single
 redis.client.host=47.93.158.14
 redis.client.port=6579
