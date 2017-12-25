@@ -1,4 +1,4 @@
-package com.yueny.blog.service.util;
+package com.yueny.blog.common.cache;
 
 import java.lang.reflect.Method;
 
@@ -16,8 +16,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableCaching
-// @ComponentScan("com.service")
-// @PropertySource("classpath:/redis.properties")
 public class RedisCacheConfig extends CachingConfigurerSupport {
 	@Bean
 	public KeyGenerator customKeyGenerator() {

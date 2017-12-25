@@ -1,12 +1,13 @@
-package com.yueny.blog.service;
+package com.yueny.blog.service.cache.comp;
 
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import com.yueny.blog.service.env.CacheDataHandler;
-import com.yueny.blog.service.env.CacheKeyConstant;
+import com.yueny.blog.service.BaseBiz;
+import com.yueny.blog.service.cache.CacheDataHandler;
+import com.yueny.blog.service.cache.CacheKeyConstant;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
 
 /**
@@ -18,7 +19,7 @@ import com.yueny.rapid.lang.util.collect.ArrayUtil;
  * @DATE 2016年9月9日 下午10:03:07
  *
  */
-public abstract class CacheBaseBiz<L> extends BaseBiz {
+public abstract class BaseCacheBiz<L> extends BaseBiz {
 	/**
 	 * 缓存默认过期时间,15秒
 	 */

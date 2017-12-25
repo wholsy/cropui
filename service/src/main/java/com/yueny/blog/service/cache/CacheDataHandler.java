@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.yueny.blog.service.env;
+package com.yueny.blog.service.cache;
 
 /**
  * 缓存数据执行器

@@ -13,9 +13,9 @@ import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.dao.tag.IOwenerTagDao;
 import com.yueny.blog.entry.tag.OwenerTagEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.env.CacheDataHandler;
-import com.yueny.blog.service.env.CacheListService;
-import com.yueny.blog.service.env.CacheService;
+import com.yueny.blog.service.cache.CacheDataHandler;
+import com.yueny.blog.service.cache.comp.CacheListService;
+import com.yueny.blog.service.cache.comp.CacheService;
 import com.yueny.blog.service.tag.IOwenerTagService;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 

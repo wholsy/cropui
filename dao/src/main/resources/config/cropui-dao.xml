@@ -27,7 +27,7 @@
 	</bean>
 	
 	<!-- SqlSessionTemplate是我们代码中使用的SQL模板对象，用来操作数据库  -->
-    <bean class="org.mybatis.spring.SqlSessionTemplate">
+    <bean class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg ref="sqlSessionFactory"/>
     </bean>
     
