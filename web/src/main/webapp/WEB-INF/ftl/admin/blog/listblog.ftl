@@ -73,8 +73,8 @@
             <!-- /.page-content -->
         </div>
     </div>
-<#include "admin/common/footer.ftl">
 </div>
+<#include "admin/common/footer.ftl">
 
 <#include  "admin/common/endjs.ftl">
 
@@ -99,9 +99,8 @@
         	{{/if}}
         </td>
         <td>
-            <a href="javascript:del({{value.articleBlogId}});">删除</a>
-            <#-- _blank or _self -->
             <a target="_blank" href="${ctx}/admin/wblog.html?articleBlogId={{value.articleBlogId}}">编辑</a>
+            <a href="javascript:del({{value.articleBlogId}});">删除</a>
             <a target="_blank" href="${ctx}/article/{{value.articleBlogId}}.html">预览</a>
         </td>
     </tr>
