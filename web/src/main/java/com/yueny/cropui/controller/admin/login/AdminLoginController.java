@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.console.login;
+package com.yueny.cropui.controller.admin.login;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

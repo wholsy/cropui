@@ -213,10 +213,10 @@
 <script src="${ctx}/adm/assets/js/editor.md/editormd.min.js"></script>
 <script src="${ctx}/adm/assets/js/wblog/wblog_md.js"></script>
 
-<script src="http://static.yueny.website/plugins/markdown/to-markdown.js"></script>
-<script src="http://static.yueny.website/plugins/markdown/markdown.min.js"></script>
+<script src="http://static.codealy.com/plugins/markdown/to-markdown.js"></script>
+<script src="http://static.codealy.com/plugins/markdown/markdown.min.js"></script>
 
-<script src='http://static.yueny.website/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
+<script src='http://static.codealy.com/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
 
 </body>
 </html>

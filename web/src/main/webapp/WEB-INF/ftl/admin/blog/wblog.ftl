@@ -1,7 +1,7 @@
 <#include "admin/common/header.ftl">
 
 <#-- kindeditor -->
-<link href="http://static.yueny.website/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
+<link href="http://static.codealy.com/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
 
 <link href="${ctx}/assets/css/write/write.css" rel="stylesheet" type="text/css">
 <link href="${ctx}/assets/css/write/main.css" rel="stylesheet" type="text/css">
@@ -221,13 +221,13 @@
 			
 <#-- kindeditor -->
 <script src="${ctx}/assets/plugins/kindeditor/kindeditor-all.js"></script>
-<script src="http://static.yueny.website/plugins/kindeditor/lang/zh-CN.js"></script>
+<script src="http://static.codealy.com/plugins/kindeditor/lang/zh-CN.js"></script>
 <script src="${ctx}/adm/assets/js/wblog/wblog.js"></script>
 
-<script src="http://static.yueny.website/plugins/markdown/to-markdown.js"></script>
-<script src="http://static.yueny.website/plugins/markdown/markdown.min.js"></script>
+<script src="http://static.codealy.com/plugins/markdown/to-markdown.js"></script>
+<script src="http://static.codealy.com/plugins/markdown/markdown.min.js"></script>
 
-<script src='http://static.yueny.website/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
+<script src='http://static.codealy.com/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
 
 </body>
 </html>

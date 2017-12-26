@@ -8,7 +8,7 @@
     <meta name="description" content="User login page"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
-	<link rel="icon" href="http://static.yueny.website/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="http://static.codealy.com/favicon.ico" type="image/x-icon">
     <#-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="${ctx}/adm/assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="${ctx}/adm/assets/font-awesome/4.5.0/css/font-awesome.min.css"/>

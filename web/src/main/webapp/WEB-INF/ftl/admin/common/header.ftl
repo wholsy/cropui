@@ -11,13 +11,13 @@
     <meta name="author" content="云少">
     
     <title>${title}</title>
-    <link rel="shortcut icon" href="http://static.yueny.website/favicon.ico">
+    <link rel="shortcut icon" href="http://static.codealy.com/favicon.ico">
     
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="${ctx}/adm/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="${ctx}/adm/assets/font-awesome/v4.6.3/css/font-awesome.min.css" type="text/css">
 		
-    <link href="http://static.yueny.website/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
+    <link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
 	
 	<#-- MetisMenu css -->
 	<link href="${ctx}/adm/assets/js/metisMenu/v2.5.2/dist/metisMenu.css" rel="stylesheet" type="text/css">
@@ -50,11 +50,11 @@
     <!-- HTML5 Shim and Respond.js, for IE6-8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="http://static.yueny.website/plugins/libs/html5shiv.min.js"></script>
-        <script src="http://static.yueny.website/plugins/libs/respond.min.js"></script>
+        <script src="http://static.codealy.com/plugins/libs/html5shiv.min.js"></script>
+        <script src="http://static.codealy.com/plugins/libs/respond.min.js"></script>
     <![endif]-->
     
-    <script src="http://static.yueny.website/plugins/jquery/v2.1.4/dist/jquery.js"></script>
+    <script src="http://static.codealy.com/plugins/jquery/v2.1.4/dist/jquery.js"></script>
     
     <!-- inline styles related to this page -->
     <!-- ace settings handler -->

@@ -19,7 +19,7 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  */
 @Controller
 @RequestMapping(value = "/admin")
-public class AdminIndexController extends BaseController {
+public class WelcomeAdminController extends BaseController {
 	/**
 	 * 后台首页
 	 */
