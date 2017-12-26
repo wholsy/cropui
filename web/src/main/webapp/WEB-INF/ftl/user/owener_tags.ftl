@@ -25,7 +25,7 @@
 				<ul>
 					<#list tagSimpleBlog.list as simpleBlog>
 						<li>
-							<a href="${ctx}/article/${simpleBlog.articleBlogId}.html">
+							<a href="${ctx}/article/${simpleBlog.articleBlogId}.html" target="_blank">
 								${simpleBlog.articleTitle}
 							</a>
 						</li>

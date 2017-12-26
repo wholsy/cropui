@@ -1,7 +1,7 @@
 package com.yueny.blog.vo.article.cas.user;
 
-import com.yueny.blog.bo.cas.user.UserBaseInfoBo;
-import com.yueny.blog.bo.cas.user.UserBaseInfoExpBo;
+import com.yueny.blog.bo.console.user.UserBaseInfoBo;
+import com.yueny.blog.bo.console.user.UserBaseInfoExpBo;
 import com.yueny.superclub.api.pojo.instance.AbstractBo;
 
 import lombok.AllArgsConstructor;

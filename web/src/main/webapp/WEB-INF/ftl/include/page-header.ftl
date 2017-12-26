@@ -48,10 +48,8 @@
 							<li><a href="${ctx}/">主页</a></li>
 					      	<li><a href="${ctx}/archive.html">存档</a></li>
 					      	<li><a href="${ctx}/owenerTags.html">我的分类</a></li>
-					      	<li><a href="${ctx}/tags.html">标签树</a></li>
-					      	<#--
-					      	<li><a href="${ctx}/fks.html">拓扑关系</a></li>
-					      	-->
+					      	<li><a href="${ctx}/tags.html" onclick="return false">标签树</a></li>
+					      	<li><a href="${ctx}/fks.html" onclick="return false">拓扑关系</a></li>
 					      	<li><a href="${ctx}/about.html">关于我</a></li>
 						</ul>
 					</div>
@@ -66,7 +64,7 @@
 	    	<#if !hideHeader>
 		    	<#-- menu Start
 				<div class="page-header">
-					<h1>正值少年 <small> Thinking all about tech & life </small></h1>
+					<h1>正值少年 <small>  </small></h1>
 					<div class="home-nav">
 					    <a href="${ctx}/" >主页</a>
 					    <a href="${ctx}/archive.html" >存档</a>
