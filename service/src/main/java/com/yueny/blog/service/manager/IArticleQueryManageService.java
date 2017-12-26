@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.yueny.blog.bo.article.ArticleBlogViewBo;
 import com.yueny.blog.bo.model.document.ArchiveData;
-import com.yueny.blog.bo.model.document.OwenerTagsData;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.superclub.api.page.core.PageCond;
 
@@ -39,13 +38,6 @@ public interface IArticleQueryManageService {
 	 * @throws DataVerifyAnomalyException
 	 */
 	ArticleBlogViewBo getArticleInfo(String articleBlogId) throws DataVerifyAnomalyException;
-
-	/**
-	 * 获得指定用户的标签信息
-	 *
-	 * @throws DataVerifyAnomalyException
-	 */
-	OwenerTagsData getOwenerTag(String uid) throws DataVerifyAnomalyException;
 
 	//
 	// /**

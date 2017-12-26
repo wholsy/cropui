@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yueny.blog.bo.model.document.ChartData;
-import com.yueny.blog.service.manager.ITagQueryManageService;
+import com.yueny.blog.service.chart.ITagChartService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.JsonNormalResponse;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
@@ -28,7 +28,7 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 @Controller
 public class ChartsController extends BaseController {
 	@Autowired
-	private ITagQueryManageService tagQueryService;
+	private ITagChartService tagQueryService;
 
 	/**
 	 * 报表

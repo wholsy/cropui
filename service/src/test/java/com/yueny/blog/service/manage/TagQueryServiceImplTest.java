@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yueny.blog.bo.model.document.ChartData;
 import com.yueny.blog.service.BaseBizTest;
-import com.yueny.blog.service.manager.ITagQueryManageService;
+import com.yueny.blog.service.chart.ITagChartService;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 
 /**
@@ -16,7 +16,7 @@ import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
  */
 public class TagQueryServiceImplTest extends BaseBizTest {
 	@Autowired
-	private ITagQueryManageService tagQueryService;
+	private ITagChartService tagQueryService;
 
 	@Test
 	public void testGetChartData() {

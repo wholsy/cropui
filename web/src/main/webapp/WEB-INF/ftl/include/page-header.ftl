@@ -12,10 +12,10 @@
 	    <meta name="author" content="云少">
 	    
 	    <title>${title}</title>
-	    <link rel="shortcut icon" href="http://static.yueny.website/favicon.ico">
+	    <link rel="shortcut icon" href="http://static.codealy.com/favicon.ico">
 	    
-	    <link href="http://static.yueny.website/plugins/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="http://static.yueny.website/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
+	    <link href="http://static.codealy.com/plugins/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
 		
 	    <link href="${ctx}/assets/css/theme/gloal.css" rel="stylesheet" type="text/css">
 		<link href="${ctx}/assets/css/theme/gloal.y.css" rel="stylesheet" type="text/css">
@@ -24,13 +24,13 @@
 	    <!-- HTML5 Shim and Respond.js, for IE6-8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	    <!--[if lt IE 9]>
-	        <script src="http://static.yueny.website/plugins/libs/html5shiv.min.js"></script>
-	        <script src="http://static.yueny.website/plugins/libs/respond.min.js"></script>
+	        <script src="http://static.codealy.com/plugins/libs/html5shiv.min.js"></script>
+	        <script src="http://static.codealy.com/plugins/libs/respond.min.js"></script>
 	    <![endif]-->
 	</head>
 	
 	<body>
-		<script src="http://static.yueny.website/plugins/jquery/v2.1.4/dist/jquery.js"></script>
+		<script src="http://static.codealy.com/plugins/jquery/v2.1.4/dist/jquery.js"></script>
 	    
 	    <#if !hideHeader>
 			<#-- menu Start -->

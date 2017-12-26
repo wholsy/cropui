@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -13,7 +12,6 @@ import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.bo.article.ArticleBlogViewBo;
 import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
 import com.yueny.blog.bo.model.document.ArchiveData;
-import com.yueny.blog.bo.model.document.OwenerTagsData;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
@@ -165,38 +163,6 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 		// private Set<Long> articleTagIds;
 
 		return view;
-	}
-
-	@Override
-	@ProfilerLog
-	@Cacheable(value = "getOwenerTagByUId", keyGenerator = "customKeyGenerator")
-	public OwenerTagsData getOwenerTag(final String uid) throws DataVerifyAnomalyException {
-		// final String redisKey =
-		// CacheKeyConstant.getPrefis(getClass().getSimpleName(),
-		// "getOwenerTag", uid);
-
-		final OwenerTagsData owenerTagsData = new OwenerTagsData();
-		owenerTagsData.setUid(uid);
-
-		final List<OwenerTagBo> owenerTags = owenerTagService.queryByUid(uid);
-		owenerTagsData.setOwenerTags(owenerTags);
-
-		for (final OwenerTagBo owenerTagBo : owenerTags) {
-			final List<ArticleBlogBo> list = articleBlogService.findByOwenerTagId(owenerTagBo.getOwenerTagId());
-			for (final ArticleBlogBo articleBlogBo : list) {
-				final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
-				simpleBlog.setArticleBlogId(articleBlogBo.getArticleBlogId());
-				simpleBlog.setArticleTitle(articleBlogBo.getArticleTitle());
-				simpleBlog.setArticleAlias(articleBlogBo.getArticleAlias());
-				simpleBlog.setToday(DateUtil.format(articleBlogBo.getCreateTime(), DateFormatType.TIME_LEFT_DIAGONAL));
-				simpleBlog.setCreateTime(articleBlogBo.getCreateTime());
-				simpleBlog.setModifyUser(articleBlogBo.getModifyUser());
-				simpleBlog.setUpdateTime(articleBlogBo.getUpdateTime());
-
-				owenerTagsData.addSimpleBlog(owenerTagBo.getOwenerTagName(), simpleBlog);
-			}
-		}
-		return owenerTagsData;
 	}
 
 }

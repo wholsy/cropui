@@ -1,4 +1,4 @@
-package com.yueny.blog.service.manager.impl;
+package com.yueny.blog.service.chart.impl;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.cache.CacheDataHandler;
 import com.yueny.blog.service.cache.comp.CacheService;
-import com.yueny.blog.service.manager.ITagQueryManageService;
+import com.yueny.blog.service.chart.ITagChartService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.blog.service.tag.IOwenerTagService;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
@@ -27,7 +27,7 @@ import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
  *
  */
 @Service
-public class TagQueryManageServiceImpl extends BaseBiz implements ITagQueryManageService {
+public class TagChartServiceImpl extends BaseBiz implements ITagChartService {
 	@Autowired
 	private CacheService<ChartData> cacheService;
 	@Autowired
