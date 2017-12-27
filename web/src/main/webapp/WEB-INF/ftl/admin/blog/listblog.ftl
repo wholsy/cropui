@@ -74,7 +74,9 @@
         </div>
     </div>
 </div>
+<#--
 <#include "admin/common/footer.ftl">
+-->
 
 <#include  "admin/common/endjs.ftl">
 
