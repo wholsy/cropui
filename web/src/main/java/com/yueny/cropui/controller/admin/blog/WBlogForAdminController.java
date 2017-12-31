@@ -15,8 +15,9 @@ import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.bo.enums.ArticleSelType;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
+import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.service.article.IArticleBlogService;
-import com.yueny.blog.service.tag.ICategoriesTagService;
+import com.yueny.blog.service.categories.ICategoriesTagService;
 import com.yueny.blog.service.tag.IOwenerTagService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.lang.util.StringUtil;
@@ -31,8 +32,8 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  * @since
  */
 @Controller
-@RequestMapping(value = "/admin")
-public class WBlogController extends BaseController {
+@RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
+public class WBlogForAdminController extends BaseController {
 	@Autowired
 	private IArticleBlogService articleBlogService;
 	@Autowired

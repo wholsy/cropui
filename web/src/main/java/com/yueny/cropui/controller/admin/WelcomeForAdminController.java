@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.yueny.blog.common.BlogConstant;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
@@ -18,12 +19,12 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  * @since
  */
 @Controller
-@RequestMapping(value = "/admin")
-public class WelcomeAdminController extends BaseController {
+@RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
+public class WelcomeForAdminController extends BaseController {
 	/**
 	 * 后台首页
 	 */
-	@RequestMapping(value = { "/", "/welcome.html", "/index.html" }, method = { RequestMethod.GET })
+	@RequestMapping(value = { "/", "/welcome.html" }, method = RequestMethod.GET)
 	public String adminIndex(final HttpServletResponse response) {
 		setModelAttribute(WebAttributes.ACTION, "INDEX");
 

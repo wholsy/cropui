@@ -21,7 +21,7 @@ import com.yueny.blog.service.article.IArticleBlogService;
 import com.yueny.blog.service.cache.CacheDataHandler;
 import com.yueny.blog.service.cache.comp.CacheListService;
 import com.yueny.blog.service.cache.comp.CacheService;
-import com.yueny.blog.service.tag.ICategoriesTagService;
+import com.yueny.blog.service.categories.ICategoriesTagService;
 import com.yueny.blog.vo.article.ArticleBlogForCategoryTagModel;
 import com.yueny.blog.vo.article.ArticleTagBlogVo;
 import com.yueny.rapid.lang.date.DateFormatType;

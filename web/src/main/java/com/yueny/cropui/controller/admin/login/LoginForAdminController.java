@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.service.console.manager.ILoginManager;
 import com.yueny.blog.service.console.manager.IUserDisplayManager;
 import com.yueny.blog.service.util.CurrentUserUtils;
@@ -29,8 +30,8 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  *
  */
 @Controller
-@RequestMapping(value = "/admin/login")
-public class AdminLoginController extends BaseController {
+@RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
+public class LoginForAdminController extends BaseController {
 	@Autowired
 	private ILoginManager loginManager;
 	@Autowired
@@ -39,7 +40,7 @@ public class AdminLoginController extends BaseController {
 	/**
 	 * 登录行为post
 	 */
-	@RequestMapping(value = "/dologin", method = { RequestMethod.POST })
+	@RequestMapping(value = "/login/dologin", method = { RequestMethod.POST })
 	@ResponseBody
 	public JsonNormalResponse<Boolean> dologin(@RequestParam(value = "username") final String username,
 			@RequestParam(value = "password") final String password, final HttpServletResponse response) {
@@ -77,7 +78,7 @@ public class AdminLoginController extends BaseController {
 	/**
 	 * 退出登录行为
 	 */
-	@RequestMapping(value = "/dologout", method = { RequestMethod.POST })
+	@RequestMapping(value = "/login/dologout", method = { RequestMethod.POST })
 	@ResponseBody
 	public JsonNormalResponse<Boolean> dologout(final HttpServletResponse response) {
 		final JsonNormalResponse<Boolean> res = new JsonNormalResponse<>();
@@ -93,7 +94,7 @@ public class AdminLoginController extends BaseController {
 	/**
 	 * admin 登录页
 	 */
-	@RequestMapping(value = "/login.html")
+	@RequestMapping(value = "/login/login.html")
 	public String login(final HttpServletResponse response) {
 		final HttpSession session = getSession();
 		if (session.getAttribute(CurrentUserUtils.LOGIN_DIST_NAME) != null) {

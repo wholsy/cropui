@@ -1,4 +1,4 @@
-package com.yueny.blog.service.document;
+package com.yueny.blog.service.tag;
 
 import com.yueny.blog.bo.model.document.OwenerTagsData;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;

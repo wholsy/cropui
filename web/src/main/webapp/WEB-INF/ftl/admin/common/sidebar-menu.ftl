@@ -2,10 +2,11 @@
 <div id="page-sidebar" class="navbar-default sidebar" role="navigation">
     <#-- sidebar-menu start -->
     <div id="sidebar-menu" class="sidebar-nav navbar-collapse tooltip-icons">
+    	<br>
+    	
         <ul id="side-menu" class="nav">
-            
-            <li>
-                <a href="#" name="sys_config" 
+            <li title="博客">
+                <a href="#" name="blogs"
                 	data-tooltip-toggle="tooltip" data-placement="right">
                 	<i class="fa fa-cogs fa-spin fa-1x fa-fw"></i> 
                 	<span class="sidebar-nav-item">博客管理</span>
@@ -27,10 +28,23 @@
                 </ul>
             </li>
             
+            <li title="标签">
+            	<a href="#" name="tags">
+                	<span class="sidebar-nav-item">标签管理</span>
+                </a>
+                <ul class="nav nav-second-level animated zoomIn">
+                    <a href="${ctx}/admin/categories_tag.html" 
+                			data-tooltip-toggle="tooltip" data-placement="right">
+	                	<i class="fa fa-tachometer"></i> 
+						<span class="sidebar-nav-item">全站文章分类管理</span>
+	                </a>
+                </ul>
+            </li>
+            
             <li class="disabled">
                 <a href="/admin/list_tag.html">
                 <i class="fa fa-tachometer"></i> 
-					<span class="sidebar-nav-item">标签管理</span>
+					<span class="sidebar-nav-item">个性管理</span>
                 </a>
             </li>
             

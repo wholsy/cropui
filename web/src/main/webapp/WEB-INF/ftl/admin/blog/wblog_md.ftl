@@ -199,7 +199,9 @@
             
         </div>
     </div>
+<#--
 <#include "admin/common/footer.ftl">
+-->
 </div>
 <#include "admin/common/endjs.ftl">
 

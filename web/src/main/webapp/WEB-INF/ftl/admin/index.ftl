@@ -22,7 +22,7 @@
                 <!-- /.ace-settings-container -->
                 <div class="page-header">
                     <h1>
-                        快捷链接
+                                                                  快捷链接
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                         </small>
@@ -32,9 +32,9 @@
 
                 <div class="row">
                     <div class="col-xs-12" style="font-size: 16px">
-                        <a target="_blank" href="/log">查看日志</a>
+                        <a target="_blank" href="${ctx}/log">查看日志</a>
                         <br>
-                        <a target="_self" href="/adm/lastblog">定位最后一次修改的文章</a>
+                        <a target="_self" href="${ctx}/lastblog">定位最后一次修改的文章</a>
                         <br>
                     </div>
                     <!-- /.col -->
@@ -44,7 +44,6 @@
             <!-- /.page-content -->
         </div>
     </div>
-<#include "admin/common/footer.ftl">
 </div>
 
 <#include "admin/common/endjs.ftl">

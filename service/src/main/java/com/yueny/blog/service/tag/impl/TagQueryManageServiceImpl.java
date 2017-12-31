@@ -1,4 +1,4 @@
-package com.yueny.blog.service.document.impl;
+package com.yueny.blog.service.tag.impl;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.article.IArticleBlogService;
 import com.yueny.blog.service.cache.CacheDataHandler;
 import com.yueny.blog.service.cache.comp.CacheService;
-import com.yueny.blog.service.document.ITagQueryManageService;
 import com.yueny.blog.service.tag.IOwenerTagService;
+import com.yueny.blog.service.tag.ITagQueryManageService;
 import com.yueny.rapid.lang.date.DateFormatType;
 import com.yueny.rapid.lang.date.DateUtil;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;

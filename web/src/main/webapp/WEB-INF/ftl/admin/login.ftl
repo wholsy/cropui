@@ -11,21 +11,9 @@
 	<link rel="icon" href="http://static.codealy.com/favicon.ico" type="image/x-icon">
     <#-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="${ctx}/adm/assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="${ctx}/adm/assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
-    <#-- text fonts -->
-    <link rel="stylesheet" href="${ctx}/adm/assets/css/fonts.googleapis.com.css"/>
     <#-- ace styles -->
     <link rel="stylesheet" href="${ctx}/adm/assets/css/ace.min.css"/>
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="${ctx}/adm/assets/css/ace-part2.min.css"/>
-    <![endif]-->
-    <link rel="stylesheet" href="${ctx}/adm/assets/css/ace-rtl.min.css"/>
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="${ctx}/adm/assets/css/ace-ie.min.css"/>
-    <![endif]-->
-    <link rel="stylesheet" href="${ctx}/adm/assets/css/common.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -127,9 +115,6 @@
 <#-- basic scripts -->
 
 <script src="${ctx}/adm/assets/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/adm/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-</script>
 <script src="${ctx}/adm/assets/js/bootstrap.min.js"></script>
 
 <#-- inline scripts related to this page -->
@@ -147,7 +132,7 @@
                         $("#msg_error").text(rs["message"]);
                     }
                     else {
-                        window.location.href = "${ctx}/admin/index.html";
+                        window.location.href = "${ctx}/admin/welcome.html";
                     }
                 });
 

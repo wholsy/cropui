@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yueny.blog.bo.resp.JsonListForPageResponse;
+import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.service.article.IArticleBlogService;
 import com.yueny.blog.service.manager.IArticleManageService;
 import com.yueny.blog.service.util.PageHtmlHelper;
@@ -34,8 +35,8 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  * @since
  */
 @Controller
-@RequestMapping(value = "/admin")
-public class BlogListController extends BaseController {
+@RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
+public class BlogListForAdminController extends BaseController {
 	@Autowired
 	private IArticleBlogService articleBlogService;
 	@Autowired

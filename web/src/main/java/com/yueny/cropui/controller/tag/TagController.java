@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.document;
+package com.yueny.cropui.controller.tag;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yueny.blog.bo.model.document.OwenerTagsData;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
-import com.yueny.blog.service.document.ITagQueryManageService;
+import com.yueny.blog.service.tag.ITagQueryManageService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;

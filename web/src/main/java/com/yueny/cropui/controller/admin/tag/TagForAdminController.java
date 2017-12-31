@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.yueny.blog.common.BlogConstant;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
@@ -16,8 +17,8 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  *
  */
 @Controller
-@RequestMapping(value = "/admin")
-public class TagWController extends BaseController {
+@RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
+public class TagForAdminController extends BaseController {
 	/**
 	 * 用户标签列表
 	 */

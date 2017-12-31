@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.service.BaseBizTest;
-import com.yueny.blog.service.tag.ICategoriesTagService;
+import com.yueny.blog.service.categories.ICategoriesTagService;
 
 /**
  * 文章分类类目服务测试用例
