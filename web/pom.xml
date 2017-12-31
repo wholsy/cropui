@@ -12,6 +12,10 @@
 	<artifactId>blog-web</artifactId>
 	<packaging>war</packaging>
 	
+	<properties>
+		<skip.maven.deploy>true</skip.maven.deploy>
+	</properties>
+	
 	<dependencies>
 		<dependency>
             <groupId>com.yueny.blog</groupId>
