@@ -27,7 +27,6 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  * @author yueny09 <deep_blue_yang@163.com>
  *
  * @DATE 2016年9月12日 下午8:17:40
- *
  */
 @Controller
 @RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
@@ -92,18 +91,19 @@ public class LoginForAdminController extends BaseController {
 	}
 
 	/**
-	 * admin 登录页
+	 * 后台登录页
 	 */
 	@RequestMapping(value = "/login/login.html")
 	public String login(final HttpServletResponse response) {
 		final HttpSession session = getSession();
 		if (session.getAttribute(CurrentUserUtils.LOGIN_DIST_NAME) != null) {
 			// 已登录，重定向到主页
-			return redirectAction("/admin/welcome.html");
+			return redirectAction(BlogConstant.ADMIN_URL_PREFIX + "/welcome.html");
 		}
 
 		setModelAttribute(WebAttributes.ACTION, "LOGIN");
 
+		// 定向到页面
 		return "admin/login";
 	}
 

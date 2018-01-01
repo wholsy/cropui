@@ -4,17 +4,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
     <title>Login - Codealy Blog</title>
-
-    <meta name="description" content="User login page"/>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-
+    <meta name="description" content="User login page"/>
+	<meta name="keywords"  content="设置关键词..." />
+    
+	<meta name="renderer" content="webkit">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name='apple-touch-fullscreen' content='yes'>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="address=no">
+	
 	<link rel="icon" href="http://static.codealy.com/favicon.ico" type="image/x-icon">
-    <#-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="${ctx}/adm/assets/css/bootstrap.min.css"/>
 
-    <#-- ace styles -->
-    <link rel="stylesheet" href="${ctx}/adm/assets/css/ace.min.css"/>
+	<!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
 
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if IE]>
@@ -55,6 +70,7 @@
                                     <h4 class="header blue lighter bigger">
                                         <i class="ace-icon fa fa-coffee green"></i>
                                         Please Enter Your Information
+                                        <a class="msgstar"></a>
                                     </h4>
 
                                     <div class="space-6"></div>

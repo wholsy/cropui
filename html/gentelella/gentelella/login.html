@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+      	作者：offline
+      	时间：2018-01-01
+      	描述：公共头文件
+      -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="description" content="User login page"/>
+		<meta name="keywords"  content="设置关键词..." />
+    
+		<meta name="renderer" content="webkit">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name='apple-touch-fullscreen' content='yes'>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="address=no">
+		
+		<link rel="icon" href="http://static.codealy.com/favicon.ico" type="image/x-icon">
+
+    <title>Login - Codealy Blog</title>
+
+    
+    <!-- Bootstrap -->
+    <link href="plug-ins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="plug-ins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="plug-ins/nprogress/nprogress.css" rel="stylesheet">
+    
+    <!-- Custom Theme Style -->
+    <link href="admin/css/custom.min.css" rel="stylesheet">
+    <link href="admin/css/style.css" rel="stylesheet" type="text/css"/>
+    
+    <!-- Animate.css -->
+    <link href="plug-ins/animate.css/animate.min.css" rel="stylesheet">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if IE]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form class="form-horizontal form-label-left input_mask">
+            	<header>
+								<h1>
+                    <i class="ace-icon fa  fa-laptop green"></i>
+                    <span class="red">Codealy</span>
+                    <span class="grey" id="id-text2">Blog</span>
+                </h1>
+                <h4 class="blue" id="id-company-text">&copy; <a href="http://blog.codealy.com">blog.codealy.com</a></h4>
+							</header>
+							
+							<!-- 用户名 -->
+							<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                	<input type="text" class="form-control has-feedback-left" title="用户名"
+                			id="txt_username" name="txt_username" placeholder="Username" 
+                			data-validate-length-range="18" data-validate-words="5" required="required">
+                	<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              </div>
+              
+              <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                	<input type="password" class="form-control has-feedback-left" title="密码"
+                			id="txt_password" placeholder="Password" required="required" >
+                	<span class="fa fa-compass form-control-feedback left" aria-hidden="true"></span>
+              </div>
+              
+              <!--  登录 -->
+              <div class="form-group">
+                <button id="btn_login" type="button" class=" btn btn-sm btn-primary submit">
+                    <i class="ace-icon fa fa-key"></i>
+                    <span class="bigger-110">Login</span>
+                </button>
+                <a class="reset_pass" href="#">Lost your password?</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">New to site?
+                  <a href="#signup" class="to_register"> Create Account </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br/>
+              </div> 
+            </form>
+          </section>
+          
+          <div>
+              <h1><i class="fa fa-paw"></i> Blog Codealy !</h1>
+              <span>
+              </span>
+              <p>
+              	©Copyright 2016 
+              	<a href="http://blog.codealy.com/" title="正值少年" target="_blank">正值少年</a>
+              </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+    <!-- jQuery -->
+    <script src="plug-ins/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="plug-ins/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="plug-ins/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="plug-ins/nprogress/nprogress.js"></script>
+    <script src="plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+    
+    <script src="admin/javascript/pages/login.js"></script>
+  </body>
+</html>
