@@ -1,164 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta charset="utf-8"/>
-    <title>Login - Codealy Blog</title>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <meta name="description" content="User login page"/>
-	<meta name="keywords"  content="设置关键词..." />
-    
-	<meta name="renderer" content="webkit">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name='apple-touch-fullscreen' content='yes'>
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="format-detection" content="telephone=no">
-	<meta name="format-detection" content="address=no">
-	
-	<link rel="icon" href="http://static.codealy.com/favicon.ico" type="image/x-icon">
+<#include "admin/common/header_start.ftl">
+<#include "admin/common/header_end.ftl">
 
-	<!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+<body class="login">
+	<div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
 
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-    
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if IE]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form class="form-horizontal form-label-left input_mask">
+            	<header>
+					<h1>
+				        <i class="ace-icon fa  fa-laptop green"></i>
+				        <span class="red">Codealy</span>
+				        <span class="grey" id="id-text2">Blog</span>
+				    </h1>
+				    <h4 class="blue" id="id-company-text">&copy; <a href="http://blog.codealy.com">blog.codealy.com</a></h4>
+				</header>
+							
+				<#-- 用户名 -->
+				<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                	<input type="text" class="form-control has-feedback-left" title="用户名"
+                			id="txt_username" name="txt_username" placeholder="Username" 
+                			data-validate-length-range="18" data-validate-words="5" required="required">
+                	<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              	</div>
+              	
+				<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+					<input type="password" class="form-control has-feedback-left" title="密码"
+							id="txt_password" placeholder="Password" required="required" >
+					<span class="fa fa-compass form-control-feedback left" aria-hidden="true"></span>
+				</div>
+              
+              <#--  登录 -->
+              <div class="form-group">
+                <button id="btn_login" type="button" class=" btn btn-sm btn-primary submit">
+                    <i class="ace-icon fa fa-key"></i>
+                    <span class="bigger-110">Login</span>
+                </button>
+                <#--
+                <a class="reset_pass" href="#">Lost your password?</a>
+                 -->
+              </div>
+			  
+              <div class="clearfix"></div>
+		
+              <div class="separator">
+                <p class="change_link">New to site?
+                  <#--
+                  <a href="#signup" class="to_register"> Create Account </a>
+                   -->
+                </p>
 
-<body class="login-layout light-login">
-<div class="main-container">
-    <div class="main-content">
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="login-container" style="margin-top: 10%">
-
-                    <div id="parent_msg_error" class="alert alert-danger hidden">
-                        <button type="button" class="close" data-dismiss="alert">
-                            <i class="ace-icon fa fa-times"></i>
-                        </button>
-                        <i class="ace-icon fa fa-times"></i>&nbsp;
-                        <strong id="msg_error"></strong>
-                        <br>
-                    </div>
-
-                    <div class="center">
-                        <h1>
-                            <i class="ace-icon fa  fa-laptop green"></i>
-                            <span class="red">Codealy</span>
-                            <span class="grey" id="id-text2">Blog</span>
-                        </h1>
-                        <h4 class="blue" id="id-company-text">&copy; <a href="http://blog.codealy.com">blog.codealy.com</a></h4>
-                    </div>
-                    <div class="space-6"></div>
-                    <div class="position-relative">
-                        <div id="login-box" class="login-box visible widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header blue lighter bigger">
-                                        <i class="ace-icon fa fa-coffee green"></i>
-                                        Please Enter Your Information
-                                        <a class="msgstar"></a>
-                                    </h4>
-
-                                    <div class="space-6"></div>
-                                    <form>
-                                        <fieldset>
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input id="txt_username" type="text" class="form-control"
-                                                                   placeholder="Username"/>
-															<i class="ace-icon fa fa-user"></i>
-														</span>
-                                            </label>
-                                            <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input id="txt_password" type="password"
-                                                                   class="form-control"
-                                                                   placeholder="Password"/>
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-                                            </label>
-
-
-                                        </fieldset>
-                                    </form>
-
-                                    <div class="social-or-login center">
-                                        <span class="bigger-110"></span>
-                                    </div>
-
-                                    <div class="space-6"></div>
-                                    <div class="social-login center">
-                                        <button id="btn_login" type="button"
-                                                class="width-35 center btn btn-sm btn-primary">
-                                            <i class="ace-icon fa fa-key"></i>
-                                            <span class="bigger-110">Login</span>
-                                        </button>
-                                    </div>
-                                    <div class="space-6"></div>
-
-                                </div>
-                                <#-- /.widget-main -->
-                            </div>
-                            <#-- /.widget-body -->
-                        </div>
-                        <#-- /.login-box -->
-                    </div>
-                    <#-- /.position-relative -->
-                </div>
-            </div>
-            <#-- /.col -->
+                <div class="clearfix"></div>
+                <br/>
+              </div>
+            </form>
+          </section>
+          
+          <#include "admin/common/include/footer_for_login.ftl">
         </div>
-        <#-- /.row -->
+      </div>
     </div>
-    <#-- /.main-content -->
-</div>
-<#-- /.main-container -->
-
-<#-- basic scripts -->
-
-<script src="${ctx}/adm/assets/js/jquery-1.11.3.min.js"></script>
-<script src="${ctx}/adm/assets/js/bootstrap.min.js"></script>
-
-<#-- inline scripts related to this page -->
-<script type="text/javascript">
-    $(function () {
+    
+	<#include "admin/common/include/endjs.ftl">
+	
+	<#--
+	<script src="${ctx}/adm/javascript/pages/login.js"></script>
+	-->
+	<script type="text/javascript">
+		$(function () {
         $("#btn_login").bind("click", function () {
-            $("#parent_msg_error").addClass("hidden");
-
             var username = $("#txt_username").val();
             var password = $("#txt_password").val();
             if (username && password) {
                 $.post("${ctx}/admin/login/dologin", {username: username, password: password}, function (rs) {
                     if (rs["data"] == false) {
-                        $("#parent_msg_error").removeClass("hidden");
-                        $("#msg_error").text(rs["message"]);
-                    }
-                    else {
+                    	$.dialog.alert(rs["message"]);
+                    } else {
                         window.location.href = "${ctx}/admin/welcome.html";
                     }
                 });
-
             }
-
         })
 
     });
+	</script>
 
-
-</script>
 </body>
 </html>
