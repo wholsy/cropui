@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,8 +78,9 @@ public class BlogListForAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/do_show_list.json", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonListForPageResponse<ArticleTagBlogVo> listBlogData(@RequestParam(value = "pageno") int pageno,
-			@Param("title_q") String title_q, final HttpServletResponse response) {
+	public JsonListForPageResponse<ArticleTagBlogVo> listBlogData(
+			@RequestParam(value = "pageno", required = false) int pageno,
+			@RequestParam(value = "title_q", required = false) String title_q, final HttpServletResponse response) {
 		if (pageno <= 0) {
 			pageno = 1;
 		}

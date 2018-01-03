@@ -63,23 +63,23 @@
 	                            	搜索
 	                        </button>
 	                    </form>
-						<table id="datatable" class="table table-striped table-bordered">
+						<table id="datatable-keytable-checkbox" class="table table-striped table-bordered">
 			                <thead>
-			                  <tr class="headings">
-								<th>
-								  <input type="checkbox" id="check-all" class="flat">
-								</th>
-								<th class="column-title">标识号 </th>
-								<th class="column-title">标题</th>
-								<th class="column-title">全站分类 </th>
-								<th class="column-title">时间 </th>
-								<th class="column-title">状态 </th>
-								<th class="column-title no-link last"><span class="nobr">管理</span>
-								</th>
-								<th class="bulk-actions" colspan="7">
-									<a class="antoo" style="color:#fff; font-weight:500;">多选 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-								</th>
-			                  </tr>
+								<tr class="headings">
+									<th>
+									  <input type="checkbox" id="check-all" class="flat">
+									</th>
+									<th class="column-title">标识号 </th>
+									<th class="column-title">标题</th>
+									<th class="column-title">全站分类 </th>
+									<th class="column-title">时间 </th>
+									<th class="column-title">状态 </th>
+									<th class="column-title no-link last"><span class="nobr">管理</span>
+									</th>
+									<th class="bulk-actions" colspan="7">
+										<a class="antoo" style="color:#fff; font-weight:500;">多选 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+									</th>
+								</tr>
 			                </thead>
 							
 							<tbody id="list_tbody">
@@ -174,6 +174,24 @@
 			                  </tr>
 			                </tbody>
 			                -->
+			                
+			                <tfoot>
+					            <tr class="headings">
+									<th>
+									  <input type="checkbox" id="check-all" class="flat">
+									</th>
+									<th class="column-title">标识号 </th>
+									<th class="column-title">标题</th>
+									<th class="column-title">全站分类 </th>
+									<th class="column-title">时间 </th>
+									<th class="column-title">状态 </th>
+									<th class="column-title no-link last"><span class="nobr">管理</span>
+									</th>
+									<th class="bulk-actions" colspan="7">
+										<a class="antoo" style="color:#fff; font-weight:500;">多选 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+									</th>
+								</tr>
+					        </tfoot>
 		              </table>
 	            </div>
 	            <#-- table-responsive end -->
