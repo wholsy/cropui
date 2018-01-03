@@ -102,6 +102,7 @@ public class LoginForAdminController extends BaseController {
 		}
 
 		setModelAttribute(WebAttributes.ACTION, "LOGIN");
+		setModelAttribute("title", "登录");
 
 		// 定向到页面
 		return "admin/login";

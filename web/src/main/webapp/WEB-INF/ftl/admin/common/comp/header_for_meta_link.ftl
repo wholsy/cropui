@@ -34,7 +34,7 @@
     <link href="${ctx}/plug-ins/nprogress/nprogress.css" rel="stylesheet">
     
     <!-- Custom Theme Style -->
-    <link href="${ctx}/adm/css/custom.min.css" rel="stylesheet">
+    <link href="${ctx}/adm/css/custom.css" rel="stylesheet">
     <link href="${ctx}/adm/css/style.css" rel="stylesheet" type="text/css"/>
     
     <!-- Animate.css -->

@@ -25,7 +25,8 @@
 
 <!-- Custom Theme Scripts -->
 <script src="${ctx}/assets/js/tools.js"></script>
-<script src="${ctx}/adm/js/custom.js"></script>
-<script src="${ctx}/adm/js/custom2.js"></script>
 <script src="${ctx}/adm/javascript/public.js"></script>
+
+<script src="${ctx}/adm/js/custom.js"></script>
+<script src="${ctx}/adm/js/custom2_link.js"></script>
 		

@@ -27,6 +27,7 @@ public class WelcomeForAdminController extends BaseController {
 	@RequestMapping(value = { "/", "/welcome.html" }, method = RequestMethod.GET)
 	public String adminIndex(final HttpServletResponse response) {
 		setModelAttribute(WebAttributes.ACTION, "INDEX");
+		setModelAttribute("title", "正值少年");
 
 		return "admin/index";
 	}
