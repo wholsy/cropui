@@ -302,7 +302,7 @@
 
 </html>
 		
-	<!--
+<#--
 	<div class="main-container ace-save-state" id="main-container">
 	<#include "admin/common/sidebar-menu.ftl">
 	
@@ -366,5 +366,3 @@
 	</div>
 	<#include  "admin/common/endjs.ftl">
 	-->
-
-</html>

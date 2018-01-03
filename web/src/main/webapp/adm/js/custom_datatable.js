@@ -61,34 +61,25 @@ function init_DataTables() {
 	console.log('init_DataTables');
 	
 	var $datatable = $('#datatable-keytable-checkbox');
-
 	$datatable.dataTable({
-		keys: true,
-		fixedHeader: true,
+		"serverSide": true,               //设置为true才会进行服务器分页
+		"pagingType": "full_numbers",       //分页按钮的显示形式
+		"paging": true,     //如果为FALSE 所有数据显示在一个页面上
 		//数据赋值
-		ajax : {
+		"ajax" : {
             "url" : ctx + "/admin/do_show_list.json",
             "type" : "POST",
             "dataSrc" : function(json) {
+            	alert("bb");
             	return json.data;
-            },
-            "error" : function() {
-                var data = {
-                		"data" : []
-                };
             }
 		},
 		
-		deferRender: true,
 		scrollY: 380,
 		scrollCollapse: true,
-		scroller: true,
-		
-		'order': [[ 1, 'asc' ]],
-		'columnDefs': [
-			{ orderable: false, targets: [0] }
-		]
+		scroller: true
 	});
+	
 	$datatable.on('draw.dt', function() {
 	  $('checkbox input').iCheck({
 		checkboxClass: 'icheckbox_flat-green'
