@@ -4,9 +4,9 @@
   	描述：include body end 
 -->
     
-    	<#include "admin/common/include/footer_for_common.ftl">
+    		<#include "admin/common/include/footer_for_common.ftl">
     
-    	</div>
+    		</div>
 	</div>
     
 </body>

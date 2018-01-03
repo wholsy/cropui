@@ -1,0 +1,13 @@
+2018-01-03 23:05:10,431 ERROR [][][pool-3-thread-1] c.t.d.c.i.DefaultDiamondSubscriber - 循环探测发生异常
+java.lang.RuntimeException: 获取修改过的DataID列表超时 cfg.codealy.com, 超时时间为：25000
+	at com.taobao.diamond.client.impl.DefaultDiamondSubscriber.checkUpdateDataIds(DefaultDiamondSubscriber.java:801)
+	at com.taobao.diamond.client.impl.DefaultDiamondSubscriber.checkDiamondServerConfigInfo(DefaultDiamondSubscriber.java:294)
+	at com.taobao.diamond.client.impl.DefaultDiamondSubscriber.access$300(DefaultDiamondSubscriber.java:69)
+	at com.taobao.diamond.client.impl.DefaultDiamondSubscriber$2.run(DefaultDiamondSubscriber.java:220)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)

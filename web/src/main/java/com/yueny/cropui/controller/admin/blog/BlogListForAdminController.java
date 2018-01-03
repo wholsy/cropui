@@ -76,11 +76,11 @@ public class BlogListForAdminController extends BaseController {
 	 *            标题模糊查询
 	 * @return
 	 */
-	@RequestMapping(value = "/do_show_list.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/service/do_show_list.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonListForPageResponse<ArticleTagBlogVo> listBlogData(
-			@RequestParam(value = "pageno", required = false) int pageno,
-			@RequestParam(value = "title_q", required = false) String title_q, final HttpServletResponse response) {
+			@RequestParam(value = "pageno", defaultValue="1") int pageno,
+			@RequestParam(value = "title_q", defaultValue="") String title_q, final HttpServletResponse response) {
 		if (pageno <= 0) {
 			pageno = 1;
 		}
@@ -98,6 +98,8 @@ public class BlogListForAdminController extends BaseController {
 			res.setMessage(BaseErrorType.SYSTEM_BUSY.getMessage());
 			res.setData(Collections.emptyList());
 		}
+		
+		logger.info("res: {}.", res);
 		return res;
 	}
 
