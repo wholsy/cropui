@@ -1,7 +1,6 @@
 <#include "admin/common/header_start.ftl">
     <!-- icheck -->
     <link href="${ctx}/plug-ins/icheck/skins/flat/green.css" rel="stylesheet">
-    
     <!-- Datatables -->
     <link href="${ctx}/plug-ins/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="${ctx}/plug-ins/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
