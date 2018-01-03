@@ -1,5 +1,6 @@
 $(pageInit);
 
+
 var jsonData = { articleBlogId: '0' };
 //正文编辑器
 var editor = null;

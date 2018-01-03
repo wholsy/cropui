@@ -1,4 +1,4 @@
-// Table
+// Table 表
 $('table input').on('ifChecked', function () {
     checkState = '';
     $(this).parent().parent().parent().addClass('selected');
