@@ -65,8 +65,20 @@ function init_DataTables() {
 	$datatable.dataTable({
 		keys: true,
 		fixedHeader: true,
-  
-		ajax: ctx + "/admin/do_show_list.json",
+		//数据赋值
+		ajax : {
+            "url" : ctx + "/admin/do_show_list.json",
+            "type" : "POST",
+            "dataSrc" : function(json) {
+            	return json.data;
+            },
+            "error" : function() {
+                var data = {
+                		"data" : []
+                };
+            }
+		},
+		
 		deferRender: true,
 		scrollY: 380,
 		scrollCollapse: true,
