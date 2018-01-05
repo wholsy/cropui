@@ -10,8 +10,7 @@
 <#include "admin/common/header_end.ftl">
 
 <#include "admin/common/body_start.ftl">
-	<!-- page content 页面内容  -->
-    <div class="right_col" role="main">
+	
       <!-- top tiles -->
       <div class="row tile_count">
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -532,10 +531,7 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- /page content 页面内容结束  -->
-        
-	<#include "admin/common/include/endjs.ftl">
+	
 	
 	<!-- Chart.js -->
     <script src="${ctx}/plug-ins/Chart.js/dist/Chart.min.js"></script>

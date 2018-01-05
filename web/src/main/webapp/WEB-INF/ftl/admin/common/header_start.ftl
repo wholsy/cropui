@@ -8,3 +8,7 @@
 <html lang="en">
 <head>
 	<#include "admin/common/comp/header_for_meta_link.ftl">
+	
+	<#-- jquery插件包-必要 -->
+	<#-- 这个是所有jquery插件的基础，首先第一个引入 -->
+	<script src="${ctx}/plug-ins/jquery/dist/jquery.min.js"></script>

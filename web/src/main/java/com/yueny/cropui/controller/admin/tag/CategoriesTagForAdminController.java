@@ -37,13 +37,13 @@ public class CategoriesTagForAdminController extends BaseController {
 
 		try {
 			final List<CategoriesTagBo> categoriesTags = articleCategoriesService.findArticleCategoriesTree();
-			setModelAttribute("categories_tags", categoriesTags);
+			setModelAttribute("list", categoriesTags);
 		} catch (final Exception e) {
 			logger.error("【全站文章分类管理】出现错误!", e);
 			return redirectAction("/");
 		}
 
-		return "tag/categories_tag_list";
+		return "admin/tag/categories_tag_list";
 	}
 
 }

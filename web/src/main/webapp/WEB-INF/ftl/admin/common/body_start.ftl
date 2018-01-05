@@ -13,4 +13,6 @@
 		<#-- 顶部导航-->
 		<#include "admin/common/include/navbar.ftl">
     
+    		<!-- page content 页面内容  -->
+    		<div class="right_col" role="main">
     

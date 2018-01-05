@@ -1896,8 +1896,6 @@ if (typeof NProgress != 'undefined') {
 		
 		function init_charts() {
 			
-				console.log('run_charts  typeof [' + typeof (Chart) + ']');
-			
 				if( typeof (Chart) === 'undefined'){ return; }
 				
 				console.log('init_charts');

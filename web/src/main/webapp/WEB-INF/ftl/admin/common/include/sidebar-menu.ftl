@@ -84,8 +84,13 @@
 						<span class="fa fa-chevron-down"></span>
 					</a>
 					<ul class="nav child_menu">
+						<li>
+							<a href="${ctx}/admin/categories_tag.html">
+								<span class="sidebar-nav-item">全站文章分类</span>
+							</a>
+						</li>
 						<li class="disabled">
-							<a href="general_elements.html">
+							<a class="disabled" href="#general_elements.html">
 								<span class="sidebar-nav-item">个性管理</span>
 							</a>
 						</li>

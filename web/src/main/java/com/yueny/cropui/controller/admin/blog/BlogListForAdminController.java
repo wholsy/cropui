@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yueny.blog.bo.resp.JsonListForPageResponse;
+import com.yueny.blog.bo.resp.JqGridDataJsonListForPageResponse;
 import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.service.article.IArticleBlogService;
 import com.yueny.blog.service.manager.IArticleManageService;
@@ -78,21 +78,22 @@ public class BlogListForAdminController extends BaseController {
 	 */
 	@RequestMapping(value = "/service/do_show_list.json", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonListForPageResponse<ArticleTagBlogVo> listBlogData(
-			@RequestParam(value = "pageno", defaultValue="1") int pageno,
-			@RequestParam(value = "title_q", defaultValue="") String title_q, final HttpServletResponse response) {
+	public JqGridDataJsonListForPageResponse<ArticleTagBlogVo> listBlogData(
+			@RequestParam(value = "pageno",required=false, defaultValue="1") int pageno,
+			@RequestParam(value = "title_q",required=false, defaultValue="") String title_q, final HttpServletResponse response) {
 		if (pageno <= 0) {
 			pageno = 1;
 		}
 
-		final JsonListForPageResponse<ArticleTagBlogVo> res = new JsonListForPageResponse<>();
+		final JqGridDataJsonListForPageResponse<ArticleTagBlogVo> res = new JqGridDataJsonListForPageResponse<>();
 		try {
 			final PageCond pageable = new PageCond(pageno, 10);
 			final List<ArticleTagBlogVo> blogs = articleBlogService.findPageListForSimpleWithTitle(pageable, title_q);
 			res.setData(blogs);
-
-			final String pages = PageHtmlHelper.getPageHtmlByPage(pageable.getItems(), pageno, pageable.getPageSize());
-			res.setPages(pages);
+			res.setCurrentpage(pageable.getCurrentPage());
+			res.setRows(pageable.getPageSize());
+			res.setTotal(pageable.getPages());
+			res.setRecords(pageable.getItems());
 		} catch (final Exception e) {
 			res.setCode(BaseErrorType.SYSTEM_BUSY.getCode());
 			res.setMessage(BaseErrorType.SYSTEM_BUSY.getMessage());
@@ -110,6 +111,11 @@ public class BlogListForAdminController extends BaseController {
 	public String listBlogPage(final HttpServletResponse response) {
 		setModelAttribute(WebAttributes.ACTION, "LIST_BLOG");
 		setModelAttribute("title", "博客列表");
+		
+		// 博文总数
+		setModelAttribute("blogTotal", 12);
+		//上月新增博文数
+		setModelAttribute("incrForLastMonth", 2);
 
 		return "admin/blog/listblog";
 	}

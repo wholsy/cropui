@@ -1,10 +1,75 @@
-<#include "admin/common/header.ftl">
-<body class="no-skin">
-<#include "admin/common/navbar.ftl">
+<#include "admin/common/header_start.ftl">
+<#include "admin/common/header_end.ftl">
 
-<div class="main-container ace-save-state" id="main-container">
-<#include "admin/common/sidebar-menu.ftl">
+<#include "admin/common/body_start.ftl">
 
+	<!-- top tiles -->
+	<div class="row tile_count">
+		<div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+			<span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+			<div class="count">2500</div>
+			<span class="count_bottom"><i class="green">4% </i> From last Week</span>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+			<span class="count_top"><i class="fa fa-user"></i> Total Males</span>
+			<div class="count green">2,500</div>
+			<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+        </div>
+	</div>
+	<!-- top tiles -->
+
+	<#-- row start -->
+	<div class="row">
+	
+		<#-- col start -->
+        <div class="col-md-4 col-sm-4 col-xs-12">
+			<div class="x_panel tile fixed_height_320">
+	            <div class="x_title">
+	            		个第三方
+	            		<#include "admin/common/comp/panel_for_nav.ftl">
+	            </div>
+	            
+	            <#-- x_content start -->
+	            <div class="x_content">
+	               edsfdsf
+	            </div>
+	            <#-- x_content start -->
+			</div>
+        </div>
+		<#-- col start -->
+		
+		<#-- col start -->
+		<div class="col-md-4 col-sm-4 col-xs-12">
+			<#-- x_panel start -->
+			<div class="x_panel tile fixed_height_320 overflow_hidden">
+				<#-- x_title start -->
+				<div class="x_title">
+					<h2>Device Usage</h2>
+					<#include "admin/common/comp/panel_for_nav.ftl">
+					<div class="clearfix"></div>
+				</div>
+				<#-- x_title end -->
+				
+				<#-- x_content start -->
+	            <div class="x_content">
+	               分润若若若
+	            </div>
+	            <#-- x_content start -->
+			</div>
+			<#-- x_panel start -->
+		</div>
+		<#-- col end -->
+
+	</div>
+	<#-- row end -->
+
+	
+
+<#include "admin/common/body_end.ftl">
+
+</html>
+
+<#-- 
     <div class="main-content">
         <div class="main-content-inner">
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
@@ -72,58 +137,7 @@
                 </div>
 
             </div>
-            <#-- /.page-content -->
         </div>
     </div>
-<#include "admin/common/footer.ftl">
 </div>
-
-<#include "admin/common/endjs.ftl">
-
-<script id="template_list" type="text/html">
-    {{each datas as value i}}
-    <tr>
-        <td>{{value._id}}</td>
-        <td>{{value._pname}} - {{value._name}}</td>
-        <td>{{value.ut}}</td>
-        <td>
-            <a href="javascript:del({{value._id}});">删除</a>
-            <a target="_self" href="/adm/tag_mgr/showaddup/?_id={{value._id}}">编辑</a>
-        </td>
-    </tr>
-    {{/each}}
-</script>
-
-
-<script>
-    function del(id) {
-        if (confirm("确定删除吗?")) {
-            $.get("/adm/tag_mgr/del/?_id=" + id + "", function (data) {
-                window.location.reload();
-            });
-        }
-    }
-
-    $(function () {
-        //page(1);
-        
-        $("#btn_q").bind("click", function () {
-            page(1);
-        });
-    });
-
-    function page(pageno) {
-        var txt_q = $("#txt_q").val();
-        $.post("/adm/tag_mgr/doshowlist_tag/?pageno=" + pageno + "&t=" + new Date().getTime() + "", {txt_q: txt_q}, function (data) {
-            console.log(data);
-            var html = template('template_list', data);
-            $("#list_tbody").html(html);
-            $("#pager").html(data["pages"]);
-
-        })
-    }
-
-
-</script>
-</body>
-</html>
+ -->
