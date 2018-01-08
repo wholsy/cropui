@@ -12,55 +12,107 @@ $(function(){
 });
 
 function pageInit(){
-    jQuery("#jsGrid").jqGrid(
+    $("#jsDataGrid").jqGrid(
         {
             /**/
             //组件创建完成之后请求数据的url
             url: ctx + "/admin/service/do_show_list.json",
             //向后台请求数据的ajax的类型。可选 post,get
-            mtype : "post",
+            mtype : "POST",
 			//请求数据返回的类型。可选json,xml,txt, local
-            dataType: "json",
-            
-            //dataType: "local",
+            datatype: "json",
+            //datatype: "local",
 	
-            colNames : [ 
+            colNames : [
             		'标识号', 
-            		'文章标题articleBlogId', 
-            		'创建日期'
+            		'文章标题', 
+            		'全站分类',
+            		'时间',
+            		'状态',
+            		'管理'
             	],
             	//jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-            colModel : [ 
+            colModel : [
                  {
-                 	name : 'articleBlogId', index : 'articleBlogId'
+                 	name : 'articleBlogId', index : 'articleBlogId',
+                 	align:"center", hidden: true, editable:true
                  }, 
                  {
-                 	name : 'articleBlogId',
-                 	index : 'articleBlogId'
-                 	
+                 	name : 'articleTitle',
+                 	index : 'articleTitle',
+                 	width : 300,
+                 	// cellvalue表示当前单元格的值, options 为当前配置, rowObject为当前行数据
+                 	formatter : function (cellvalue, options, rowObject) {
+						var alink = tools.getLink(ctx + '/article/' + rowObject.articleBlogId + '.html', cellvalue, '_blank', false);
+						return alink;					
+					}
                  }, 
                  {
-                 	name : 'createTime', 
-                 	index : 'createTime'
+                 	align:"center",width : 80,
+                 	formatter : function (cellvalue, options, rowObject) {
+                 		var tagLink = '';
+                 		
+                 		if(rowObject.categoryTagsForBlog != null && rowObject.categoryTagsForBlog.length > 0){
+                 			for(var i=0; i < rowObject.categoryTagsForBlog.length; i++){
+                 				var ctBlog = rowObject.categoryTagsForBlog[i]
+                 				tagLink = '<a href="#">' + ctBlog.categoryTagName + '</a>';
+									
+								if(i != rowObject.categoryTagsForBlog.length-1){
+									tagLink += ' | ';
+								}
+                 			}
+                 		}
+						
+						return tagLink;
+					}
+                 },
+                 {
+                 	name : 'today', 
+                 	index : 'today',
+                 	width : 80, align:"center",
+                 },
+                 {
+                 	width : 50, align:"center",
+                 	// cellvalue表示当前单元格的值, options 为当前配置, rowObject为当前行数据
+                 	formatter : function (cellvalue, options, rowObject) {
+						if (rowObject._isdraft ==1) {
+            					return '<span class="label label-warning">草稿</span>'
+           				}
+           				
+           				return '<span class="label label-success">已发布</span>'
+					}
+                 },
+                 {
+                 	formatter : function (cellvalue, options, rowObject) {
+                 		var tagLink = '';
+                 		
+                 		//<a target="_blank" href="${ctx}/admin/wblog.html?articleBlogId=s">编辑</a>
+            				//<a href="javascript:del({{value.articleBlogId}});">删除</a>
+            				//<a target="_blank" href="${ctx}/article/{{value.articleBlogId}}.html">预览</a>
+            
+            
+                 		
+                 		
+                 		
+						return tagLink;
+					}
                  }
             ],
             
             //一页显示多少条
             rowNum : 10,
             rowList : [ 10, 30, 50 ],
-            pager : '#jsGrid_pager',
+            pager : '#jsDataGrid_pager',
             
             viewrecords : true,
             multiselect: true, 
             shrinkToFit : true,
 		    autoScroll : true,
-		    cellEdit : false,
 		    multiselect : true,
 		    // 行编号
 		    rownumbers : true, 
             autowidth : true,
-    			height : 250,
-    			altclass: 'altRowsColour',
+    			height : 260,
            
             jsonReader : {
                 root: "list",
@@ -69,12 +121,6 @@ function pageInit(){
                 records: "records",
                 repeatitems: false
             },
-
-            gridComplete : function() { 
-            		var tm = jQuery("#jsGrid").jqGrid('getGridParam','totaltime'); 
-            		$.dialog.tips("Render time: "+ tm+" ms "); 
-            }
-
 
             /*
             deleteConfirm: function(item) {
@@ -127,10 +173,10 @@ function pageInit(){
 
     /*创建jqGrid的操作按钮容器*/
     /*可以控制界面上增删改查的按钮是否显示*/
-    jQuery("#jsGrid").jqGrid('navGrid', '#jsGrid_pager', 
+    $("#jsDataGrid").jqGrid('navGrid', '#jsDataGrid_pager', 
     		{
     			edit : false, 
-    			add : true, 
+    			add : false, 
     			del : true,
     			search : false,
     			refresh : true
@@ -143,7 +189,7 @@ function pageInit(){
     ];
     
     for(var i=0;i<=mydata.length;i++){  
-        jQuery("#jsGrid").jqGrid('addRowData',i+1, mydata[i]);  
+        $("#jsDataGrid").jqGrid('addRowData',i+1, mydata[i]);  
     }
     */
     
@@ -157,9 +203,9 @@ function pageInit(){
             		console.log("get data success!");
             		
                 //for(var i=0;i<=rs["list"].length;i++){  
-			    //    jQuery("#jsGrid").jqGrid('addRowData',i+1, rs["list"][i]);  
+			    //    jQuery("#jsDataGrid").jqGrid('addRowData',i+1, rs["list"][i]);  
 			   //}
-			   	var thegrid = jQuery("#jsGrid")[0];
+			   	var thegrid = jQuery("#jsDataGrid")[0];
 				thegrid.addJSONData(eval(rs["list"]));
             }
         }

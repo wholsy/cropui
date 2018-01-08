@@ -50,8 +50,8 @@
 							发布的<code>博文</code> 信息列表
 			          	</p>
 			          	
-			          	<table id="jsGrid"></table> 
-						<div id="jsGrid_pager"></div>
+			          	<table id="jsDataGrid"></table> 
+						<div id="jsDataGrid_pager"></div>
 		          </div>
 				</div>
 			</div>
@@ -67,6 +67,7 @@
 	<#-- 在jqgrid/js/i18n下还有其他的多语言包，可以尝试更换看效果 -->
 	<script type="text/javascript" src="${ctx}/plug-ins/jqgrid/js/i18n/grid.locale-cn.js"></script>
 	
+    
 <#include "admin/common/body_end.ftl">
 
 </html>

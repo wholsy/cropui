@@ -198,3 +198,29 @@ tools.getArticleId = function (val) {
   }
   return 0;
 };
+
+/*
+q:参数名; 
+url:可选;
+style: Boolean,是否带超链接样式
+*/
+tools.getLink = function (url, text, target, style) {
+	var link = '<a ';
+						
+	if (target) {
+		// 不为空
+		link += 'target="' + target + '" ';
+	}
+	
+	if(Boolean(style)){
+		link += 'style="text-decoration:underline;color:blue" ';
+	}
+    
+    if (url) {
+		link += 'href="' + url + '" ';
+	}
+	
+	link += '>' + text + '</a>';
+    
+    return link;
+};
