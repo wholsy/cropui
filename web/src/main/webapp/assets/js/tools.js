@@ -202,9 +202,8 @@ tools.getArticleId = function (val) {
 /*
 q:参数名; 
 url:可选;
-style: Boolean,是否带超链接样式
 */
-tools.getLink = function (url, text, target, style) {
+tools.getLink = function (url, text, target) {
 	var link = '<a ';
 						
 	if (target) {
@@ -212,9 +211,9 @@ tools.getLink = function (url, text, target, style) {
 		link += 'target="' + target + '" ';
 	}
 	
-	if(Boolean(style)){
-		link += 'style="text-decoration:underline;color:blue" ';
-	}
+	//if((/^true$/i).test(style)){
+	//	link += 'style="text-decoration:underline;color:blue" ';
+	//}
     
     if (url) {
 		link += 'href="' + url + '" ';

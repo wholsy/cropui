@@ -3,7 +3,11 @@
   	时间：2018-1-1
   	描述：include body end 
 -->
-    
+    		<#-- 
+		<iframe src="admin/common/adds/adds_c.ftl" style="width:800px; height:20px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"/>
+		 -->
+		 
+    		
     		</div>
     		<!-- /page content 页面内容结束  -->
 	 

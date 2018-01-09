@@ -75,6 +75,7 @@ input[type=email]:focus, input[type=url]:focus, input[type=search]:focus, input[
 }
 */
 
+/*
 *::selection { 
 	background: #0099cc; 
 }
@@ -107,6 +108,7 @@ a:focus {
 a:hover, a:active {
   outline: 0;
 }
+*/
 
 input:focus, textarea:focus { 
 	border-color: #0099cc; 
