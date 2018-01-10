@@ -13,8 +13,8 @@ import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.cache.CacheDataHandler;
 import com.yueny.blog.service.cache.comp.CacheService;
-import com.yueny.blog.service.categories.ICategoriesTagService;
 import com.yueny.blog.service.chart.ITagChartService;
+import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.blog.service.tag.IOwenerTagService;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 

@@ -16,6 +16,7 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
  * @author 袁洋 2015年8月24日 上午10:22:23
  *
  */
+@Deprecated
 @Controller
 @RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
 public class TagForAdminController extends BaseController {

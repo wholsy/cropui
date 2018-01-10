@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="${ctx}/plug-ins/jqgrid/css/css/redmond/jquery-ui-1.8.16.custom.css" />
 	
 <#include "admin/common/header_end.ftl">
-
+ß
 <#include "admin/common/body_start.ftl">
 
 		<!-- top tiles -->
@@ -59,7 +59,7 @@
 		</div>
 		<#-- row end -->
 		
-	<script src="${ctx}/adm/javascript/pages/blog_list.js"></script>
+	<script src="${ctx}/adm/javascript/pages/blog/blog_list.js"></script>
 	
 	<#-- jqGrid插件包-必要 -->
 	<script type="text/javascript" src="${ctx}/plug-ins/jqgrid/js/jquery.jqGrid.src.js"></script>

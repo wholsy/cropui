@@ -77,6 +77,25 @@ var historys = function()
 		return cellvalue;
     }
     
+    // 数据删除
+    this.del = function(articleBlogId) {
+        if (confirm("确定删除该文章吗?")) {
+        		$.ajax({
+				url: ctx + "/admin/del.json?articleBlogId=" + articleBlogId + "",
+				type: 'DELETE',
+				success: function(rs) {
+					if (rs["data"] == true) {
+						$.dialog.tips("删除成功！");
+	                		//window.location.reload();
+	                		jQuery("#jsDataGrid").trigger("reloadGrid");
+	                }else {
+	                		alert(rs["message"]);
+	                }
+				}
+			});
+        }
+    }
+    
    /**加载数据列表*/
    this.load_processHistories_list = function()
    {
@@ -95,9 +114,11 @@ var historys = function()
             		'标识号', 
             		'文章标题', 
             		'全站分类',
+            		'个人分类',
             		'时间',
             		'状态',
-            		'管理'
+            		'修改',
+            		'删除'
             	],
             	//jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
             colModel : [
@@ -116,19 +137,29 @@ var historys = function()
                  	formatter : format_for_categoryTagsForBlog
                  },
                  {
+                 	name : 'owenerTag', 
+                 	index : 'owenerTag',
+                 	align:"center",
+                 },
+                 {
                  	name : 'today', 
                  	index : 'today',
                  	width : 80, align:"center",
                  	formatter : format_for_date
                  },
                  {
-                 	width : 50, align:"center",
+                 	name : 'isdraft', width : 50, align:"center",
                  	formatter : format_for_isdraft
                  },
                  {
-                 	name : 'act', 
-                 	index : 'act',
-                 	align:"right"
+                 	name : 'modify', 
+                 	width : 50,
+                 	align:"center"
+                 },
+                 {
+                 	name : 'delete', 
+                 	width : 50,
+                 	align:"center"
                  }
             ],
             
@@ -146,16 +177,16 @@ var historys = function()
 			// //当表格所有数据都加载完成，处理统计行数据
 			gridComplete: function() {
 				var ids = jQuery("#jsDataGrid").jqGrid('getDataIDs');
-				for(var i=0;i < ids.length;i++){
+				for(var i=0; i < ids.length;i++){
 					// 行数
 					var rowid = ids[i];
 					var ret = $("#jsDataGrid").jqGrid('getRowData', rowid);
 					
-					ee = '<a target="_blank" href="' + ctx + '/admin/wblog.html?articleBlogId=' + ret.articleBlogId + '">编辑</a>';
-					de = '<a href="javascript: del(' + ret.articleBlogId + ');">删除</a>';
-       				re = '<a target="_blank" href="' + ctx + '/article/' + ret.articleBlogId + '.html">预览</a>';
-            
-					jQuery("#jsDataGrid").jqGrid('setRowData',ids[i],{act: ee + ' | ' + de + ' | ' + re});
+					ee = "<a target='_blank' class='fa fa-pencil' href='" + ctx + "/admin/wblog.html?articleBlogId=" + ret.articleBlogId + "'>编辑</a>";
+					de = "<a href='#' class='fa fa-trash' onclick='del(" + ret.articleBlogId +")'>删除</a>";
+       				//re = '<a target="_blank" href="' + ctx + '/article/' + ret.articleBlogId + '.html">预览</a>';
+            			
+					jQuery("#jsDataGrid").jqGrid('setRowData',ids[i],{ modify: ee, delete : de});
 				}	
 			}
 			
@@ -219,6 +250,13 @@ var historys = function()
 	    			refresh : true
 	    		}
 	    	);
+	    	
+	    	jQuery("#jsDataGrid").jqGrid('setGroupHeaders', {
+			  useColSpanStyle: true, 
+			  groupHeaders:[
+				{startColumnName: 'act', numberOfColumns: 2, titleText: '<em>操作</em>'},
+			  ]	
+		});
    }
 
 

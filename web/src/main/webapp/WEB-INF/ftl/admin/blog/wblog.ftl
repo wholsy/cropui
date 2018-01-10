@@ -57,11 +57,11 @@
 									
 									<p id="p_desc" class="subtit" style="display:none;">
 										摘要：
-										<span class="gray">（默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）</span>
+										<span class="gray">（默认使用文章标题，您也可以在这里自行编辑 ）</span>
 									</p>
 									<div id="d_desc">
 										<textarea id="articleDigest" name="articleDigest" rows="6" maxlength="200"
-											placeholder="摘要： （默认自动提取您文章的前200字显示在博客首页作为文章摘要，您也可以在这里自行编辑 ）"
+											placeholder="摘要：默认使用文章标题，您也可以在这里自行编辑"
 											style="width:99%;" >${(item.articleDigest)!''}
 										</textarea>
 									</div>
@@ -71,7 +71,7 @@
 										<span class="word_count" title="字数统计包含HTML代码/字数统计包含纯文本、IMG、EMBED，不包含换行符，IMG和EMBED算一个文字"></span>
 										<span id="autosave_note"></span>
 										<a id="wblog_md" 
-											href="${ctx}/admin/wblog_md.html?articleBlogId={{value.articleBlogId}}" 
+											href="${ctx}/admin/wblog_md.html?articleBlogId=${value.articleBlogId}" 
 											target="_blank"
 											>切换到MarkDown编辑器</a>
 									</p>
@@ -100,6 +100,30 @@
 											</div>
 										</div>
 									
+										<p class="subtit" style="display:none;">文章别名（URL中使用，取代文章ID）</p>
+										<div style="display:none;">
+											<input type="text" id="articleAliasName" name="articleAlias" 
+												style="width:60%; height:20px;" maxlength="30"
+												value='${(item.articleAlias)!''}'/>
+											（只能使用数字、字母、横线和下划线）
+										</div>
+										
+										<p class="subtit">全站文章分类[<a href="${ctx}/admin/categories_tag.html" target="_blank">编辑全站分类</a>]</p>
+										<div class="radioBox channel">
+											<#list categoryTags as categoryTag>
+										    	<input type='radio' name='categoryTagCode' id='categoryChl-${categoryTag.categoriesId}' 
+										    		value='${categoryTag.categoriesTagCode}' 
+										    		<#if (item.categoryTagCodes)?? && ((item.categoryTagCodes)?size > 0) && (item.categoryTagCodes)?seq_contains(categoryTag.categoriesTagCode)>
+									    				checked
+									    			<#else>
+									    			</#if>
+									    		/>
+												<label for='categoryChl-${categoryTag.categoriesId}'>
+													${categoryTag.categoriesName}
+												</label>
+											</#list>
+										</div>
+										
 										<p class="subtit">个人分类 [<a href="${ctx}/admin/owenerTags.html" target="_blank">编辑个人分类</a>]</p>
 										<div>
 											<input id="owenerTag" name="owenerTag" data-ids="" type="text" 
@@ -128,31 +152,7 @@
 												</div>
 											</div>
 										</div>
-								
-										<p class="subtit" style="display:none;">文章别名（URL中使用，取代文章ID）</p>
-										<div style="display:none;">
-											<input type="text" id="articleAliasName" name="articleAlias" 
-												style="width:60%; height:20px;" maxlength="30"
-												value='${(item.articleAlias)!''}'/>
-											（只能使用数字、字母、横线和下划线）
-										</div>
-		
-										<p class="subtit">全站文章分类（到分类首页）</p>
-										<div class="radioBox channel">
-											<#list categoryTags as categoryTag>
-										    	<input type='radio' name='categoryTagCode' id='categoryChl-${categoryTag.categoriesId}' 
-										    		value='${categoryTag.categoriesTagCode}' 
-										    		<#if (item.categoryTagCodes)?? && ((item.categoryTagCodes)?size > 0) && (item.categoryTagCodes)?seq_contains(categoryTag.categoriesTagCode)>
-									    				checked
-									    			<#else>
-									    			</#if>
-									    		/>
-												<label for='categoryChl-${categoryTag.categoriesId}'>
-													${categoryTag.categoriesName}
-												</label>
-											</#list>
-										</div>
-								    	<#-- 横线 -->
+								    		<#-- 横线 -->
 										<p class="subtit"></p>
 								    	
 										<p style="text-indent:2em;">提示：请不要发布任何推广、广告（包括招聘）、政治、低俗等方面的内容，否则可能会影响到您的使用。</p>
@@ -183,7 +183,7 @@
 		</div>
 		<#-- row end -->
 	
-		<script src="${ctx}/adm/javascript/pages/wblog/wblog.js"></script>
+		<script src="${ctx}/adm/javascript/pages/blog/wblog/wblog.js"></script>
 		
 		<script type="text/javascript">
 			jsonData={articleBlogId:'0',point:'False',max_point:'100',tohome_max_cnt:'5',isClientUser:0,_0:'0'};

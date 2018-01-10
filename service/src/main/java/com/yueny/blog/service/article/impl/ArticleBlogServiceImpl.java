@@ -18,12 +18,16 @@ import com.yueny.blog.dao.cd.ArticleBlogCd;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.article.IArticleBlogService;
+import com.yueny.blog.service.cache.CacheActionType;
 import com.yueny.blog.service.cache.CacheDataHandler;
 import com.yueny.blog.service.cache.comp.CacheListService;
 import com.yueny.blog.service.cache.comp.CacheService;
-import com.yueny.blog.service.categories.ICategoriesTagService;
-import com.yueny.blog.vo.article.ArticleBlogForCategoryTagModel;
-import com.yueny.blog.vo.article.ArticleTagBlogVo;
+import com.yueny.blog.service.disruptor.LogEventDisruptor;
+import com.yueny.blog.service.disruptor.handler.SyntonyExecute;
+import com.yueny.blog.service.tag.ICategoriesTagService;
+import com.yueny.blog.service.tag.IOwenerTagService;
+import com.yueny.blog.vo.article.admin.tags.ArticleBlogForCategoryTagModel;
+import com.yueny.blog.vo.article.admin.tags.ArticleTagBlogVo;
 import com.yueny.rapid.lang.date.DateFormatType;
 import com.yueny.rapid.lang.date.DateUtil;
 import com.yueny.rapid.lang.util.StringUtil;
@@ -48,17 +52,20 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	private CacheService<ArticleBlogBo> cacheService;
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
+	@Autowired
+	private IOwenerTagService owenerTagService;
+	@Autowired
+	private LogEventDisruptor logEventDisruptor;
 
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see
-	 * com.yueny.blog.service.article.IArticleBlogService#deleteByBlogId(java.
+	 * @see com.yueny.blog.service.article.IArticleBlogService#deleteByBlogId(java.
 	 * lang.String)
 	 */
 	@Override
 	@ProfilerLog
-	public boolean deleteByBlogId(String articleBlogId) {
+	public boolean deleteByBlogId(final String articleBlogId) {
 		return blogDao.deleteByBlogId(articleBlogId);
 	}
 
@@ -81,7 +88,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 				}
 				return map(entry, ArticleBlogBo.class);
 			}
-		}, 5L, "findByBlogId", articleBlogId);
+		}, 5L, CacheActionType.QUERY_ONE, articleBlogId);
 	}
 
 	@Override
@@ -97,7 +104,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 				return map(entry, ArticleBlogBo.class);
 			}
-		}, "findById", primaryId);
+		}, CacheActionType.QUERY_ONE, primaryId);
 	}
 
 	@Override
@@ -208,7 +215,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	@Override
 	@ProfilerLog
-	public List<ArticleSimpleBlogBo> findPageListForSimple(IPageable pageable) {
+	public List<ArticleSimpleBlogBo> findPageListForSimple(final IPageable pageable) {
 		final List<ArticleBlogBo> lists = findPageList(pageable);
 
 		final List<ArticleSimpleBlogBo> ls = Lists.newArrayList();
@@ -230,7 +237,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 
 	@Override
 	@ProfilerLog
-	public List<ArticleTagBlogVo> findPageListForSimpleWithTitle(IPageable pageable, String articleTitle) {
+	public List<ArticleTagBlogVo> findPageListForSimpleWithTitle(final IPageable pageable, final String articleTitle) {
 		final List<ArticleBlogEntry> entrys = blogDao
 				.queryByCd(ArticleBlogCd.builder().pageable(pageable).articleTitle(articleTitle).build());
 		if (CollectionUtils.isEmpty(entrys)) {
@@ -249,6 +256,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 			simpleBlog.setModifyUser(blog.getModifyUser());
 			simpleBlog.setUpdateTime(blog.getUpdateTime());
 
+			// 处理全站文章标签列表
 			final List<CategoriesTagBo> ct = categoriesTagService.findByCode(blog.getCategoryTagCodes());
 			if (CollectionUtil.isEmpty(ct)) {
 				simpleBlog.setCategoryTagsForBlog(Collections.emptySet());
@@ -262,6 +270,9 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 				});
 				simpleBlog.setCategoryTagsForBlog(ctb);
 			}
+
+			// 处理个人分类列表
+			// owenerTagService.
 
 			ls.add(simpleBlog);
 		});
@@ -288,7 +299,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 */
 	@Override
 	@ProfilerLog
-	public Long queryAllCount(String articleTitle) {
+	public Long queryAllCount(final String articleTitle) {
 		if (StringUtil.isEmpty(articleTitle)) {
 			return blogDao.queryAllCount();
 		}
@@ -298,10 +309,17 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	@Override
 	@ProfilerLog
 	public boolean update(final ArticleBlogBo bo) {
-		cacheService.cacheDelete(ArrayUtil.newArray("findByBlogId", bo.getArticleBlogId()),
-				ArrayUtil.newArray("findById", bo.getArticleId()),
-				ArrayUtil.newArray("findByPreviousBlogId", bo.getArticleBlogId()), ArrayUtil.newArray("findLatestBlog"),
-				ArrayUtil.newArray("findLatestBlog", bo.getUid()));
+		// 获取要通过事件传递的业务数据；
+		final SyntonyExecute syntonyExecute = new SyntonyExecute() {
+			@Override
+			public void execute() {
+				cacheService.cacheDelete(ArrayUtil.newArray("findByBlogId", bo.getArticleBlogId()),
+						ArrayUtil.newArray("findById", bo.getArticleId()),
+						ArrayUtil.newArray("findByPreviousBlogId", bo.getArticleBlogId()),
+						ArrayUtil.newArray("findLatestBlog"), ArrayUtil.newArray("findLatestBlog", bo.getUid()));
+			}
+		};
+		logEventDisruptor.onData(syntonyExecute);
 
 		final ArticleBlogEntry entry = map(bo, ArticleBlogEntry.class);
 		return blogDao.update(entry);
