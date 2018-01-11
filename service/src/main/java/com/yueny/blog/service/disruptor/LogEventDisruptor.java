@@ -73,7 +73,7 @@ public class LogEventDisruptor implements InitializingBean {
 	 * @param syntonyExecute
 	 *            事件传递的业务数据
 	 */
-	public void onData(final SyntonyExecute syntonyExecute) {
+	public void publishData(final SyntonyExecute syntonyExecute) {
 		final Disruptor<LogEvent> disruptor = DisruptorHelper.getDisruptor(LogEvent.class);
 
 		// 发布事件

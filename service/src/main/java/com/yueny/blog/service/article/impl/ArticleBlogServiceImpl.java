@@ -313,13 +313,13 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 		final SyntonyExecute syntonyExecute = new SyntonyExecute() {
 			@Override
 			public void execute() {
-				cacheService.cacheDelete(ArrayUtil.newArray("findByBlogId", bo.getArticleBlogId()),
+				cacheService.cacheDelete(ArrayUtil.newArray(CacheActionType.QUERY_ONE, bo.getArticleBlogId()),
 						ArrayUtil.newArray("findById", bo.getArticleId()),
 						ArrayUtil.newArray("findByPreviousBlogId", bo.getArticleBlogId()),
 						ArrayUtil.newArray("findLatestBlog"), ArrayUtil.newArray("findLatestBlog", bo.getUid()));
 			}
 		};
-		logEventDisruptor.onData(syntonyExecute);
+		logEventDisruptor.publishData(syntonyExecute);
 
 		final ArticleBlogEntry entry = map(bo, ArticleBlogEntry.class);
 		return blogDao.update(entry);

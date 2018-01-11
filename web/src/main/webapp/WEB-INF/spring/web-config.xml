@@ -14,7 +14,7 @@
 	<!-- 自动扫描 -->
 	<context:component-scan base-package="com.yueny.cropui.controller"/>
 	
-	<mvc:annotation-driven>
+	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
 		<mvc:message-converters register-defaults="true">
 			<!-- can read and write byte arrays from the HTTP request and response -->
 			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
@@ -66,18 +66,23 @@
     <mvc:resources mapping="/upload/**" location="/upload/"/>
      
 	<!-- or ContentNegotiating  -->
-	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">  
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="true" />
+        <property name="favorParameter" value="false"/>
+        <property name="parameterName" value="mediaType"/>
+        <property name="ignoreAcceptHeader" value="true" />
+        <property name="defaultContentType" value="application/json" />
+        <property name="useJaf" value="false" />
+        
         <property name="mediaTypes">
 			<map>
+				<entry key="json" value="application/json" />  
 				<entry key="html" value="text/html" />  
-                <entry key="json" value="application/json" />  
                 <entry key="xml" value="application/xml" />
                 <entry key="xls" value="application/excel" />  
                 <entry key="pdf" value="application/pdf" /> 
 			</map>
 		</property>
-		<property name="ignoreAcceptHeader" value="true"></property>
-        <property name="defaultContentType" value="text/html"/>
     </bean>
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="contentNegotiationManager" ref="contentNegotiationManager"/>
