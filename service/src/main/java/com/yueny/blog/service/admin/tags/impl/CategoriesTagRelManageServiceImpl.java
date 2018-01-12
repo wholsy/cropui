@@ -5,18 +5,18 @@ package com.yueny.blog.service.admin.tags.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Sets;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
+import com.yueny.blog.service.tag.IOwenerTagService;
 import com.yueny.blog.vo.article.admin.tags.TagsForCategoriesViewsVo;
 
 /**
@@ -31,6 +31,8 @@ import com.yueny.blog.vo.article.admin.tags.TagsForCategoriesViewsVo;
 public class CategoriesTagRelManageServiceImpl implements ICategoriesTagRelManageService {
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
+	@Autowired
+	private IOwenerTagService owenerTagService;
 
 	/*
 	 * (non-Javadoc)
@@ -51,9 +53,9 @@ public class CategoriesTagRelManageServiceImpl implements ICategoriesTagRelManag
 			vo.setCategoriesTagBo(categoriesTagBo);
 
 			// 添加个人分类列表
-			final Set<OwenerTagBo> owenerTagList = new HashSet<>();
-			// query
-			vo.setOwenerTag(owenerTagList);
+			final List<OwenerTagBo> owenerTagList = owenerTagService
+					.queryByCategoriesTagCode(categoriesTagBo.getCategoriesTagCode());
+			vo.setOwenerTags(Sets.newHashSet(owenerTagList));
 
 			list.add(vo);
 		}

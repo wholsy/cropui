@@ -2,8 +2,8 @@
 	<#-- kindeditor -->
 	<link href="http://static.codealy.com/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
 	
-	<link href="${ctx}/assets/css/write/write.css" rel="stylesheet" type="text/css">
-	<link href="${ctx}/assets/css/write/main.css" rel="stylesheet" type="text/css">
+	<link href="${ctx}/adm/style/pages/blog/write/write.css" rel="stylesheet" type="text/css">
+	<link href="${ctx}/adm/style/pages/blog/write/main.css" rel="stylesheet" type="text/css">
 	
 <#include "admin/common/header_end.ftl">
 
@@ -165,9 +165,9 @@
 									<#-- moreDiv end -->
 			
 									<div class="btn_area_1">   
-										<input id="btnPublish" type="button" class="input_btn_1" 
+										<input id="btnPublish" type="button" class="input_btn_1 btn btn-primary" 
 											value="发表文章" title="保存并跳转" />
-										<input id="btnDraft" type="button" class="input_btn_1" 
+										<input id="btnDraft" type="button" class="input_btn_1 btn btn-default" 
 											value="立即保存" title="保存草稿" />
 										<input id="btnCancel" type="button" class="input_btn_1" value="舍弃" />
 										<#-- 显示错误 -->  

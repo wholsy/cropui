@@ -22,6 +22,14 @@ public class DisruptorHelper {
 		return (Disruptor<T>) disruptorMaps.get(event);
 	}
 
+	public static <T extends IEvent> boolean remove(final Class<T> event) {
+		if (disruptorMaps.containsKey(event)) {
+			disruptorMaps.remove(event);
+			return true;
+		}
+		return false;
+	}
+
 	public static <T extends IEvent> void setDisruptor(final Class<T> event, final Disruptor<T> disruptor) {
 		if (disruptorMaps.containsKey(event)) {
 			return;

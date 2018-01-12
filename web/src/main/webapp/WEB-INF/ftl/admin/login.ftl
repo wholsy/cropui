@@ -66,27 +66,7 @@
     
 	<#include "admin/common/include/endjs.ftl">
 	
-	<#--
 	<script src="${ctx}/adm/javascript/pages/login.js"></script>
-	-->
-	<script type="text/javascript">
-		$(function () {
-        $("#btn_login").bind("click", function () {
-            var username = $("#txt_username").val();
-            var password = $("#txt_password").val();
-            if (username && password) {
-                $.post("${ctx}/admin/login/dologin", {username: username, password: password}, function (rs) {
-                    if (rs["data"] == false) {
-                    	$.dialog.alert(rs["message"]);
-                    } else {
-                        window.location.href = "${ctx}/admin/welcome.html";
-                    }
-                });
-            }
-        })
-
-    });
-	</script>
 
 </body>
 </html>

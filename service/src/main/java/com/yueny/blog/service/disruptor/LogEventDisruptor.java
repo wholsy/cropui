@@ -1,9 +1,12 @@
+/**
+ *
+ */
 package com.yueny.blog.service.disruptor;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.WaitStrategy;
 import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
@@ -11,11 +14,16 @@ import com.lmax.disruptor.dsl.ProducerType;
 import com.yueny.blog.service.disruptor.event.LogEvent;
 import com.yueny.blog.service.disruptor.factory.LogEventFactory;
 import com.yueny.blog.service.disruptor.handler.LogEventHandler;
-import com.yueny.blog.service.disruptor.handler.SyntonyExecute;
 import com.yueny.rapid.lang.thread.factory.NamedThreadFactory;
 
+/**
+ * @author yueny09 <deep_blue_yang@163.com>
+ *
+ * @DATE 2018年1月11日 下午9:15:01
+ *
+ */
 @Service
-public class LogEventDisruptor implements InitializingBean {
+public class LogEventDisruptor implements InitializingBean, DisposableBean {
 	/*
 	 * (non-Javadoc)
 	 *
@@ -24,7 +32,24 @@ public class LogEventDisruptor implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		final Disruptor<LogEvent> disruptor = getDisruptor();
+
 		DisruptorHelper.setDisruptor(LogEvent.class, disruptor);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.springframework.beans.factory.DisposableBean#destroy()
+	 */
+	@Override
+	public void destroy() throws Exception {
+		final Disruptor<LogEvent> disruptor = DisruptorHelper.getDisruptor(LogEvent.class);
+
+		if (disruptor != null) {
+			disruptor.shutdown();
+
+			DisruptorHelper.remove(LogEvent.class);
+		}
 	}
 
 	private Disruptor<LogEvent> getDisruptor() {
@@ -60,34 +85,18 @@ public class LogEventDisruptor implements InitializingBean {
 				// Single producer
 				ProducerType.SINGLE, waitStrategy);
 
+		final LogEventHandler logEventHandler = new LogEventHandler();
 		// Connect the handler
-		disruptor.handleEventsWith(new LogEventHandler());
+		disruptor.handleEventsWith(logEventHandler);
+
+		// set our custom exception handler
+		// ExceptionHandler exceptionHandler = new WriteExceptionHandler();
+		// disruptor.handleExceptionsFor(logEventHandler).with(exceptionHandler);
 
 		// Start the Disruptor, starts all threads running
 		disruptor.start();
 
 		return disruptor;
-	}
-
-	/**
-	 * @param syntonyExecute
-	 *            事件传递的业务数据
-	 */
-	public void publishData(final SyntonyExecute syntonyExecute) {
-		final Disruptor<LogEvent> disruptor = DisruptorHelper.getDisruptor(LogEvent.class);
-
-		// 发布事件
-		// Get the ring buffer from the Disruptor to be used for publishing.
-		final RingBuffer<LogEvent> ringBuffer = disruptor.getRingBuffer();
-		final long sequence = ringBuffer.next();// 请求下一个事件序号；
-
-		try {
-			// 获取该序号对应的事件对象；
-			final LogEvent event = ringBuffer.get(sequence);
-			event.setSyntonyExecute(syntonyExecute);
-		} finally {
-			ringBuffer.publish(sequence);// 发布事件；
-		}
 	}
 
 }

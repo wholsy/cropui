@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 全站文章分类
+ * 全站文章分类列表展示的数据实体
  *
  * @author yueny09 <deep_blue_yang@163.com>
  *
@@ -37,6 +37,6 @@ public class TagsForCategoriesViewsVo extends AbstractBo {
 	 */
 	@Getter
 	@Setter
-	private Set<OwenerTagBo> owenerTag;
+	private Set<OwenerTagBo> owenerTags;
 
 }

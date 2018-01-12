@@ -6,7 +6,7 @@
 
 <ul class="nav navbar-right panel_toolbox">
 	<li>
-		<a class="collapse-link">
+		<a class="collapse-link" data-toggle="tooltip" data-placement="left" title="窗口折叠">
 			<i class="fa fa-chevron-up"></i>
 		</a>
     </li>
@@ -28,7 +28,7 @@
      -->
      
     <li>
-	    <a class="close-link">
+	    <a class="close-link" data-toggle="tooltip" data-placement="right" title="窗口关闭">
 			<i class="fa fa-close"></i>
 	    </a>
 	</li>

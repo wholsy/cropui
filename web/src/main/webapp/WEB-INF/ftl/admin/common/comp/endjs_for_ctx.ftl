@@ -16,16 +16,16 @@
 <script src="${ctx}/plug-ins/nprogress/nprogress.js"></script>
     
 <#-- tips -->
-<script src="${ctx}/assets/js/jquery.sobox.js"></script>
 <!-- lhg dialog js -->
 <script src="${ctx}/plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+<script src="${ctx}/assets/javascript/jquery.sobox.js"></script>
 
 <script src="http://static.codealy.com/plugins/prettify/prettify.js" type="text/javascript"></script>
 <script src="${ctx}/plug-ins/layerUi/layer.js"></script>
 
 <!-- Custom Theme Scripts -->
-<script src="${ctx}/assets/js/tools.js"></script>
-<script src="${ctx}/adm/javascript/public.js"></script>
+<script src="${ctx}/assets/javascript/public.js"></script>
+<script src="${ctx}/assets/javascript/tools.js"></script>
 
 <script src="${ctx}/adm/js/custom.js"></script>
 <script src="${ctx}/adm/js/custom2_link.js"></script>

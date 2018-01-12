@@ -22,8 +22,8 @@ import com.yueny.blog.service.cache.CacheActionType;
 import com.yueny.blog.service.cache.CacheDataHandler;
 import com.yueny.blog.service.cache.comp.CacheListService;
 import com.yueny.blog.service.cache.comp.CacheService;
-import com.yueny.blog.service.disruptor.LogEventDisruptor;
 import com.yueny.blog.service.disruptor.handler.SyntonyExecute;
+import com.yueny.blog.service.disruptor.producer.LogEventProducer;
 import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.blog.service.tag.IOwenerTagService;
 import com.yueny.blog.vo.article.admin.tags.ArticleBlogForCategoryTagModel;
@@ -54,8 +54,6 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	private ICategoriesTagService categoriesTagService;
 	@Autowired
 	private IOwenerTagService owenerTagService;
-	@Autowired
-	private LogEventDisruptor logEventDisruptor;
 
 	/*
 	 * (non-Javadoc)
@@ -313,13 +311,14 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 		final SyntonyExecute syntonyExecute = new SyntonyExecute() {
 			@Override
 			public void execute() {
+				logger.info("删除日志 {} 缓存信息！", bo.getArticleBlogId());
 				cacheService.cacheDelete(ArrayUtil.newArray(CacheActionType.QUERY_ONE, bo.getArticleBlogId()),
 						ArrayUtil.newArray("findById", bo.getArticleId()),
 						ArrayUtil.newArray("findByPreviousBlogId", bo.getArticleBlogId()),
 						ArrayUtil.newArray("findLatestBlog"), ArrayUtil.newArray("findLatestBlog", bo.getUid()));
 			}
 		};
-		logEventDisruptor.publishData(syntonyExecute);
+		new LogEventProducer().publishData(syntonyExecute);
 
 		final ArticleBlogEntry entry = map(bo, ArticleBlogEntry.class);
 		return blogDao.update(entry);

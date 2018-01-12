@@ -47,7 +47,7 @@
 						<ul class="nav">
 							<li><a href="${ctx}/">主页</a></li>
 					      	<li><a href="${ctx}/archive.html">存档</a></li>
-					      	<li><a href="${ctx}/owenerTags.html">我的分类</a></li>
+					      	<li><a href="${ctx}/owenerTags.html">我的分类标签</a></li>
 					      	<li><a href="${ctx}/tags.html" onclick="return false">标签树</a></li>
 					      	<li><a href="${ctx}/fks.html" onclick="return false">拓扑关系</a></li>
 					      	<li><a href="${ctx}/about.html">关于我</a></li>

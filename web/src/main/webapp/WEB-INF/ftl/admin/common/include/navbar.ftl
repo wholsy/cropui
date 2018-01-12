@@ -8,7 +8,9 @@
     
     <nav>
       <div class="nav toggle">
-        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+        <a id="menu_toggle" data-toggle="tooltip" data-placement="right" title="菜单控制">
+        		<i class="fa fa-bars"></i>
+        	</a>
       </div>
 	  
       <ul class="nav navbar-nav navbar-right">
@@ -39,11 +41,13 @@
                 <span>Settings</span>
               </a>
             </li>
-            <li><a href="javascript:;">Help</a></li>
+            <li>
+            		<a href="javascript:;" data-toggle="tooltip" data-placement="left" title="帮助">Help</a>
+            </li>
             
             <li class="divider"></li>
             <li>
-	            <a id="a_logout" href="#">
+	            <a id="a_logout" href="#" data-toggle="tooltip" data-placement="left" title="退出">
 		            <i class="fa fa-sign-out pull-right"></i>
 		            ${distUser.displayName} Logout
 	            </a>
@@ -117,6 +121,7 @@
           </ul>
         </li>
         -->
+        
       </ul>
     </nav>
     

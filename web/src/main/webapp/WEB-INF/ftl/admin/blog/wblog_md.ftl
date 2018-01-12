@@ -1,10 +1,10 @@
 <#include "admin/common/header.ftl">
 
 <#-- editormd -->
-<link rel="stylesheet" href="${ctx}/adm/assets/js/editor.md/css/editormd.css"/>
+<link rel="stylesheet" href="${ctx}/plug-ins/editor.md/css/editormd.css"/>
 
-<link href="${ctx}/assets/css/write/write.css" rel="stylesheet" type="text/css">
-<link href="${ctx}/assets/css/write/main.css" rel="stylesheet" type="text/css">
+	<link href="${ctx}/adm/style/pages/blog/write/write.css" rel="stylesheet" type="text/css">
+	<link href="${ctx}/adm/style/pages/blog/write/main.css" rel="stylesheet" type="text/css">
 	
 <body class="no-skin">
 <#include "admin/common/navbar.ftl">
@@ -212,8 +212,8 @@
 </script>
 
 <#-- editormd -->
-<script src="${ctx}/adm/assets/js/editor.md/editormd.min.js"></script>
-<script src="${ctx}/adm/assets/js/wblog/wblog_md.js"></script>
+<script src="${ctx}/plug-ins/editor.md/editormd.min.js"></script>
+<script src="${ctx}/adm/javascript/pages/blog/wblog/wblog_md.js"></script>
 
 <script src="http://static.codealy.com/plugins/markdown/to-markdown.js"></script>
 <script src="http://static.codealy.com/plugins/markdown/markdown.min.js"></script>

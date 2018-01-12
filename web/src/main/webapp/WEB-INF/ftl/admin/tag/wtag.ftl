@@ -1,11 +1,4 @@
 <#include "../common/header.ftl">
-<#--上传组件-->
-<link href="/adm/assets/js/jquery-file-upload/jquery.fileupload.css" rel="stylesheet">
-<script src="/adm/assets/js/jquery-file-upload/jquery.ui.widget.js"></script>
-<script src="/adm/assets/js/jquery-file-upload/jquery.iframe-transport.js"></script>
-<script src="/adm/assets/js/jquery-file-upload/jquery.fileupload.js"></script>
-<script src="/adm/assets/js/jquery-file-upload/upload-base.js"></script>
-
 
 <body class="no-skin">
 <#include "../common/navbar.ftl">

@@ -26,6 +26,8 @@ public class LogEventHandler implements EventHandler<LogEvent> {
 		if (syntonyExecute != null) {
 			syntonyExecute.execute();
 		}
+		// logger.info("Disruptor engine started successfully.");
+
 	}
 
 }
