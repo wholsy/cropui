@@ -1,6 +1,6 @@
 package com.yueny.blog.service.console.manager;
 
-import com.yueny.blog.vo.article.cas.user.UserDisplayVo;
+import com.yueny.blog.vo.console.user.UserDisplayVo;
 
 /**
  * 用户展示服务

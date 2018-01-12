@@ -1,4 +1,4 @@
-package com.yueny.blog.vo.article.admin.tags;
+package com.yueny.blog.vo.console.article;
 
 import java.util.Set;
 

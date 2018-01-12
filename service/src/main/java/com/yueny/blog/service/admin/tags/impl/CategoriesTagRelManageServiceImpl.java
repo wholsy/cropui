@@ -17,7 +17,7 @@ import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService;
 import com.yueny.blog.service.tag.ICategoriesTagService;
 import com.yueny.blog.service.tag.IOwenerTagService;
-import com.yueny.blog.vo.article.admin.tags.TagsForCategoriesViewsVo;
+import com.yueny.blog.vo.console.tags.TagsForCategoriesViewsVo;
 
 /**
  * 后台的全站文章分类类目服务
@@ -60,6 +60,30 @@ public class CategoriesTagRelManageServiceImpl implements ICategoriesTagRelManag
 			list.add(vo);
 		}
 		return list;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#
+	 * findByTagsForCategories(java.lang.String)
+	 */
+	@Override
+	public TagsForCategoriesViewsVo findByTagsForCategories(final String categoriesTagCode) {
+		final CategoriesTagBo categoriesTagBo = categoriesTagService.findByCode(categoriesTagCode);
+		if (categoriesTagBo == null) {
+			return null;
+		}
+
+		final TagsForCategoriesViewsVo vo = new TagsForCategoriesViewsVo();
+		vo.setCategoriesTagBo(categoriesTagBo);
+
+		// 添加个人分类列表
+		final List<OwenerTagBo> owenerTagList = owenerTagService
+				.queryByCategoriesTagCode(categoriesTagBo.getCategoriesTagCode());
+		vo.setOwenerTags(Sets.newHashSet(owenerTagList));
+
+		return vo;
 	}
 
 }

@@ -8,8 +8,8 @@ import com.yueny.blog.bo.console.user.UserBaseInfoExpBo;
 import com.yueny.blog.bo.console.user.UserInfoBo;
 import com.yueny.blog.service.console.manager.IUserDisplayManager;
 import com.yueny.blog.service.console.user.IUserService;
-import com.yueny.blog.vo.article.cas.user.UserDisplayVo;
-import com.yueny.blog.vo.article.cas.user.UserInfoVo;
+import com.yueny.blog.vo.console.user.UserDisplayVo;
+import com.yueny.blog.vo.console.user.UserInfoVo;
 import com.yueny.rapid.lang.mask.MaskInfoUtil;
 
 /**

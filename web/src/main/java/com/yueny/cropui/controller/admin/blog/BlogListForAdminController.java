@@ -16,7 +16,7 @@ import com.yueny.blog.bo.resp.JqGridDataJsonListForPageResponse;
 import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.service.article.IArticleBlogService;
 import com.yueny.blog.service.manage.IArticleManageService;
-import com.yueny.blog.vo.article.admin.tags.ArticleTagBlogVo;
+import com.yueny.blog.vo.console.article.ArticleTagBlogVo;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.JsonNormalResponse;
 import com.yueny.rapid.lang.enums.BaseErrorType;

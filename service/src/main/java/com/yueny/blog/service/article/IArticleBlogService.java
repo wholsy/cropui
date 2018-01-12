@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
-import com.yueny.blog.vo.article.admin.tags.ArticleTagBlogVo;
+import com.yueny.blog.vo.console.article.ArticleTagBlogVo;
 import com.yueny.superclub.api.page.IPageable;
 
 /**

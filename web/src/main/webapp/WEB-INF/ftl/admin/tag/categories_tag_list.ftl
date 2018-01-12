@@ -47,7 +47,7 @@
 				    			${categoriesTag.categoriesTagBo.categoriesName}
 				    			 |
 					    </#list>
-					    <a href="javascript:;" class="btn btn-round btn-default" data-toggle="modal"
+					    <a href="${ctx}/admin/categories_tag/ " class="btn btn-round btn-default" data-toggle="modal"
 					    		data-target=".bs-tag-edit-modal-lg">
 	                    		<i class="fa fa-plus-circle"></i> Insert
 	                    </a>
@@ -60,7 +60,7 @@
 				                          	<span aria-hidden="true">×</span>
 				                          </button>
 				                          <h4 class="modal-title" id="myModalLabel">
-				                          	全站文章分类-新增
+				                          	全站文章分类-新增 -- ${categoriesTag.categoriesTagBo.categoriesName}
 				                          </h4>
 				                        </div>
 				                        

@@ -14,7 +14,7 @@ import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.service.console.manager.ILoginManager;
 import com.yueny.blog.service.console.manager.IUserDisplayManager;
 import com.yueny.blog.service.util.CurrentUserUtils;
-import com.yueny.blog.vo.article.cas.user.UserDisplayVo;
+import com.yueny.blog.vo.console.user.UserDisplayVo;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.JsonNormalResponse;
 import com.yueny.rapid.lang.enums.BaseErrorType;
