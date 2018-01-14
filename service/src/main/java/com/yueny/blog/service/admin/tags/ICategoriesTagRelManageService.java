@@ -2,7 +2,8 @@ package com.yueny.blog.service.admin.tags;
 
 import java.util.List;
 
-import com.yueny.blog.vo.console.tags.TagsForCategoriesViewsVo;
+import com.yueny.blog.console.vo.tags.TagsForCategorieBaseVo;
+import com.yueny.blog.console.vo.tags.TagsForCategoriesViewsVo;
 
 /**
  * 后台的全站文章分类类目服务
@@ -26,6 +27,14 @@ public interface ICategoriesTagRelManageService {
 	 * @param categoriesTagCode
 	 *            全站文章分类编号
 	 */
-	TagsForCategoriesViewsVo findByTagsForCategories(String categoriesTagCode);
+	TagsForCategoriesViewsVo findByTagsForCode(String categoriesTagCode);
+
+	/**
+	 * 查询当前子分类对应的父级所属层级的父分类列表
+	 *
+	 * @param categoriesChildrenCode
+	 *            当前子分类编号
+	 */
+	List<TagsForCategorieBaseVo> findParentTagsByChildrenCodeForUp(final String categoriesChildrenCode);
 
 }

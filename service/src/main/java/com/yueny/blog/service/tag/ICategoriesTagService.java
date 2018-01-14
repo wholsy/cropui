@@ -44,7 +44,7 @@ public interface ICategoriesTagService {
 	CategoriesTagBo findByID(final Long categoriesId);
 
 	/**
-	 * 文章分类编号查询
+	 * 查询父级文章的子类分类编号
 	 *
 	 * @param categoriesParentCode
 	 *            父级分类编号

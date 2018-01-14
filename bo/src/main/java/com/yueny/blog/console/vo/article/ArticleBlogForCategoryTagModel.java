@@ -1,4 +1,4 @@
-package com.yueny.blog.vo.console.article;
+package com.yueny.blog.console.vo.article;
 
 import com.yueny.superclub.util.common.pojo.BaseBo;
 

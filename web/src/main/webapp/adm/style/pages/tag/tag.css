@@ -1,4 +1,23 @@
 /* 全站文章分类 */
+
+.tag {
+	display:inline-block;
+	padding:0 6px;
+	color:#017E66;
+	background-color:rgba(1,126,102,0.08);
+	height:26px;
+	font-weight:normal;
+	font-size:13px;
+	text-align:center;
+}
+
+a.tag {
+    line-height:26px;
+}
+input.tag {
+    line-height:1;
+}
+
 .tag:after {
     content: " ";
     height: 30px;

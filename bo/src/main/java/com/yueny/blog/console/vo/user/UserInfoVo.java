@@ -1,4 +1,4 @@
-package com.yueny.blog.vo.console.user;
+package com.yueny.blog.console.vo.user;
 
 import java.io.Serializable;
 import java.util.Date;

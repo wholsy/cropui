@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import com.yueny.blog.bo.console.user.UserBaseInfoBo;
 import com.yueny.blog.bo.console.user.UserBaseInfoExpBo;
 import com.yueny.blog.bo.console.user.UserInfoBo;
+import com.yueny.blog.console.vo.user.UserDisplayVo;
+import com.yueny.blog.console.vo.user.UserInfoVo;
 import com.yueny.blog.service.console.manager.IUserDisplayManager;
 import com.yueny.blog.service.console.user.IUserService;
-import com.yueny.blog.vo.console.user.UserDisplayVo;
-import com.yueny.blog.vo.console.user.UserInfoVo;
 import com.yueny.rapid.lang.mask.MaskInfoUtil;
 
 /**

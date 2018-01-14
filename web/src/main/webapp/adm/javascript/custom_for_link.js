@@ -1,4 +1,6 @@
-// Panel toolbox
+/* 快捷折叠和关闭按钮 */
+
+/* 退出登陆按钮 */
 $(function () {
     $("#a_logout").bind("click", function () {
         $.post(ctx+"/admin/login/dologout", function (ret) {
@@ -13,6 +15,7 @@ $(function () {
     
 });
 
+// Panel toolbox
 $(document).ready(function() {
 	// 收缩折叠
     $('.collapse-link').on('click', function() {

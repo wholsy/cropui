@@ -1,4 +1,4 @@
-package com.yueny.blog.vo.console.user;
+package com.yueny.blog.console.vo.user;
 
 import com.yueny.blog.bo.console.user.UserBaseInfoBo;
 import com.yueny.blog.bo.console.user.UserBaseInfoExpBo;

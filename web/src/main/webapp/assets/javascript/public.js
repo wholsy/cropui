@@ -1,3 +1,19 @@
+$(function () {
+		/* blockUI 全局设置 */
+	   // override these in your code to change the default behavior and style
+	   $.blockUI.defaults.css = {
+            border: 'none',
+            padding: '15px',
+            backgroundColor: '#000',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .5,
+            color: '#fff'
+        };
+        
+       $.blockUI.defaults.message = 'Hold on!';
+});
+
 
 //捐赠
 function reciprocate(){
@@ -22,3 +38,4 @@ function reciprocate(){
 	  +'</div>'
 	});
 }
+
