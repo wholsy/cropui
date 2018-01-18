@@ -3,6 +3,8 @@
  */
 package com.yueny.blog.console.request;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.yueny.superclub.api.pojo.instance.AbstractBo;
 
 import lombok.Getter;
@@ -29,14 +31,17 @@ public class TagsForCategoriesModifyRequest extends AbstractBo {
 	/** 分类名称 */
 	@Getter
 	@Setter
+	@NotEmpty(message = "分类名称不能为空")
 	private String categoriesName;
 	/** 上级父级分类编号 */
 	@Getter
 	@Setter
+	@NotEmpty(message = "上级分类不能为空")
 	private String tagsForUpategoriesCode;
 	/** 全站文章分类编号 */
 	@Getter
 	@Setter
+	@NotEmpty(message = "全站文章分类不能为空")
 	private String categoriesTagCode;
 	/** 备注 */
 	@Getter

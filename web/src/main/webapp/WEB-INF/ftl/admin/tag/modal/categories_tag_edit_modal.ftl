@@ -12,28 +12,33 @@
 		</h4>
 	</div>
 	
-	<form id="categoriesTagEditForm" class="form-horizontal form-label-left" role="form" enctype="multipart/form-data"
-		 method="POST" action="${ctx}/admin/categories_tag/${categoriesTag.categoriesTagCode}.html" 
-		 data-toggle="validator">
+	<form id="categoriesTagEditForm" class="form-horizontal form-label-left input_mask" role="form" enctype="multipart/form-data"
+		 action="${ctx}/admin/categories_tag/update/" 
+		 data-toggle="validator" data-parsley-validate>
 		<input type="hidden" name="categoriesTagCode" value="${categoriesTag.categoriesTagCode}"/>
 		
 		<#-- modal-body start -->
 			<div class="modal-body">
 					<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12">全站文章分类名称</label>
+							<div class="col-md-9 col-sm-9 col-xs-12 invalid-form-error-message"></div>
+					</div>
+					<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">全站文章分类名称<span class="required red">*</span></label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 							  <input type="text" class="form-control" name="categoriesName" 
 							  		<#if (categoriesTag)?? && (categoriesTag.owenerTags)??>
 							  			readonly="readonly"
 							    		</#if>
-							  		placeholder="全站文章分类名称"
+							  		placeholder="全站文章分类名称" required="required"
 							  		value="${categoriesTag.categoriesName}"/>
 							</div>
 					</div>
 					<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12">分类描述</label>
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">分类描述<span class="required red">*</span></label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
-							  <input type="text" class="form-control" name="categoriesDesc" placeholder="分类描述"
+							  <input type="text" class="form-control" name="categoriesDesc" placeholder="分类描述" 
+							  		required="required" data-parsley-trigger="blur"  
+            							data-parsley-required-message="分类描述不可为空" data-parsley-group="blockInput"
 							  		value="${categoriesTag.categoriesDesc}"/>
 							</div>
 					</div>
@@ -48,7 +53,7 @@
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">上级分类</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
 								<select name="tagsForUpategoriesCode" class="select2_single form-control" tabindex="-1">
-									<option>请选择</option>
+									<option value="">请选择</option>
 									<#if (tagsForUp)?? && (tagsForUp?size > 0)>
                             					<#list tagsForUp as tp>
                             						<option value="${tp.categoriesTagCode}" 
@@ -124,7 +129,7 @@
 	<script src="${ctx}/adm/javascript/pages/tag/categories_tag-form.js"></script>
 	
 	<!-- jQuery Tags Input -->
-	<script src="${ctx}/adm/javascript/custom_tag.js"></script>
+	<script src="${ctx}/adm/javascript/custom_public.js"></script>
     <script src="${ctx}/plug-ins/jquery.tagsinput/src/jquery.tagsinput.js"></script>
     
     <#-- tips -->
@@ -132,4 +137,5 @@
 	<script src="${ctx}/plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
 	<#-- mask -->
 	<script src="${ctx}/plug-ins/mask/blockui/jquery.blockUI.js"></script>
-   
+ 	<#-- Parsley validator -->
+    <script src="${ctx}/plug-ins/parsleyjs/dist/parsley.js"></script>

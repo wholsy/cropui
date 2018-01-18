@@ -23,6 +23,9 @@
 <script src="${ctx}/plug-ins/mask/documentMask/documentMask.js"></script>
 <script src="${ctx}/plug-ins/mask/blockui/jquery.blockUI.js"></script>
 
+<#-- Parsley validator -->
+<script src="${ctx}/plug-ins/parsleyjs/dist/parsley.js"></script>
+    
 <script src="http://static.codealy.com/plugins/prettify/prettify.js" type="text/javascript"></script>
 <script src="${ctx}/plug-ins/layerUi/layer.js"></script>
 
@@ -30,6 +33,7 @@
 <script src="${ctx}/assets/javascript/public.js"></script>
 <script src="${ctx}/assets/javascript/tools.js"></script>
 <script src="${ctx}/adm/javascript/custom_for_link.js"></script>
+<script src="${ctx}/adm/javascript/custom_public.js"></script>
 
 <script src="${ctx}/adm/js/custom.js"></script>
 		

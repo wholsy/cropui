@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yueny.blog.bo.tag.CategoriesTagBo;
-import com.yueny.blog.service.tag.ICategoriesTagService;
+import com.yueny.blog.service.table.ICategoriesTagService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 

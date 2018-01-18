@@ -1593,18 +1593,6 @@ function init_knob() {
 
 };
 
-/* INPUT MASK */
-
-function init_InputMask() {
-
-	if (typeof($.fn.inputmask) === 'undefined') {
-		return;
-	}
-	console.log('init_InputMask');
-
-	$(":input").inputmask();
-
-};
 
 /* COLOR PICKER */
 
@@ -1944,45 +1932,6 @@ function init_SmartWizard() {
 
 };
 
-
-/* VALIDATOR */
-
-function init_validator() {
-
-	if (typeof(validator) === 'undefined') {
-		return;
-	}
-	console.log('init_validator');
-
-	// initialize the validator function
-	validator.message.date = 'not a real date';
-
-	// validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
-	$('form')
-		.on('blur', 'input[required], input.optional, select.required', validator.checkField)
-		.on('change', 'select.required', validator.checkField)
-		.on('keypress', 'input[required][pattern]', validator.keypress);
-
-	$('.multi.required').on('keyup blur', 'input', function() {
-		validator.checkField.apply($(this).siblings().last()[0]);
-	});
-
-	$('form').submit(function(e) {
-		e.preventDefault();
-		var submit = true;
-
-		// evaluate the form using generic validaing
-		if (!validator.checkAll($(this))) {
-			submit = false;
-		}
-
-		if (submit)
-			this.submit();
-
-		return false;
-	});
-
-};
 
 /* PNotify */
 
@@ -5321,7 +5270,6 @@ $(function() {
 	init_flot_chart();
 	init_sidebar();
 	init_wysiwyg();
-	init_InputMask();
 	init_JQVmap();
 	init_cropper();
 	init_knob();
@@ -5338,7 +5286,6 @@ $(function() {
 	init_morris_charts();
 	init_skycons();
 	init_select2();
-	init_validator();
 	init_DataTables();
 	init_chart_doughnut();
 	init_gauge();

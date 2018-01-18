@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yueny.blog.bo.model.document.ArchiveData;
-import com.yueny.blog.service.manage.IArticleQueryManageService;
+import com.yueny.blog.service.manager.IArticleQueryManageService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.superclub.api.page.core.PageCond;

@@ -1,18 +1,33 @@
 $(document).ready(function() {
 	$('.modal-link').on('click', function (event) {
 			event.preventDefault();
-		
+			
+			/*  */
+			$('.x_content').block({ 
+				// apply css props as desired
+            		css: {
+		            border: 'none',
+		            padding: '15px',
+		            backgroundColor: '#000',
+		            '-webkit-border-radius': '10px',
+		            '-moz-border-radius': '10px',
+		            opacity: .5,
+		            color: '#fff'
+		        },
+				message: '数据加载中...'
+			 });
+			 
             var categoriesTagCode = $(this).data('code');
             var remote = ctx + "/admin/categories_tag/"+ categoriesTagCode +".html";
             
-            // $.bootstrapLoading.start({ loadingTips: "正在处理数据，请稍候..." });
             var modal = $('.variant-modal');
             modal.modal({
             		backdrop: 'static',
             		keyboard: true
             	});
             	modal.find(".modal-content").empty();
-			// $.bootstrapLoading.end();
+			
+			$('.x_content').unblock();
 			
             $.ajax({
             		url: ctx + "/admin/categories_tag/"+ categoriesTagCode +".html", 

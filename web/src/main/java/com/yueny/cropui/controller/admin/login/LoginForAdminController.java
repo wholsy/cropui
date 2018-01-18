@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.console.vo.user.UserDisplayVo;
-import com.yueny.blog.service.console.manager.ILoginManager;
-import com.yueny.blog.service.console.manager.IUserDisplayManager;
+import com.yueny.blog.service.admin.manager.ILoginManager;
+import com.yueny.blog.service.admin.manager.IUserDisplayManager;
 import com.yueny.blog.service.util.CurrentUserUtils;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.JsonNormalResponse;

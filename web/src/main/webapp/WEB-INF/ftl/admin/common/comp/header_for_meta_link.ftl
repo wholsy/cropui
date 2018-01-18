@@ -33,6 +33,9 @@
     <!-- NProgress -->
     <link href="${ctx}/plug-ins/nprogress/nprogress.css" rel="stylesheet">
     
+    <#-- Parsley validator -->
+    <<link href="${ctx}/plug-ins/parsleyjs/src/parsley.css" rel="stylesheet">
+    
     <!-- Custom Theme Style -->
     <link href="${ctx}/adm/style/custom.css" rel="stylesheet">
     <link href="${ctx}/adm/style/style.css" rel="stylesheet" type="text/css"/>

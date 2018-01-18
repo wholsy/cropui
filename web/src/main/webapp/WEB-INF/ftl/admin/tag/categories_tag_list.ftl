@@ -340,9 +340,9 @@
 	</div>
 	<#-- row end -->
 	
+	<#include "admin/common/body_end.ftl">
 	
 	<script src="${ctx}/adm/javascript/pages/tag/categories_tag.js"></script>
-	
 	
 	<script src="${ctx}/plug-ins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="${ctx}/plug-ins/icheck/icheck.min.js"></script>
@@ -358,8 +358,6 @@
     <script src="${ctx}/plug-ins/switchery/dist/switchery.min.js"></script>
     <#-- Select2 -->
     <script src="${ctx}/plug-ins/select2/dist/js/select2.full.min.js"></script>
-    <#-- Parsley -->
-    <script src="${ctx}/plug-ins/parsleyjs/dist/parsley.min.js"></script>
     <#-- Autosize -->
     <script src="${ctx}/plug-ins/autosize/dist/autosize.min.js"></script>
     <#-- jQuery autocomplete -->
@@ -367,6 +365,5 @@
     <#-- starrr -->
     <script src="${ctx}/plug-ins/starrr/dist/starrr.js"></script>
 	
-<#include "admin/common/body_end.ftl">
 
 </html>
