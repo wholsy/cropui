@@ -61,6 +61,30 @@ public class OwenerTagDaoImpl extends SingleTableDao<OwenerTagEntry> implements 
 		return super.queryListByColumns(builder);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.dao.tag.IOwenerTagDao#queryByCode(java.util.List)
+	 */
+	@Override
+	public List<OwenerTagEntry> queryByCode(final Set<String> owenerTagCode) {
+		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_CODE", BasicSqlOperand.IN, owenerTagCode)
+				.build();
+		return super.queryListByColumns(builder);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.dao.tag.IOwenerTagDao#queryByCode(java.lang.String)
+	 */
+	@Override
+	public OwenerTagEntry queryByCode(final String owenerTagCode) {
+		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_CODE", owenerTagCode).build();
+
+		return super.queryByColumns(builder);
+	}
+
 	@Override
 	public List<OwenerTagEntry> queryByID(final Set<Long> entryIds) {
 		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_ID", BasicSqlOperand.IN, entryIds)

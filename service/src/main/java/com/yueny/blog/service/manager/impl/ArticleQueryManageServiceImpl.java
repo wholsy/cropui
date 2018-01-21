@@ -128,7 +128,7 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 		view.setArticleBlog(articleBlog);
 
 		// 获取文章的个人分类信息
-		final List<OwenerTagBo> owenerTags = owenerTagService.queryById(articleBlog.getOwenerTagIds());
+		final List<OwenerTagBo> owenerTags = owenerTagService.queryByCode(articleBlog.getOwenerTagIds());
 		view.setOwenerTags(owenerTags);
 
 		// 该博文所归属的全站文章分类

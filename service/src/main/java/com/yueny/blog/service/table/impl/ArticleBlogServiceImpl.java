@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,21 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	private CacheListService<ArticleBlogBo> cacheListService;
 	@Autowired
 	private CacheService<ArticleBlogBo> cacheService;
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.yueny.blog.service.table.IArticleBlogService#countBy(java.lang.String)
+	 */
+	@Override
+	public Long countBy(final String owenerTagCode) {
+		if (StringUtils.isEmpty(owenerTagCode)) {
+			return 0L;
+		}
+
+		return blogDao.countBy(owenerTagCode);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -93,6 +109,13 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 		}, CacheActionType.QUERY_ONE, primaryId);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.yueny.blog.service.table.IArticleBlogService#findByOwenerTagCode(java.
+	 * lang.String)
+	 */
 	@Override
 	@ProfilerLog
 	public List<ArticleBlogBo> findByOwenerTagCode(final String owenerTagCode) {

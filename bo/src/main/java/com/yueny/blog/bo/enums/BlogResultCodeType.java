@@ -20,7 +20,11 @@ public enum BlogResultCodeType implements IResultCodeType {
 	/*** 非法请求,请刷新后重试! */
 	ILLEGAL_REQUEST("610001", "非法请求,请刷新后重试!"),
 	/*** 数据记录不存在 */
-	RECORD_NOT_EXIT_PLACE("610005", "数据记录:%s 不存在!"),;
+	RECORD_NOT_EXIT_PLACE("610005", "数据记录:%s 不存在!"),
+	/*** 数据记录不存在 */
+	EXIT_FOR_OWENER_TAG_NAME("610016", "个人分类标签:%s 已经被使用!"),
+	/*** 不支持的操作 */
+	UNSUPPORT_ACTION("610017", "不支持的操作！"),;
 
 	/** 错误码 */
 	private String code;

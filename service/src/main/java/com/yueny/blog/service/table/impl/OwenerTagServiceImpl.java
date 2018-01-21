@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,6 +83,39 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 				return map(entrys, OwenerTagBo.class);
 			}
 		}, "queryByCategoriesTagCode", categoriesTagCode);
+	}
+
+	@Override
+	public List<OwenerTagBo> queryByCode(final Set<String> owenerTagCode) {
+		if (CollectionUtils.isEmpty(owenerTagCode)) {
+			return Collections.emptyList();
+		}
+		final List<OwenerTagEntry> entry = owenerTagDao.queryByCode(owenerTagCode);
+		if (entry == null) {
+			return Collections.emptyList();
+		}
+
+		return map(entry, OwenerTagBo.class);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.yueny.blog.service.table.IOwenerTagService#queryByCode(java.lang.String)
+	 */
+	@Override
+	public OwenerTagBo queryByCode(final String owenerTagCode) {
+		if (StringUtils.isEmpty(owenerTagCode)) {
+			return null;
+		}
+
+		final OwenerTagEntry entry = owenerTagDao.queryByCode(owenerTagCode);
+		if (entry == null) {
+			return null;
+		}
+
+		return map(entry, OwenerTagBo.class);
 	}
 
 	@Override

@@ -37,8 +37,6 @@ public class ArticleBlogEntry extends BaseEntry {
 	private String articleMore;
 	/** 此文章的上一篇文章对外ID */
 	private String articlePreviousBlogId;
-	/** 文章标签ID,最多添加5个标签，多个标签之间用“,”分隔 */
-	private String articleTagIds;
 	/** 文章标题 */
 	private String articleTitle;
 	/** 全站文章分类编号 ，多个标签之间用“,”分隔，目前定义只会为一个 */

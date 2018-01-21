@@ -71,7 +71,6 @@
         <property name="favorParameter" value="false"/>
         <property name="parameterName" value="mediaType"/>
         <property name="ignoreAcceptHeader" value="true" />
-        <property name="defaultContentType" value="application/json" />
         <property name="useJaf" value="false" />
         
         <property name="mediaTypes">
@@ -79,7 +78,7 @@
 				<entry key="json" value="application/json" />  
 				<entry key="html" value="text/html" />  
                 <entry key="xml" value="application/xml" />
-                <entry key="xls" value="application/excel" />  
+                <entry key="xls" value="application/excel" />
                 <entry key="pdf" value="application/pdf" /> 
 			</map>
 		</property>

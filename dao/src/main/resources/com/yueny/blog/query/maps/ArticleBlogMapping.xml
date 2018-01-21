@@ -9,7 +9,6 @@
   		<result column="SEL_TYPE_CODE" property="selTypeCode"/>
   		<result column="ARTICLE_CONTEXT" property="articleContext"/>
   		<result column="ARTICLE_DIGEST" property="articleDigest"/>
-  		<result column="ARTICLE_TAG_IDS" property="articleTagIds"/>
   		<result column="OWENER_TAG_IDS" property="owenerTagIds"/>
   		<result column="CATEGORY_TAG_CODES" property="categoryTagCodes"/>
   		<result column="ARTICLE_MORE" property="articleMore"/>

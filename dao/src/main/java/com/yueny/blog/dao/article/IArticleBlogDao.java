@@ -16,6 +16,13 @@ import com.yueny.superclub.api.page.IPageable;
  */
 public interface IArticleBlogDao extends ISingleTableDao<ArticleBlogEntry>, IWholeTableQueryDao<ArticleBlogEntry> {
 	/**
+	 * 查询表内数据数量
+	 *
+	 * @return 总数
+	 */
+	Long countBy(String owenerTagCode);
+
+	/**
 	 * 根据文章对外ID删除博文<br>
 	 */
 	boolean deleteByBlogId(String articleBlogId);

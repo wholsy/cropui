@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yueny.blog.bo.enums.BlogResultCodeType;
+import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.common.enums.CropuiToolkitsErrorType;
 import com.yueny.blog.console.request.TagsForCategoriesModifyRequest;
 import com.yueny.blog.console.vo.tags.TagsForCategorieBaseVo;
 import com.yueny.blog.console.vo.tags.TagsForCategoriesViewsVo;
 import com.yueny.blog.service.admin.manager.ICategoriesTagManagerService;
+import com.yueny.blog.service.table.IOwenerTagService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.JsonNormalResponse;
+import com.yueny.rapid.lang.exception.invalid.InvalidException;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
 /**
@@ -34,9 +38,11 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 public class CategoriesTagAdminController extends BaseController {
 	@Autowired
 	private ICategoriesTagManagerService categoriesTagManagerService;
+	@Autowired
+	private IOwenerTagService owenerTagService;
 
 	/**
-	 * 获取具体的全站文章分类信息及所拥有的个人标签
+	 * 获取具体的全站文章分类信息及所拥有的个人标签页面
 	 */
 	@RequestMapping(value = "/categories_tag/{categoriesTagCode}.html", method = RequestMethod.GET)
 	public String selectCategoriesData(@PathVariable(required = false) final String categoriesTagCode,
@@ -94,6 +100,18 @@ public class CategoriesTagAdminController extends BaseController {
 	}
 
 	/**
+	 * 个人标签修改页面
+	 */
+	@RequestMapping(value = "/owener_tag/{owenerTagCode}.html", method = RequestMethod.GET)
+	public String selectOwenerData(@PathVariable(required = true) final String owenerTagCode,
+			final HttpServletResponse response) {
+		final OwenerTagBo owenerTag = owenerTagService.queryByCode(owenerTagCode);
+		setModelAttribute("owenerTag", owenerTag);
+
+		return "admin/tag/modal/owener_tag_edit_modal";
+	}
+
+	/**
 	 * 提交修改信息
 	 */
 	@RequestMapping(value = "/categories_tag/update/", method = RequestMethod.PUT)
@@ -113,11 +131,50 @@ public class CategoriesTagAdminController extends BaseController {
 		try {
 			// 从session中获取uid
 			final String uid = "yuanyang";
-
-			final boolean rs = categoriesTagManagerService.update(tagsForCategoriesModifyRequest, uid);
-			resp.setData(rs);
+			if (StringUtils.isNotEmpty(tagsForCategoriesModifyRequest.getCategoriesTagCode())) {
+				final boolean rs = categoriesTagManagerService.update(tagsForCategoriesModifyRequest, uid);
+				resp.setData(rs);
+			} else {
+				throw new InvalidException(BlogResultCodeType.UNSUPPORT_ACTION);
+			}
+		} catch (final InvalidException e) {
+			logger.error("【全站文章分类信息】出现错误!", e);
+			resp.setCode(e.getErrorCode());
+			resp.setMessage(e.getErrorMsg());
 		} catch (final Exception e) {
 			logger.error("【全站文章分类信息】出现错误!", e);
+
+			resp.setCode(CropuiToolkitsErrorType.SYSTEM_BUSY.getCode());
+			resp.setMessage(CropuiToolkitsErrorType.SYSTEM_BUSY.getMessage());
+		}
+
+		return resp;
+	}
+
+	/**
+	 * 提交个人标签信息修改
+	 */
+	@RequestMapping(value = "/owener_tag/update/", method = RequestMethod.PUT)
+	@ResponseBody
+	public JsonNormalResponse<Boolean> updateOwenerTag(final @Valid OwenerTagBo owenerTagRequest,
+			final HttpServletResponse response) {
+		final JsonNormalResponse<Boolean> resp = new JsonNormalResponse<>();
+		resp.setData(false);
+
+		if (owenerTagRequest == null) {
+			resp.setCode(CropuiToolkitsErrorType.DATA_VERIFY_ERROR.getCode());
+			resp.setMessage(CropuiToolkitsErrorType.DATA_VERIFY_ERROR.getMessage());
+			return resp;
+		}
+
+		try {
+			throw new InvalidException(BlogResultCodeType.UNSUPPORT_ACTION);
+		} catch (final InvalidException e) {
+			logger.error("【个人标签信息修改】出现错误!", e);
+			resp.setCode(e.getErrorCode());
+			resp.setMessage(e.getErrorMsg());
+		} catch (final Exception e) {
+			logger.error("【个人标签信息修改】出现错误!", e);
 
 			resp.setCode(CropuiToolkitsErrorType.SYSTEM_BUSY.getCode());
 			resp.setMessage(CropuiToolkitsErrorType.SYSTEM_BUSY.getMessage());

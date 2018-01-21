@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.yueny.blog.bo.enums.BlogResultCodeType;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.common.BlogConstant;
@@ -31,6 +32,7 @@ import com.yueny.blog.service.disruptor.producer.FigureTagCheckerEventProducer;
 import com.yueny.blog.service.table.IArticleBlogService;
 import com.yueny.blog.service.table.ICategoriesTagService;
 import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.rapid.lang.exception.invalid.InvalidException;
 import com.yueny.rapid.lang.util.enums.EnableType;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 import com.yueny.superclub.api.constant.Constants;
@@ -45,12 +47,17 @@ import com.yueny.superclub.api.constant.Constants;
  */
 @Service
 public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategoriesTagManagerService {
+	private interface ModifyTagAction {
+		CategoriesTagBo action(TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, final String uid);
+	}
+
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
 	@Autowired
 	private IOwenerTagService owenerTagService;
 	@Autowired
 	private IArticleBlogService articleBlogService;
+
 	@Autowired
 	private OwenerTagCodeGenerate owenerTagCodeGenerate;
 
@@ -160,32 +167,29 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 		return mapAny(ctList, TagsForCategorieBaseVo.class);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see
-	 * com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#update(com.
-	 * yueny.blog.console.request.TagsForCategoriesModifyRequest)
-	 */
-	@Override
-	@Transactional
-	public boolean update(final TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, final String uid) {
-		// 获取最新的数据
-		final CategoriesTagBo tagBo = categoriesTagService
-				.findByCode(tagsForCategoriesModifyRequest.getCategoriesTagCode());
-		// 对更新数据进行重新赋值
-		tagBo.setCategoriesDesc(tagsForCategoriesModifyRequest.getCategoriesDesc());
-		tagBo.setCategoriesName(tagsForCategoriesModifyRequest.getCategoriesName());
-		tagBo.setMemo(tagsForCategoriesModifyRequest.getMemo());
-		tagBo.setCategoriesParentCode(tagsForCategoriesModifyRequest.getTagsForUpategoriesCode());
-		categoriesTagService.update(tagBo);
-
+	private boolean modifyTag(final TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, final String uid,
+			final ModifyTagAction action) throws InvalidException {
 		final String owenerTagNames = tagsForCategoriesModifyRequest.getOwenerTagNameArrays();
 		final List<String> names = Splitter.on(Constants.COMMA)
 				// 去掉空的子串
 				.omitEmptyStrings()
 				// 去掉子串的空格
 				.trimResults().splitToList(owenerTagNames);
+
+		// 优先校验:该name没有挂在其他 CategoriesTagCode 下
+		for (final String name : names) {
+			final OwenerTagBo tag = owenerTagService.queryByTagName(uid, name);
+			if (tag != null && !StringUtils.equals(tag.getCategoriesTagCode(),
+					tagsForCategoriesModifyRequest.getCategoriesTagCode())) {
+				// TODO 如果被挂在其他分类下但已失效，此处可以删除其 tag。
+				// 但目前未执行删除，故直接报错
+				final InvalidException e = new InvalidException(BlogResultCodeType.EXIT_FOR_OWENER_TAG_NAME);
+				e.setErrorMsg(String.format(e.getErrorMsg(), name));
+				throw e;
+			}
+		}
+
+		final CategoriesTagBo tagBo = action.action(tagsForCategoriesModifyRequest, uid);
 
 		// 在删除阶段保留的记录，在新增阶段也不进行新增
 		final List<String> retainNames = Lists.newArrayList();
@@ -235,6 +239,38 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 				.articleBlogService(articleBlogService).owenerTagService(owenerTagService).uid(uid).build());
 
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#update(com.
+	 * yueny.blog.console.request.TagsForCategoriesModifyRequest)
+	 */
+	@Override
+	@Transactional
+	public boolean update(final TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, final String uid)
+			throws InvalidException {
+		final ModifyTagAction action = new ModifyTagAction() {
+			@Override
+			public CategoriesTagBo action(final TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest,
+					final String uid) {
+				// 获取最新的数据
+				final CategoriesTagBo tagBo = categoriesTagService
+						.findByCode(tagsForCategoriesModifyRequest.getCategoriesTagCode());
+				// 对更新数据进行重新赋值
+				tagBo.setCategoriesDesc(tagsForCategoriesModifyRequest.getCategoriesDesc());
+				tagBo.setCategoriesName(tagsForCategoriesModifyRequest.getCategoriesName());
+				tagBo.setMemo(tagsForCategoriesModifyRequest.getMemo());
+				tagBo.setCategoriesParentCode(tagsForCategoriesModifyRequest.getTagsForUpategoriesCode());
+				categoriesTagService.update(tagBo);
+
+				return tagBo;
+			}
+		};
+
+		return modifyTag(tagsForCategoriesModifyRequest, uid, action);
 	}
 
 }

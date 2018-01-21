@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.kapo.api.annnotation.DbSchemaType;
 import com.yueny.kapo.core.condition.builder.DeleteBuilder;
 import com.yueny.kapo.core.condition.builder.QueryBuilder;
+import com.yueny.kapo.core.condition.column.operand.enums.BasicSqlOperand;
 import com.yueny.kapo.core.condition.column.operand.enums.FuzzySqlOperand;
 import com.yueny.kapo.core.dao.SingleTableDao;
 import com.yueny.rapid.lang.util.StringUtil;
@@ -34,6 +36,31 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 	/*
 	 * (non-Javadoc)
 	 *
+	 * @see com.yueny.blog.dao.article.IArticleBlogDao#countBy(java.lang.String)
+	 */
+	@Override
+	public Long countBy(final String owenerTagCode) {
+		// null
+		if (owenerTagCode == null) {
+			final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", BasicSqlOperand.IS_NULL, null)
+					.build();
+			return super.queryCountByColumns(builder);
+		}
+		// 空, 如 ''
+		if (StringUtils.isEmpty(owenerTagCode)) {
+			final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", "").build();
+			return super.queryCountByColumns(builder);
+		}
+
+		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", FuzzySqlOperand.LIKE, owenerTagCode)
+				.build();
+
+		return super.queryCountByColumns(builder);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see com.yueny.blog.dao.article.IArticleBlogDao#deleteByBlogId(java.lang.
 	 * String)
 	 */
@@ -45,9 +72,20 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 
 	@Override
 	public List<ArticleBlogEntry> findByOwenerTagCode(final String owenerTagCode) {
+		// null
+		if (owenerTagCode == null) {
+			final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", BasicSqlOperand.IS_NULL, null)
+					.build();
+			return super.queryListByColumns(builder);
+		}
+		// 空, 如 ''
+		if (StringUtils.isEmpty(owenerTagCode)) {
+			final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", "").build();
+			return super.queryListByColumns(builder);
+		}
+
 		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", FuzzySqlOperand.LIKE, owenerTagCode)
 				.build();
-
 		return super.queryListByColumns(builder);
 	}
 

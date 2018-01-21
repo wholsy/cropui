@@ -26,10 +26,8 @@ import com.yueny.rapid.lang.agent.UserAgentResource;
 import com.yueny.rapid.lang.enums.BaseErrorType;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.rapid.lang.util.HtmlRegexpUtil;
-import com.yueny.rapid.lang.util.NumberUtil;
 import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
-import com.yueny.superclub.api.annnotation.et.UnUsed;
 import com.yueny.superclub.api.constant.Constants;
 
 import lombok.SneakyThrows;
@@ -94,18 +92,14 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 					.setArticleDigest(StringUtils.trim(HtmlRegexpUtil.filterHtmlTag(condition.getArticleDigest())));
 		}
 
-		// 文章标签,最多添加5个标签，多个标签之间用“,”分隔,eg: Java,自由分类
-		final Set<Long> articleTagIds = operationArticleTagIdsBySave(uid, condition.getArticleTag());
-		articleBlogBo.setArticleTagIds(articleTagIds);
-
 		// 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love'
-		final Map<Long, OwenerTagBo> owenerTags = operationOwenerTagIdsBySave(uid, condition.getOwenerTag());
+		final Map<String, OwenerTagBo> owenerTags = operationOwenerTagIdsBySave(uid, condition.getOwenerTag());
 		articleBlogBo.setOwenerTagIds(owenerTags.keySet());
 
 		// 全站文章分类（到分类首页）， 如果发布文章时未选择，则使用‘个人分类’的默认全站分类
 		final Set<String> categoryTagCodes = Sets.newHashSet();
 		if (StringUtil.isEmpty(condition.getCategoryTagCode())) {
-			for (final Map.Entry<Long, OwenerTagBo> entry : owenerTags.entrySet()) {
+			for (final Map.Entry<String, OwenerTagBo> entry : owenerTags.entrySet()) {
 				categoryTagCodes.add(entry.getValue().getCategoriesTagCode());
 			}
 		} else {
@@ -198,10 +192,6 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 					.setArticleDigest(StringUtils.trim(HtmlRegexpUtil.filterHtmlTag(condition.getArticleDigest())));
 		}
 
-		// 文章标签,最多添加5个标签，多个标签之间用“,”分隔,eg: Java,自由分类
-		final Set<Long> articleTagIds = operationArticleTagIdsBySave(uid, condition.getArticleTag());
-		articleBlogBo.setArticleTagIds(articleTagIds);
-
 		/* 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love' */
 		// 原分类信息下的使用次数首先全部减一
 		for (final Object owenerTagId : articleBlogBo.getOwenerTagIds()) {
@@ -210,13 +200,13 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 			}
 		}
 		// 重新维护次数关系
-		final Map<Long, OwenerTagBo> owenerTags = operationOwenerTagIdsBySave(uid, condition.getOwenerTag());
+		final Map<String, OwenerTagBo> owenerTags = operationOwenerTagIdsBySave(uid, condition.getOwenerTag());
 		articleBlogBo.setOwenerTagIds(owenerTags.keySet());
 
 		// 全站文章分类（到分类首页）， 如果发布文章时未选择，则使用‘个人分类’的默认全站分类
 		final Set<String> categoryTagCodes = Sets.newHashSet();
 		if (StringUtil.isEmpty(condition.getCategoryTagCode())) {
-			for (final Map.Entry<Long, OwenerTagBo> entry : owenerTags.entrySet()) {
+			for (final Map.Entry<String, OwenerTagBo> entry : owenerTags.entrySet()) {
 				categoryTagCodes.add(entry.getValue().getCategoriesTagCode());
 			}
 		} else {
@@ -235,27 +225,6 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 	}
 
 	/**
-	 * 新增和修改时的文章标签部分操作
-	 *
-	 * @param uid
-	 *            UID
-	 * @param articleTagData
-	 *            文章标签,最多添加5个标签，多个标签之间用“,”分隔,eg: Java,31231
-	 * @throws DataVerifyAnomalyException
-	 */
-	@UnUsed
-	private Set<Long> operationArticleTagIdsBySave(final String uid, final String articleTagData)
-			throws DataVerifyAnomalyException {
-		final Set<Long> articleTagIds = Sets.newHashSet();
-		for (final String articleTag : Splitter.on(Constants.COMMA).split(articleTagData)) {
-			// TODO 根据文章标签名称获取文章标签信息
-			final String articleTagName = articleTag;
-			articleTagIds.add(99L);
-		}
-		return articleTagIds;
-	}
-
-	/**
 	 * 新增和修改时的个人分类部分操作
 	 *
 	 * @param uid
@@ -265,26 +234,26 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 	 * @return
 	 * @throws DataVerifyAnomalyException
 	 */
-	private Map<Long, OwenerTagBo> operationOwenerTagIdsBySave(final String uid, final String owenerTagData)
+	private Map<String, OwenerTagBo> operationOwenerTagIdsBySave(final String uid, final String owenerTagData)
 			throws DataVerifyAnomalyException {
-		final Map<Long, OwenerTagBo> owenerTags = Maps.newHashMap();
+		final Map<String, OwenerTagBo> owenerTags = Maps.newHashMap();
 		for (final String owenerTag : Splitter.on(Constants.COMMA).split(owenerTagData)) {
-			final Long owenerTagId = NumberUtil.toLong(owenerTag, null);
+			final String owenerTagCode = owenerTag;
 			// 已经存在的,eg: '1,3,6,8'
-			if (owenerTagId == null) {
+			if (owenerTagCode == null) {
 				continue;
 			}
 
-			final OwenerTagBo tag = owenerTagService.queryById(owenerTagId);
+			final OwenerTagBo tag = owenerTagService.queryByCode(owenerTagCode);
 			if (tag == null) {
 				throw new DataVerifyAnomalyException(BaseErrorType.RECORD_NOT_EXIT);
 			}
 
-			if (!owenerTagService.plusCorrelaArticle(owenerTagId, 1)) {
+			if (!owenerTagService.plusCorrelaArticle(tag.getOwenerTagId(), 1)) {
 				throw new DataVerifyAnomalyException(BaseErrorType.SYSTEM_ERROR);
 			}
 
-			owenerTags.put(owenerTagId, tag);
+			owenerTags.put(owenerTagCode, tag);
 		}
 		return owenerTags;
 	}

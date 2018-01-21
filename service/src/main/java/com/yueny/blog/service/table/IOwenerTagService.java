@@ -50,6 +50,22 @@ public interface IOwenerTagService {
 	List<OwenerTagBo> queryByCategoriesTagCode(String uid, final String categoriesTagCode);
 
 	/**
+	 * 个人分类编码查询
+	 *
+	 * @param owenerTagCode
+	 *            个人分类编码
+	 */
+	List<OwenerTagBo> queryByCode(final Set<String> owenerTagCode);
+
+	/**
+	 * 个人分类编码查询
+	 *
+	 * @param owenerTagCode
+	 *            个人分类编码
+	 */
+	OwenerTagBo queryByCode(final String owenerTagCode);
+
+	/**
 	 * 主键查询
 	 *
 	 * @param primaryId

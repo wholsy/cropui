@@ -35,6 +35,22 @@ public interface IOwenerTagDao
 	List<OwenerTagEntry> queryByCategoriesTagCode(String uid, final String categoriesTagCode);
 
 	/**
+	 * 个人分类编码查询
+	 *
+	 * @param owenerTagCode
+	 *            个人分类编码
+	 */
+	List<OwenerTagEntry> queryByCode(final Set<String> owenerTagCode);
+
+	/**
+	 * 个人分类编码查询
+	 *
+	 * @param owenerTagCode
+	 *            个人分类编码
+	 */
+	OwenerTagEntry queryByCode(final String owenerTagCode);
+
+	/**
 	 * 使用主键列表查询实体
 	 *
 	 * @param entryIds

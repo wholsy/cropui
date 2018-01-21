@@ -1,7 +1,9 @@
 package com.yueny.blog.service.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +31,26 @@ public class TagQueryManageServiceImpl implements ITagQueryManageService {
 	@Autowired
 	private IOwenerTagService owenerTagService;
 
+	private List<ArticleSimpleBlogBo> getArticleSimpleBlog(final List<ArticleBlogBo> ArticleBlogList) {
+		final List<ArticleSimpleBlogBo> articleSimpleBlogList = new ArrayList<ArticleSimpleBlogBo>();
+		for (final ArticleBlogBo articleBlogBo : ArticleBlogList) {
+			final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
+			simpleBlog.setArticleBlogId(articleBlogBo.getArticleBlogId());
+			simpleBlog.setArticleTitle(articleBlogBo.getArticleTitle());
+			simpleBlog.setArticleAlias(articleBlogBo.getArticleAlias());
+			simpleBlog.setToday(DateUtil.format(articleBlogBo.getCreateTime(), DateFormatType.TIME_LEFT_DIAGONAL));
+			simpleBlog.setCreateTime(articleBlogBo.getCreateTime());
+			simpleBlog.setModifyUser(articleBlogBo.getModifyUser());
+			simpleBlog.setUpdateTime(articleBlogBo.getUpdateTime());
+
+			articleSimpleBlogList.add(simpleBlog);
+		}
+
+		return articleSimpleBlogList;
+	}
+
 	@Override
 	@ProfilerLog
-	// @Cacheable(value = "getOwenerTagByUId", keyGenerator =
-	// "customKeyGenerator")
 	public OwenerTagsData getOwenerTag(final String uid) throws DataVerifyAnomalyException {
 		final CacheDataHandler<OwenerTagsData> cacheDataHandler = new CacheDataHandler<OwenerTagsData>() {
 			@Override
@@ -47,20 +65,22 @@ public class TagQueryManageServiceImpl implements ITagQueryManageService {
 				for (final OwenerTagBo owenerTagBo : owenerTags) {
 					final List<ArticleBlogBo> list = articleBlogService
 							.findByOwenerTagCode(owenerTagBo.getOwenerTagCode());
-					for (final ArticleBlogBo articleBlogBo : list) {
-						final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
-						simpleBlog.setArticleBlogId(articleBlogBo.getArticleBlogId());
-						simpleBlog.setArticleTitle(articleBlogBo.getArticleTitle());
-						simpleBlog.setArticleAlias(articleBlogBo.getArticleAlias());
-						simpleBlog.setToday(
-								DateUtil.format(articleBlogBo.getCreateTime(), DateFormatType.TIME_LEFT_DIAGONAL));
-						simpleBlog.setCreateTime(articleBlogBo.getCreateTime());
-						simpleBlog.setModifyUser(articleBlogBo.getModifyUser());
-						simpleBlog.setUpdateTime(articleBlogBo.getUpdateTime());
 
-						owenerTagsData.addSimpleBlog(owenerTagBo.getOwenerTagName(), simpleBlog);
-					}
+					owenerTagsData.addSimpleBlog(owenerTagBo.getOwenerTagName(), getArticleSimpleBlog(list));
 				}
+
+				// 尚未分配标签的博文
+				final List<ArticleBlogBo> listForEmpty = articleBlogService.findByOwenerTagCode("");
+				if (CollectionUtils.isNotEmpty(listForEmpty)) {
+					final OwenerTagBo emptyOwenerTagBo = new OwenerTagBo();
+					emptyOwenerTagBo.setCorrelaArticleSum(listForEmpty.size());
+					emptyOwenerTagBo.setOwenerTagName("未分配标签");
+					owenerTagsData.getOwenerTags().add(emptyOwenerTagBo);
+
+					owenerTagsData.addSimpleBlog(emptyOwenerTagBo.getOwenerTagName(),
+							getArticleSimpleBlog(listForEmpty));
+				}
+
 				return owenerTagsData;
 			}
 		};

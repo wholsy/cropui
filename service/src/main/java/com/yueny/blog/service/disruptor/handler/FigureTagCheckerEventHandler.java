@@ -2,7 +2,6 @@ package com.yueny.blog.service.disruptor.handler;
 
 import java.util.List;
 
-import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.disruptor.event.FigureTagCheckerEvent;
 import com.yueny.blog.service.table.IArticleBlogService;
@@ -37,9 +36,9 @@ public class FigureTagCheckerEventHandler extends AbstractEventHandler<FigureTag
 				// 处理每个用户标签
 				final String owenerTagCode = owenerTagBo.getOwenerTagCode();
 				// 获取用户所拥有该标签的博文信息
-				final List<ArticleBlogBo> lts = articleBlogService.findByOwenerTagCode(owenerTagCode);
+				final Long ltsCount = articleBlogService.countBy(owenerTagCode);
 
-				final int step = lts.size() - owenerTagBo.getCorrelaArticleSum();
+				final int step = ltsCount.intValue() - owenerTagBo.getCorrelaArticleSum();
 				owenerTagService.plusCorrelaArticle(owenerTagBo.getOwenerTagId(), step);
 
 				return 1;

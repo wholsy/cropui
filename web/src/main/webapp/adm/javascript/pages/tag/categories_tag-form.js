@@ -18,10 +18,10 @@ $(document).ready(function() {
 			 });
 			 //setTimeout($('.modal-content').unblock(), 2000);
 			 
-            var categoriesTagEditForm = $($(this).data('form'));
+            var tagEditForm = $($(this).data('form'));
             
 			//调用parsley表单验证插件(提交时才会验证 是否必填和输入格式)
-			var submitok  = categoriesTagEditForm.parsley().validate();
+			var submitok  = tagEditForm.parsley().validate();
 			if (!submitok){
 			    $('.invalid-form-error-message')
 			      .html(submitok ? '' : 'You must correctly fill *at least one of these two blocks!')
@@ -31,16 +31,16 @@ $(document).ready(function() {
 				return false;
 			}
 			
-			var url = categoriesTagEditForm.attr("action");
-			
+			var url = tagEditForm.attr("action");
             //构造参数发送给后台
-            var postData = categoriesTagEditForm.serializeArray();
+            var postData = tagEditForm.serializeArray();
             
             $.ajax({
 			   url: url,
 			   type: 'PUT',
 			   data: postData,
 			   success: function(data) {
+			   		//alert(data);
 			   		$('.modal-content').unblock();
 	                if (data.success) {
 	                    $.dialog.tips("保存成功");

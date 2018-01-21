@@ -5,6 +5,7 @@ import java.util.List;
 import com.yueny.blog.console.request.TagsForCategoriesModifyRequest;
 import com.yueny.blog.console.vo.tags.TagsForCategorieBaseVo;
 import com.yueny.blog.console.vo.tags.TagsForCategoriesViewsVo;
+import com.yueny.rapid.lang.exception.invalid.InvalidException;
 
 /**
  * 后台的全站文章分类类目服务
@@ -47,6 +48,6 @@ public interface ICategoriesTagManagerService {
 	 *            用户uid
 	 * @return
 	 */
-	boolean update(TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, String uid);
+	boolean update(TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, String uid) throws InvalidException;
 
 }
