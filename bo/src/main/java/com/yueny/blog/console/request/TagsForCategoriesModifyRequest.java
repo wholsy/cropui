@@ -48,7 +48,7 @@ public class TagsForCategoriesModifyRequest extends AbstractBo {
 	@Setter
 	private String memo;
 
-	/** 个人分类名称，以逗号分隔 */
+	/** 个人分类名称，以逗号 COMMA 分隔 */
 	@Getter
 	@Setter
 	private String owenerTagNameArrays;

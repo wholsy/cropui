@@ -11,8 +11,8 @@ import com.yueny.blog.bo.model.document.ChartData;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.cache.CacheDataHandler;
-import com.yueny.blog.service.cache.comp.CacheService;
+import com.yueny.blog.service.comp.cache.CacheDataHandler;
+import com.yueny.blog.service.comp.cache.core.CacheService;
 import com.yueny.blog.service.manager.ITagChartManagerService;
 import com.yueny.blog.service.table.ICategoriesTagService;
 import com.yueny.blog.service.table.IOwenerTagService;
@@ -56,14 +56,14 @@ public class TagChartManagerServiceImpl extends BaseBiz implements ITagChartMana
 	/**
 	 * 数据对象本身递归处理
 	 */
-	private void eachChildrenChartData(final List<ChartData> chartDatas) {
+	private void eachChildrenChartData(final String uid, final List<ChartData> chartDatas) {
 		// 根据全站标签,获取最底层非叶子节点的叶子节点数据
 		for (final ChartData nextChartData : chartDatas) {
 			if (CollectionUtils.isNotEmpty(nextChartData.getChildren())) {
-				eachChildrenChartData(nextChartData.getChildren());
+				eachChildrenChartData(uid, nextChartData.getChildren());
 			}
 
-			final List<OwenerTagBo> oweners = owenerTagService.queryByCategoriesTagCode(nextChartData.getCode());
+			final List<OwenerTagBo> oweners = owenerTagService.queryByCategoriesTagCode(uid, nextChartData.getCode());
 			if (CollectionUtils.isEmpty(oweners)) {
 				continue;
 			}
@@ -80,7 +80,7 @@ public class TagChartManagerServiceImpl extends BaseBiz implements ITagChartMana
 	}
 
 	@Override
-	public ChartData getChartData() throws DataVerifyAnomalyException {
+	public ChartData getChartData(final String uid) throws DataVerifyAnomalyException {
 		return cacheService.cache(new CacheDataHandler<ChartData>() {
 			@Override
 			public ChartData caller() {
@@ -105,7 +105,7 @@ public class TagChartManagerServiceImpl extends BaseBiz implements ITagChartMana
 				}
 
 				// 根据全站标签,获取最底层非叶子节点的叶子节点数据
-				eachChildrenChartData(chartData.getChildren());
+				eachChildrenChartData(uid, chartData.getChildren());
 
 				return chartData;
 			}

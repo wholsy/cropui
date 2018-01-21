@@ -12,6 +12,7 @@ import com.yueny.blog.entry.tag.OwenerTagEntry;
 import com.yueny.kapo.api.annnotation.DbSchemaType;
 import com.yueny.kapo.api.annnotation.TableSeg;
 import com.yueny.kapo.core.condition.builder.QueryBuilder;
+import com.yueny.kapo.core.condition.builder.UpdateBuilder;
 import com.yueny.kapo.core.condition.column.operand.enums.BasicSqlOperand;
 import com.yueny.kapo.core.dao.SingleTableDao;
 import com.yueny.rapid.lang.util.enums.EnableType;
@@ -46,17 +47,16 @@ public class OwenerTagDaoImpl extends SingleTableDao<OwenerTagEntry> implements 
 		// return super.updateByColumns(builder) > 0;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.dao.tag.IOwenerTagDao#queryByCategoriesTagCode(java.lang.
+	 * String)
+	 */
 	@Override
-	public List<OwenerTagEntry> queryAllByUid(final String uid) {
-		// WEIGHT '权重, 1-255'
-		final QueryBuilder builder = QueryBuilder.builder().where("UID", uid).build();
-
-		return super.queryListByColumns(builder);
-	}
-
-	@Override
-	public List<OwenerTagEntry> queryByCategoriesTagCode(final String categoriesTagCode) {
-		final QueryBuilder builder = QueryBuilder.builder().where("CATEGORIES_TAG_CODE", categoriesTagCode).build();
+	public List<OwenerTagEntry> queryByCategoriesTagCode(final String uid, final String categoriesTagCode) {
+		final QueryBuilder builder = QueryBuilder.builder().where("UID", uid)
+				.where("CATEGORIES_TAG_CODE", categoriesTagCode).where("IS_SHOW", EnableType.ENABLE.getValue()).build();
 
 		return super.queryListByColumns(builder);
 	}
@@ -68,12 +68,46 @@ public class OwenerTagDaoImpl extends SingleTableDao<OwenerTagEntry> implements 
 		return super.queryListByColumns(builder);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.dao.tag.IOwenerTagDao#queryByTagName(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public OwenerTagEntry queryByTagName(final String uid, final String tagName) {
+		final QueryBuilder builder = QueryBuilder.builder().where("UID", uid).where("OWENER_TAG_NAME", tagName).build();
+
+		return super.queryByColumns(builder);
+	}
+
 	@Override
 	public List<OwenerTagEntry> queryByUid(final String uid) {
 		final QueryBuilder builder = QueryBuilder.builder().where("UID", uid)
 				.where("IS_SHOW", EnableType.ENABLE.getValue()).build();
 
 		return super.queryListByColumns(builder);
+	}
+
+	@Override
+	public List<OwenerTagEntry> queryByUidForAll(final String uid) {
+		// WEIGHT '权重, 1-255'
+		final QueryBuilder builder = QueryBuilder.builder().where("UID", uid).build();
+
+		return super.queryListByColumns(builder);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.dao.tag.IOwenerTagDao#update(long, java.lang.Integer)
+	 */
+	@Override
+	public boolean update(final long primaryId, final Integer isShow) {
+		final UpdateBuilder builder = UpdateBuilder.builder().set("IS_SHOW", isShow).where("OWENER_TAG_ID", primaryId)
+				.build();
+
+		return super.updateByColumns(builder) > 0;
 	}
 
 }

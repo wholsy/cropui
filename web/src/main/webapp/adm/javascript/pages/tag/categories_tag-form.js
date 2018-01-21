@@ -40,10 +40,8 @@ $(document).ready(function() {
 			   url: url,
 			   type: 'PUT',
 			   data: postData,
-			   success: function(json) {
+			   success: function(data) {
 			   		$('.modal-content').unblock();
-			   		
-			   		var data = $.parseJSON(json);
 	                if (data.success) {
 	                    $.dialog.tips("保存成功");
 	                    

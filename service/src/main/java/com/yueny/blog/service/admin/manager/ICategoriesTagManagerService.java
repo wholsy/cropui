@@ -20,7 +20,7 @@ public interface ICategoriesTagManagerService {
 	 *
 	 * @return 类目树
 	 */
-	List<TagsForCategoriesViewsVo> findAll();
+	List<TagsForCategoriesViewsVo> findAll(String uid);
 
 	/**
 	 * 获取指定文章分类类目信息
@@ -28,7 +28,7 @@ public interface ICategoriesTagManagerService {
 	 * @param categoriesTagCode
 	 *            全站文章分类编号
 	 */
-	TagsForCategoriesViewsVo findByTagsForCode(String categoriesTagCode);
+	TagsForCategoriesViewsVo findByTagsForCode(String uid, String categoriesTagCode);
 
 	/**
 	 * 查询当前子分类对应的父级所属层级的父分类列表
@@ -36,14 +36,17 @@ public interface ICategoriesTagManagerService {
 	 * @param categoriesChildrenCode
 	 *            当前子分类编号
 	 */
-	List<TagsForCategorieBaseVo> findParentTagsByChildrenCodeForUp(final String categoriesChildrenCode);
+	List<TagsForCategorieBaseVo> findParentTagsByChildrenCodeForUp(String uid, final String categoriesChildrenCode);
 
 	/**
 	 * 修改文章分类类目信息
 	 *
 	 * @param tagsForCategoriesModifyRequest
 	 *            全站文章分类的数据修改请求对象
+	 * @param uid
+	 *            用户uid
+	 * @return
 	 */
-	boolean update(TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest);
+	boolean update(TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, String uid);
 
 }

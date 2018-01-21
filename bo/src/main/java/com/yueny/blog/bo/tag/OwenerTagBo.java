@@ -28,6 +28,8 @@ public class OwenerTagBo extends BaseBo {
 	private Integer isShow;
 	/** 主键 */
 	private Long owenerTagId;
+	/** 个人分类编号 */
+	private String owenerTagCode;
 	/** 个人分类名称 */
 	private String owenerTagName;
 	/** 用户唯一标识，用户编号。md5加密生成 */

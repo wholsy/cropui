@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yueny.blog.service.admin.manager.ILoginManager;
-import com.yueny.blog.service.user.IUserPassportService;
+import com.yueny.blog.service.table.IUserPassportService;
 import com.yueny.rapid.lang.exception.invalid.InvalidException;
 
 /**

@@ -50,7 +50,10 @@ public class ChartsController extends BaseController {
 	public JsonNormalResponse<ChartData> chartsFrontEndJson(final HttpServletResponse response) {
 		final JsonNormalResponse<ChartData> res = new JsonNormalResponse<>();
 		try {
-			final ChartData chartData = tagQueryService.getChartData();
+			// 从session中获取uid
+			final String uid = "yuanyang";
+
+			final ChartData chartData = tagQueryService.getChartData(uid);
 			res.setData(chartData);
 		} catch (final DataVerifyAnomalyException e) {
 			res.setCode(e.getErrorCode());

@@ -9,10 +9,10 @@ import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
 import com.yueny.blog.bo.model.document.OwenerTagsData;
 import com.yueny.blog.bo.tag.OwenerTagBo;
-import com.yueny.blog.service.article.IArticleBlogService;
-import com.yueny.blog.service.cache.CacheDataHandler;
-import com.yueny.blog.service.cache.comp.CacheService;
+import com.yueny.blog.service.comp.cache.CacheDataHandler;
+import com.yueny.blog.service.comp.cache.core.CacheService;
 import com.yueny.blog.service.manager.ITagQueryManageService;
+import com.yueny.blog.service.table.IArticleBlogService;
 import com.yueny.blog.service.table.IOwenerTagService;
 import com.yueny.rapid.lang.date.DateFormatType;
 import com.yueny.rapid.lang.date.DateUtil;
@@ -45,7 +45,8 @@ public class TagQueryManageServiceImpl implements ITagQueryManageService {
 				owenerTagsData.setOwenerTags(owenerTags);
 
 				for (final OwenerTagBo owenerTagBo : owenerTags) {
-					final List<ArticleBlogBo> list = articleBlogService.findByOwenerTagId(owenerTagBo.getOwenerTagId());
+					final List<ArticleBlogBo> list = articleBlogService
+							.findByOwenerTagCode(owenerTagBo.getOwenerTagCode());
 					for (final ArticleBlogBo articleBlogBo : list) {
 						final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
 						simpleBlog.setArticleBlogId(articleBlogBo.getArticleBlogId());

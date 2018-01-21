@@ -21,7 +21,7 @@ public class TagQueryServiceImplTest extends BaseBizTest {
 	@Test
 	public void testGetChartData() {
 		try {
-			final ChartData chartData = tagQueryService.getChartData();
+			final ChartData chartData = tagQueryService.getChartData("yuanyang");
 			System.out.println(chartData);
 		} catch (final DataVerifyAnomalyException e) {
 			e.printStackTrace();

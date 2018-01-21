@@ -17,5 +17,5 @@ public interface ITagChartManagerService {
 	 *
 	 * @throws DataVerifyAnomalyException
 	 */
-	ChartData getChartData() throws DataVerifyAnomalyException;
+	ChartData getChartData(String uid) throws DataVerifyAnomalyException;
 }

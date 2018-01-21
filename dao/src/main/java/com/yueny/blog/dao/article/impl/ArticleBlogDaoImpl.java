@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yueny.blog.dao.article.IArticleBlogDao;
 import com.yueny.blog.dao.article.IArticleBlogMapper;
-import com.yueny.blog.dao.cd.ArticleBlogCd;
+import com.yueny.blog.dao.cd.ArticleBlogCondition;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.kapo.api.annnotation.DbSchemaType;
 import com.yueny.kapo.core.condition.builder.DeleteBuilder;
@@ -33,20 +33,19 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.yueny.blog.dao.article.IArticleBlogDao#deleteByBlogId(java.lang.
 	 * String)
 	 */
 	@Override
-	public boolean deleteByBlogId(String articleBlogId) {
+	public boolean deleteByBlogId(final String articleBlogId) {
 		final DeleteBuilder builder = DeleteBuilder.builder().where("ARTICLE_BLOG_ID", articleBlogId).build();
 		return super.deleteByColumns(builder) > 0;
 	}
 
 	@Override
-	public List<ArticleBlogEntry> findByOwenerTagId(final Long owenerTagId) {
-		// TODO 如果OWENER_TAG_IDS为28,31, 查询owenerTagId=8,会出问题
-		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", FuzzySqlOperand.LIKE, owenerTagId)
+	public List<ArticleBlogEntry> findByOwenerTagCode(final String owenerTagCode) {
+		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", FuzzySqlOperand.LIKE, owenerTagCode)
 				.build();
 
 		return super.queryListByColumns(builder);
@@ -58,7 +57,7 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 	}
 
 	@Override
-	public Long queryAllCount(String articleTitle) {
+	public Long queryAllCount(final String articleTitle) {
 		final QueryBuilder builder = QueryBuilder.builder()
 				.where("ARTICLE_TITLE", FuzzySqlOperand.LIKE_RIGHT, articleTitle).build();
 
@@ -82,12 +81,11 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see
-	 * com.yueny.blog.dao.article.IArticleBlogDao#queryByCd(com.yueny.blog.dao.
+	 * @see com.yueny.blog.dao.article.IArticleBlogDao#Condition(com.yueny.blog.dao.
 	 * cd.ArticleBlogCd)
 	 */
 	@Override
-	public List<ArticleBlogEntry> queryByCd(ArticleBlogCd cd) {
+	public List<ArticleBlogEntry> queryByCondition(final ArticleBlogCondition cd) {
 		final QueryBuilder.InnerBuilder builder = QueryBuilder.builder();
 		if (StringUtil.isNotEmpty(cd.getArticleBlogId())) {
 			builder.where("ARTICLE_BLOG_ID", cd.getArticleBlogId());

@@ -2,7 +2,7 @@ package com.yueny.blog.dao.article;
 
 import java.util.List;
 
-import com.yueny.blog.dao.cd.ArticleBlogCd;
+import com.yueny.blog.dao.cd.ArticleBlogCondition;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.kapo.api.ISingleTableDao;
 import com.yueny.kapo.api.IWholeTableQueryDao;
@@ -23,7 +23,7 @@ public interface IArticleBlogDao extends ISingleTableDao<ArticleBlogEntry>, IWho
 	/**
 	 * 获取存在于用户个人分类的博文
 	 */
-	List<ArticleBlogEntry> findByOwenerTagId(Long owenerTagId);
+	List<ArticleBlogEntry> findByOwenerTagCode(String owenerTagCode);
 
 	/**
 	 * 文章已读次数加step
@@ -55,7 +55,7 @@ public interface IArticleBlogDao extends ISingleTableDao<ArticleBlogEntry>, IWho
 	/**
 	 * ArticleBlogCd模式查询
 	 */
-	List<ArticleBlogEntry> queryByCd(ArticleBlogCd cd);
+	List<ArticleBlogEntry> queryByCondition(ArticleBlogCondition condition);
 
 	/**
 	 * 根据此文章的'上一篇文章对外ID'获取此文章信息
