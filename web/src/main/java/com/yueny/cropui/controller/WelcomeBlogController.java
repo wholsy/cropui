@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yueny.blog.bo.article.ArticleBlogBo;
-import com.yueny.blog.service.article.IArticleBlogService;
+import com.yueny.blog.service.table.IArticleBlogService;
 import com.yueny.superclub.api.page.core.PageCond;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 import com.yueny.superclub.util.web.security.context.VisitContextHolder;

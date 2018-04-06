@@ -16,10 +16,8 @@ $(document).ready(function() {
 		        },
 				message: '数据加载中...'
 			 });
-			 
-            var categoriesTagCode = $(this).data('code');
-            var remote = ctx + "/admin/categories_tag/"+ categoriesTagCode +".html";
-            
+			
+			var remoteUrlAddres = $(this).data('url');
             var modal = $('.variant-modal');
             modal.modal({
             		backdrop: 'static',
@@ -28,9 +26,9 @@ $(document).ready(function() {
             	modal.find(".modal-content").empty();
 			
 			$('.x_content').unblock();
-			
+
             $.ajax({
-            		url: ctx + "/admin/categories_tag/"+ categoriesTagCode +".html", 
+            		url: remoteUrlAddres, 
             		type : "GET",
             		dataType: 'text',
             		

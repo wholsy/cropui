@@ -78,6 +78,14 @@ public class OwenerTagsData extends AbstractBo {
 		}
 	}
 
+	public void addSimpleBlog(final String owenerTagName, final List<ArticleSimpleBlogBo> simpleBlog) {
+		if (simpleBlogMaps.containsKey(owenerTagName)) {
+			simpleBlogMaps.get(owenerTagName).addAll(simpleBlog);
+		} else {
+			simpleBlogMaps.put(owenerTagName, Sets.newHashSet(simpleBlog));
+		}
+	}
+
 	/**
 	 * @return 获取用户标签下的博客概要信息
 	 */

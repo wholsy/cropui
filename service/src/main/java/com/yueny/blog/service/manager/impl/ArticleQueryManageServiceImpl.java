@@ -15,10 +15,10 @@ import com.yueny.blog.bo.model.document.ArchiveData;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.article.IArticleBlogService;
-import com.yueny.blog.service.cache.CacheDataHandler;
-import com.yueny.blog.service.cache.comp.CacheService;
+import com.yueny.blog.service.comp.cache.CacheDataHandler;
+import com.yueny.blog.service.comp.cache.core.CacheService;
 import com.yueny.blog.service.manager.IArticleQueryManageService;
+import com.yueny.blog.service.table.IArticleBlogService;
 import com.yueny.blog.service.table.ICategoriesTagService;
 import com.yueny.blog.service.table.IOwenerTagService;
 import com.yueny.rapid.lang.date.DateFormatType;
@@ -58,8 +58,7 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see
-	 * com.yueny.blog.service.manage.IArticleQueryService#getArchive(com.yueny.
+	 * @see com.yueny.blog.service.manage.IArticleQueryService#getArchive(com.yueny.
 	 * superclub.api.page.core.PageCond)
 	 */
 	@Override
@@ -104,7 +103,7 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 	@ProfilerLog
 	@SneakyThrows(value = { DataVerifyAnomalyException.class })
 	public ArticleBlogViewBo getArticleInfo(final String articleBlogId) {
-		// 增加一次阅读量,不关注成败,转异步
+		// 增加一次阅读量,不关注成败,转异步 TODO 使用disruptor
 		multiThreadSupport.processJobs(new IExecutor<String>() {
 			@Override
 			public void execute(final List<String> ts) {
@@ -129,7 +128,7 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 		view.setArticleBlog(articleBlog);
 
 		// 获取文章的个人分类信息
-		final List<OwenerTagBo> owenerTags = owenerTagService.queryById(articleBlog.getOwenerTagIds());
+		final List<OwenerTagBo> owenerTags = owenerTagService.queryByCode(articleBlog.getOwenerTagIds());
 		view.setOwenerTags(owenerTags);
 
 		// 该博文所归属的全站文章分类

@@ -9,7 +9,7 @@ import com.yueny.blog.bo.console.user.UserInfoBo;
 import com.yueny.blog.console.vo.user.UserDisplayVo;
 import com.yueny.blog.console.vo.user.UserInfoVo;
 import com.yueny.blog.service.admin.manager.IUserDisplayManager;
-import com.yueny.blog.service.user.IUserService;
+import com.yueny.blog.service.table.IUserInfoService;
 import com.yueny.rapid.lang.mask.MaskInfoUtil;
 
 /**
@@ -23,7 +23,7 @@ import com.yueny.rapid.lang.mask.MaskInfoUtil;
 @Service
 public class UserDisplayManagerImpl implements IUserDisplayManager {
 	@Autowired
-	private IUserService userService;
+	private IUserInfoService userService;
 
 	@Override
 	public UserDisplayVo display(String loginName) {

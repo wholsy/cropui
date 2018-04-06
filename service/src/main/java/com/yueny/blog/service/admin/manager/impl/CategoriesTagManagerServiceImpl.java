@@ -6,13 +6,18 @@ package com.yueny.blog.service.admin.manager.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.yueny.blog.bo.enums.BlogResultCodeType;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.common.BlogConstant;
@@ -21,9 +26,16 @@ import com.yueny.blog.console.vo.tags.TagsForCategorieBaseVo;
 import com.yueny.blog.console.vo.tags.TagsForCategoriesViewsVo;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.admin.manager.ICategoriesTagManagerService;
+import com.yueny.blog.service.comp.uid.OwenerTagCodeGenerate;
+import com.yueny.blog.service.disruptor.event.FigureTagCheckerEvent;
+import com.yueny.blog.service.disruptor.producer.FigureTagCheckerEventProducer;
+import com.yueny.blog.service.table.IArticleBlogService;
 import com.yueny.blog.service.table.ICategoriesTagService;
 import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.rapid.lang.exception.invalid.InvalidException;
+import com.yueny.rapid.lang.util.enums.EnableType;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
+import com.yueny.superclub.api.constant.Constants;
 
 /**
  * 后台的全站文章分类类目服务
@@ -35,10 +47,19 @@ import com.yueny.rapid.topic.profiler.ProfilerLog;
  */
 @Service
 public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategoriesTagManagerService {
+	private interface ModifyTagAction {
+		CategoriesTagBo action(TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, final String uid);
+	}
+
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
 	@Autowired
 	private IOwenerTagService owenerTagService;
+	@Autowired
+	private IArticleBlogService articleBlogService;
+
+	@Autowired
+	private OwenerTagCodeGenerate owenerTagCodeGenerate;
 
 	/*
 	 * (non-Javadoc)
@@ -48,7 +69,7 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	 */
 	@Override
 	@ProfilerLog
-	public List<TagsForCategoriesViewsVo> findAll() {
+	public List<TagsForCategoriesViewsVo> findAll(final String uid) {
 		final List<CategoriesTagBo> ctList = categoriesTagService.findRootArticleCategories();
 		if (CollectionUtils.isEmpty(ctList)) {
 			return Collections.emptyList();
@@ -65,8 +86,8 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 			vo.setMemo(categoriesTagBo.getMemo());
 
 			// 添加个人分类列表
-			final List<OwenerTagBo> owenerTagList = owenerTagService
-					.queryByCategoriesTagCode(categoriesTagBo.getCategoriesTagCode());
+			final List<OwenerTagBo> owenerTagList = owenerTagService.queryByCategoriesTagCode(uid,
+					categoriesTagBo.getCategoriesTagCode());
 			vo.setOwenerTags(Sets.newHashSet(owenerTagList));
 
 			list.add(vo);
@@ -82,7 +103,7 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	 */
 	@Override
 	@ProfilerLog
-	public TagsForCategoriesViewsVo findByTagsForCode(final String categoriesTagCode) {
+	public TagsForCategoriesViewsVo findByTagsForCode(final String uid, final String categoriesTagCode) {
 		final CategoriesTagBo categoriesTagBo = categoriesTagService.findByCode(categoriesTagCode);
 		if (categoriesTagBo == null) {
 			return null;
@@ -97,8 +118,8 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 		vo.setMemo(categoriesTagBo.getMemo());
 
 		// 添加个人分类列表
-		final List<OwenerTagBo> owenerTagList = owenerTagService
-				.queryByCategoriesTagCode(categoriesTagBo.getCategoriesTagCode());
+		final List<OwenerTagBo> owenerTagList = owenerTagService.queryByCategoriesTagCode(uid,
+				categoriesTagBo.getCategoriesTagCode());
 		vo.setOwenerTags(Sets.newHashSet(owenerTagList));
 
 		return vo;
@@ -112,7 +133,8 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	 */
 	@Override
 	@ProfilerLog
-	public List<TagsForCategorieBaseVo> findParentTagsByChildrenCodeForUp(final String categoriesChildrenCode) {
+	public List<TagsForCategorieBaseVo> findParentTagsByChildrenCodeForUp(final String uid,
+			final String categoriesChildrenCode) {
 		if (StringUtils.isEmpty(categoriesChildrenCode)) {
 			return Collections.emptyList();
 		}
@@ -145,6 +167,80 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 		return mapAny(ctList, TagsForCategorieBaseVo.class);
 	}
 
+	private boolean modifyTag(final TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, final String uid,
+			final ModifyTagAction action) throws InvalidException {
+		final String owenerTagNames = tagsForCategoriesModifyRequest.getOwenerTagNameArrays();
+		final List<String> names = Splitter.on(Constants.COMMA)
+				// 去掉空的子串
+				.omitEmptyStrings()
+				// 去掉子串的空格
+				.trimResults().splitToList(owenerTagNames);
+
+		// 优先校验:该name没有挂在其他 CategoriesTagCode 下
+		for (final String name : names) {
+			final OwenerTagBo tag = owenerTagService.queryByTagName(uid, name);
+			if (tag != null && !StringUtils.equals(tag.getCategoriesTagCode(),
+					tagsForCategoriesModifyRequest.getCategoriesTagCode())) {
+				// TODO 如果被挂在其他分类下但已失效，此处可以删除其 tag。
+				// 但目前未执行删除，故直接报错
+				final InvalidException e = new InvalidException(BlogResultCodeType.EXIT_FOR_OWENER_TAG_NAME);
+				e.setErrorMsg(String.format(e.getErrorMsg(), name));
+				throw e;
+			}
+		}
+
+		final CategoriesTagBo tagBo = action.action(tagsForCategoriesModifyRequest, uid);
+
+		// 在删除阶段保留的记录，在新增阶段也不进行新增
+		final List<String> retainNames = Lists.newArrayList();
+		// 删除 categoriesTag 下的原有 owenerTag
+		final List<OwenerTagBo> ls = owenerTagService.queryByCategoriesTagCode(uid, tagBo.getCategoriesTagCode());
+		if (CollectionUtils.isNotEmpty(ls)) {
+			final List<Long> deleteIds = ls.stream().filter(owenerTagBo -> {
+				// 如果将要新增项包含，则返回false; 意味着不进行该项的删除。
+				if (names.contains(owenerTagBo.getOwenerTagName())) {
+					retainNames.add(owenerTagBo.getOwenerTagName());
+					return false;
+				}
+				return true;
+			}).map(owenerTagBo -> owenerTagBo.getOwenerTagId()).collect(Collectors.toList());
+
+			owenerTagService.deleteById(deleteIds);
+		}
+
+		// 新增 categoriesTag 下的 owenerTag
+		names.stream().filter(name -> {
+			// 在删除阶段保留的记录，在新增阶段也不进行新增
+			if (retainNames.contains(name)) {
+				return false;
+			}
+			return true;
+		}).forEach(name -> {
+			// 先看看当前这个name是否已经存在。如果存在，则直接更新状态为可见
+			final OwenerTagBo tag = owenerTagService.queryByTagName(uid, name);
+			if (tag != null) {
+				owenerTagService.update(tag.getOwenerTagId(), EnableType.ENABLE);
+			} else {
+				final OwenerTagBo bo = new OwenerTagBo();
+				bo.setCategoriesTagCode(tagBo.getCategoriesTagCode());
+				bo.setOwenerTagCode(owenerTagCodeGenerate.getOps());
+				bo.setIsShow(EnableType.ENABLE.getValue());
+				bo.setOwenerTagName(name);
+				bo.setUid(uid);
+				bo.setCorrelaArticleSum(0);
+				bo.setWeight(8);
+
+				owenerTagService.insert(bo);
+			}
+		});
+
+		// 进行标签完整性检查
+		new FigureTagCheckerEventProducer().publishData(FigureTagCheckerEvent.builder()
+				.articleBlogService(articleBlogService).owenerTagService(owenerTagService).uid(uid).build());
+
+		return true;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -153,14 +249,28 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	 * yueny.blog.console.request.TagsForCategoriesModifyRequest)
 	 */
 	@Override
-	public boolean update(final TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest) {
-		final CategoriesTagBo tagBo = categoriesTagService
-				.findByCode(tagsForCategoriesModifyRequest.getCategoriesTagCode());
-		tagBo.setCategoriesDesc(tagsForCategoriesModifyRequest.getCategoriesDesc());
+	@Transactional
+	public boolean update(final TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest, final String uid)
+			throws InvalidException {
+		final ModifyTagAction action = new ModifyTagAction() {
+			@Override
+			public CategoriesTagBo action(final TagsForCategoriesModifyRequest tagsForCategoriesModifyRequest,
+					final String uid) {
+				// 获取最新的数据
+				final CategoriesTagBo tagBo = categoriesTagService
+						.findByCode(tagsForCategoriesModifyRequest.getCategoriesTagCode());
+				// 对更新数据进行重新赋值
+				tagBo.setCategoriesDesc(tagsForCategoriesModifyRequest.getCategoriesDesc());
+				tagBo.setCategoriesName(tagsForCategoriesModifyRequest.getCategoriesName());
+				tagBo.setMemo(tagsForCategoriesModifyRequest.getMemo());
+				tagBo.setCategoriesParentCode(tagsForCategoriesModifyRequest.getTagsForUpategoriesCode());
+				categoriesTagService.update(tagBo);
 
-		categoriesTagService.update(tagBo);
+				return tagBo;
+			}
+		};
 
-		return false;
+		return modifyTag(tagsForCategoriesModifyRequest, uid, action);
 	}
 
 }

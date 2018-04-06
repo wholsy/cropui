@@ -3,7 +3,7 @@ package com.yueny.blog.service.common;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.yueny.blog.service.cache.CacheKeyConstant;
+import com.yueny.blog.service.comp.cache.CacheKeyConstant;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
 
 public class CacheKeyConstantTest {

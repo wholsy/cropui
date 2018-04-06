@@ -31,7 +31,7 @@ public class ArticleBlogViewBo extends BaseBo {
 	 */
 	private ArticleBlogBo articleBlog;
 	// /** 文章标签ID,最多添加5个标签，多个标签之间用“,”分隔 */
-	// private Set<Long> articleTagIds;
+	// private Set<String> articleTagIds;
 	/**
 	 * 该博文所归属的全站文章分类
 	 */

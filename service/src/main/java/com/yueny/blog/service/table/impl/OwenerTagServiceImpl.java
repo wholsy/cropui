@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,11 @@ import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.dao.tag.IOwenerTagDao;
 import com.yueny.blog.entry.tag.OwenerTagEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.cache.CacheDataHandler;
-import com.yueny.blog.service.cache.comp.CacheListService;
-import com.yueny.blog.service.cache.comp.CacheService;
+import com.yueny.blog.service.comp.cache.CacheDataHandler;
+import com.yueny.blog.service.comp.cache.core.CacheListService;
+import com.yueny.blog.service.comp.cache.core.CacheService;
 import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.rapid.lang.util.enums.EnableType;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 
 /**
@@ -36,6 +38,28 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	@Autowired
 	private IOwenerTagDao owenerTagDao;
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.service.table.IOwenerTagService#deleteById(long)
+	 */
+	@Override
+	public boolean deleteById(final List<Long> primaryIds) {
+		final int sInt = primaryIds.stream().mapToInt(id -> {
+			final OwenerTagEntry entry = owenerTagDao.queryByID(id);
+			// 更新为不可见
+			entry.setIsShow(EnableType.DISENABLE.getValue());
+			final boolean rs = owenerTagDao.update(entry);
+
+			if (!rs) {
+				return 0;
+			}
+			return 1;
+		}).sum();
+
+		return primaryIds.size() == sInt;
+	}
+
 	@Override
 	public Long insert(final OwenerTagBo bo) {
 		return owenerTagDao.insert(map(bo, OwenerTagEntry.class));
@@ -47,27 +71,11 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	}
 
 	@Override
-	@ProfilerLog
-	public List<OwenerTagBo> queryAllByUid(final String uid) {
+	public List<OwenerTagBo> queryByCategoriesTagCode(final String uid, final String categoriesTagCode) {
 		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
 			@Override
 			public List<OwenerTagBo> caller() {
-				final List<OwenerTagEntry> entrys = owenerTagDao.queryAllByUid(uid);
-				if (CollectionUtils.isEmpty(entrys)) {
-					Collections.emptyList();
-				}
-
-				return map(entrys, OwenerTagBo.class);
-			}
-		}, 2L, TimeUnit.SECONDS, "queryAllByUid", uid);
-	}
-
-	@Override
-	public List<OwenerTagBo> queryByCategoriesTagCode(final String categoriesTagCode) {
-		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
-			@Override
-			public List<OwenerTagBo> caller() {
-				final List<OwenerTagEntry> entrys = owenerTagDao.queryByCategoriesTagCode(categoriesTagCode);
+				final List<OwenerTagEntry> entrys = owenerTagDao.queryByCategoriesTagCode(uid, categoriesTagCode);
 				if (CollectionUtils.isEmpty(entrys)) {
 					Collections.emptyList();
 				}
@@ -75,6 +83,39 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 				return map(entrys, OwenerTagBo.class);
 			}
 		}, "queryByCategoriesTagCode", categoriesTagCode);
+	}
+
+	@Override
+	public List<OwenerTagBo> queryByCode(final Set<String> owenerTagCode) {
+		if (CollectionUtils.isEmpty(owenerTagCode)) {
+			return Collections.emptyList();
+		}
+		final List<OwenerTagEntry> entry = owenerTagDao.queryByCode(owenerTagCode);
+		if (entry == null) {
+			return Collections.emptyList();
+		}
+
+		return map(entry, OwenerTagBo.class);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.yueny.blog.service.table.IOwenerTagService#queryByCode(java.lang.String)
+	 */
+	@Override
+	public OwenerTagBo queryByCode(final String owenerTagCode) {
+		if (StringUtils.isEmpty(owenerTagCode)) {
+			return null;
+		}
+
+		final OwenerTagEntry entry = owenerTagDao.queryByCode(owenerTagCode);
+		if (entry == null) {
+			return null;
+		}
+
+		return map(entry, OwenerTagBo.class);
 	}
 
 	@Override
@@ -107,6 +148,22 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 		}, 2L);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.service.table.IOwenerTagService#queryByTagName(java.lang.
+	 * String, java.lang.String)
+	 */
+	@Override
+	public OwenerTagBo queryByTagName(final String uid, final String tagName) {
+		final OwenerTagEntry entry = owenerTagDao.queryByTagName(uid, tagName);
+		if (entry == null) {
+			return null;
+		}
+
+		return map(entry, OwenerTagBo.class);
+	}
+
 	@Override
 	@ProfilerLog
 	public List<OwenerTagBo> queryByUid(final String uid) {
@@ -121,6 +178,33 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 				return map(entrys, OwenerTagBo.class);
 			}
 		}, 2L, TimeUnit.SECONDS, "queryByUid", uid);
+	}
+
+	@Override
+	@ProfilerLog
+	public List<OwenerTagBo> queryByUidForAll(final String uid) {
+		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
+			@Override
+			public List<OwenerTagBo> caller() {
+				final List<OwenerTagEntry> entrys = owenerTagDao.queryByUidForAll(uid);
+				if (CollectionUtils.isEmpty(entrys)) {
+					Collections.emptyList();
+				}
+
+				return map(entrys, OwenerTagBo.class);
+			}
+		}, 2L, TimeUnit.SECONDS, "queryAllByUid", uid);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see com.yueny.blog.service.table.IOwenerTagService#update(long,
+	 * java.lang.Integer)
+	 */
+	@Override
+	public boolean update(final long primaryId, final EnableType isShow) {
+		return owenerTagDao.update(primaryId, isShow.getValue());
 	}
 
 }

@@ -66,7 +66,7 @@ public class ArticleOwenerTagController extends BaseController {
 
 			// 从session中获取uid
 			final String uid = "yuanyang";
-			final List<OwenerTagBo> owenerTagBos = owenerTagService.queryAllByUid(uid);
+			final List<OwenerTagBo> owenerTagBos = owenerTagService.queryByUidForAll(uid);
 			setModelAttribute("owenerTagBos", owenerTagBos);
 		} catch (final Exception e) {
 			logger.error("【发布文章】出现错误!", e);

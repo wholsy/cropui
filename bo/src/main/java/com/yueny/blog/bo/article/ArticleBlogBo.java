@@ -40,14 +40,12 @@ public class ArticleBlogBo extends BaseBo {
 	private String articleMore;
 	/** 此文章的上一篇文章对外ID */
 	private String articlePreviousBlogId;
-	/** 文章标签ID,最多添加5个标签，多个标签之间用“,”分隔 */
-	private Set<Long> articleTagIds;
 	/** 文章标题 */
 	private String articleTitle;
 	/** 全站文章分类编号 ，多个标签之间用“,”分隔，目前定义只会为一个 */
 	private Set<String> categoryTagCodes;
 	/** 个人分类ID,多个分类之间用“,”分隔 */
-	private Set<Long> owenerTagIds;
+	private Set<String> owenerTagIds;
 	/** 阅读次数 */
 	private Integer readTimes;
 	/** 文章标题类型 */

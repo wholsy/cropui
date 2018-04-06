@@ -24,8 +24,7 @@ public class DozerConverterTest {
 		bo.setArticleTitle("文章标题");
 		bo.setSelTypeCode(ArticleSelType.ORIGINAL);
 		bo.setArticleId(1L);
-		bo.setArticleTagIds(Sets.newHashSet(1L, 2L));
-		bo.setOwenerTagIds(Sets.newHashSet(6L, 8L));
+		bo.setOwenerTagIds(Sets.newHashSet("OT23t126q7t3762", "OTr675587"));
 		bo.setCategoryTagCodes(Sets.newHashSet("A34567"));
 
 		final ArticleBlogEntry entry = mapper.map(bo, ArticleBlogEntry.class);
@@ -46,7 +45,6 @@ public class DozerConverterTest {
 		entry.setArticleTitle("文章标题");
 		entry.setSelTypeCode(11);
 		entry.setArticleId(1L);
-		entry.setArticleTagIds("1,2");
 		entry.setOwenerTagIds("8,6");
 		entry.setCategoryTagCodes("A34567");
 

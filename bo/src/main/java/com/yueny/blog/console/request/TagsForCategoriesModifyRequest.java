@@ -41,14 +41,13 @@ public class TagsForCategoriesModifyRequest extends AbstractBo {
 	/** 全站文章分类编号 */
 	@Getter
 	@Setter
-	@NotEmpty(message = "全站文章分类不能为空")
 	private String categoriesTagCode;
 	/** 备注 */
 	@Getter
 	@Setter
 	private String memo;
 
-	/** 个人分类名称，以逗号分隔 */
+	/** 个人分类名称，以逗号 COMMA 分隔 */
 	@Getter
 	@Setter
 	private String owenerTagNameArrays;

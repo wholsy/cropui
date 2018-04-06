@@ -54,7 +54,8 @@
 				    			${categoriesTag.categoriesName}
 				    			 |
 					    </#list>
-					    <a class="btn btn-round btn-default modal-link" data-toggle="modal" data-code="-1">
+					    <a class="btn btn-round btn-default modal-link" data-toggle="modal" 
+					    		data-url="${ctx}/admin/categories_tag/-1.html">
 	                    		<i class="fa fa-plus-circle"></i> Insert
 	                    </a>
 	                    
@@ -67,7 +68,8 @@
 	                				
 	            					<div class="tag-list__itemWraper">
 	                            		<h3 class="h5 tag-list__itemheader">
-	                            			<a class="modal-link" data-toggle="modal" data-code="${categoriesTag.categoriesTagCode}">
+	                            			<a class="modal-link" data-toggle="modal"
+	                            				data-url="${ctx}/admin/categories_tag/${categoriesTag.categoriesTagCode}.html">
 	                                        	${categoriesTag.categoriesName}
 										</a>
 	                            		</h3>
@@ -76,8 +78,10 @@
 	                            			<li class="tagPopup">
 	                            				<#if (categoriesTag.owenerTags)?? && (categoriesTag.owenerTags?size > 0)>
 	                            					<#list categoriesTag.owenerTags as owenerTag>
-										    			<a href="/t/${owenerTag.owenerTagId}" class="tag" data-toggle="popover" data-id="1"
-				                                           data-original-title="${owenerTag.owenerTagName}">
+										    			<a class="modal-link tag" data-toggle="popover" 
+										    				data-id="1"
+				                                        data-original-title="${owenerTag.owenerTagName}"
+				                                        data-url="${ctx}/admin/owener_tag/${owenerTag.owenerTagCode}.html">
 			                                        		<#--  
 			                                        		<img src="https://sfault-avatar.b0.upaiyun.com/300/191/3001919899-5488009eb028c_small">
 			                                        		-->
