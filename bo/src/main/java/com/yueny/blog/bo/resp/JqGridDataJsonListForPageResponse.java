@@ -17,51 +17,51 @@ public class JqGridDataJsonListForPageResponse<T> extends JsonListResponse<T> {
 	 *
 	 */
 	private static final long serialVersionUID = 9163369797333712558L;
-	
-	/**
-	 * 每页中的记录行数
-	 */
-	@Getter
-	@Setter
-	private Integer rows=0;
-	/**
-	 * 排序的方式
-	 */
-	@Getter
-	@Setter
-	private String sord;  
-	
-	/**
-	 * 用于排序的列名
-	 */
-	@Getter
-	@Setter
-	private String sidx;        
-	
+
 	/**
 	 * /是否用于查询的请求
 	 */
 	@Getter
 	@Setter
-	private String search;
-	
+	private String _search;
 	/**
 	 * 当前页码的数据
 	 */
 	@Getter
 	@Setter
 	private Integer currentpage = 1;
+
+	/**
+	 * 代表数据行总数的数据
+	 */
+	@Getter
+	@Setter
+	private Long records = 0L;
+
+	/**
+	 * 每页中的记录行数
+	 */
+	@Getter
+	@Setter
+	private Integer rows = 0;
+
+	/**
+	 * 用于排序的列名
+	 */
+	@Getter
+	@Setter
+	private String sidx;
+	/**
+	 * 排序的方式， 如asc
+	 */
+	@Getter
+	@Setter
+	private String sord;
 	/**
 	 * 页码总数的数据
 	 */
 	@Getter
 	@Setter
 	private Integer total = 0;
-	/**
-	 *代表数据行总数的数据
-	 */
-	@Getter
-	@Setter
-	private Long records = 0L;
-	
+
 }

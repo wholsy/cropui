@@ -33,7 +33,9 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 	public final L cache(final CacheDataHandler<L> cacheExecutor, final Long timeout, final TimeUnit unit,
 			final Object... args) {
 		// TODO redis异常处理
-		// .
+		if (redisTemplate == null) {
+			return cacheExecutor.caller();
+		}
 
 		// getClass() is 'CacheListService'
 		final String redisKey = CacheKeyConstant.assmebledKeys(getClass().getSimpleName(), args);

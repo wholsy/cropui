@@ -50,7 +50,8 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.manage.IArticleManageService#addBlog(java.lang.
+	 * @see
+	 * com.yueny.blog.service.manage.IArticleManageService#addBlog(java.lang.
 	 * String, com.yueny.blog.bo.model.condition.ArticlePublishedCondition,
 	 * com.yueny.rapid.lang.agent.UserAgentResource)
 	 */
@@ -117,7 +118,8 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.manage.IArticleManageService#delArticleBlog(java.
+	 * @see
+	 * com.yueny.blog.service.manage.IArticleManageService#delArticleBlog(java.
 	 * lang. String)
 	 */
 	@Override
@@ -143,7 +145,8 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.manage.IArticleManageService#editBlog(java.lang.
+	 * @see
+	 * com.yueny.blog.service.manage.IArticleManageService#editBlog(java.lang.
 	 * String, com.yueny.blog.bo.model.condition.ArticlePublishedCondition,
 	 * com.yueny.rapid.lang.agent.UserAgentResource)
 	 */
@@ -229,22 +232,21 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 	 *
 	 * @param uid
 	 *            UID
-	 * @param owenerTagData
+	 * @param owenerTagIds
 	 *            个人分类,多个分类之间用“,”分隔,包含已存在分类的主键,和新增分类,eg: '1,3,6,8,love'
 	 * @return
 	 * @throws DataVerifyAnomalyException
 	 */
-	private Map<String, OwenerTagBo> operationOwenerTagIdsBySave(final String uid, final String owenerTagData)
+	private Map<String, OwenerTagBo> operationOwenerTagIdsBySave(final String uid, final String owenerTagIds)
 			throws DataVerifyAnomalyException {
 		final Map<String, OwenerTagBo> owenerTags = Maps.newHashMap();
-		for (final String owenerTag : Splitter.on(Constants.COMMA).split(owenerTagData)) {
-			final String owenerTagCode = owenerTag;
+		for (final String owenerTagId : Splitter.on(Constants.COMMA).split(owenerTagIds)) {
 			// 已经存在的,eg: '1,3,6,8'
-			if (owenerTagCode == null) {
+			if (owenerTagId == null) {
 				continue;
 			}
 
-			final OwenerTagBo tag = owenerTagService.queryByCode(owenerTagCode);
+			final OwenerTagBo tag = owenerTagService.queryById(Long.parseLong(owenerTagId));
 			if (tag == null) {
 				throw new DataVerifyAnomalyException(BaseErrorType.RECORD_NOT_EXIT);
 			}
@@ -253,7 +255,7 @@ public class ArticleManagerServiceImpl extends BaseBiz implements IArticleManage
 				throw new DataVerifyAnomalyException(BaseErrorType.SYSTEM_ERROR);
 			}
 
-			owenerTags.put(owenerTagCode, tag);
+			owenerTags.put(owenerTagId, tag);
 		}
 		return owenerTags;
 	}

@@ -78,8 +78,10 @@ public class BlogListAdminController extends BaseController {
 	@RequestMapping(value = "/service/do_show_list.json", method = RequestMethod.POST)
 	@ResponseBody
 	public JqGridDataJsonListForPageResponse<ArticleTagBlogVo> listBlogData(
-			@RequestParam(value = "pageno", required = false, defaultValue = "1") int pageno,
-			@RequestParam(value = "title_q", required = false, defaultValue = "") final String title_q,
+			@RequestParam(value = "page", required = false, defaultValue = "1") int pageno,
+			@RequestParam(value = "rows", required = true) int rows,
+			@RequestParam(value = "_search", required = false) boolean search_q,
+			@RequestParam(value = "title_q", required = false) final String title_q,
 			final HttpServletResponse response) {
 		if (pageno <= 0) {
 			pageno = 1;
@@ -87,7 +89,7 @@ public class BlogListAdminController extends BaseController {
 
 		final JqGridDataJsonListForPageResponse<ArticleTagBlogVo> res = new JqGridDataJsonListForPageResponse<>();
 		try {
-			final PageCond pageable = new PageCond(pageno, 10);
+			final PageCond pageable = new PageCond(pageno, rows);
 			final List<ArticleTagBlogVo> blogs = articleBlogManagerService.findPageListForSimpleWithTitle(pageable,
 					title_q);
 			res.setData(blogs);

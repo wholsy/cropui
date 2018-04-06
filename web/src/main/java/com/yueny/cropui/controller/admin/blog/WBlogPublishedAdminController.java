@@ -3,6 +3,7 @@ package com.yueny.cropui.controller.admin.blog;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yueny.blog.bo.enums.BlogResultCodeType;
 import com.yueny.blog.bo.model.condition.ArticlePublishedCondition;
 import com.yueny.blog.common.BlogConstant;
 import com.yueny.blog.service.admin.manager.IArticleManagerService;
@@ -17,6 +19,7 @@ import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.NormalResponse;
 import com.yueny.rapid.lang.agent.UserAgentResource;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
+import com.yueny.rapid.lang.exception.invalid.InvalidException;
 import com.yueny.rapid.lang.util.StringUtil;
 
 /**
@@ -49,6 +52,13 @@ public class WBlogPublishedAdminController extends BaseController {
 
 		final NormalResponse<String> response = new NormalResponse<>();
 		try {
+			if (StringUtils.isEmpty(condition.getOwenerTag())) {
+				throw new InvalidException(BlogResultCodeType.INVALID_IS_NULL_FOR_OWENER_TAG);
+			}
+			if (StringUtils.isEmpty(condition.getCategoryTagCode())) {
+				throw new InvalidException(BlogResultCodeType.INVALID_IS_NULL_FOR_CATEGORY_TAG_CODE);
+			}
+
 			final UserAgentResource agent = getCurrentUserAgent();
 
 			// 从session中获取uid
@@ -65,6 +75,10 @@ public class WBlogPublishedAdminController extends BaseController {
 
 			response.setData(articleBlogId);
 		} catch (final DataVerifyAnomalyException e) {
+			logger.error("【发布文章】出现错误!", e);
+			response.setCode(e.getErrorCode());
+			response.setMessage(e.getErrorMsg());
+		} catch (final InvalidException e) {
 			logger.error("【发布文章】出现错误!", e);
 			response.setCode(e.getErrorCode());
 			response.setMessage(e.getErrorMsg());

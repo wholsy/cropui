@@ -3,7 +3,7 @@
 	<link rel="stylesheet" href="${ctx}/plug-ins/jqgrid/css/ui.jqgrid.css" />
 	<#-- jqGrid主题包-非必要 --> 
 	<#-- 在jqgrid/css/css这个目录下还有其他的主题包，可以尝试更换看效果 -->
-	<link rel="stylesheet" href="${ctx}/plug-ins/jqgrid/css/css/redmond/jquery-ui-1.8.16.custom.css" />
+	<link rel="stylesheet" href="${ctx}/plug-ins/jqgrid/css/css/ui-lightness/jquery-ui-1.8.16.custom.css" />
 	
 <#include "admin/common/header_end.ftl">
 ß
@@ -37,7 +37,7 @@
 		<#-- row start -->
 		<div class="row">
 			<#-- 列表信息 -->
-			<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-24 col-sm-24 col-xs-24">
 		        <div class="x_panel">
 					<div class="x_title">
 			            <h2>博文信息列表 <small>已发布博文</small></h2>

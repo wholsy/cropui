@@ -12,12 +12,13 @@ $(document).ready(function()
             rowList : [ 10, 30, 50 ],
             viewrecords : true,
             multiselect: true, 
-		    multiselect : true,
 		    // 行编号
 		    rownumbers : true, 
             autowidth : true,
-    			height : 250,
-           
+            height: 250, 
+			caption: "数据列表显示",
+    		
+			// 解析返回的数据格式
             jsonReader : {
                 root: "list",
                 page: "currentpage",
@@ -190,53 +191,6 @@ var historys = function()
 				}	
 			}
 			
-            /*
-            deleteConfirm: function(item) {
-                return "The client <b>\"" + item.articleTitle + "\" </b>will be removed. Are you sure?";
-            },
-            controller: {
-                deleteItem: function(item) {
-                        return $.ajax({
-                        url: ctx + "/admin/del.json?articleBlogId=" + item.articleBlogId + "",
-                        type: 'DELETE',
-                        success: function(rs) {
-                            if (rs["data"] == true) {
-                                $.dialog.tips("删除成功！");
-                            }else {
-                                    alert("删除失败：" + rs["message"]);
-                            }
-                        }
-                    });
-                }
-            },
-    
-            fields: [
-                { name: "articleBlogId", title: "标识号", type: "text",
-                        itemTemplate: function(value, item) {
-                            return $("<a target='_blank' href='" + ctx + "/article/" + item.articleBlogId + ".html'>").append(value).append("</a>");
-                        }
-                    },
-                { name: "articleTitle", title: "标题", type: "textarea", width: 150,
-                        itemTemplate: function(value, item) {
-                            return $("<div title='" + item.articleAlias + "'>").append(value).append("</div>");
-                        }
-                    },
-                { name: "today", title: "创建日期", type: "date",
-                        itemTemplate: function(value, item) {
-                            return item.today;
-                        }
-                    },
-                {
-                        type: "control",
-                        modeSwitchButton: false,
-                        editButton: true,
-                        headerTemplate: function() {
-                        return $("<a>").attr("title", "新增博文").attr("target", "_blank").attr("href", "#").text("新增博文");
-                    }
-                }
-                
-            ]
-            */
         });
        
        	/*创建jqGrid的操作按钮容器*/
@@ -245,7 +199,7 @@ var historys = function()
 	    		{
 	    			edit : false, 
 	    			add : false, 
-	    			del : true,
+	    			del : false,
 	    			search : false,
 	    			refresh : true
 	    		}

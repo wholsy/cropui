@@ -26,15 +26,14 @@
 	-->
 	<aop:aspectj-autoproxy/>
 	
+	<import resource="classpath:/config/service-dozer.xml"/>
+	<import resource="classpath:/config/service-redis.xml"/>
 	
 	<bean class="com.yueny.superclub.util.strategy.spring.ManageSpringBeans" 
 		lazy-init="false" />
 	<bean class="com.yueny.superclub.util.strategy.factory.StrategyFactoryService"/>
 	
 	<bean class="com.yueny.superclub.util.exec.multi.MultiThreadSupport"/>
-	
-	<import resource="classpath:/config/service-dozer.xml"/>
-	<import resource="classpath:/config/service-redis.xml"/>
 	
 	<!-- 密码加密器  -->
 	<bean id="passPortEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
