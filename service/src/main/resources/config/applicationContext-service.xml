@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-lazy-init="false">
+	
+	<context:annotation-config/>
+	<context:spring-configured/>
+ 
+	<!-- 自动扫描 -->
+	<context:component-scan base-package="com.yueny.blog.service"/>
+	<context:component-scan base-package="com.yueny.cropui.service"/>
+	<context:component-scan base-package="com.yueny.kapo.core"/>
+
+	<mvc:annotation-driven/>
+	
+	<!-- 激活自动代理功能
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+	-->
+	<aop:aspectj-autoproxy/>
+	
+	
+	<bean class="com.yueny.superclub.util.strategy.spring.ManageSpringBeans" 
+		lazy-init="false" />
+	<bean class="com.yueny.superclub.util.strategy.factory.StrategyFactoryService"/>
+	
+	<bean class="com.yueny.superclub.util.exec.multi.MultiThreadSupport"/>
+	
+	<import resource="classpath:/config/service-dozer.xml"/>
+	<import resource="classpath:/config/service-redis.xml"/>
+	
+	<!-- 密码加密器  -->
+	<bean id="passPortEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+		<constructor-arg name="secret" type="java.lang.CharSequence">
+            <value>${security.secret.value.site.wide}</value>
+        </constructor-arg>
+	</bean>
+	<bean id="passportMatchesService" class="com.yueny.superclub.util.web.security.passport.matches.PassPortEncodeMatchesService">
+        <property name="passPortEncoder" ref="passPortEncoder"/>
+	</bean>
+	
+</beans>

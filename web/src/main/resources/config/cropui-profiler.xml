@@ -13,14 +13,24 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 	
-	<!-- 
-	<bean id="performanceMonitoringHelper" scope="prototype"
-		class="com.yueny.blog.service.common.PerformanceMonitoringHelper">
+	<!-- 在方法上使用 @ProfilerLog -->
+	<bean class="com.yueny.rapid.topic.profiler.spring.MonitorGuideHandler">
+		<constructor-arg>
+			<bean class="com.yueny.rapid.topic.profiler.configure.ProfilerLogConfigure" p:profilerDuration="true"/>
+		</constructor-arg>
 	</bean>
-	<bean id="performanceMonitoringAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor" scope="prototype">
-		<property name="advice" ref="performanceMonitoringHelper" />
-		<property name="pattern" value="com.yueny.cropui.controller..*" />
-	</bean>
-	 -->
 	
+    <!-- 该方式可以避免在Dao方法上添加 @ProfilerLog从而实现耗时输出  -->
+    <bean id="defaultDigestLogInterceptor" class="com.yueny.rapid.adapter.digest.web.method.BasicDigestLogMethodInterceptor"
+          c:loggerName="${digest.interceptor.logger.name}" p:printDigstLogger="false" p:printResults="true"/>
+    <!-- web,service日志摘要见web-config.xml mvc:interceptor -->
+    <aop:config>
+		<aop:pointcut id="daoAnnotatedClass"
+			expression="within(com.yueny.blog.dao..*))"/>
+		<aop:advisor advice-ref="defaultDigestLogInterceptor" pointcut-ref="daoAnnotatedClass" order="20"/>
+		
+		<aop:advisor advice-ref="defaultDigestLogInterceptor"
+            pointcut="${digest.advisor.default.pointcut.expression}"/>        
+    </aop:config>
+
 </beans>

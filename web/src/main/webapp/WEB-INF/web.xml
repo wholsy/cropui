@@ -20,7 +20,7 @@
 	<!-- Spring配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:config/all.xml</param-value>
+		<param-value>classpath*:config/applicationContext-blog.xml</param-value>
 	</context-param>
     <context-param>
 		<param-name>defaultHtmlEscape</param-name>

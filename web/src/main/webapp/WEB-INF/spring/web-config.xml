@@ -139,7 +139,17 @@
 				p:generateLogId="true"/>
 		</mvc:interceptor>
     
-		<!-- 2、 日志摘要   -->
+		<!-- 2、日志摘要 DigestLog  -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.yueny.rapid.adapter.digest.web.interceptor.DigestLogHandlerInterceptor"
+                c:loggerName="${digest.interceptor.logger.name}" 
+                p:printDigstPigeonhole="${digest.interceptor.print.pigeonhole}" 
+                p:slowDumpThreshold="${digest.interceptor.slow.dump.threshold}">
+            </bean>
+        </mvc:interceptor>
+        
+        <!-- 2、web摘要   -->
 		<mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/static/**"/>
