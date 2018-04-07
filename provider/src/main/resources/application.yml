@@ -1,0 +1,9 @@
+# 服务器配置
+server:
+   port: 8090
+   sessionTimeout: 45
+   contextPath: /
+   
+spring:
+   aop: 
+      proxy-target-class: true

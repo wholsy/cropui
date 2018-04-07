@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.yueny.blog</groupId>
+		<artifactId>blog-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>blog-provider</artifactId>
+	<packaging>jar</packaging>
+	
+	<properties>
+        <spring.boot.version>1.5.3.RELEASE</spring.boot.version>
+		<skipTest>true</skipTest>
+		<skip.maven.deploy>true</skip.maven.deploy>
+    </properties>
+    
+    <dependencyManagement>
+    	<dependencies>
+    		<dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>1.5.3.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+	        </dependency>
+    	</dependencies>
+    </dependencyManagement>
+    
+	<dependencies>
+		<dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-bo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-common</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-entry</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-dao</artifactId>
+        </dependency>
+		<dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yueny.blog</groupId>
+            <artifactId>blog-integration</artifactId>
+        </dependency>
+        
+        <dependency>
+		    <groupId>com.yueny.rapid.util</groupId>
+		    <artifactId>rapid-util-web-core</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.yueny.rapid.util</groupId>
+		    <artifactId>rapid-util-web-freemarker</artifactId>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+		<dependency>
+		        <groupId>org.springframework.boot</groupId>
+		        <artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+        <!-- freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+ 		<dependency>
+             <groupId>org.slf4j</groupId>
+             <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.logback-extensions</groupId>
+			<artifactId>logback-ext-spring</artifactId>
+		</dependency>
+		
+        <dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+           	<artifactId>jackson-databind</artifactId>
+		</dependency>
+		
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<finalName>${artifactId}-${env}</finalName>
+		
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		
+		<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-resource</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>profile/${env}/config</directory>
+                                    <targetPath>config</targetPath>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>profile/${env}/properties</directory>
+                                    <targetPath>properties</targetPath>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.3.RELEASE</version>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+	</build>
+	
+	<profiles>
+	 	<profile>
+	 		<id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <env>dev</env>
+                
+                <!-- 如何配置端口 -->
+                <pom.logs.home>/Users/yueny/data/logs/tomcat/blog/runtime/blog</pom.logs.home>
+                <pom.logs.level>debug</pom.logs.level>
+                <pom.logs.level.digest>info</pom.logs.level.digest>
+                <pom.log.root.appender>file-log</pom.log.root.appender>
+            </properties>
+	 	</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env>prod</env>
+				
+				<pom.logs.home>/data/var/logs/javalog/blog/runtime/blog</pom.logs.home>
+                <pom.logs.level>info</pom.logs.level>
+                <pom.logs.level.digest>info</pom.logs.level.digest>
+                <pom.log.root.appender>file-log</pom.log.root.appender>
+			</properties>
+		</profile>
+	 </profiles>
+	 
+</project>
