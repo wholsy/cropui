@@ -191,8 +191,6 @@
 	</dependencies>
   
 	<build>
-		<finalName>blog</finalName>
-		
 		<!-- 打包资源文件 -->
 		<resources>
 			<resource>

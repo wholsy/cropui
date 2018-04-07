@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,22 +46,23 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see
-	 * com.yueny.blog.service.table.IArticleBlogService#countBy(java.lang.String)
+	 * @see com.yueny.blog.service.table.IArticleBlogService#countBy(java.lang.
+	 * String)
 	 */
 	@Override
-	public Long countBy(final String owenerTagCode) {
-		if (StringUtils.isEmpty(owenerTagCode)) {
+	public Long countBy(final Long owenerTagId) {
+		if (owenerTagId == null || owenerTagId.longValue() <= 0) {
 			return 0L;
 		}
 
-		return blogDao.countBy(owenerTagCode);
+		return blogDao.countBy(owenerTagId.toString());
 	}
 
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.article.IArticleBlogService#deleteByBlogId(java.
+	 * @see
+	 * com.yueny.blog.service.article.IArticleBlogService#deleteByBlogId(java.
 	 * lang.String)
 	 */
 	@Override
@@ -113,23 +113,27 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.yueny.blog.service.table.IArticleBlogService#findByOwenerTagCode(java.
+	 * com.yueny.blog.service.table.IArticleBlogService#findByOwenerTagIds(java.
 	 * lang.String)
 	 */
 	@Override
 	@ProfilerLog
-	public List<ArticleBlogBo> findByOwenerTagCode(final String owenerTagCode) {
+	public List<ArticleBlogBo> findByOwenerTagIds(final Long owenerTagId) {
 		return cacheListService.cache(new CacheDataHandler<List<ArticleBlogBo>>() {
 			@Override
 			public List<ArticleBlogBo> caller() {
-				final List<ArticleBlogEntry> entrys = blogDao.findByOwenerTagCode(owenerTagCode);
+				String tagId = null;
+				if (owenerTagId != null) {
+					tagId = owenerTagId.toString();
+				}
+				final List<ArticleBlogEntry> entrys = blogDao.findByOwenerTagId(tagId);
 				if (CollectionUtils.isEmpty(entrys)) {
 					return Collections.emptyList();
 				}
 
 				return map(entrys, ArticleBlogBo.class);
 			}
-		}, 5L, "findByOwenerTagCode", owenerTagCode);
+		}, 5L, "findByOwenerTagId", owenerTagId);
 	}
 
 	@Override
@@ -225,9 +229,8 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see
-	 * com.yueny.blog.service.article.IArticleBlogService#findPageList(com.yueny.
-	 * superclub.api.page.IPageable, java.lang.String)
+	 * @see com.yueny.blog.service.article.IArticleBlogService#findPageList(com.
+	 * yueny. superclub.api.page.IPageable, java.lang.String)
 	 */
 	@Override
 	public List<ArticleBlogBo> findPageList(final IPageable pageable, final String articleTitle) {

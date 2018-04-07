@@ -20,7 +20,7 @@ public interface IArticleBlogDao extends ISingleTableDao<ArticleBlogEntry>, IWho
 	 *
 	 * @return 总数
 	 */
-	Long countBy(String owenerTagCode);
+	Long countBy(String owenerTagId);
 
 	/**
 	 * 根据文章对外ID删除博文<br>
@@ -30,7 +30,7 @@ public interface IArticleBlogDao extends ISingleTableDao<ArticleBlogEntry>, IWho
 	/**
 	 * 获取存在于用户个人分类的博文
 	 */
-	List<ArticleBlogEntry> findByOwenerTagCode(String owenerTagCode);
+	List<ArticleBlogEntry> findByOwenerTagId(String owenerTagId);
 
 	/**
 	 * 文章已读次数加step

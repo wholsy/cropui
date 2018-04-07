@@ -64,13 +64,13 @@ public class TagQueryManageServiceImpl implements ITagQueryManageService {
 
 				for (final OwenerTagBo owenerTagBo : owenerTags) {
 					final List<ArticleBlogBo> list = articleBlogService
-							.findByOwenerTagCode(owenerTagBo.getOwenerTagCode());
+							.findByOwenerTagIds(owenerTagBo.getOwenerTagId());
 
 					owenerTagsData.addSimpleBlog(owenerTagBo.getOwenerTagName(), getArticleSimpleBlog(list));
 				}
 
 				// 尚未分配标签的博文
-				final List<ArticleBlogBo> listForEmpty = articleBlogService.findByOwenerTagCode("");
+				final List<ArticleBlogBo> listForEmpty = articleBlogService.findByOwenerTagIds(null);
 				if (CollectionUtils.isNotEmpty(listForEmpty)) {
 					final OwenerTagBo emptyOwenerTagBo = new OwenerTagBo();
 					emptyOwenerTagBo.setCorrelaArticleSum(listForEmpty.size());

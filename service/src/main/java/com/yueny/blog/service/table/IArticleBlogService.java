@@ -20,7 +20,7 @@ public interface IArticleBlogService {
 	 *
 	 * @return 总数
 	 */
-	Long countBy(String owenerTagCode);
+	Long countBy(Long owenerTagId);
 
 	/**
 	 * 根据文章对外ID删除博文<br>
@@ -48,7 +48,7 @@ public interface IArticleBlogService {
 	/**
 	 * 获取存在于用户个人分类的博文
 	 */
-	List<ArticleBlogBo> findByOwenerTagCode(final String owenerTagCode);
+	List<ArticleBlogBo> findByOwenerTagIds(final Long owenerTagId);
 
 	/**
 	 * 根据此文章的'上一篇文章对外ID'获取此文章信息
