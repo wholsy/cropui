@@ -39,20 +39,20 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 	 * @see com.yueny.blog.dao.article.IArticleBlogDao#countBy(java.lang.String)
 	 */
 	@Override
-	public Long countBy(final String owenerTagCode) {
+	public Long countBy(final String owenerTagId) {
 		// null
-		if (owenerTagCode == null) {
+		if (owenerTagId == null) {
 			final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", BasicSqlOperand.IS_NULL, null)
 					.build();
 			return super.queryCountByColumns(builder);
 		}
 		// 空, 如 ''
-		if (StringUtils.isEmpty(owenerTagCode)) {
+		if (StringUtils.isEmpty(owenerTagId)) {
 			final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", "").build();
 			return super.queryCountByColumns(builder);
 		}
 
-		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", FuzzySqlOperand.LIKE, owenerTagCode)
+		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", FuzzySqlOperand.LIKE, owenerTagId)
 				.build();
 
 		return super.queryCountByColumns(builder);
@@ -71,20 +71,20 @@ public class ArticleBlogDaoImpl extends SingleTableDao<ArticleBlogEntry> impleme
 	}
 
 	@Override
-	public List<ArticleBlogEntry> findByOwenerTagCode(final String owenerTagCode) {
+	public List<ArticleBlogEntry> findByOwenerTagId(final String owenerTagId) {
 		// null
-		if (owenerTagCode == null) {
+		if (owenerTagId == null) {
 			final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", BasicSqlOperand.IS_NULL, null)
 					.build();
 			return super.queryListByColumns(builder);
 		}
 		// 空, 如 ''
-		if (StringUtils.isEmpty(owenerTagCode)) {
+		if (StringUtils.isEmpty(owenerTagId)) {
 			final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", "").build();
 			return super.queryListByColumns(builder);
 		}
 
-		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", FuzzySqlOperand.LIKE, owenerTagCode)
+		final QueryBuilder builder = QueryBuilder.builder().where("OWENER_TAG_IDS", FuzzySqlOperand.LIKE, owenerTagId)
 				.build();
 		return super.queryListByColumns(builder);
 	}
