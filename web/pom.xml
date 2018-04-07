@@ -14,7 +14,26 @@
 	
 	<properties>
 		<skip.maven.deploy>true</skip.maven.deploy>
+		
+		<!-- 
+		Caused by: java.lang.IllegalStateException: Expected raw type form of org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$Match
+		spring升级到 4.3.5 以上 或者 aspectjweaver 回退到 1.8.9
+		 -->
+		<org.springframework.version>4.3.5.RELEASE</org.springframework.version>
+		
+		<jetty.port>8090</jetty.port>
+    	<jetty.logger.level>DEBUG</jetty.logger.level>
 	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-aspects</artifactId>
+			    <version>${org.springframework.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	
 	<dependencies>
 		<dependency>
@@ -57,32 +76,145 @@
 			<artifactId>freemarker</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.logback-extensions</groupId>
+			<artifactId>logback-ext-spring</artifactId>
+		</dependency>
+		
 		<!-- 添加Servlet支持 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Spring Dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-aspects</artifactId>
+		</dependency>
+		<!-- advice -->
+        <dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+			
+		
+		<!-- 添加jsoup支持 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<!-- alibaba -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
 	</dependencies>
   
 	<build>
 		<finalName>blog</finalName>
+		
+		<!-- 打包资源文件 -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		
 		<plugins>
 			<!-- jetty -->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.2.v20150730</version>
                 <configuration>
                     <httpConnector>
-                        <port>8090</port>
+                        <port>${jetty.port}</port>
                     </httpConnector>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                     <systemProperties>
                         <systemProperty>
                             <name>org.eclipse.jetty.LEVEL</name>
-                            <value>DEBUG</value>
+                            <value>${jetty.logger.level}</value>
                         </systemProperty>
                     </systemProperties>
                 </configuration>
@@ -91,10 +223,6 @@
             <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-				</configuration>
 				<executions>
                      <execution>
                          <phase>package</phase>
@@ -106,8 +234,87 @@
                          </configuration>
                      </execution>
 				</executions>
+				<configuration>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				</configuration>
 			</plugin>
 			
+			<!-- skip deployment of server module -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+			</plugin>
+			
+			<plugin>
+                 <groupId>org.codehaus.mojo</groupId>
+                 <artifactId>build-helper-maven-plugin</artifactId>
+                 <version>1.8</version>
+                 <executions>
+                    <execution>
+                    	<id>add-resource</id>
+                    	<phase>validate</phase>
+					    <goals>
+					    	<goal>add-resource</goal>
+					    </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>profile/${env}</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                 </executions>
+             </plugin>
+             
+			<!-- 文件动态加载(拷贝)，可以有多个execution，不同id即可
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-profile-xml-files</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/main/resources/config</outputDirectory>
+							<resources>
+								<resource>
+									<directory>profile/${env}/config</directory>
+									<filtering>true</filtering>
+									<excludes>
+										<exclude>**/.copyarea.db</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-profile-properties-files</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>src/main/resources/properties</outputDirectory>
+							<resources>
+								<resource>
+									<directory>profile/${env}/properties</directory>
+									<filtering>true</filtering>
+									<excludes>
+										<exclude>**/.copyarea.db</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
 		 </plugins>
 	 </build>
 	 
