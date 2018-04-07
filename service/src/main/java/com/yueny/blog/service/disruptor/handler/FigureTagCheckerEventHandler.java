@@ -21,7 +21,8 @@ public class FigureTagCheckerEventHandler extends AbstractEventHandler<FigureTag
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.lmax.disruptor.EventHandler#onEvent(java.lang.Object, long, boolean)
+	 * @see com.lmax.disruptor.EventHandler#onEvent(java.lang.Object, long,
+	 * boolean)
 	 */
 	@Override
 	public void onEvent(final FigureTagCheckerEvent event, final long sequence, final boolean endOfBatch) {
@@ -34,9 +35,9 @@ public class FigureTagCheckerEventHandler extends AbstractEventHandler<FigureTag
 		final int sInt = owenerTagList.parallelStream().mapToInt(owenerTagBo -> {
 			try {
 				// 处理每个用户标签
-				final String owenerTagCode = owenerTagBo.getOwenerTagCode();
+				final Long owenerTagId = owenerTagBo.getOwenerTagId();
 				// 获取用户所拥有该标签的博文信息
-				final Long ltsCount = articleBlogService.countBy(owenerTagCode);
+				final Long ltsCount = articleBlogService.countBy(owenerTagId);
 
 				final int step = ltsCount.intValue() - owenerTagBo.getCorrelaArticleSum();
 				owenerTagService.plusCorrelaArticle(owenerTagBo.getOwenerTagId(), step);

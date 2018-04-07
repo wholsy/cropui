@@ -122,7 +122,11 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 		return cacheListService.cache(new CacheDataHandler<List<ArticleBlogBo>>() {
 			@Override
 			public List<ArticleBlogBo> caller() {
-				final List<ArticleBlogEntry> entrys = blogDao.findByOwenerTagId(owenerTagId.toString());
+				String tagId = null;
+				if (owenerTagId != null) {
+					tagId = owenerTagId.toString();
+				}
+				final List<ArticleBlogEntry> entrys = blogDao.findByOwenerTagId(tagId);
 				if (CollectionUtils.isEmpty(entrys)) {
 					return Collections.emptyList();
 				}

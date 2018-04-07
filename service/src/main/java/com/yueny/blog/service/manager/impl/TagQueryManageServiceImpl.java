@@ -70,7 +70,7 @@ public class TagQueryManageServiceImpl implements ITagQueryManageService {
 				}
 
 				// 尚未分配标签的博文
-				final List<ArticleBlogBo> listForEmpty = articleBlogService.findByOwenerTagIds("");
+				final List<ArticleBlogBo> listForEmpty = articleBlogService.findByOwenerTagIds(null);
 				if (CollectionUtils.isNotEmpty(listForEmpty)) {
 					final OwenerTagBo emptyOwenerTagBo = new OwenerTagBo();
 					emptyOwenerTagBo.setCorrelaArticleSum(listForEmpty.size());
