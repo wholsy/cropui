@@ -14,7 +14,7 @@
 	<import resource="classpath:/config/cropui-aop.xml"/>
 	<import resource="classpath:/config/cropui-bean.xml"/>
 	<import resource="classpath:/config/cropui-profiler.xml"/>
-	<import resource="classpath:/config/cropui-tx.xml"/>
+	<import resource="classpath*:/config/cropui-tx.xml"/>
 	
 	<import resource="classpath*:/config/applicationContext-service.xml"/>
 	<import resource="classpath*:/config/applicationContext-common.xml"/>
