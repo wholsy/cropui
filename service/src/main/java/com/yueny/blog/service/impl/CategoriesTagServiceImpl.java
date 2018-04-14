@@ -1,4 +1,4 @@
-package com.yueny.blog.service.table.impl;
+package com.yueny.blog.service.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +16,7 @@ import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
 import com.yueny.blog.service.comp.cache.core.CacheListService;
 import com.yueny.blog.service.comp.cache.core.CacheService;
-import com.yueny.blog.service.table.ICategoriesTagService;
+import com.yueny.blog.service.ICategoriesTagService;
 import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 

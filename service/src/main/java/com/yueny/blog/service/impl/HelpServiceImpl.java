@@ -1,4 +1,4 @@
-package com.yueny.blog.service.help.impl;
+package com.yueny.blog.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ import com.yueny.blog.entry.help.HisDevReportEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
 import com.yueny.blog.service.comp.cache.core.CacheService;
-import com.yueny.blog.service.help.IHelpService;
+import com.yueny.blog.service.IHelpService;
 import com.yueny.rapid.lang.date.DateFormatType;
 import com.yueny.rapid.lang.date.DateTimeUtil;
 import com.yueny.rapid.lang.date.DateUtil;

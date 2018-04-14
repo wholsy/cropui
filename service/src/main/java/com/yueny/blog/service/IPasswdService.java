@@ -7,7 +7,7 @@
  * Authors:
  *   leiwen <chrisredfield1985@126.com> , boyan <killme2008@gmail.com>
  */
-package com.yueny.blog.service.common;
+package com.yueny.blog.service;
 
 /**
  * 密码服务 

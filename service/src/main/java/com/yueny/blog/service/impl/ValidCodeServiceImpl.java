@@ -1,13 +1,12 @@
 /**
  * 
  */
-package com.yueny.blog.service.common.impl;
+package com.yueny.blog.service.impl;
 
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.common.IProfileService;
-import com.yueny.blog.service.common.IValidCodeService;
+import com.yueny.blog.service.IProfileService;
+import com.yueny.blog.service.IValidCodeService;
 import com.yueny.rapid.message.email.sender.EmailTemplateSenderHelper;
-import com.yueny.rapid.message.email.sender.EmailType;
 import com.yueny.rapid.message.email.sender.core.EmailMessage;
 import com.yueny.rapid.message.email.sender.entity.ThreadEmailEntry;
 import org.apache.commons.lang3.StringUtils;

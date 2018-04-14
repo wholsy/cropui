@@ -1,4 +1,4 @@
-package com.yueny.blog.service.table.impl;
+package com.yueny.blog.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import com.yueny.blog.bo.console.user.UserInfoBo;
 import com.yueny.blog.dao.console.user.IUserInfoDao;
 import com.yueny.blog.entry.console.user.UserInfoEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.table.IUserInfoService;
+import com.yueny.blog.service.IUserInfoService;
 
 /**
  * 管理员查询服务

@@ -21,7 +21,7 @@ import com.yueny.blog.console.request.TagsForCategoriesModifyRequest;
 import com.yueny.blog.console.vo.tags.TagsForCategorieBaseVo;
 import com.yueny.blog.console.vo.tags.TagsForCategoriesViewsVo;
 import com.yueny.blog.service.admin.manager.ICategoriesTagManagerService;
-import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.blog.service.IOwenerTagService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.JsonNormalResponse;
 import com.yueny.rapid.lang.exception.invalid.InvalidException;

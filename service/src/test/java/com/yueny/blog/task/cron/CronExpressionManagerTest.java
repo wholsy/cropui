@@ -1,4 +1,4 @@
-package com.yueny.blog.service.task.cron;
+package com.yueny.blog.task.cron;
 
 public class CronExpressionManagerTest {
 	// .

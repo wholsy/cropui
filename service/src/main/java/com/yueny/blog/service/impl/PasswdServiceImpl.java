@@ -7,10 +7,10 @@
  * Authors:
  *   leiwen <chrisredfield1985@126.com> , boyan <killme2008@gmail.com>
  */
-package com.yueny.blog.service.common.impl;
+package com.yueny.blog.service.impl;
 
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.common.IPasswdService;
+import com.yueny.blog.service.IPasswdService;
 import com.yueny.superclub.util.crypt.core.group.MD5Util;
 import org.springframework.stereotype.Service;
 

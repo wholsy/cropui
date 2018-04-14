@@ -2,7 +2,7 @@ package com.yueny.cropui.controller.admin;
 
 import com.taobao.diamond.common.Constants;
 import com.yueny.blog.service.admin.manager.ILoginManager;
-import com.yueny.blog.service.common.IValidCodeService;
+import com.yueny.blog.service.IValidCodeService;
 import com.yueny.cropui.controller.BaseController;
 import com.yueny.rapid.data.resp.pojo.response.BaseResponse;
 import com.yueny.rapid.lang.exception.invalid.InvalidException;

@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.disruptor.event.FigureTagCheckerEvent;
-import com.yueny.blog.service.table.IArticleBlogService;
-import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.blog.service.IArticleBlogService;
+import com.yueny.blog.service.IOwenerTagService;
 
 /**
  * 标签完整性检查事件<br>

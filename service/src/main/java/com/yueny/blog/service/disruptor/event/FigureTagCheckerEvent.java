@@ -1,7 +1,7 @@
 package com.yueny.blog.service.disruptor.event;
 
-import com.yueny.blog.service.table.IArticleBlogService;
-import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.blog.service.IArticleBlogService;
+import com.yueny.blog.service.IOwenerTagService;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

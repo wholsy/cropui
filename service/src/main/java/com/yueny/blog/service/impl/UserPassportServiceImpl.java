@@ -1,4 +1,4 @@
-package com.yueny.blog.service.table.impl;
+package com.yueny.blog.service.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import com.yueny.blog.dao.console.user.IUserInfoDao;
 import com.yueny.blog.dao.console.user.IUserInfoPassportDao;
 import com.yueny.blog.entry.console.user.UserInfoEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.table.IUserPassportService;
+import com.yueny.blog.service.IUserPassportService;
 import com.yueny.rapid.lang.exception.invalid.InvalidException;
 import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.superclub.util.web.security.exception.enums.UserSecurityResultCodeType;

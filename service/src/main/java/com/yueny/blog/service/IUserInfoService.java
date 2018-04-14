@@ -1,4 +1,4 @@
-package com.yueny.blog.service.table;
+package com.yueny.blog.service;
 
 import com.yueny.blog.bo.console.user.UserInfoBo;
 

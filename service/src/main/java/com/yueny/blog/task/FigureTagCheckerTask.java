@@ -1,4 +1,4 @@
-package com.yueny.blog.service.task;
+package com.yueny.blog.task;
 
 import java.util.Date;
 

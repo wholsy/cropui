@@ -1,4 +1,4 @@
-package com.yueny.blog.service.help;
+package com.yueny.blog.service;
 
 import com.yueny.blog.bo.model.statistics.day.HisDevReportDayData;
 import com.yueny.blog.bo.model.statistics.month.HisDevReportMonthData;

@@ -1,13 +1,12 @@
 package com.yueny.blog.service.admin.manager.impl;
 
-import com.yueny.blog.bo.console.user.UserInfoBo;
-import com.yueny.blog.service.common.IPasswdService;
-import com.yueny.blog.service.table.IUserInfoService;
+import com.yueny.blog.service.IPasswdService;
+import com.yueny.blog.service.IUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yueny.blog.service.admin.manager.ILoginManager;
-import com.yueny.blog.service.table.IUserPassportService;
+import com.yueny.blog.service.IUserPassportService;
 import com.yueny.rapid.lang.exception.invalid.InvalidException;
 
 /**

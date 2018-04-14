@@ -1,4 +1,4 @@
-package com.yueny.blog.service.help.impl;
+package com.yueny.blog.service.impl;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,7 +15,7 @@ import com.yueny.blog.entry.help.AboutUsInfoEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
 import com.yueny.blog.service.comp.cache.core.CacheListService;
-import com.yueny.blog.service.help.IAboutUsInfoService;
+import com.yueny.blog.service.IAboutUsInfoService;
 import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.superclub.api.constant.Constants;
 

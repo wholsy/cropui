@@ -7,11 +7,11 @@
  * Authors:
  *   leiwen <chrisredfield1985@126.com> , boyan <killme2008@gmail.com>
  */
-package com.yueny.blog.service.common.impl;
+package com.yueny.blog.service.impl;
 
 import com.taobao.diamond.extend.DynamicProperties;
 import com.yueny.blog.common.enums.ProfileType;
-import com.yueny.blog.service.common.IProfileService;
+import com.yueny.blog.service.IProfileService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

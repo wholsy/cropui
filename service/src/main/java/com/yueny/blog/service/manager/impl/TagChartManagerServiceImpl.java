@@ -14,8 +14,8 @@ import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
 import com.yueny.blog.service.comp.cache.core.CacheService;
 import com.yueny.blog.service.manager.ITagChartManagerService;
-import com.yueny.blog.service.table.ICategoriesTagService;
-import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.blog.service.ICategoriesTagService;
+import com.yueny.blog.service.IOwenerTagService;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 
 /**

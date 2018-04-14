@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.yueny.blog.service.common;
+package com.yueny.blog.service;
 
 import com.yueny.blog.common.enums.ProfileType;
 

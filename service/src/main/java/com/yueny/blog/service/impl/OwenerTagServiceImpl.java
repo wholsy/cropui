@@ -1,4 +1,4 @@
-package com.yueny.blog.service.table.impl;
+package com.yueny.blog.service.impl;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
 import com.yueny.blog.service.comp.cache.core.CacheListService;
 import com.yueny.blog.service.comp.cache.core.CacheService;
-import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.blog.service.IOwenerTagService;
 import com.yueny.rapid.lang.util.enums.EnableType;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 
@@ -41,7 +41,7 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.table.IOwenerTagService#deleteById(long)
+	 * @see com.yueny.blog.service.IOwenerTagService#deleteById(long)
 	 */
 	@Override
 	public boolean deleteById(final List<Long> primaryIds) {
@@ -102,7 +102,7 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.yueny.blog.service.table.IOwenerTagService#queryByCode(java.lang.String)
+	 * com.yueny.blog.service.IOwenerTagService#queryByCode(java.lang.String)
 	 */
 	@Override
 	public OwenerTagBo queryByCode(final String owenerTagCode) {
@@ -151,7 +151,7 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.table.IOwenerTagService#queryByTagName(java.lang.
+	 * @see com.yueny.blog.service.IOwenerTagService#queryByTagName(java.lang.
 	 * String, java.lang.String)
 	 */
 	@Override
@@ -199,7 +199,7 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.table.IOwenerTagService#update(long,
+	 * @see com.yueny.blog.service.IOwenerTagService#update(long,
 	 * java.lang.Integer)
 	 */
 	@Override
