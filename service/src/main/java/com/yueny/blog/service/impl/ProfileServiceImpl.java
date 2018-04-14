@@ -30,9 +30,6 @@ public class ProfileServiceImpl implements IProfileService {
 	@Value("${app.profile.env}")
 	private String env;
 	
-	@Value("${cfg.ctx}")
-	private String cfgCtx;
-
 	@Override
 	public String profile() {
 		return env;
@@ -51,11 +48,6 @@ public class ProfileServiceImpl implements IProfileService {
 		return ProfileType.LOCAL;
 	}
 	
-	@Override
-	public String ctx() {
-		return cfgCtx;
-	}
-
 	@Override
 	public String getCfgProperty(String propertyKey) {
 		String confVal= DynamicProperties.staticProperties.getProperty(propertyKey);

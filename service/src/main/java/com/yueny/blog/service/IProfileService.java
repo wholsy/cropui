@@ -28,12 +28,6 @@ public interface IProfileService {
 	ProfileType profileType();
 	
 	/**
-	 * 获取 ctx
-	 * @return ctx
-	 */
-	String ctx();
-	
-	/**
 	 * 获取当前 配置中心 中指定键的  property 信息
 	 * @return propertyKey 键
 	 */
