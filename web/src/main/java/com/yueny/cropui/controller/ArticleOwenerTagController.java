@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.article;
+package com.yueny.cropui.controller;
 
 import java.util.List;
 

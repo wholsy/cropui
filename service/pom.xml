@@ -73,7 +73,13 @@
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-userAgent</artifactId>
 		</dependency>
-		
+
+		<!-- 短信/邮件  -->
+		<dependency>
+			<groupId>com.yueny.rapid.message</groupId>
+			<artifactId>rapid-message-email</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.yueny.rapid.topic</groupId>
 			<artifactId>rapid-topic-profiler-box</artifactId>

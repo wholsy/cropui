@@ -14,7 +14,9 @@
 <script src="${ctx}/plug-ins/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
 <script src="${ctx}/plug-ins/nprogress/nprogress.js"></script>
-    
+<#-- 自定义短信验证码发送按钮 -->
+<script src="${ctx}/assets/js/captical.js"></script>
+
 <#-- tips -->
 <!-- lhg dialog js -->
 <script src="${ctx}/plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>

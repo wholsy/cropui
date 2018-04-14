@@ -1,8 +1,9 @@
-package com.yueny.cropui.controller.admin.login;
+package com.yueny.cropui.controller.admin;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.yueny.blog.service.common.IProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,8 @@ public class LoginAdminController extends BaseController {
 	private ILoginManager loginManager;
 	@Autowired
 	private IUserDisplayManager userDisplayManager;
+	@Autowired
+	private IProfileService profileService;
 
 	/**
 	 * 登录行为post
@@ -103,6 +106,7 @@ public class LoginAdminController extends BaseController {
 
 		setModelAttribute(WebAttributes.ACTION, "LOGIN");
 		setModelAttribute("title", "登录");
+		setModelAttribute("profile", profileService.profileType().getDesc());
 
 		// 定向到页面
 		return "admin/login";

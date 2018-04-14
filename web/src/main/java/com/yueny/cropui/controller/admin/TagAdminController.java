@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.admin.tag;
+package com.yueny.cropui.controller.admin;
 
 import javax.servlet.http.HttpServletResponse;
 

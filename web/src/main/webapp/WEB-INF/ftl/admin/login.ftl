@@ -18,21 +18,21 @@
 				        ( ${profile} )
 				    </h1>
 				    <h4 class="blue" id="id-company-text">&copy; 
-				    	<a href="http://blog.codealy.com">blog.codealy.com</a>
+				    	<a href="${ctx}">blog.codealy.com</a>
 				    </h4>
 				</header>
 							
 				<#-- 用户名 -->
 				<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                 	<input type="text" class="form-control has-feedback-left" title="用户名"
-                			id="txt_username" name="txt_username" placeholder="Username" 
+                			id="username" name="username" placeholder="username"
                 			data-validate-length-range="18" data-validate-words="5" required="required">
                 	<span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
               	</div>
               	
 				<div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
 					<input type="password" class="form-control has-feedback-left" title="密码"
-							id="txt_password" name="txt_password" placeholder="Password" required="required" >
+							id="password" name="password" placeholder="password" required="required" >
 					<span class="fa fa-key fa-fw form-control-feedback left" aria-hidden="true"></span>
 				</div>
               	
@@ -42,9 +42,11 @@
 	                <input type="button" class="btn btn-primary" 
 	                	value="获取验证码" onclick="getValidateCode(this)"/>
 	        	</div>
-	        	
-              <#--  登录 -->
-              <div class="form-group">
+
+                <span id="showMesage" style="width: 100%;display: none"></span>
+
+                <#--  登录 -->
+                <div class="form-group">
                 <button id="btn_login" type="button" class=" btn btn-sm btn-primary submit">
                     <i class="ace-icon fa fa-key"></i>
                     <span class="bigger-110">Login</span>
@@ -52,20 +54,20 @@
                 <#--
                 <a class="reset_pass" href="#">Lost your password?</a>
                  -->
-              </div>
+                </div>
 			  
-              <div class="clearfix"></div>
-		
-              <div class="separator">
-                <p class="change_link">New to site?
-                  <#--
-                  <a href="#signup" class="to_register"> Create Account </a>
-                   -->
-                </p>
-
                 <div class="clearfix"></div>
-                <br/>
-              </div>
+
+                <div class="separator">
+                    <p class="change_link">New to site?
+                        <#--
+                        <a href="#signup" class="to_register"> Create Account </a>
+                        -->
+                    </p>
+
+                    <div class="clearfix"></div>
+                    <br/>
+                </div>
             </form>
           </section>
           
@@ -86,14 +88,14 @@
         function sendSmsCode(obj){
             captical.show(obj, "重新发送"); /* 发送中 */
 
-            var txt_username=document.getElementById("txt_username").value;
-            var txt_password=document.getElementById("txt_password").value;
+            var username = $('#username').val();
+            var password = $('#password').val();
 
             $.ajax({
                 type : 'POST',
                 url:"/validate/login/get",
-                data : {"txt_username": txt_username,
-                         "txt_password" : txt_password
+                data : {"username": username,
+                         "password" : password
                 },
                 success : function(data)
                 {
