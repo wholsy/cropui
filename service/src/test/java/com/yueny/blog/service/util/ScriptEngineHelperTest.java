@@ -2,6 +2,8 @@ package com.yueny.blog.service.util;
 
 import org.junit.Test;
 
+import com.yueny.blog.common.util.ScriptEngineHelper;
+
 @Deprecated
 public class ScriptEngineHelperTest {
 	@Test

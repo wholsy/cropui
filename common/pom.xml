@@ -15,6 +15,11 @@
 	</properties>
 	
 	<dependencies>
+		<dependency>
+			<groupId>com.yueny.rapid.lang</groupId>
+			<artifactId>rapid-lang-util</artifactId>
+		</dependency>
+		
 		<!-- 添加Servlet支持 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -23,11 +28,27 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+		</dependency>
+		
+		<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <scope>provided</scope>
         </dependency>
         
+        <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+		</dependency>
+		
+		<!-- markdownToHtml: 轻量级 Markdown 引擎 -->
+        <dependency>
+		    <groupId>org.pegdown</groupId>
+		    <artifactId>pegdown</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

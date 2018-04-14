@@ -48,10 +48,7 @@
 			<artifactId>rapid-data-storage-redis</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-util</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-timer</artifactId>
@@ -122,12 +119,6 @@
 			<artifactId>ezmorph</artifactId>
 		</dependency>
 		
-        <!-- markdownToHtml: 轻量级 Markdown 引擎 -->
-        <dependency>
-		    <groupId>org.pegdown</groupId>
-		    <artifactId>pegdown</artifactId>
-		</dependency>
-			
         <dependency>
 		    <groupId>com.lmax</groupId>
 		    <artifactId>disruptor</artifactId>
@@ -167,10 +158,6 @@
 		<dependency>
 		  <groupId>org.apache.commons</groupId>
 		  <artifactId>commons-pool2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
