@@ -42,7 +42,6 @@
 	                <input type="button" class="btn btn-primary" 
 	                	value="获取验证码" onclick="getValidateCode(this)"/>
 	        	</div>
-
                 <span id="showMesage" style="width: 100%;display: none"></span>
 
                 <#--  登录 -->
@@ -86,11 +85,13 @@
         }
 
         function sendSmsCode(obj){
-            captical.show(obj, "重新发送"); /* 发送中 */
-
             var username = $('#username').val();
             var password = $('#password').val();
+            if(!username || !password){
+                return;
+            }
 
+            captical.show(obj, "重新发送"); /* 发送中 */
             $.ajax({
                 type : 'POST',
                 url:"/validate/login/get",

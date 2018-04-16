@@ -24,6 +24,9 @@
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
 		p:connection-factory-ref="jedisConnectionFactory">
 	</bean>
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
+          p:connection-factory-ref="jedisConnectionFactory">
+    </bean>
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="${redis.maxIdle}"/>
         <property name="maxTotal" value="${redis.maxTotal}"/>
@@ -43,6 +46,7 @@
 
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
         <property name="caches">
+
             <set>
             	<!-- 此处类concurrentMapCacheFactoryBean的作用是产生 缓存类 实例  -->
                 <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
