@@ -38,6 +38,10 @@
 		    <groupId>com.yueny.rapid.service</groupId>
 			<artifactId>rapid-service-rest</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.service</groupId>
+			<artifactId>rapid-service-cache</artifactId>
+		</dependency>
 		
 		<dependency>
 			<groupId>com.yueny.rapid.data</groupId>

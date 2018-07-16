@@ -18,7 +18,6 @@ import com.yueny.blog.service.comp.cache.CacheDataHandler;
  */
 @Component
 public class CacheService<T> extends BaseCacheBiz<T> {
-	// <T extends ICacheWidget>
 
 	/**
 	 * 缓存对象

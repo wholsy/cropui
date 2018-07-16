@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -13,8 +15,6 @@ import com.yueny.blog.bo.help.AboutUsInfoBo;
 import com.yueny.blog.dao.help.IAboutUsInfoDao;
 import com.yueny.blog.entry.help.AboutUsInfoEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheListService;
 import com.yueny.blog.service.IAboutUsInfoService;
 import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.superclub.api.constant.Constants;
@@ -27,45 +27,74 @@ import com.yueny.superclub.api.constant.Constants;
  * @DATE 2016年9月11日 上午11:13:06
  *
  */
+@CacheConfig(cacheNames = "content")
 @Service
 public class AboutUsInfoServiceImpl extends BaseBiz implements IAboutUsInfoService {
 	@Autowired
 	private IAboutUsInfoDao aboutUsInfoDao;
-	@Autowired
-	private CacheListService<AboutUsInfoBo> cacheListService;
 
 	@Override
+	@Cacheable(value = "content", key = "queryAllAboutUsInfoList")
 	public List<AboutUsInfoBo> queryAll() {
-		return cacheListService.cache("queryAll", new CacheDataHandler<List<AboutUsInfoBo>>() {
-			@Override
-			public List<AboutUsInfoBo> caller() {
-				final List<AboutUsInfoEntry> entrys = aboutUsInfoDao.queryAllData();
-				if (CollectionUtils.isEmpty(entrys)) {
-					Collections.emptyList();
-				}
+		// return cacheListService.cache("queryAll", new
+		// CacheDataHandler<List<AboutUsInfoBo>>() {
+		// @Override
+		// public List<AboutUsInfoBo> caller() {
+		// final List<AboutUsInfoEntry> entrys = aboutUsInfoDao.queryAllData();
+		// if (CollectionUtils.isEmpty(entrys)) {
+		// Collections.emptyList();
+		// }
+		//
+		// final List<AboutUsInfoBo> lists = Lists.newArrayList();
+		// for (final AboutUsInfoEntry entry : entrys) {
+		// final AboutUsInfoBo bo = map(entry, AboutUsInfoBo.class);
+		//
+		// // 以 "|&|" 分隔
+		// final StringBuilder sb = new StringBuilder();
+		// sb.append(Constants.PIPE);
+		// sb.append(Constants.AND);
+		// sb.append(Constants.PIPE);
+		//
+		// if (StringUtil.isNotEmpty(entry.getResume())) {
+		// bo.setResumes(Arrays.asList(StringUtil.split(entry.getResume(),
+		// sb.toString())));
+		// }
+		// if (StringUtil.isNotEmpty(entry.getContactWay())) {
+		// bo.setContactWays(Arrays.asList(StringUtil.split(entry.getContactWay(),
+		// sb.toString())));
+		// }
+		//
+		// lists.add(bo);
+		// }
+		// return lists;
+		// }
+		// }, 10 * 60L);
 
-				final List<AboutUsInfoBo> lists = Lists.newArrayList();
-				for (final AboutUsInfoEntry entry : entrys) {
-					final AboutUsInfoBo bo = map(entry, AboutUsInfoBo.class);
+		final List<AboutUsInfoEntry> entrys = aboutUsInfoDao.queryAllData();
+		if (CollectionUtils.isEmpty(entrys)) {
+			Collections.emptyList();
+		}
 
-					// 以 "|&|" 分隔
-					final StringBuilder sb = new StringBuilder();
-					sb.append(Constants.PIPE);
-					sb.append(Constants.AND);
-					sb.append(Constants.PIPE);
+		final List<AboutUsInfoBo> lists = Lists.newArrayList();
+		for (final AboutUsInfoEntry entry : entrys) {
+			final AboutUsInfoBo bo = map(entry, AboutUsInfoBo.class);
 
-					if (StringUtil.isNotEmpty(entry.getResume())) {
-						bo.setResumes(Arrays.asList(StringUtil.split(entry.getResume(), sb.toString())));
-					}
-					if (StringUtil.isNotEmpty(entry.getContactWay())) {
-						bo.setContactWays(Arrays.asList(StringUtil.split(entry.getContactWay(), sb.toString())));
-					}
+			// 以 "|&|" 分隔
+			final StringBuilder sb = new StringBuilder();
+			sb.append(Constants.PIPE);
+			sb.append(Constants.AND);
+			sb.append(Constants.PIPE);
 
-					lists.add(bo);
-				}
-				return lists;
+			if (StringUtil.isNotEmpty(entry.getResume())) {
+				bo.setResumes(Arrays.asList(StringUtil.split(entry.getResume(), sb.toString())));
 			}
-		}, 10 * 60L);
+			if (StringUtil.isNotEmpty(entry.getContactWay())) {
+				bo.setContactWays(Arrays.asList(StringUtil.split(entry.getContactWay(), sb.toString())));
+			}
+
+			lists.add(bo);
+		}
+		return lists;
 	}
 
 }

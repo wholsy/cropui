@@ -14,6 +14,7 @@ import com.yueny.blog.service.disruptor.util.DisruptorHelper;
  * @DATE 2018年1月11日 下午9:24:18
  *
  */
+@Deprecated
 public class ArticleCacheRemoveEventProducer
 		extends AbstractEventProducer<ArticleCacheRemoveEvent, SyntonyHandlerFunction> {
 	private static final EventTranslatorOneArg<ArticleCacheRemoveEvent, SyntonyHandlerFunction> TRANSLATOR_ONE_ARG = new EventTranslatorOneArg<ArticleCacheRemoveEvent, SyntonyHandlerFunction>() {
@@ -35,11 +36,11 @@ public class ArticleCacheRemoveEventProducer
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see
-	 * com.yueny.blog.service.disruptor.producer.AbstractEventProducer#publishData(
-	 * com.yueny.blog.service.disruptor.api.SyntonyHandlerFunction)
+	 * @see com.yueny.blog.service.disruptor.producer.AbstractEventProducer#
+	 * publishData( com.yueny.blog.service.disruptor.api.SyntonyHandlerFunction)
 	 */
 	@Override
+	@Deprecated
 	public void publishData(final SyntonyHandlerFunction syntonyExecute) {
 		logger.info("Publishing " + syntonyExecute);
 

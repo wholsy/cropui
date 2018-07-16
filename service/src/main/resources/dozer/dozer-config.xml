@@ -22,7 +22,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 				<class-b>java.lang.Number</class-b>
 			</converter>
 			
-			<converter type="com.yueny.blog.service.util.dozer.SetsConverter">
+			<converter type="com.yueny.blog.common.util.dozer.SetsConverter">
 				<class-a>java.util.Set</class-a>
 				<class-b>java.lang.String</class-b>
 			</converter>

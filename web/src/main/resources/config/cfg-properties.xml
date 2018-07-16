@@ -39,8 +39,8 @@
         <property name="propertiesArray">
            <list>
            		<!-- 按顺序加载， 若有重复，后者覆盖前者   -->
-              	<ref bean="cfgConfigProperties"/>
                	<ref bean="localConfigProperties"/>
+               <ref bean="cfgConfigProperties"/>
            </list>
        </property>
     </bean>
