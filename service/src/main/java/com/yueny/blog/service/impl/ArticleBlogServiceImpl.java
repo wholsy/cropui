@@ -78,15 +78,15 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 * <pre>
 	 * &#64;Cacheable(value="cacheName", key"T(String).valueOf(#name).concat('-').concat(#password))
 		public ResultDTO method(int name, String password);
-
+	
 		&#64;Cacheable(value="cacheName", key"#user.id)
 		public ResultDTO method(User user);
-	
-		&#64;Cacheable(value="gomeo2oCache", keyGenerator = "keyGenerator")
-		public ResultDTO method(User user);
-	
-		&#64;Cacheable(value="andCache",key="#userId + 'findById'")
 
+		&#64;Cacheable(value="gomeo2oCache", keyGenerator = "wiselyKeyGenerator")
+		public ResultDTO method(User user);
+
+		&#64;Cacheable(value="andCache",key="#userId + 'findById'")
+	
 		 //将缓存保存进andCache，并当参数userId的长度小于32时才保存进缓存，默认使用参数值及类型作为缓存的key
 	    &#64;Cacheable(value="andCache",condition="#userId.length < 32")
 	 * </pre>
@@ -284,7 +284,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	 */
 	@Override
 	@ProfilerLog
-	@Cacheable(key = "T(String).valueOf(##pageable.currentPage).concat('-').concat(#pageable.pageSize)+ 'findPageList'")
+	@Cacheable(key = "T(String).valueOf(#pageable.currentPage).concat('-').concat(#pageable.pageSize)+ 'findPageList'")
 	public List<ArticleBlogBo> findPageList(final IPageable pageable) {
 		// return cacheListService.cache(new
 		// CacheDataHandler<List<ArticleBlogBo>>() {
@@ -374,6 +374,7 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	@Override
 	@ProfilerLog
 	@CacheEvict(allEntries = true)
+	// { "provinceCities", "searchCity" },
 	public boolean update(final ArticleBlogBo bo) {
 		// // 获取要通过事件传递的业务数据；
 		// final SyntonyHandlerFunction syntonyExecute = new

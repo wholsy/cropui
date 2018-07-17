@@ -7,16 +7,16 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.dao.tag.ICategoriesTagDao;
 import com.yueny.blog.entry.tag.CategoriesTagEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheListService;
-import com.yueny.blog.service.comp.cache.core.CacheService;
 import com.yueny.blog.service.ICategoriesTagService;
+import com.yueny.blog.service.comp.cache.CacheDataHandler;
+import com.yueny.blog.service.comp.cache.core.CacheObjectService;
 import com.yueny.rapid.lang.util.StringUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 
@@ -31,9 +31,7 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 	@Autowired
 	private ICategoriesTagDao articleCategoriesDao;
 	@Autowired
-	private CacheListService<CategoriesTagBo> cacheListService;
-	@Autowired
-	private CacheService<CategoriesTagBo> cacheService;
+	private CacheObjectService<CategoriesTagBo> cacheService;
 
 	/**
 	 * 递归处理
@@ -61,58 +59,51 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 
 	@Override
 	@ProfilerLog
+	@Cacheable(value = "content", key = "findArticleCategoriesTree")
 	public List<CategoriesTagBo> findArticleCategoriesTree() {
-		return cacheListService.cache("findArticleCategoriesTree", new CacheDataHandler<List<CategoriesTagBo>>() {
-			@Override
-			public List<CategoriesTagBo> caller() {
-				/* 获取顶级文章分类类目 */
-				final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByParentTagCode("-1");
-				if (CollectionUtils.isEmpty(entrys)) {
-					return Collections.emptyList();
-				}
+		/* 获取顶级文章分类类目 */
+		final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByParentTagCode("-1");
+		if (CollectionUtils.isEmpty(entrys)) {
+			return Collections.emptyList();
+		}
 
-				/* 获取子类目 */
-				final List<CategoriesTagBo> articleCategoriesTree = map(entrys, CategoriesTagBo.class);
-				for (final CategoriesTagBo articleCategories : articleCategoriesTree) {
-					if (StringUtil.isEmpty(articleCategories.getCategoriesTagCode())) {
-						continue;
-					}
-
-					final List<CategoriesTagBo> children = eachChildren(articleCategories.getCategoriesTagCode());
-					if (CollectionUtils.isEmpty(children)) {
-						continue;
-					}
-					articleCategories.setChildren(children);
-				}
-
-				return articleCategoriesTree;
+		/* 获取子类目 */
+		final List<CategoriesTagBo> articleCategoriesTree = map(entrys, CategoriesTagBo.class);
+		for (final CategoriesTagBo articleCategories : articleCategoriesTree) {
+			if (StringUtil.isEmpty(articleCategories.getCategoriesTagCode())) {
+				continue;
 			}
-		});
+
+			final List<CategoriesTagBo> children = eachChildren(articleCategories.getCategoriesTagCode());
+			if (CollectionUtils.isEmpty(children)) {
+				continue;
+			}
+			articleCategories.setChildren(children);
+		}
+
+		return articleCategoriesTree;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.tag.ICategoriesTagService#findByCode(java.util.
+	 * @see
+	 * com.yueny.blog.service.tag.ICategoriesTagService#findByCode(java.util.
 	 * Set)
 	 */
 	@Override
+	@Cacheable(value = "content", key = "#categoriesCodes + 'findByCode'")
 	public List<CategoriesTagBo> findByCode(final Set<String> categoriesCodes) {
-		return cacheListService.cache(new CacheDataHandler<List<CategoriesTagBo>>() {
-			@Override
-			public List<CategoriesTagBo> caller() {
-				if (CollectionUtils.isEmpty(categoriesCodes)) {
-					return Collections.emptyList();
-				}
+		if (CollectionUtils.isEmpty(categoriesCodes)) {
+			return Collections.emptyList();
+		}
 
-				final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByTagCode(categoriesCodes);
-				if (CollectionUtils.isEmpty(entrys)) {
-					return Collections.emptyList();
-				}
+		final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByTagCode(categoriesCodes);
+		if (CollectionUtils.isEmpty(entrys)) {
+			return Collections.emptyList();
+		}
 
-				return map(entrys, CategoriesTagBo.class);
-			}
-		}, "findByCode", categoriesCodes);
+		return map(entrys, CategoriesTagBo.class);
 	}
 
 	@Override
@@ -146,17 +137,13 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 	}
 
 	@Override
+	@Cacheable(value = "content", key = "#categoriesParentCode + 'findByParentCode'")
 	public List<CategoriesTagBo> findByParentCode(final String categoriesParentCode) {
-		return cacheListService.cache(categoriesParentCode, new CacheDataHandler<List<CategoriesTagBo>>() {
-			@Override
-			public List<CategoriesTagBo> caller() {
-				final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByParentTagCode(categoriesParentCode);
-				if (CollectionUtils.isEmpty(entrys)) {
-					return Collections.emptyList();
-				}
-				return map(entrys, CategoriesTagBo.class);
-			}
-		});
+		final List<CategoriesTagEntry> entrys = articleCategoriesDao.queryByParentTagCode(categoriesParentCode);
+		if (CollectionUtils.isEmpty(entrys)) {
+			return Collections.emptyList();
+		}
+		return map(entrys, CategoriesTagBo.class);
 	}
 
 	@Override
@@ -173,8 +160,8 @@ public class CategoriesTagServiceImpl extends BaseBiz implements ICategoriesTagS
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.yueny.blog.service.tag.ICategoriesTagService#update(com.yueny.blog.bo.tag
-	 * .CategoriesTagBo)
+	 * com.yueny.blog.service.tag.ICategoriesTagService#update(com.yueny.blog.bo
+	 * .tag .CategoriesTagBo)
 	 */
 	@Override
 	public boolean update(final CategoriesTagBo bo) {

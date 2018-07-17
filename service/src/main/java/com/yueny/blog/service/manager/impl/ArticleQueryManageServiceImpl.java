@@ -16,7 +16,7 @@ import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheService;
+import com.yueny.blog.service.comp.cache.core.CacheObjectService;
 import com.yueny.blog.service.manager.IArticleQueryManageService;
 import com.yueny.blog.service.IArticleBlogService;
 import com.yueny.blog.service.ICategoriesTagService;
@@ -47,7 +47,7 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 	@Autowired
 	private IArticleBlogService articleBlogService;
 	@Autowired
-	private CacheService<List<ArchiveData>> cacheService;
+	private CacheObjectService<List<ArchiveData>> cacheService;
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
 	@Autowired

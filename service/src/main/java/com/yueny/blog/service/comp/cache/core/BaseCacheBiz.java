@@ -1,6 +1,5 @@
 package com.yueny.blog.service.comp.cache.core;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
 import com.yueny.blog.service.comp.cache.CacheKeyConstant;
-import com.yueny.rapid.lang.json.JsonUtil;
 import com.yueny.rapid.lang.util.collect.ArrayUtil;
-import com.yueny.rapid.service.cache.ICacheService;
 
 /**
  * 缓存基类<br>
@@ -28,8 +25,8 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 	 */
 	protected static final Long DEFAULT_EXPIRE_SECOND = 15L;
 
-	@Autowired
-	private ICacheService cacheService;
+	// @Autowired
+	// private ICacheService cacheService;
 
 	@Autowired
 	private RedisTemplate<String, L> redisTemplate;
@@ -43,9 +40,7 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 		// getClass() is 'CacheListService'
 		final String redisKey = CacheKeyConstant.assmebledKeys(getClass().getSimpleName(), args);
 
-		final String json = cacheService.get(redisKey);
-		L t = JsonUtil.fromJson(json, get());
-		// L t = redisTemplate.opsForValue().get(redisKey);
+		L t = redisTemplate.opsForValue().get(redisKey);
 
 		if (t != null) {
 			logger.trace("查询 {} 的键 {}，命中缓存：{}.", getClass().getSimpleName(), args, t);
@@ -129,14 +124,15 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 		return;
 	}
 
-	/**
-	 * @return 得到泛型类
-	 */
-	private final <L> Class<L> get() {
-		final Class<L> entityClass = (Class<L>) ((ParameterizedType) getClass().getGenericSuperclass())
-				.getActualTypeArguments()[0];
-
-		return entityClass;
-	}
+	// /**
+	// * @return 得到泛型类
+	// */
+	// private final <L> Class<L> get() {
+	// final Class<L> entityClass = (Class<L>) ((ParameterizedType)
+	// getClass().getGenericSuperclass())
+	// .getActualTypeArguments()[0];
+	//
+	// return entityClass;
+	// }
 
 }

@@ -19,7 +19,7 @@ import com.yueny.blog.dao.help.IHisDevReportDao;
 import com.yueny.blog.entry.help.HisDevReportEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheService;
+import com.yueny.blog.service.comp.cache.core.CacheObjectService;
 import com.yueny.blog.service.IHelpService;
 import com.yueny.rapid.lang.date.DateFormatType;
 import com.yueny.rapid.lang.date.DateTimeUtil;
@@ -36,7 +36,7 @@ import com.yueny.rapid.lang.json.JsonUtil;
 @Service
 public class HelpServiceImpl extends BaseBiz implements IHelpService {
 	@Autowired
-	private CacheService<String> cacheService;
+	private CacheObjectService<String> cacheService;
 	@Autowired
 	private IHisDevReportDao hisDevReportDao;
 

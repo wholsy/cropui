@@ -12,7 +12,7 @@ import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
 import com.yueny.blog.bo.model.document.OwenerTagsData;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheService;
+import com.yueny.blog.service.comp.cache.core.CacheObjectService;
 import com.yueny.blog.service.manager.ITagQueryManageService;
 import com.yueny.blog.service.IArticleBlogService;
 import com.yueny.blog.service.IOwenerTagService;
@@ -27,7 +27,7 @@ public class TagQueryManageServiceImpl implements ITagQueryManageService {
 	@Autowired
 	private IArticleBlogService articleBlogService;
 	@Autowired
-	private CacheService<OwenerTagsData> cacheService;
+	private CacheObjectService<OwenerTagsData> cacheService;
 	@Autowired
 	private IOwenerTagService owenerTagService;
 

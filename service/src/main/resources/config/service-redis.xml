@@ -7,39 +7,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd    
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-	<!-- Spring 缓存： cacheManager -->
-	<cache:annotation-driven cache-manager="cacheManager"/>
-    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
-        <!-- 设置默认的过期时间(以秒为单位)， 默认5 min -->
-        <property name="defaultExpiration" value="300"></property>
-        <!-- 启动时加载远程缓存 -->
-        <property name="loadRemoteCachesOnStartup" value="true"></property>
-        <!-- 是否使用前缀生成器 -->
-        <property name="usePrefix" value="true"></property>
-        
-        <property name="caches">
-			<!-- 这里可以配置多个redis -->
-            <set>
-            	<!-- 内存缓存实现方案： 此处类concurrentMapCacheFactoryBean的作用是产生 缓存类 实例  -->
-                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
-                    <property name="name" value="default"/>
-                </bean>
-            	 
-            	<bean class="com.yueny.blog.service.comp.cache.SpringRedisCache">    
-                     <property name="redisTemplate" ref="stringRedisTemplate" />    
-                     <property name="name" value="content"/>    
-                     <!-- name对应的名称要在类或方法的注解中使用，命名空间，表示存到哪个缓存里了 -->  
-                </bean>
-            </set>
-        </property>
-    </bean>
-    
-    
-    <!-- com.yueny.rapid.service.cache.CacheService -->
+    <!-- com.yueny.rapid.service.cache.CacheService
     <bean id="cacheService" class="com.yueny.rapid.service.cache.CacheService">
-        <constructor-arg ref="stringRedisTemplate"/>
+          <constructor-arg name="stringRedisTemplate" value-ref="stringRedisTemplate"></constructor-arg>
     </bean>
-
+    -->
 
  	<!-- redis连接池 -->
 	<!-- 1 redis for baidu client
@@ -55,17 +27,20 @@
 	</bean>
 	 -->
 	
-	<!-- 2 redisTemplate模板 集成  -->
+	<!-- 2 redisTemplate模板 集成   -->
+    <!-- @see com.yueny.blog.service.comp.cache.RedisCacheConfig -->
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
 		p:connection-factory-ref="jedisConnectionFactory">
 	</bean>
+	<!--
     <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
           p:connection-factory-ref="jedisConnectionFactory">
     </bean>
+	 -->
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxIdle" value="${spring.redis.pool.max-idle}"/>
         <property name="maxTotal" value="${redis.maxTotal}"/>
-        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+        <property name="maxWaitMillis" value="${spring.redis.pool.max-wait}"/>
         <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
     </bean>
     
@@ -76,7 +51,4 @@
         <property name="password" value="${redis.client.password}"/>
     </bean>
 	
-	
-	
-    
-</beans>  
+</beans>

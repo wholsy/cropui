@@ -12,7 +12,7 @@ import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheService;
+import com.yueny.blog.service.comp.cache.core.CacheObjectService;
 import com.yueny.blog.service.manager.ITagChartManagerService;
 import com.yueny.blog.service.ICategoriesTagService;
 import com.yueny.blog.service.IOwenerTagService;
@@ -29,7 +29,7 @@ import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 @Service
 public class TagChartManagerServiceImpl extends BaseBiz implements ITagChartManagerService {
 	@Autowired
-	private CacheService<ChartData> cacheService;
+	private CacheObjectService<ChartData> cacheService;
 	@Autowired
 	private ICategoriesTagService categoriesTagService;
 	@Autowired

@@ -8,16 +8,16 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.yueny.blog.bo.tag.OwenerTagBo;
 import com.yueny.blog.dao.tag.IOwenerTagDao;
 import com.yueny.blog.entry.tag.OwenerTagEntry;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheListService;
-import com.yueny.blog.service.comp.cache.core.CacheService;
 import com.yueny.blog.service.IOwenerTagService;
+import com.yueny.blog.service.comp.cache.CacheDataHandler;
+import com.yueny.blog.service.comp.cache.core.CacheObjectService;
 import com.yueny.rapid.lang.util.enums.EnableType;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 
@@ -32,9 +32,7 @@ import com.yueny.rapid.topic.profiler.ProfilerLog;
 @Service
 public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	@Autowired
-	private CacheListService<OwenerTagBo> cacheListService;
-	@Autowired
-	private CacheService<OwenerTagBo> cacheService;
+	private CacheObjectService<OwenerTagBo> cacheService;
 	@Autowired
 	private IOwenerTagDao owenerTagDao;
 
@@ -71,18 +69,14 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	}
 
 	@Override
+	@Cacheable(value = "content", key = "T(String).valueOf(#uid).concat('-').concat(#categoriesTagCode)+ 'queryByCategoriesTagCode'")
 	public List<OwenerTagBo> queryByCategoriesTagCode(final String uid, final String categoriesTagCode) {
-		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
-			@Override
-			public List<OwenerTagBo> caller() {
-				final List<OwenerTagEntry> entrys = owenerTagDao.queryByCategoriesTagCode(uid, categoriesTagCode);
-				if (CollectionUtils.isEmpty(entrys)) {
-					Collections.emptyList();
-				}
+		final List<OwenerTagEntry> entrys = owenerTagDao.queryByCategoriesTagCode(uid, categoriesTagCode);
+		if (CollectionUtils.isEmpty(entrys)) {
+			Collections.emptyList();
+		}
 
-				return map(entrys, OwenerTagBo.class);
-			}
-		}, "queryByCategoriesTagCode", categoriesTagCode);
+		return map(entrys, OwenerTagBo.class);
 	}
 
 	@Override
@@ -134,18 +128,14 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	}
 
 	@Override
+	@Cacheable(value = "content", key = "#owenerTagIds+ 'queryById'")
 	public List<OwenerTagBo> queryById(final Set<Long> owenerTagIds) {
-		return cacheListService.cache(owenerTagIds, new CacheDataHandler<List<OwenerTagBo>>() {
-			@Override
-			public List<OwenerTagBo> caller() {
-				final List<OwenerTagEntry> entrys = owenerTagDao.queryByID(owenerTagIds);
-				if (CollectionUtils.isEmpty(entrys)) {
-					Collections.emptyList();
-				}
+		final List<OwenerTagEntry> entrys = owenerTagDao.queryByID(owenerTagIds);
+		if (CollectionUtils.isEmpty(entrys)) {
+			Collections.emptyList();
+		}
 
-				return map(entrys, OwenerTagBo.class);
-			}
-		}, 2L);
+		return map(entrys, OwenerTagBo.class);
 	}
 
 	/*
@@ -166,34 +156,26 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 
 	@Override
 	@ProfilerLog
+	@Cacheable(value = "content", key = "#uid+ 'queryByUid'")
 	public List<OwenerTagBo> queryByUid(final String uid) {
-		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
-			@Override
-			public List<OwenerTagBo> caller() {
-				final List<OwenerTagEntry> entrys = owenerTagDao.queryByUid(uid);
-				if (CollectionUtils.isEmpty(entrys)) {
-					Collections.emptyList();
-				}
+		final List<OwenerTagEntry> entrys = owenerTagDao.queryByUid(uid);
+		if (CollectionUtils.isEmpty(entrys)) {
+			Collections.emptyList();
+		}
 
-				return map(entrys, OwenerTagBo.class);
-			}
-		}, 2L, TimeUnit.SECONDS, "queryByUid", uid);
+		return map(entrys, OwenerTagBo.class);
 	}
 
 	@Override
 	@ProfilerLog
+	@Cacheable(value = "content", key = "#uid+ 'queryByUidForAll'")
 	public List<OwenerTagBo> queryByUidForAll(final String uid) {
-		return cacheListService.cache(new CacheDataHandler<List<OwenerTagBo>>() {
-			@Override
-			public List<OwenerTagBo> caller() {
-				final List<OwenerTagEntry> entrys = owenerTagDao.queryByUidForAll(uid);
-				if (CollectionUtils.isEmpty(entrys)) {
-					Collections.emptyList();
-				}
+		final List<OwenerTagEntry> entrys = owenerTagDao.queryByUidForAll(uid);
+		if (CollectionUtils.isEmpty(entrys)) {
+			Collections.emptyList();
+		}
 
-				return map(entrys, OwenerTagBo.class);
-			}
-		}, 2L, TimeUnit.SECONDS, "queryAllByUid", uid);
+		return map(entrys, OwenerTagBo.class);
 	}
 
 	/*
