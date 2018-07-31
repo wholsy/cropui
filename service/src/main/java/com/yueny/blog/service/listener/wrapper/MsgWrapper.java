@@ -43,14 +43,14 @@ public class MsgWrapper {
 	private final MsgQueneFactory factory;
 
 	private final IMsgListener msgListener;
-	// private final boolean notify;
+	private final boolean notify;
 
 	/**
-	 * 监控周期, 默认5秒
+	 * 监控周期, 默认30秒
 	 */
 	@Setter
 	@Getter
-	private long period = 5L;
+	private long period = 30L;
 
 	/**
 	 * 定时任务执行器
@@ -66,7 +66,7 @@ public class MsgWrapper {
 
 		this.msgListener = msgListener;
 
-		// this.notify = notify;
+		this.notify = notify;
 
 		// 循环设置notify属性
 		final Class<?> listenerClass = msgListener.getClass().getSuperclass();

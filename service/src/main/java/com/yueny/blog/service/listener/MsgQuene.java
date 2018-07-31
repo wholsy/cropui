@@ -2,11 +2,7 @@ package com.yueny.blog.service.listener;
 
 import com.yueny.blog.service.disruptor.api.SyntonyHandlerFunction;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * 消息队列
@@ -23,16 +19,12 @@ import lombok.ToString;
 public class MsgQuene {
 
 	/**
-	 * 异步执行类实例，异常会被 com.yueny.blog.service.listener.wrapper.MsgWrapper#
-	 * init$processExecutor$consumeMsg 处理
+	 * 异步执行类实例，异常会被 com.yueny.blog.service.listener.wrapper.MsgWrapper#init$processExecutor$consumeMsg 处理
 	 */
 	@Getter
 	private SyntonyHandlerFunction<?> syntonyExecuteInstance;
 
-	/**
-	 * 销毁操作
-	 */
-	public void destory() {
+	public void destory(){
 		syntonyExecuteInstance = null;
 	}
 
