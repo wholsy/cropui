@@ -25,7 +25,7 @@ public interface ICategoriesTagService {
 	 * @param categoriesCodes
 	 *            全站文章分类编号
 	 */
-	List<CategoriesTagBo> findByCode(Set<String> categoriesCodes);
+	List<CategoriesTagBo> findListByCode(Set<String> categoriesCodes);
 
 	/**
 	 * 文章分类编号查询

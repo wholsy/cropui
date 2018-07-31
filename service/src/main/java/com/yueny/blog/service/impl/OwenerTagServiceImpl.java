@@ -3,7 +3,6 @@ package com.yueny.blog.service.impl;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -12,12 +11,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.yueny.blog.bo.tag.OwenerTagBo;
+import com.yueny.blog.common.cache.ICacheUsableful;
 import com.yueny.blog.dao.tag.IOwenerTagDao;
 import com.yueny.blog.entry.tag.OwenerTagEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.IOwenerTagService;
-import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheObjectService;
 import com.yueny.rapid.lang.util.enums.EnableType;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 
@@ -30,9 +28,7 @@ import com.yueny.rapid.topic.profiler.ProfilerLog;
  *
  */
 @Service
-public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
-	@Autowired
-	private CacheObjectService<OwenerTagBo> cacheService;
+public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService, ICacheUsableful {
 	@Autowired
 	private IOwenerTagDao owenerTagDao;
 
@@ -113,18 +109,14 @@ public class OwenerTagServiceImpl extends BaseBiz implements IOwenerTagService {
 	}
 
 	@Override
+	@Cacheable(value = "content", key = "#primaryId + 'queryById'")
 	public OwenerTagBo queryById(final long primaryId) {
-		return cacheService.cache(new CacheDataHandler<OwenerTagBo>() {
-			@Override
-			public OwenerTagBo caller() {
-				final OwenerTagEntry entry = owenerTagDao.queryByID(primaryId);
-				if (entry == null) {
-					return null;
-				}
+		final OwenerTagEntry entry = owenerTagDao.queryByID(primaryId);
+		if (entry == null) {
+			return null;
+		}
 
-				return map(entry, OwenerTagBo.class);
-			}
-		}, 2L, TimeUnit.SECONDS, "queryById", primaryId);
+		return map(entry, OwenerTagBo.class);
 	}
 
 	@Override

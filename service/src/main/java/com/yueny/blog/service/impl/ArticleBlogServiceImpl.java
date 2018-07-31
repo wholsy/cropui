@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.yueny.blog.bo.article.ArticleBlogBo;
 import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
+import com.yueny.blog.common.cache.ICacheUsableful;
 import com.yueny.blog.dao.article.IArticleBlogDao;
 import com.yueny.blog.dao.cd.ArticleBlogCondition;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
@@ -33,7 +34,7 @@ import com.yueny.superclub.api.page.IPageable;
 // 代表这个Controller下需要缓存的方法对应redis中的缓存名为 content
 @CacheConfig(cacheNames = "content")
 @Service
-public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogService {
+public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogService, ICacheUsableful {
 	@Autowired
 	private IArticleBlogDao blogDao;
 
@@ -76,19 +77,19 @@ public class ArticleBlogServiceImpl extends BaseBiz implements IArticleBlogServi
 	@ProfilerLog
 	/**
 	 * <pre>
-	 * &#64;Cacheable(value="cacheName", key"T(String).valueOf(#name).concat('-').concat(#password))
+	 * &#64;Cacheable(value="content", key"T(String).valueOf(#name).concat('-').concat(#password))
 		public ResultDTO method(int name, String password);
 	
-		&#64;Cacheable(value="cacheName", key"#user.id)
+		&#64;Cacheable(value="content", key"#user.id)
 		public ResultDTO method(User user);
 
-		&#64;Cacheable(value="gomeo2oCache", keyGenerator = "wiselyKeyGenerator")
+		&#64;Cacheable(value="content", keyGenerator = "wiselyKeyGenerator")
 		public ResultDTO method(User user);
 
-		&#64;Cacheable(value="andCache",key="#userId + 'findById'")
+		&#64;Cacheable(value="content",key="#userId + 'findById'")
 	
 		 //将缓存保存进andCache，并当参数userId的长度小于32时才保存进缓存，默认使用参数值及类型作为缓存的key
-	    &#64;Cacheable(value="andCache",condition="#userId.length < 32")
+	    &#64;Cacheable(value="content",condition="#userId.length < 32")
 	 * </pre>
 	 *
 	 */

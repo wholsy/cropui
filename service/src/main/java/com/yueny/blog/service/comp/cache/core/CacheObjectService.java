@@ -17,11 +17,13 @@ import com.yueny.blog.service.comp.cache.CacheDataHandler;
  * @DATE 2016年11月17日 下午2:14:14
  */
 @Component
+@Deprecated
 public class CacheObjectService<T> extends BaseCacheBiz<T> {
 
 	/**
 	 * 缓存对象
 	 */
+	@Deprecated
 	public final T cache(final CacheDataHandler<T> handler, final Long timeout, final Object... args) {
 		return cache(handler, timeout, TimeUnit.SECONDS, args);
 	}

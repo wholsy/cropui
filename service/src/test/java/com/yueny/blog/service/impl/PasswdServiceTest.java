@@ -12,8 +12,8 @@ public class PasswdServiceTest {
 
     @Test
     public void testGetEncodeData(){
-        String ps = passwdService.getEncodeData("yuanyang", "");
-        Assert.assertEquals(ps, "58fdb3852fb6b344a80a3389466eea13");
+        String ps = passwdService.getEncodeData("liyu.211314.", "");
+        Assert.assertEquals(ps, "2c94aa72146ac190916005ff83ecf1f5");
     }
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
@@ -14,23 +16,22 @@ import com.yueny.blog.bo.article.ArticleSimpleBlogBo;
 import com.yueny.blog.bo.model.document.ArchiveData;
 import com.yueny.blog.bo.tag.CategoriesTagBo;
 import com.yueny.blog.bo.tag.OwenerTagBo;
+import com.yueny.blog.common.cache.ICacheUsableful;
 import com.yueny.blog.service.BaseBiz;
-import com.yueny.blog.service.comp.cache.CacheDataHandler;
-import com.yueny.blog.service.comp.cache.core.CacheObjectService;
-import com.yueny.blog.service.manager.IArticleQueryManageService;
 import com.yueny.blog.service.IArticleBlogService;
 import com.yueny.blog.service.ICategoriesTagService;
 import com.yueny.blog.service.IOwenerTagService;
+import com.yueny.blog.service.disruptor.api.SyntonyHandlerFunction;
+import com.yueny.blog.service.listener.DefaultMsgPusher;
+import com.yueny.blog.service.listener.MsgQuene;
+import com.yueny.blog.service.manager.IArticleQueryManageService;
 import com.yueny.rapid.lang.date.DateFormatType;
 import com.yueny.rapid.lang.date.DateTimeUtil;
 import com.yueny.rapid.lang.date.DateUtil;
 import com.yueny.rapid.lang.enums.BaseErrorType;
 import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
-import com.yueny.rapid.lang.util.collect.ArrayUtil;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
 import com.yueny.superclub.api.page.core.PageCond;
-import com.yueny.superclub.util.exec.multi.MultiThreadSupport;
-import com.yueny.superclub.util.exec.multi.executor.IExecutor;
 
 import lombok.SneakyThrows;
 
@@ -43,79 +44,79 @@ import lombok.SneakyThrows;
  *
  */
 @Service
-public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQueryManageService {
+@CacheConfig(cacheNames = "content")
+public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQueryManageService, ICacheUsableful {
+
 	@Autowired
 	private IArticleBlogService articleBlogService;
 	@Autowired
-	private CacheObjectService<List<ArchiveData>> cacheService;
-	@Autowired
 	private ICategoriesTagService categoriesTagService;
+	// @Autowired
+	// private MultiThreadSupport multiThreadSupport;
 	@Autowired
-	private MultiThreadSupport multiThreadSupport;
+	private DefaultMsgPusher defaultMsgPusher;
 	@Autowired
 	private IOwenerTagService owenerTagService;
 
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.manage.IArticleQueryService#getArchive(com.yueny.
-	 * superclub.api.page.core.PageCond)
+	 * @see
+	 * com.yueny.blog.service.manage.IArticleQueryService#getArchiveList(com.
+	 * yueny. superclub.api.page.core.PageCond)
 	 */
 	@Override
 	@ProfilerLog
-	public List<ArchiveData> getArchive(final PageCond pageable) throws DataVerifyAnomalyException {
-		return cacheService.cache(ArrayUtil.newArray("getArchiveByPageable", pageable),
-				new CacheDataHandler<List<ArchiveData>>() {
-					@Override
-					public List<ArchiveData> caller() {
-						final List<ArticleBlogBo> lists = articleBlogService.findPageList(pageable);
+	@Cacheable(key = "T(String).valueOf(#pageable.currentPage).concat('-').concat(#pageable.pageSize)+ 'getArchiveList'")
+	public List<ArchiveData> getArchiveList(final PageCond pageable) throws DataVerifyAnomalyException {
+		final List<ArticleBlogBo> lists = articleBlogService.findPageList(pageable);
 
-						final Map<Integer, List<ArticleSimpleBlogBo>> archiveMaps = Maps.newTreeMap();
-						for (final ArticleBlogBo articleBlogBo : lists) {
-							final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
-							simpleBlog.setArticleBlogId(articleBlogBo.getArticleBlogId());
-							simpleBlog.setArticleTitle(articleBlogBo.getArticleTitle());
-							simpleBlog.setArticleAlias(articleBlogBo.getArticleAlias());
-							simpleBlog.setToday(
-									DateUtil.format(articleBlogBo.getCreateTime(), DateFormatType.TIME_LEFT_DIAGONAL));
-							simpleBlog.setCreateTime(articleBlogBo.getCreateTime());
-							simpleBlog.setModifyUser(articleBlogBo.getModifyUser());
-							simpleBlog.setUpdateTime(articleBlogBo.getUpdateTime());
+		final Map<Integer, List<ArticleSimpleBlogBo>> archiveMaps = Maps.newTreeMap();
+		for (final ArticleBlogBo articleBlogBo : lists) {
+			final ArticleSimpleBlogBo simpleBlog = new ArticleSimpleBlogBo();
+			simpleBlog.setArticleBlogId(articleBlogBo.getArticleBlogId());
+			simpleBlog.setArticleTitle(articleBlogBo.getArticleTitle());
+			simpleBlog.setArticleAlias(articleBlogBo.getArticleAlias());
+			simpleBlog.setToday(DateUtil.format(articleBlogBo.getCreateTime(), DateFormatType.TIME_LEFT_DIAGONAL));
+			simpleBlog.setCreateTime(articleBlogBo.getCreateTime());
+			simpleBlog.setModifyUser(articleBlogBo.getModifyUser());
+			simpleBlog.setUpdateTime(articleBlogBo.getUpdateTime());
 
-							final int year = DateTimeUtil.thisYear(articleBlogBo.getCreateTime());
-							if (archiveMaps.containsKey(year)) {
-								archiveMaps.get(year).add(simpleBlog);
-							} else {
-								archiveMaps.put(year, Lists.newArrayList(simpleBlog));
-							}
-						}
+			final int year = DateTimeUtil.thisYear(articleBlogBo.getCreateTime());
+			if (archiveMaps.containsKey(year)) {
+				archiveMaps.get(year).add(simpleBlog);
+			} else {
+				archiveMaps.put(year, Lists.newArrayList(simpleBlog));
+			}
+		}
 
-						final List<ArchiveData> archiveDataList = Lists.newArrayList();
-						for (final Map.Entry<Integer, List<ArticleSimpleBlogBo>> entry : archiveMaps.entrySet()) {
-							archiveDataList.add(new ArchiveData(entry.getValue(), entry.getKey()));
-						}
-						return archiveDataList;
-					}
-				});
+		final List<ArchiveData> archiveDataList = Lists.newArrayList();
+		for (final Map.Entry<Integer, List<ArticleSimpleBlogBo>> entry : archiveMaps.entrySet()) {
+			archiveDataList.add(new ArchiveData(entry.getValue(), entry.getKey()));
+		}
+		return archiveDataList;
 	}
 
 	@Override
 	@ProfilerLog
 	@SneakyThrows(value = { DataVerifyAnomalyException.class })
 	public ArticleBlogViewBo getArticleInfo(final String articleBlogId) {
-		// 增加一次阅读量,不关注成败,转异步 TODO 使用disruptor
-		multiThreadSupport.processJobs(new IExecutor<String>() {
+		// 增加一次阅读量,不关注成败
+		final SyntonyHandlerFunction<?> functionInstance = new SyntonyHandlerFunction<Boolean>() {
 			@Override
-			public void execute(final List<String> ts) {
-				for (final String blogId : ts) {
-					try {
-						articleBlogService.plusReadTimes(blogId);
-					} catch (final Exception e) {
-						logger.error("阅读量增加增加失败!", e);
-					}
+			public Boolean execute() {
+				final boolean rs = false;
+				try {
+					logger.info("阅读量:{} 增加增加操作", articleBlogId);
+					articleBlogService.plusReadTimes(articleBlogId);
+				} catch (final Exception e) {
+					logger.error("阅读量增加增加失败!", e);
 				}
+
+				return rs;
 			}
-		}, Lists.newArrayList(articleBlogId));
+		};
+		defaultMsgPusher.push(MsgQuene.builder().syntonyExecuteInstance(functionInstance).build());
 
 		// 获取文章的基本信息
 		final ArticleBlogBo articleBlog = articleBlogService.findByBlogId(articleBlogId);
@@ -133,7 +134,7 @@ public class ArticleQueryManageServiceImpl extends BaseBiz implements IArticleQu
 
 		// 该博文所归属的全站文章分类
 		final List<CategoriesTagBo> categoriesTagList = categoriesTagService
-				.findByCode(articleBlog.getCategoryTagCodes());
+				.findListByCode(articleBlog.getCategoryTagCodes());
 		view.setCategoriesTagList(categoriesTagList);
 
 		// 获取下一篇博文信息

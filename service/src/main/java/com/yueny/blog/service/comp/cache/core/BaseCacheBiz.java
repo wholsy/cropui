@@ -19,6 +19,7 @@ import com.yueny.rapid.lang.util.collect.ArrayUtil;
  * @DATE 2016年9月9日 下午10:03:07
  *
  */
+@Deprecated
 public abstract class BaseCacheBiz<L> extends BaseBiz {
 	/**
 	 * 缓存默认过期时间,15秒
