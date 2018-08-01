@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.tag;
+package com.yueny.cropui.controller.blog;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +20,7 @@ import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
 /**
- * 标签树控制器
+ * 【我的分类标签】标签树控制器
  *
  * @author 袁洋 2015年8月24日 上午10:22:23
  *
@@ -31,7 +31,7 @@ public class TagController extends BaseController {
 	private ITagQueryManageService tagQueryManageService;
 
 	/**
-	 * 用户标签信息
+	 * 我的分类标签
 	 */
 	@RequestMapping(value = "/owenerTags.html", method = { RequestMethod.GET })
 	public String getOwenerTag(final HttpServletResponse response) {
@@ -52,7 +52,7 @@ public class TagController extends BaseController {
 			return redirectAction("/");
 		}
 
-		return "user/owener_tags";
+		return "blog/owener_tags";
 	}
 
 	/**

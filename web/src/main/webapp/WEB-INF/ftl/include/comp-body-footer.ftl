@@ -1,12 +1,6 @@
 <#-- body体的结束 -->
 
-		<p>
-			<a href="#">回到顶部</a>
-		</p>
-
-		<#-- 分割线
-		<hr>
- 		-->
+		<#include "ad/ad-import.ftl">
 
         <footer class="footer center">
 			<p>

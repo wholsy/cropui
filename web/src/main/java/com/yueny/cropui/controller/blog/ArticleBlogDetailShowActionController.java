@@ -16,7 +16,7 @@ import com.yueny.rapid.lang.exception.DataVerifyAnomalyException;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
 /**
- * 文章显示控制器
+ * 【文章显示】控制器
  *
  * @author 袁洋 2015年8月25日 上午10:18:37
  *

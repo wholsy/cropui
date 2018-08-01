@@ -1,4 +1,48 @@
 @charset "UTF-8";
+
+/**
+ * style.default
+ */
+* {
+  margin: 0;
+  list-style:none;
+  text-decoration:none;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+html, body {
+  height: 100%;
+}
+
+html{
+  width:98%;
+  margin: 0 auto;
+  max-height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust:100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overflow: -moz-scrollbars-vertical;
+}
+
+/*
+ Pixyll
+ A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff.
+ Best served with BASSCSS (http://jxnblk.github.io/basscss)
+ Crafted with <3 by John Otander (@4lpine) - ©2015 John Otander MIT License http://opensource.org/licenses/MIT
+*/
+body {
+  font-family: "Merriweather", "PT Serif", Georgia, "Times New Roman", serif;
+  color: #333333;
+  background-color: #fff;
+  font-size: 1.5rem;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  margin: 0 auto;
+  /*background-image: url("../../images/bg/bg.jpg");*/
+}
+
 /*
  BASSCSS
  Next-level CSS toolkit - http://jxnblk.github.io/basscss
@@ -25,6 +69,49 @@ p, .p, .f4, h4, h5, h6, dl, ol, ul { font-size: 1.125rem; line-height: 1.5rem; }
 
 small, .small, .f5 { font-size: .875rem; line-height: 1.5rem; }
 
+a { color: #0096cc; text-decoration: none; }
+
+a:hover { color: #007199; }
+
+img { width: auto; max-width: 100%; }
+
+hr { margin: 20px 0; border: 0; border-top: 1px solid #eee; }
+
+/* Table styles copied from Bootstrap Copyright (c) 2013 Twitter, Inc
+*/
+table { width: 100%; max-width: 100%; margin-bottom: 1.5; font-size: 1.125rem; }
+table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td, table > tfoot > tr > th, table > tfoot > tr > td { padding: 12px; line-height: 1.2; vertical-align: top; border-top: 1px solid #333; }
+table > thead > tr > th { vertical-align: bottom; border-bottom: 2px solid #333; }
+table > caption + thead > tr:first-child > th, table > caption + thead > tr:first-child > td, table > colgroup + thead > tr:first-child > th, table > colgroup + thead > tr:first-child > td, table > thead:first-child > tr:first-child > th, table > thead:first-child > tr:first-child > td { border-top: 0; }
+table > tbody + tbody { border-top: 2px solid #333; }
+
+
+form { font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif; font-weight: 300; font-size: 1rem; }
+
+textarea.input { height: 8em; }
+
+p { font-weight: 300; line-height: 1.5; color: #333; }
+
+abbr { border-bottom: 1px black dotted; cursor: help; }
+
+pre, code { font-family: Menlo, Monaco, "Courier New", monospace; }
+
+code { color: #7a7a7a; }
+
+pre { padding: 1.125em; font-size: 1.125rem; line-height: 1.11; overflow-x: scroll; margin-bottom: 0.88em; }
+
+blockquote { padding: 1.33em; font-style: italic; border-left: 5px solid #7a7a7a; }
+
+blockquote footer { font-size: .85rem; font-style: normal; background-color: #fff; color: #7a7a7a; border-color: transparent; }
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif; font-weight: 900; line-height: 1.2; margin: 1em 0 0.5em; }
+
+footer { border-top: thin solid #f3f3f3; }
+
+footer, footer .wrap { color: #7a7a7a; background-color: #fafafa; font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif; font-weight: 300; clear: both; }
+
+footer:after { content: ""; display: block; }
+
 @media screen and (min-width: 48em) { .h1 { font-size: 4rem; line-height: 5rem; }
   .h2 { font-size: 2rem; line-height: 2.5rem; }
   .h3 { font-size: 1.5rem; line-height: 2rem; }
@@ -33,6 +120,15 @@ small, .small, .f5 { font-size: .875rem; line-height: 1.5rem; }
 @media screen and (min-width: 64em) { .h1 { font-size: 6rem; line-height: 8rem; }
   .h2 { font-size: 3rem; line-height: 3.5rem; } }
 strong, .bold { font-weight: bold; }
+
+.site-wrap {
+  width:80%;
+  margin: 0 auto;
+  min-height: 100%;
+  margin-bottom: -120px;
+}
+
+.site-wrap:after { content: ""; display: block; }
 
 .regular { font-weight: normal; }
 
@@ -45,6 +141,8 @@ strong, .bold { font-weight: bold; }
 .right-align { text-align: right; }
 
 .measure { max-width: 48rem; }
+
+.wrap .measure { margin: 0 auto; }
 
 .measure-narrow { max-width: 32rem; }
 
@@ -270,12 +368,6 @@ strong, .bold { font-weight: bold; }
 
 .bg-orange { background-color: #ffcc22; }
 
-body { color: #333333; background-color: #fff; }
-
-a { color: #0096cc; text-decoration: none; }
-
-a:hover { color: #007199; }
-
 .button { border-radius: .25rem; transition-duration: .2s; transition-timing-function: ease; transition-property: box-shadow , background-color; }
 
 .button:focus { outline: none; box-shadow: 0 0 0 2px white, 0 0 1px 4px rgba(0, 150, 204, 0.5); }
@@ -308,28 +400,7 @@ a:hover { color: #007199; }
 
 .transition-all { transition: all .2s ease; }
 
-/*
- Pixyll
- A simple, beautiful theme for Jekyll that emphasizes content rather than aesthetic fluff.
- Best served with BASSCSS (http://jxnblk.github.io/basscss)
- Crafted with <3 by John Otander (@4lpine) - ©2015 John Otander MIT License http://opensource.org/licenses/MIT
-
-*/
-body { font-family: "Merriweather", "PT Serif", Georgia, "Times New Roman", serif; }
-
-html, body { height: 100%; }
-
-img { width: auto; max-width: 100%; }
-
-hr { margin: 20px 0; border: 0; border-top: 1px solid #eee; }
-
-.site-wrap { min-height: 100%; margin-bottom: -120px; }
-
-.site-wrap:after { content: ""; display: block; }
-
 .footer, .site-wrap:after { height: 50px; }
-
-body { font-size: 1.5rem; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
 
 .gist, .gist .highlight .p { font-size: .75rem; }
 
@@ -346,14 +417,6 @@ body { font-size: 1.5rem; box-sizing: border-box; -moz-box-sizing: border-box; -
 .site-nav { margin: 0; padding: 0; }
 
 .site-header a:hover, .posts .post a:hover .post-meta, .posts .post a:hover .post-title, .posts .post a:hover .post-summary { opacity: 0.88; }
-
-/* Table styles copied from Bootstrap Copyright (c) 2013 Twitter, Inc
-*/
-table { width: 100%; max-width: 100%; margin-bottom: 1.5; font-size: 1.125rem; }
-table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td, table > tfoot > tr > th, table > tfoot > tr > td { padding: 12px; line-height: 1.2; vertical-align: top; border-top: 1px solid #333; }
-table > thead > tr > th { vertical-align: bottom; border-bottom: 2px solid #333; }
-table > caption + thead > tr:first-child > th, table > caption + thead > tr:first-child > td, table > colgroup + thead > tr:first-child > th, table > colgroup + thead > tr:first-child > td, table > thead:first-child > tr:first-child > th, table > thead:first-child > tr:first-child > td { border-top: 0; }
-table > tbody + tbody { border-top: 2px solid #333; }
 
 .related-post-title { border-bottom: thin solid #f3f3f3; }
 
@@ -379,8 +442,6 @@ table > tbody + tbody { border-top: 2px solid #333; }
 
 .pagination a:active { background: #f7f7f7; }
 
-.wrap .measure { margin: 0 auto; }
-
 .meta, .post-meta { width: auto; font-size: 1rem; font-weight: 300; margin: 0; padding: .25em 0; color: #7a7a7a; font-style: italic; }
 
 .pagination .button { font-size: 1rem; font-weight: 300; letter-spacing: 1px; }
@@ -389,27 +450,7 @@ table > tbody + tbody { border-top: 2px solid #333; }
 
 .button-disabled:hover, .button-disabled:active, .button-disabled:focus { cursor: not-allowed; background-color: #999; }
 
-form { font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif; font-weight: 300; font-size: 1rem; }
-
-textarea.input { height: 8em; }
-
-p { font-weight: 300; line-height: 1.5; color: #333; }
-
-abbr { border-bottom: 1px black dotted; cursor: help; }
-
-pre, code { font-family: Menlo, Monaco, "Courier New", monospace; }
-
-code { color: #7a7a7a; }
-
-pre { padding: 1.125em; font-size: 1.125rem; line-height: 1.11; overflow-x: scroll; margin-bottom: 0.88em; }
-
 .highlight .p { font-size: 1.125rem; line-height: 1; }
-
-blockquote { padding: 1.33em; font-style: italic; border-left: 5px solid #7a7a7a; }
-
-blockquote footer { font-size: .85rem; font-style: normal; background-color: #fff; color: #7a7a7a; border-color: transparent; }
-
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif; font-weight: 900; line-height: 1.2; margin: 1em 0 0.5em; }
 
 .social-icons { padding: 0.5em 0 0 0; font-size: 1.25rem; width: 100%; }
 
@@ -448,11 +489,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { font-family: "Lato", 'Hel
   .post-link .post-title { margin-top: .125em; }
   .posts .post { margin-bottom: 2.666em; padding-bottom: 1.333em; border-bottom: thin solid #f3f3f3; }
   .posts .post:last-child { border-bottom: none; margin-bottom: .666em; padding-bottom: 0; } }
-footer { border-top: thin solid #f3f3f3; }
-
-footer, footer .wrap { color: #7a7a7a; background-color: #fafafa; font-family: 'Lato', 'Helvetica Neue', Helvetica, sans-serif; font-weight: 300; clear: both; }
-
-footer:after { content: ""; display: block; }
 
 /*!
 Animate.css - http://daneden.me/animate

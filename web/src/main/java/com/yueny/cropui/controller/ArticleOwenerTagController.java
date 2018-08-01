@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.yueny.cropui.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import com.yueny.blog.service.IOwenerTagService;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
 /**
- * 我的文章标签类目控制器
+ * 【我的文章标签类目】控制器
  *
  * @author 袁洋 2015年8月24日 上午10:22:23
  *

@@ -129,6 +129,14 @@
 			</div>
 		</div><#-- 2、 页面内容 End -->
 
+    <p>
+        <a href="#">回到顶部</a>
+    </p>
+
+	<#-- 分割线
+    <hr>
+     -->
+
 	<#include "include/comp-body-footer.ftl">
 
 </body>

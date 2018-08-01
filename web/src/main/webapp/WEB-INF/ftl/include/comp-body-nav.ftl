@@ -30,7 +30,7 @@
  			-->
 
 			<#-- menu Start -->
-            <header class="site-header px2 px-responsive">
+            <header class="site-header">
                 <div class="mt2 wrap">
                     <div class="measure">
                         <a class="site-title" href="${ctx}/">

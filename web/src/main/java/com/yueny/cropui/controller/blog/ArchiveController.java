@@ -17,7 +17,7 @@ import com.yueny.superclub.api.page.core.PageCond;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 
 /**
- * 存档控制器
+ * 【存档】控制器
  *
  * @author yueny09 <deep_blue_yang@163.com>
  *
@@ -59,7 +59,7 @@ public class ArchiveController extends BaseController {
 			return redirectAction("/");
 		}
 
-		return "document/archive";
+		return "blog/document/archive";
 	}
 
 }
