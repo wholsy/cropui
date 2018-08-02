@@ -2,12 +2,12 @@
 
 	<link rel="stylesheet" href="${ctx}/adm/style/pages/tag/tag.css" />
 	
-	<link href="${ctx}/plug-ins/nprogress/nprogress.css" rel="stylesheet">
-	<link href="${ctx}/plug-ins/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-	<link href="${ctx}/plug-ins/select2/dist/css/select2.min.css" rel="stylesheet">
-	<link href="${ctx}/plug-ins/switchery/dist/switchery.min.css" rel="stylesheet">
-	<link href="${ctx}/plug-ins/starrr/dist/starrr.css" rel="stylesheet">
-	<link href="${ctx}/plug-ins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+	<link href="${ctx}/assets/plug-ins/nprogress/nprogress.css" rel="stylesheet">
+	<link href="${ctx}/assets/plug-ins/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+	<link href="${ctx}/assets/plug-ins/select2/dist/css/select2.min.css" rel="stylesheet">
+	<link href="${ctx}/assets/plug-ins/switchery/dist/switchery.min.css" rel="stylesheet">
+	<link href="${ctx}/assets/plug-ins/starrr/dist/starrr.css" rel="stylesheet">
+	<link href="${ctx}/assets/plug-ins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	
 <#include "admin/common/header_end.ftl">
 
@@ -348,26 +348,26 @@
 	
 	<script src="${ctx}/adm/javascript/pages/tag/categories_tag.js"></script>
 	
-	<script src="${ctx}/plug-ins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-	<script src="${ctx}/plug-ins/icheck/icheck.min.js"></script>
+	<script src="${ctx}/assets/plug-ins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+	<script src="${ctx}/assets/plug-ins/icheck/icheck.min.js"></script>
 	<#-- bootstrap-daterangepicker -->
-	<script src="${ctx}/plug-ins/moment/min/moment.min.js"></script>
-    <script src="${ctx}/plug-ins/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<script src="${ctx}/assets/plug-ins/moment/min/moment.min.js"></script>
+    <script src="${ctx}/assets/plug-ins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <#-- bootstrap-wysiwyg -->
-	<script src="${ctx}/plug-ins/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-	<script src="${ctx}/plug-ins/jquery.hotkeys/jquery.hotkeys.js"></script>
-	<script src="${ctx}/plug-ins/google-code-prettify/src/prettify.js"></script>
+	<script src="${ctx}/assets/plug-ins/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+	<script src="${ctx}/assets/plug-ins/jquery.hotkeys/jquery.hotkeys.js"></script>
+	<script src="${ctx}/assets/plug-ins/google-code-prettify/src/prettify.js"></script>
 	
 	<#-- Switchery -->
-    <script src="${ctx}/plug-ins/switchery/dist/switchery.min.js"></script>
+    <script src="${ctx}/assets/plug-ins/switchery/dist/switchery.min.js"></script>
     <#-- Select2 -->
-    <script src="${ctx}/plug-ins/select2/dist/js/select2.full.min.js"></script>
+    <script src="${ctx}/assets/plug-ins/select2/dist/js/select2.full.min.js"></script>
     <#-- Autosize -->
-    <script src="${ctx}/plug-ins/autosize/dist/autosize.min.js"></script>
+    <script src="${ctx}/assets/plug-ins/autosize/dist/autosize.min.js"></script>
     <#-- jQuery autocomplete -->
-    <script src="${ctx}/plug-ins/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <script src="${ctx}/assets/plug-ins/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
     <#-- starrr -->
-    <script src="${ctx}/plug-ins/starrr/dist/starrr.js"></script>
+    <script src="${ctx}/assets/plug-ins/starrr/dist/starrr.js"></script>
 	
 
 </html>

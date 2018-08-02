@@ -3,11 +3,12 @@ package com.yueny.cropui.controller.intercepter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.yueny.blog.service.listener.DefaultMsgPusher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yueny.blog.bo.ViewerRecordBo;
+import com.yueny.blog.service.IViewerRecordService;
 import com.yueny.rapid.lang.util.IpUtil;
 
 /**
@@ -20,7 +21,7 @@ import com.yueny.rapid.lang.util.IpUtil;
  */
 public class ViewerIntercepter implements HandlerInterceptor {
 	@Autowired
-	private DefaultMsgPusher defaultMsgPusher;
+	private IViewerRecordService viewerRecordService;
 
 	@Override
 	public void afterCompletion(final HttpServletRequest request, final HttpServletResponse response,
@@ -38,7 +39,12 @@ public class ViewerIntercepter implements HandlerInterceptor {
 	public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
 			throws Exception {
 		final String requestUri = request.getRequestURI();
-		final String ip = IpUtil.getClientIp(request);
+		final String clientIp = IpUtil.getClientIp(request);
+
+		final ViewerRecordBo bo = new ViewerRecordBo();
+		bo.setClientIp(clientIp);
+		bo.setRequestUri(requestUri);
+		viewerRecordService.insert(bo);
 
 		return true;
 	}

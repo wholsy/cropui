@@ -122,20 +122,20 @@
 	</form>
 
 		
-	<script src="${ctx}/plug-ins/jquery/dist/jquery.min.js"></script>
+	<script src="${ctx}/assets/plug-ins/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
-	<script src="${ctx}/plug-ins/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="${ctx}/assets/plug-ins/bootstrap/dist/js/bootstrap.min.js"></script>
 	
 	<script src="${ctx}/adm/javascript/pages/tag/categories_tag-form.js"></script>
 	
 	<!-- jQuery Tags Input -->
 	<script src="${ctx}/adm/javascript/custom_public.js"></script>
-    <script src="${ctx}/plug-ins/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <script src="${ctx}/assets/plug-ins/jquery.tagsinput/src/jquery.tagsinput.js"></script>
     
     <#-- tips -->
 	<!-- lhg dialog js -->
-	<script src="${ctx}/plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+	<script src="${ctx}/assets/plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
 	<#-- mask -->
-	<script src="${ctx}/plug-ins/mask/blockui/jquery.blockUI.js"></script>
+	<script src="${ctx}/assets/plug-ins/mask/blockui/jquery.blockUI.js"></script>
  	<#-- Parsley validator -->
-    <script src="${ctx}/plug-ins/parsleyjs/dist/parsley.js"></script>
+    <script src="${ctx}/assets/plug-ins/parsleyjs/dist/parsley.js"></script>

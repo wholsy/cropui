@@ -1,9 +1,9 @@
 <#include "admin/common/header_start.ftl">
 	<#-- jqGrid组件基础样式包-必要 -->
-	<link rel="stylesheet" href="${ctx}/plug-ins/jqgrid/css/ui.jqgrid.css" />
+	<link rel="stylesheet" href="${ctx}/assets/plug-ins/jqgrid/css/ui.jqgrid.css" />
 	<#-- jqGrid主题包-非必要 --> 
 	<#-- 在jqgrid/css/css这个目录下还有其他的主题包，可以尝试更换看效果 -->
-	<link rel="stylesheet" href="${ctx}/plug-ins/jqgrid/css/css/ui-lightness/jquery-ui-1.8.16.custom.css" />
+	<link rel="stylesheet" href="${ctx}/assets/plug-ins/jqgrid/css/css/ui-lightness/jquery-ui-1.8.16.custom.css" />
 	
 <#include "admin/common/header_end.ftl">
 ß
@@ -62,10 +62,10 @@
 	<script src="${ctx}/adm/javascript/pages/blog/blog_list.js"></script>
 	
 	<#-- jqGrid插件包-必要 -->
-	<script type="text/javascript" src="${ctx}/plug-ins/jqgrid/js/jquery.jqGrid.src.js"></script>
+	<script type="text/javascript" src="${ctx}/assets/plug-ins/jqgrid/js/jquery.jqGrid.src.js"></script>
 	<#-- jqGrid插件的多语言包-非必要 -->
 	<#-- 在jqgrid/js/i18n下还有其他的多语言包，可以尝试更换看效果 -->
-	<script type="text/javascript" src="${ctx}/plug-ins/jqgrid/js/i18n/grid.locale-cn.js"></script>
+	<script type="text/javascript" src="${ctx}/assets/plug-ins/jqgrid/js/i18n/grid.locale-cn.js"></script>
 	
     
 <#include "admin/common/body_end.ftl">

@@ -1,0 +1,12 @@
+/***** 个性化图标 *****/
+/* */
+/* 星星*/
+.msgstar { 
+	display: inline-block; width: 16px; height: 16px; 
+	background: url(../images/icons/unstar.png) no-repeat 0 0; 
+	cursor: pointer; opacity: 0.5; 
+}
+.msgstar:hover { opacity: 1; }
+.starred { 
+	background-image: url(../images/icons/star.png); opacity: 1; 
+}
