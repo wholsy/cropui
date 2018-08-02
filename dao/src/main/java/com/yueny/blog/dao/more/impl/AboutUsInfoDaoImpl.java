@@ -1,11 +1,11 @@
-package com.yueny.blog.dao.help.impl;
+package com.yueny.blog.dao.more.impl;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.yueny.blog.dao.help.IAboutUsInfoDao;
-import com.yueny.blog.entry.help.AboutUsInfoEntry;
+import com.yueny.blog.dao.more.IAboutUsInfoDao;
+import com.yueny.blog.entry.AboutUsInfoEntry;
 import com.yueny.kapo.api.annnotation.DbSchemaType;
 import com.yueny.kapo.api.annnotation.TableSeg;
 import com.yueny.kapo.core.condition.builder.QueryBuilder;

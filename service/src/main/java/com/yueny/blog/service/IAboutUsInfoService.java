@@ -2,7 +2,7 @@ package com.yueny.blog.service;
 
 import java.util.List;
 
-import com.yueny.blog.bo.help.AboutUsInfoBo;
+import com.yueny.blog.bo.AboutUsInfoBo;
 
 /**
  * 关于我们信息查询服务

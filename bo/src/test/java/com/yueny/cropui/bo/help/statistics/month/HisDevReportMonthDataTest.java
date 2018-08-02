@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 import org.junit.Test;
 
-import com.yueny.blog.bo.help.HisDevReportBo;
+import com.yueny.blog.bo.HisDevReportBo;
 import com.yueny.blog.bo.model.statistics.month.HisDevReportMonthData;
 import com.yueny.blog.bo.model.statistics.month.HisMonthDevReportData;
 import com.yueny.blog.bo.model.statistics.month.HisYearDevReportMonthData;

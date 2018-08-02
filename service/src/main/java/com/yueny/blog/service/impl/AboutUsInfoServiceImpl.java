@@ -11,9 +11,9 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
-import com.yueny.blog.bo.help.AboutUsInfoBo;
-import com.yueny.blog.dao.help.IAboutUsInfoDao;
-import com.yueny.blog.entry.help.AboutUsInfoEntry;
+import com.yueny.blog.bo.AboutUsInfoBo;
+import com.yueny.blog.dao.more.IAboutUsInfoDao;
+import com.yueny.blog.entry.AboutUsInfoEntry;
 import com.yueny.blog.service.BaseBiz;
 import com.yueny.blog.service.IAboutUsInfoService;
 import com.yueny.rapid.lang.util.StringUtil;

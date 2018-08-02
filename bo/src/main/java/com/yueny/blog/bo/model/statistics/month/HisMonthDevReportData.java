@@ -2,7 +2,7 @@ package com.yueny.blog.bo.model.statistics.month;
 
 import java.util.Set;
 
-import com.yueny.blog.bo.help.HisDevReportBo;
+import com.yueny.blog.bo.HisDevReportBo;
 
 import lombok.Data;
 

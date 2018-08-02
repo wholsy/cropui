@@ -1,4 +1,4 @@
-package com.yueny.blog.bo.utils;
+package com.yueny.blog.common.util;
 
 public class PagerUT {
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.yueny.blog.bo.help.AboutUsInfoBo;
+import com.yueny.blog.bo.AboutUsInfoBo;
 import com.yueny.blog.service.IAboutUsInfoService;
 import com.yueny.blog.service.IHelpService;
 import com.yueny.superclub.util.web.security.contanst.WebAttributes;
