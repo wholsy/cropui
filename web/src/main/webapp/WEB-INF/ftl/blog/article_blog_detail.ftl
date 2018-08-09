@@ -95,6 +95,9 @@
 						<#-- article_meta end -->
                         </div>
 
+						<#-- 摘要
+						${articleBlog.articleDigest}
+ 						-->
 						<#-- 正文 -->
                         <div class="content">
 							${articleBlog.articleContext}

@@ -23,10 +23,10 @@
 						<#list articleBlogs as articleBlog>
 							<div class="post">
 								<a href="${ctx}/article/${articleBlog.articleBlogId}.html" class="post-link">
-									<p class="post-meta">2016年 06 月 07日</p>
+                                    <p class="post-meta">${articleBlog.createTime?date}</p>
 									<h3 class="h2 post-title">${articleBlog.articleTitle}</h3>
 									<p class="post-summary">
-									${articleBlog.articleTitle}
+									${articleBlog.articleDigest}
 									</p>
 								</a>
 							</div>
