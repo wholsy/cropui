@@ -1,7 +1,9 @@
 $(function () {
         $("#btn_login").bind("click", function () {
-            var username = $("#txt_username").val();
-            var password = $("#txt_password").val();
+            alert("dwdwd");
+
+            var username = $("#username").val();
+            var password = $("#password").val();
             
             if (username && password) {
                 $.post(ctx + "/admin/login/dologin", {username: username, password: password}, function (rs) {

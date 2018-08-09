@@ -1,6 +1,6 @@
 package com.yueny.blog.service.util;
 
-import com.yueny.blog.bo.utils.PagerUT;
+import com.yueny.blog.common.util.PagerUT;
 
 public class PageHtmlHelper {
 	// equals PageCond#DEFAULT_PAGE_SIZE_PER_PAGE

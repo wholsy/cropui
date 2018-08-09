@@ -27,21 +27,21 @@
     <link rel="shortcut icon" href="http://static.codealy.com/favicon.ico" type="image/x-icon">
     
     <!-- Bootstrap -->
-    <link href="${ctx}/plug-ins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${ctx}/assets/plug-ins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="${ctx}/plug-ins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${ctx}/assets/plug-ins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="${ctx}/plug-ins/nprogress/nprogress.css" rel="stylesheet">
+    <link href="${ctx}/assets/plug-ins/nprogress/nprogress.css" rel="stylesheet">
     
     <#-- Parsley validator -->
-    <<link href="${ctx}/plug-ins/parsleyjs/src/parsley.css" rel="stylesheet">
+    <<link href="${ctx}/assets/plug-ins/parsleyjs/src/parsley.css" rel="stylesheet">
     
     <!-- Custom Theme Style -->
     <link href="${ctx}/adm/style/custom.css" rel="stylesheet">
     <link href="${ctx}/adm/style/style.css" rel="stylesheet" type="text/css"/>
     
     <!-- Animate.css -->
-    <link href="${ctx}/plug-ins/animate.css/animate.min.css" rel="stylesheet">
+    <link href="${ctx}/assets/plug-ins/animate.css/animate.min.css" rel="stylesheet">
     <link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
 	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -20,7 +20,7 @@
         <property name="username" value="${db.mysql.jdbc.username}"/>
         <property name="connectProperties">
             <props>
-                <prop key="password">${db.mysql.jdbc.password}</prop>
+                <prop key="password"><![CDATA[${db.mysql.jdbc.password}]]></prop>
                 <prop key="druid.stat.logSlowSql">true</prop>
                 <prop key="druid.stat.slowSqlMillis">5000</prop>
                 <prop key="connectTimeout">1000</prop>

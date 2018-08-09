@@ -55,13 +55,19 @@
 				<artifactId>rapid-service-rest</artifactId>
 				<version>${rapid.version}</version>
 			</dependency>
-			
+			<dependency>
+				<groupId>com.yueny.rapid.service</groupId>
+				<artifactId>rapid-service-cache</artifactId>
+				<version>${rapid.version}</version>
+			</dependency>
+
+			<!-- 短信/邮件  -->
 			<dependency>
 				<groupId>com.yueny.rapid.message</groupId>
 				<artifactId>rapid-message-email</artifactId>
 				<version>${rapid.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.yueny.rapid.data</groupId>
 				<artifactId>rapid-data-resp</artifactId>

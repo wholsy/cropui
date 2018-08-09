@@ -9,7 +9,7 @@ import com.yueny.blog.bo.console.user.UserInfoBo;
 import com.yueny.blog.console.vo.user.UserDisplayVo;
 import com.yueny.blog.console.vo.user.UserInfoVo;
 import com.yueny.blog.service.admin.manager.IUserDisplayManager;
-import com.yueny.blog.service.table.IUserInfoService;
+import com.yueny.blog.service.IUserInfoService;
 import com.yueny.rapid.lang.mask.MaskInfoUtil;
 
 /**

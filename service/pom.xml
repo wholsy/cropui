@@ -38,6 +38,10 @@
 		    <groupId>com.yueny.rapid.service</groupId>
 			<artifactId>rapid-service-rest</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.service</groupId>
+			<artifactId>rapid-service-cache</artifactId>
+		</dependency>
 		
 		<dependency>
 			<groupId>com.yueny.rapid.data</groupId>
@@ -48,10 +52,7 @@
 			<artifactId>rapid-data-storage-redis</artifactId>
 		</dependency>
 		
-		<dependency>
-			<groupId>com.yueny.rapid.lang</groupId>
-			<artifactId>rapid-lang-util</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-timer</artifactId>
@@ -76,7 +77,13 @@
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-userAgent</artifactId>
 		</dependency>
-		
+
+		<!-- 短信/邮件  -->
+		<dependency>
+			<groupId>com.yueny.rapid.message</groupId>
+			<artifactId>rapid-message-email</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.yueny.rapid.topic</groupId>
 			<artifactId>rapid-topic-profiler-box</artifactId>
@@ -122,12 +129,6 @@
 			<artifactId>ezmorph</artifactId>
 		</dependency>
 		
-        <!-- markdownToHtml: 轻量级 Markdown 引擎 -->
-        <dependency>
-		    <groupId>org.pegdown</groupId>
-		    <artifactId>pegdown</artifactId>
-		</dependency>
-			
         <dependency>
 		    <groupId>com.lmax</groupId>
 		    <artifactId>disruptor</artifactId>
@@ -167,10 +168,6 @@
 		<dependency>
 		  <groupId>org.apache.commons</groupId>
 		  <artifactId>commons-pool2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>

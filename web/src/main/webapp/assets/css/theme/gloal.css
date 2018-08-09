@@ -18,16 +18,10 @@ html{
 	-ms-text-size-adjust:100%;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	overflow: -moz-scrollbars-vertical;
-	
-	zoom:expression(function(ele){
-		ele.style.zoom = "1";
-		document.execCommand("BackgroundImageCache",false,true);
-	}
-	(this));
 }
 
 body {
-    background-color: #ddeef6;
+    background-color: #ffffff;
 /*     background-image: url("../../images/bg/bg.jpg"); */
 	background-attachment: fixed;
 	background-repeat: no-repeat;

@@ -29,7 +29,7 @@ public interface IArticleQueryManageService {
 	 *
 	 * @throws DataVerifyAnomalyException
 	 */
-	List<ArchiveData> getArchive(PageCond pageable) throws DataVerifyAnomalyException;
+	List<ArchiveData> getArchiveList(PageCond pageable) throws DataVerifyAnomalyException;
 
 	/**
 	 * 博文明细

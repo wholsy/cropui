@@ -25,13 +25,14 @@ import com.yueny.blog.console.request.TagsForCategoriesModifyRequest;
 import com.yueny.blog.console.vo.tags.TagsForCategorieBaseVo;
 import com.yueny.blog.console.vo.tags.TagsForCategoriesViewsVo;
 import com.yueny.blog.service.BaseBiz;
+import com.yueny.blog.service.IArticleBlogService;
+import com.yueny.blog.service.ICategoriesTagService;
+import com.yueny.blog.service.IOwenerTagService;
 import com.yueny.blog.service.admin.manager.ICategoriesTagManagerService;
-import com.yueny.blog.service.comp.uid.OwenerTagCodeGenerate;
-import com.yueny.blog.service.disruptor.event.FigureTagCheckerEvent;
-import com.yueny.blog.service.disruptor.producer.FigureTagCheckerEventProducer;
-import com.yueny.blog.service.table.IArticleBlogService;
-import com.yueny.blog.service.table.ICategoriesTagService;
-import com.yueny.blog.service.table.IOwenerTagService;
+import com.yueny.blog.service.comp.uid.OwenerTagCodeGeneraterService;
+import com.yueny.blog.service.disruptor.api.SyntonyHandlerFunction;
+import com.yueny.blog.service.listener.DefaultMsgPusher;
+import com.yueny.blog.service.listener.MsgQuene;
 import com.yueny.rapid.lang.exception.invalid.InvalidException;
 import com.yueny.rapid.lang.util.enums.EnableType;
 import com.yueny.rapid.topic.profiler.ProfilerLog;
@@ -52,20 +53,24 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	}
 
 	@Autowired
+	private IArticleBlogService articleBlogService;
+	@Autowired
 	private ICategoriesTagService categoriesTagService;
 	@Autowired
-	private IOwenerTagService owenerTagService;
-	@Autowired
-	private IArticleBlogService articleBlogService;
+	private DefaultMsgPusher defaultMsgPusher;
 
 	@Autowired
-	private OwenerTagCodeGenerate owenerTagCodeGenerate;
+	private OwenerTagCodeGeneraterService owenerTagCodeGenerate;
+
+	@Autowired
+	private IOwenerTagService owenerTagService;
 
 	/*
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#findAll()
+	 * com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#findAll(
+	 * )
 	 */
 	@Override
 	@ProfilerLog
@@ -235,8 +240,37 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 		});
 
 		// 进行标签完整性检查
-		new FigureTagCheckerEventProducer().publishData(FigureTagCheckerEvent.builder()
-				.articleBlogService(articleBlogService).owenerTagService(owenerTagService).uid(uid).build());
+		SyntonyHandlerFunction functionInstance = new SyntonyHandlerFunction<Integer>() {
+			@Override
+			public Integer execute() {
+				// 获取当前用户所拥有的所有有效标签
+				final List<OwenerTagBo> owenerTagList = owenerTagService.queryByUid(uid);
+				final int sInt = owenerTagList.parallelStream().mapToInt(owenerTagBo -> {
+					try {
+						// 处理每个用户标签
+						final Long owenerTagId = owenerTagBo.getOwenerTagId();
+						// 获取用户所拥有该标签的博文信息
+						final Long ltsCount = articleBlogService.countBy(owenerTagId);
+
+						final int step = ltsCount.intValue() - owenerTagBo.getCorrelaArticleSum();
+						owenerTagService.plusCorrelaArticle(owenerTagBo.getOwenerTagId(), step);
+
+						return 1;
+					} catch (final Exception e) {
+						logger.error("处理异常：", e);
+					}
+
+					return 0;
+				}).sum();
+
+				logger.info("Disruptor engine started successfully. 实际处理结果/总数目：{}/{}.", owenerTagList.size(), sInt);
+				return sInt;
+			}
+		};
+		defaultMsgPusher.push(MsgQuene.builder().syntonyExecuteInstance(functionInstance).build());
+		// new
+		// FigureTagCheckerEventProducer().publishData(FigureTagCheckerEvent.builder()
+		// .articleBlogService(articleBlogService).owenerTagService(owenerTagService).uid(uid).build());
 
 		return true;
 	}
@@ -245,8 +279,8 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#update(com.
-	 * yueny.blog.console.request.TagsForCategoriesModifyRequest)
+	 * com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#update(
+	 * com. yueny.blog.console.request.TagsForCategoriesModifyRequest)
 	 */
 	@Override
 	@Transactional

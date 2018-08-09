@@ -19,28 +19,30 @@ import com.yueny.rapid.lang.util.collect.ArrayUtil;
  * @DATE 2016年9月9日 下午10:03:07
  *
  */
+@Deprecated
 public abstract class BaseCacheBiz<L> extends BaseBiz {
 	/**
 	 * 缓存默认过期时间,15秒
 	 */
 	protected static final Long DEFAULT_EXPIRE_SECOND = 15L;
+
+	// @Autowired
+	// private ICacheService cacheService;
+
 	@Autowired
 	private RedisTemplate<String, L> redisTemplate;
 
 	/**
 	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
 	 */
+	@Deprecated
 	public final L cache(final CacheDataHandler<L> cacheExecutor, final Long timeout, final TimeUnit unit,
 			final Object... args) {
-		// TODO redis异常处理
-		if (redisTemplate == null) {
-			return cacheExecutor.caller();
-		}
-
 		// getClass() is 'CacheListService'
 		final String redisKey = CacheKeyConstant.assmebledKeys(getClass().getSimpleName(), args);
 
 		L t = redisTemplate.opsForValue().get(redisKey);
+
 		if (t != null) {
 			logger.trace("查询 {} 的键 {}，命中缓存：{}.", getClass().getSimpleName(), args, t);
 			return t;
@@ -60,6 +62,7 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 	/**
 	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
 	 */
+	@Deprecated
 	public final L cache(final CacheDataHandler<L> cacheExecutor, final Object... args) {
 		return cache(cacheExecutor, DEFAULT_EXPIRE_SECOND, TimeUnit.SECONDS, args);
 	}
@@ -67,6 +70,7 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 	/**
 	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
 	 */
+	@Deprecated
 	public final L cache(final Object args, final CacheDataHandler<L> cacheExecutor) {
 		return cache(cacheExecutor, ArrayUtil.newArray(args));
 	}
@@ -80,6 +84,7 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 	 * @param timeout
 	 *            失效时间,秒 缓存对象
 	 */
+	@Deprecated
 	public final L cache(final Object args, final CacheDataHandler<L> cacheExecutor, final Long timeout) {
 		return cache(cacheExecutor, timeout, TimeUnit.SECONDS, args);
 	}
@@ -87,6 +92,7 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 	/**
 	 * 缓存对象, null不进行缓存， 发生异常不进行捕获， 不进行缓存
 	 */
+	@Deprecated
 	public final L cache(final Object args, final CacheDataHandler<L> cacheExecutor, final Long timeout,
 			final TimeUnit unit) {
 		return cache(cacheExecutor, timeout, TimeUnit.SECONDS, ArrayUtil.newArray(args));
@@ -95,6 +101,7 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 	/**
 	 * 缓存对象删除,会删除对象和列表中的缓存值
 	 */
+	@Deprecated
 	public final void cacheDelete(final Object... args) {
 		final String redisKey = CacheKeyConstant.assmebledKeys(getClass().getSimpleName(), args);
 
@@ -117,5 +124,16 @@ public abstract class BaseCacheBiz<L> extends BaseBiz {
 		redisTemplate.delete("*_" + someKey);
 		return;
 	}
+
+	// /**
+	// * @return 得到泛型类
+	// */
+	// private final <L> Class<L> get() {
+	// final Class<L> entityClass = (Class<L>) ((ParameterizedType)
+	// getClass().getGenericSuperclass())
+	// .getActualTypeArguments()[0];
+	//
+	// return entityClass;
+	// }
 
 }

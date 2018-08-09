@@ -155,6 +155,7 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
             <bean class="com.yueny.rapid.adapter.digest.web.interceptor.WebDigestLogHandlerInterceptor"
                   c:loggerName="SLOWLY-SERVICE-DIGEST-LOGGER" 
                   p:slowDumpThreshold="100" p:printDigstPigeonhole="true"/>
@@ -209,18 +210,12 @@
         </mvc:interceptor>
 		
 		
-		<!-- 2、CsrfIntercepter拦截器 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
-			<mvc:exclude-mapping path="/static/**"/>
-			<mvc:exclude-mapping path="/content/**"/>
-			<bean class="com.yueny.cropui.controller.intercepter.CsrfIntercepter"/>
-		</mvc:interceptor>
 		<!-- 3、系统响应时间 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
 			<bean class="com.yueny.superclub.util.web.security.interceptors.MeasurementTimesInterceptor"/>
 		</mvc:interceptor>
 		<!-- 4、UserAgent  -->
@@ -228,7 +223,25 @@
 		 	<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/content/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
 		 	<bean class="com.yueny.rapid.lang.agent.handler.UserAgentResolverHandlerInterceptor"/>
+		</mvc:interceptor>
+
+		<!-- 2、CsrfIntercepter拦截器 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.yueny.cropui.controller.intercepter.CsrfIntercepter"/>
+		</mvc:interceptor>
+		<!-- 访客统计 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/content/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.yueny.cropui.controller.intercepter.ViewerIntercepter"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	

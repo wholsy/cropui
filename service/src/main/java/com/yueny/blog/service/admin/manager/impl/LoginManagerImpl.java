@@ -1,10 +1,12 @@
 package com.yueny.blog.service.admin.manager.impl;
 
+import com.yueny.blog.service.IPasswdService;
+import com.yueny.blog.service.IUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yueny.blog.service.admin.manager.ILoginManager;
-import com.yueny.blog.service.table.IUserPassportService;
+import com.yueny.blog.service.IUserPassportService;
 import com.yueny.rapid.lang.exception.invalid.InvalidException;
 
 /**
@@ -19,14 +21,21 @@ import com.yueny.rapid.lang.exception.invalid.InvalidException;
 public class LoginManagerImpl implements ILoginManager {
 	@Autowired
 	private IUserPassportService userPassportService;
+	@Autowired
+	private IPasswdService passwdService;
+	@Autowired
+	private IUserInfoService userInfoService;
 
 	@Override
 	public boolean login(final String loginName, final String originalPassword) throws InvalidException {
-		// 数据库存储密文和表单转密文后验证
-		final String cryptPassword = originalPassword;
-		final boolean getMatch = userPassportService.getMatch(loginName, cryptPassword);
+		// 获取盐值
+		//		UserInfoBo userInfo = userInfoService.queryByLoginName(loginName);
+//		userInfo.getsalt
 
-		return getMatch;
+		// 数据库存储密文和表单转密文后验证
+		String cryptPassword = passwdService.getEncodeData(originalPassword, "");
+
+		return userPassportService.getMatch(loginName, cryptPassword);
 	}
 
 }

@@ -9,25 +9,27 @@
 </script>
 
 <!-- Bootstrap -->
-<script src="${ctx}/plug-ins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="${ctx}/assets/plug-ins/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src="${ctx}/plug-ins/fastclick/lib/fastclick.js"></script>
+<script src="${ctx}/assets/plug-ins/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
-<script src="${ctx}/plug-ins/nprogress/nprogress.js"></script>
-    
+<script src="${ctx}/assets/plug-ins/nprogress/nprogress.js"></script>
+<#-- 自定义短信验证码发送按钮 -->
+<script src="${ctx}/assets/js/captical.js"></script>
+
 <#-- tips -->
 <!-- lhg dialog js -->
-<script src="${ctx}/plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+<script src="${ctx}/assets/plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
 <script src="${ctx}/assets/javascript/jquery.sobox.js"></script>
 <#-- mask -->
-<script src="${ctx}/plug-ins/mask/documentMask/documentMask.js"></script>
-<script src="${ctx}/plug-ins/mask/blockui/jquery.blockUI.js"></script>
+<script src="${ctx}/assets/plug-ins/mask/documentMask/documentMask.js"></script>
+<script src="${ctx}/assets/plug-ins/mask/blockui/jquery.blockUI.js"></script>
 
 <#-- Parsley validator -->
-<script src="${ctx}/plug-ins/parsleyjs/dist/parsley.js"></script>
+<script src="${ctx}/assets/plug-ins/parsleyjs/dist/parsley.js"></script>
     
 <script src="http://static.codealy.com/plugins/prettify/prettify.js" type="text/javascript"></script>
-<script src="${ctx}/plug-ins/layerUi/layer.js"></script>
+<script src="${ctx}/assets/plug-ins/layerUi/layer.js"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="${ctx}/assets/javascript/public.js"></script>
