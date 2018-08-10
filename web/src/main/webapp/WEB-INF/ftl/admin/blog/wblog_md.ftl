@@ -1,7 +1,7 @@
 <#include "admin/common/header.ftl">
 
 <#-- editormd -->
-<link rel="stylesheet" href="${ctx}/assets/plug-ins/editor.md/css/editormd.css"/>
+<link rel="stylesheet" href="http://static.codealy.com/plugins/editor.md/css/editormd.css"/>
 
 	<link href="${ctx}/adm/style/pages/blog/write/write.css" rel="stylesheet" type="text/css">
 	<link href="${ctx}/adm/style/pages/blog/write/main.css" rel="stylesheet" type="text/css">
@@ -212,7 +212,7 @@
 </script>
 
 <#-- editormd -->
-<script src="${ctx}/assets/plug-ins/editor.md/editormd.min.js"></script>
+<script src="http://static.codealy.com/plugins/editor.md/editormd.min.js"></script>
 <script src="${ctx}/adm/javascript/pages/blog/wblog/wblog_md.js"></script>
 
 <script src="http://static.codealy.com/plugins/markdown/to-markdown.js"></script>

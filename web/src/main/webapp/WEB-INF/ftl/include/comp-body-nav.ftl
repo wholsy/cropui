@@ -49,7 +49,7 @@
 
                         <div class="social-icons">
                             <div class="left">
-                                <a class="fa fa-github" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
                                 <#--
 								<a class="fa fa-linkedin" href="https://www.linkedin.com/in/nobodyiam"></a>
                                 <a class="fa fa-rss" href="/feed.xml"></a>
@@ -58,6 +58,16 @@
                                 <small>
                                     :) So do it,and change it,no regret!
                                 </small>
+
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
                             </div>
                             <div class="right">
                             </div>

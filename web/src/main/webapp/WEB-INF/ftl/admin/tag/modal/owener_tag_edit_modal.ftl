@@ -64,15 +64,15 @@
 	</form>
 
 		
-	<script src="${ctx}/assets/plug-ins/jquery/dist/jquery.min.js"></script>
+	<script src="http://static.codealy.com/plugins/jquery/v2.2.3/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
-	<script src="${ctx}/assets/plug-ins/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="http://static.codealy.com/plugins/bootstrap/3.3.7/dist/js/bootstrap.min.js"></script>
 	
 	<script src="${ctx}/adm/javascript/pages/tag/categories_tag-form.js"></script>
 	
 	<#-- Switchery -->
 	<script src="${ctx}/assets/javascript/public.js"></script>
-    <script src="${ctx}/assets/plug-ins/switchery/dist/switchery.min.js"></script>
+    <script src="http://static.codealy.com/plugins/switchery/dist/switchery.min.js"></script>
     <script>
     		$(document).ready(function() {
     			var clickCheckBox = document.querySelector('.js-switch');
@@ -84,8 +84,8 @@
 
     <#-- tips -->
 	<!-- lhg dialog js -->
-	<script src="${ctx}/assets/plug-ins/lhgdialog-4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+	<script src="http://static.codealy.com/plugins/lhgdialog/4.2.0/lhgdialog.js?skin=bootstrap2"></script>
 	<#-- mask -->
-	<script src="${ctx}/assets/plug-ins/mask/blockui/jquery.blockUI.js"></script>
+	<script src="http://static.codealy.com/plugins/mask/blockui/jquery.blockUI.js"></script>
  	<#-- Parsley validator -->
-    <script src="${ctx}/assets/plug-ins/parsleyjs/dist/parsley.js"></script>
+    <script src="http://static.codealy.com/plugins/parsleyjs/dist/parsley.js"></script>

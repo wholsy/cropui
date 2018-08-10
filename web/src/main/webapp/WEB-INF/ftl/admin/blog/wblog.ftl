@@ -198,8 +198,11 @@
 			}
 		</script>
 					
-		<#-- kindeditor -->
-		<script src="${ctx}/assets/plug-ins/kindeditor/kindeditor-all.js"></script>
+		<#-- kindeditor
+		<script src="${ctx}/assets/plug-ins-del/kindeditor/kindeditor-all.js"></script>
+		 -->
+		<script src="http://static.codealy.com/plugins/kindeditor/kindeditor-all.js"></script>
+		
 		<script src="http://static.codealy.com/plugins/kindeditor/lang/zh-CN.js"></script>
 		
 		<script src="http://static.codealy.com/plugins/markdown/to-markdown.js"></script>

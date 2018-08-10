@@ -14,9 +14,9 @@
 	    
 	    <link href="http://static.codealy.com/plugins/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
-        <link href="${ctx}/assets/plug-ins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://static.codealy.com/plugins/Font-Awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-        <!-- Fonts -->
+		<!-- Fonts -->
         <link href='${ctx}/assets/css/style/Merriweather_font.css' rel='stylesheet' type='text/css'>
 
 		<#--

@@ -11,4 +11,4 @@
 	
 	<#-- jquery插件包-必要 -->
 	<#-- 这个是所有jquery插件的基础，首先第一个引入 -->
-	<script src="${ctx}/assets/plug-ins/jquery/dist/jquery.min.js"></script>
+	<script src="http://static.codealy.com/plugins/jquery/2.2.3/dist/jquery.min.js"></script>
