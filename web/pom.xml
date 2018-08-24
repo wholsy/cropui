@@ -214,6 +214,11 @@
                             <name>org.eclipse.jetty.LEVEL</name>
                             <value>${jetty.logger.level}</value>
                         </systemProperty>
+						<systemProperty>
+							<name>org.eclipse.jetty.server.Request.maxFormContentSize</name>
+							<!-- -1代表不作限制 -->
+							<value>-1</value>
+						</systemProperty>
                     </systemProperties>
                 </configuration>
             </plugin>

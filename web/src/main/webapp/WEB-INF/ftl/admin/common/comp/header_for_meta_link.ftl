@@ -34,7 +34,7 @@
     <link href="http://static.codealy.com/plugins/nprogress/nprogress.css" rel="stylesheet">
     
     <#-- Parsley validator -->
-    <<link href="http://static.codealy.com/plugins/parsleyjs/src/parsley.css" rel="stylesheet">
+    <link href="http://static.codealy.com/plugins/parsleyjs/src/parsley.css" rel="stylesheet">
     
     <!-- Custom Theme Style -->
     <link href="${ctx}/adm/style/custom.css" rel="stylesheet">

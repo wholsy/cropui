@@ -1,6 +1,6 @@
 $(function () {
         $("#btn_login").bind("click", function () {
-            alert("dwdwd");
+            //alert("dwdwd");
 
             var username = $("#username").val();
             var password = $("#password").val();
