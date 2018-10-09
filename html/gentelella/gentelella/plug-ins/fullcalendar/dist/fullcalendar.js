@@ -7830,8 +7830,8 @@ TimeGrid.mixin({
 
 
 	// Calculate seg.forwardCoord and seg.backwardCoord for the segment, where both values range
-	// from 0 to 1. If the calendar is left-to-right, the seg.backwardCoord maps to "left" and
-	// seg.forwardCoord maps to "right" (via percentage). Vice-versa if the calendar is right-to-left.
+	// from 0 to 1. If the calendar is left-to-right, the seg.backwardCoord mapper to "left" and
+	// seg.forwardCoord mapper to "right" (via percentage). Vice-versa if the calendar is right-to-left.
 	//
 	// The segment might be part of a "series", which means consecutive segments with the same pressure
 	// who's width is unknown until an edge has been hit. `seriesBackwardPressure` is the number of

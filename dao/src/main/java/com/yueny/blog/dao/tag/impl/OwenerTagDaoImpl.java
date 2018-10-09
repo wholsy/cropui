@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yueny.blog.dao.tag.IOwenerTagDao;
-import com.yueny.blog.dao.tag.IOwenerTagMapper;
+import com.yueny.blog.mapper.IOwenerTagMapper;
 import com.yueny.blog.entry.tag.OwenerTagEntry;
 import com.yueny.kapo.api.annnotation.DbSchemaType;
 import com.yueny.kapo.api.annnotation.TableSeg;

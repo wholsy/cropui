@@ -2,6 +2,7 @@ package com.yueny.cropui.controller.blog;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.yueny.blog.common.BlogConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,7 +63,7 @@ public class ArticleBlogDetailShowActionController extends BaseController {
 			return redirectAction("/");
 		}
 
-		return "blog/article_blog_detail";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "blog/article_blog_detail";
 	}
 
 }

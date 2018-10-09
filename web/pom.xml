@@ -331,9 +331,9 @@
                 <env>dev</env>
                 
                 <!-- 如何配置端口 -->
-                <pom.logs.home>/Users/yueny/data/logs/tomcat/blog/runtime/blog</pom.logs.home>
-                <pom.logs.level>debug</pom.logs.level>
-                <pom.logs.level.digest>info</pom.logs.level.digest>
+                <!--<pom.logs.home>/Users/yueny/data/logs/tomcat/blog/runtime/blog</pom.logs.home>-->
+                <!--<pom.logs.level>debug</pom.logs.level>-->
+                <!--<pom.logs.level.digest>info</pom.logs.level.digest>-->
                 <pom.log.root.appender>file-log</pom.log.root.appender>
             </properties>
 	 	</profile>
@@ -342,9 +342,9 @@
 			<properties>
 				<env>prod</env>
 				
-				<pom.logs.home>/data/var/logs/javalog/blog/runtime/blog</pom.logs.home>
-                <pom.logs.level>info</pom.logs.level>
-                <pom.logs.level.digest>info</pom.logs.level.digest>
+				<!--<pom.logs.home>/data/var/logs/javalog/blog/runtime/blog</pom.logs.home>-->
+                <!--<pom.logs.level>info</pom.logs.level>-->
+                <!--<pom.logs.level.digest>info</pom.logs.level.digest>-->
                 <pom.log.root.appender>file-log</pom.log.root.appender>
 			</properties>
 		</profile>

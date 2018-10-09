@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.yueny.blog.common.BlogConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +60,7 @@ public class ArchiveController extends BaseController {
 			return redirectAction("/");
 		}
 
-		return "blog/document/archive";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "blog/document/archive";
 	}
 
 }

@@ -1,6 +1,6 @@
 <#-- body体的结束 -->
 
-		<#include "ad/ad-import.ftl">
+		<#include "web/ad/ad-import.ftl">
 
         <footer class="footer center">
 			<p>

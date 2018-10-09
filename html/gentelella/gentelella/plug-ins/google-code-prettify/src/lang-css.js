@@ -31,7 +31,7 @@
  */
 
 // This file is a call to a function defined in prettify.js which defines a
-// lexical scanner for CSS and maps tokens to styles.
+// lexical scanner for CSS and mapper tokens to styles.
 
 // The call to PR['registerLangHandler'] is quoted so that Closure Compiler
 // will not rename the call so that this language extensions can be

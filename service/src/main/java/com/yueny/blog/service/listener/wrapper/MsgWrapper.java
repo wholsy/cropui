@@ -7,6 +7,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import com.yueny.rapid.lang.thread.hook.ShutdownHookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,6 @@ import com.yueny.blog.service.listener.MsgQuene;
 import com.yueny.blog.service.listener.api.IMsgListener;
 import com.yueny.blog.service.listener.core.MsgQueneFactory;
 import com.yueny.rapid.lang.thread.factory.NamedThreadFactory;
-import com.yueny.rapid.lang.util.hook.ShutdownHookService;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.yueny.blog.common.BlogConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +53,7 @@ public class TagController extends BaseController {
 			return redirectAction("/");
 		}
 
-		return "blog/owener_tags";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "blog/owener_tags";
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class TagController extends BaseController {
 		// return redirectAction("/");
 		// }
 
-		return "document/tags_tree";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "document/tags_tree";
 	}
 
 	/**

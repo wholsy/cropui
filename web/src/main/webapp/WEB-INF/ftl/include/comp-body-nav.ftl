@@ -60,6 +60,7 @@
                                 </small>
 
                                 <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                <#--
                                 <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
                                 <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
                                 <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
@@ -68,6 +69,7 @@
                                 <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
                                 <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
                                 <a class="fa fa-github" target="_blank" href="https://github.com/yueny"></a>
+                                -->
                             </div>
                             <div class="right">
                             </div>

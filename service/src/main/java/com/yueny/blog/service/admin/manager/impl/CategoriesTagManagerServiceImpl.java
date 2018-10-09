@@ -69,7 +69,7 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#findAll(
+	 * com.yueny.blog.service.console.tags.ICategoriesTagRelManageService#findAll(
 	 * )
 	 */
 	@Override
@@ -103,7 +103,7 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#
+	 * @see com.yueny.blog.service.console.tags.ICategoriesTagRelManageService#
 	 * findByTagsForCode(java.lang.String)
 	 */
 	@Override
@@ -133,7 +133,7 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#
+	 * @see com.yueny.blog.service.console.tags.ICategoriesTagRelManageService#
 	 * findByTagsForParentCode(java.lang.String)
 	 */
 	@Override
@@ -279,7 +279,7 @@ public class CategoriesTagManagerServiceImpl extends BaseBiz implements ICategor
 	 * (non-Javadoc)
 	 *
 	 * @see
-	 * com.yueny.blog.service.admin.tags.ICategoriesTagRelManageService#update(
+	 * com.yueny.blog.service.console.tags.ICategoriesTagRelManageService#update(
 	 * com. yueny.blog.console.request.TagsForCategoriesModifyRequest)
 	 */
 	@Override

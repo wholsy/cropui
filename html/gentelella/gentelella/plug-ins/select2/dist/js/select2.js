@@ -85,7 +85,7 @@ var requirejs, require, define;
 
                 //Lop off the last part of baseParts, so that . matches the
                 //"directory" and not name of the baseName's module. For instance,
-                //baseName of "one/two/three", maps to "one/two/three.js", but we
+                //baseName of "one/two/three", mapper to "one/two/three.js", but we
                 //want the directory, "one/two" for this normalization.
                 name = baseParts.slice(0, baseParts.length - 1).concat(name);
 

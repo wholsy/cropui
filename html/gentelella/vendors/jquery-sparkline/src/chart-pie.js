@@ -10,7 +10,7 @@
             pie._super.init.call(this, el, values, options, width, height);
 
             this.shapes = {}; // map shape ids to value offsets
-            this.valueShapes = {}; // maps value offsets to shape ids
+            this.valueShapes = {}; // mapper value offsets to shape ids
             this.values = values = $.map(values, Number);
 
             if (options.get('width') === 'auto') {

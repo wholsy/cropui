@@ -29,6 +29,8 @@
             <list>
             	<!-- groupId  dataId -->
                 <value>common, redis</value>
+
+                <value>blog, app</value>
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true"/>

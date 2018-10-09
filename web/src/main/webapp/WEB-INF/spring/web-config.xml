@@ -201,7 +201,7 @@
 			</bean>
 		</mvc:interceptor>
 		
-		<!-- 8、admin IAccessOpts  -->
+		<!-- 8、console IAccessOpts  -->
 		<mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
             <bean class="com.yueny.rapid.util.web.core.interceptor.AccessHandlerInterceptor"
