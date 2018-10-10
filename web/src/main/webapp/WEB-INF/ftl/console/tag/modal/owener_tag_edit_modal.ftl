@@ -6,7 +6,7 @@
 	</div>
 	
 	<form id="owenerTagEditForm" class="form-horizontal form-label-left input_mask" role="form" enctype="multipart/form-data"
-		 action="${ctx}/admin/owener_tag/update/" 
+		 action="${ctx}/admin/owener_tag/update/"
 		 data-toggle="validator" data-parsley-validate>
 		<input type="hidden" name="owenerTagId" value="${owenerTag.owenerTagId}"/>
 		<input type="hidden" name="owenerTagCode" value="${owenerTag.owenerTagCode}"/>
@@ -68,10 +68,10 @@
 	<!-- Bootstrap -->
 	<script src="http://static.codealy.com/plugins/bootstrap/3.3.7/dist/js/bootstrap.min.js"></script>
 	
-	<script src="${ctx}/adm/javascript/pages/tag/categories_tag-form.js"></script>
+	<script src="${ctx}/console/javascript/pages/tag/categories_tag-form.js"></script>
 	
 	<#-- Switchery -->
-	<script src="${ctx}/assets/javascript/public.js"></script>
+	<script src="${ctx}/web/javascript/public.js"></script>
     <script src="http://static.codealy.com/plugins/switchery/dist/switchery.min.js"></script>
     <script>
     		$(document).ready(function() {

@@ -11,11 +11,11 @@
     		</div>
     		<!-- /page content 页面内容结束  -->
 	 
-    		<#include "admin/common/include/footer_for_common.ftl">
+    		<#include "console/common/include/footer_for_common.ftl">
     
     		</div>
 	</div>
 	
-	<#include "admin/common/include/endjs.ftl">
+	<#include "console/common/include/endjs.ftl">
     
 </body>

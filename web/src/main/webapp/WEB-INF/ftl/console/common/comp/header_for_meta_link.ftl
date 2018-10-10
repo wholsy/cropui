@@ -36,14 +36,14 @@
     <#-- Parsley validator -->
     <link href="http://static.codealy.com/plugins/parsleyjs/src/parsley.css" rel="stylesheet">
     
-    <!-- Custom Theme Style -->
-    <link href="${ctx}/adm/style/custom.css" rel="stylesheet">
-    <link href="${ctx}/adm/style/style.css" rel="stylesheet" type="text/css"/>
-    
     <!-- Animate.css -->
     <link href="http://static.codealy.com/plugins/animate.css/animate.min.css" rel="stylesheet">
     <link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
-	
+
+    <!-- Custom Theme Style -->
+    <link href="${ctx}/console/style/custom.css" rel="stylesheet">
+    <link href="${ctx}/console/style/style.css" rel="stylesheet" type="text/css"/>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if IE]>

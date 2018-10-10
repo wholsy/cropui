@@ -4,7 +4,7 @@ public class BlogConstant {
 	/**
 	 * 管理后台地址前缀
 	 */
-	public static final String ADMIN_URL_PREFIX = "/console";
+	public static final String ADMIN_URL_PREFIX = "/admin";
 	/**
 	 * 管理后台页面的路径前缀
 	 */

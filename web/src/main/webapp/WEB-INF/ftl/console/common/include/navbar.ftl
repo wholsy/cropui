@@ -19,7 +19,7 @@
 	            <img src="<#if (distUser.userBaseInfoExp)?? && (distUser.userBaseInfoExp.headTinyImageIoId)??>
 		        			${distUser.userBaseInfoExp.headTinyImageIoUrl}
 			        	<#else>
-			            	${ctx}/adm/images/img.jpg
+			            	${ctx}/admin/images/img.jpg
 			            </#if>
 			        	" 
 			        alt="${distUser.displayName}'s Photo" 

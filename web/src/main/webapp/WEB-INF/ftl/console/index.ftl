@@ -1,4 +1,4 @@
-<#include "admin/common/header_start.ftl">
+<#include "console/common/header_start.ftl">
     <!-- 可选 bootstrap-daterangepicker -->
     <link href="http://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- bootstrap-progressbar -->
@@ -7,9 +7,10 @@
     <link href="http://static.codealy.com/plugins/icheck/skins/flat/green.css" rel="stylesheet">
     <!-- JQVMap -->
     <link href="http://static.codealy.com/plugins/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-<#include "admin/common/header_end.ftl">
+<#include "console/common/header_end.ftl">
 
-<#include "admin/common/body_start.ftl">
+<#include "console/common/body_start.ftl">
+
       <!-- top tiles -->
       <div class="row tile_count">
         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -562,6 +563,6 @@
     <script src="http://static.codealy.com/plugins/moment/min/moment.min.js"></script>
     <script src="http://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-<#include "admin/common/body_end.ftl">
+<#include "console/common/body_end.ftl">
 
 </html>

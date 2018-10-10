@@ -122,7 +122,7 @@ public class ImportFileAnalyzeController extends BaseController {
 			userUploadRootRelativePath = FileUploadHelper.getUploadRootRelativePath(uid, rootCtxPath, uploadType);
 		} catch (final DataVerifyAnomalyException e) {
 			logger.error("用户上传根目录失败.", e);
-			resp.setError(1);
+			resp.setError(0);
 			resp.setMessage(e.getErrorMsg());
 			return resp;
 		}
@@ -131,7 +131,7 @@ public class ImportFileAnalyzeController extends BaseController {
 
 		if (uploadType != null) {
 			if (!FileUploadHelper.supportUploadType(uploadType)) {
-				resp.setError(1);
+				resp.setError(0);
 				resp.setMessage("Invalid Directory name.");
 				return resp;
 			}
@@ -160,14 +160,14 @@ public class ImportFileAnalyzeController extends BaseController {
 
 		// 不允许使用..移动到上一级目录
 		if (pathNode.indexOf("..") >= 0) {
-			resp.setError(1);
+			resp.setError(0);
 			resp.setMessage("Access is not allowed.");
 			return resp;
 		}
 
 		// 最后一个字符不是/
 		if (!"".equals(pathNode) && !pathNode.endsWith("/")) {
-			resp.setError(1);
+			resp.setError(0);
 			resp.setMessage("Parameter is not valid.");
 			return resp;
 		}
@@ -175,7 +175,7 @@ public class ImportFileAnalyzeController extends BaseController {
 		// 目录不存在或不是目录
 		final File currentPathFile = new File(currentPath);
 		if (!currentPathFile.isDirectory()) {
-			resp.setError(1);
+			resp.setError(0);
 			resp.setMessage("Directory does not exist.");
 			return resp;
 		}

@@ -28,12 +28,14 @@ public class ArticleBlogBo extends BaseBo {
 	private String articleAlias;
 	/** 文章对外ID */
 	private String articleBlogId;
+
 	/** 文章HTML内容 */
 	private String articleContext;
-	/** 文章MARKDOWN内容 */
+	/** 文章 MARKDOWN 内容 */
 	private String articleContextForMd;
-	/** 文章摘要 */
+	/** 文章摘要， 如果为空，则取 articleContextForMd MARKDOWN 内容 */
 	private String articleDigest;
+
 	/** 文章主键 */
 	private Long articleId;
 	/** 更多文章（添加关联的文章url），多个文章地址之间用“,”分隔 */

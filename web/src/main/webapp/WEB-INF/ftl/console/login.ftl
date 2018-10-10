@@ -1,5 +1,5 @@
-<#include "admin/common/header_start.ftl">
-<#include "admin/common/header_end.ftl">
+<#include "console/common/header_start.ftl">
+<#include "console/common/header_end.ftl">
 
 <body class="login">
 	<div>
@@ -70,14 +70,14 @@
             </form>
           </section>
           
-          <#include "admin/common/include/footer_for_login.ftl">
+          <#include "console/common/include/footer_for_login.ftl">
         </div>
       </div>
     </div>
     
-	<#include "admin/common/include/endjs.ftl">
+	<#include "console/common/include/endjs.ftl">
 	
-	<script src="${ctx}/adm/javascript/pages/login.js"></script>
+	<script src="${ctx}/console/javascript/pages/login.js"></script>
 	
 	<script type="text/javascript">
         function getValidateCode(obj) {

@@ -1,6 +1,6 @@
-<#include "admin/common/header_start.ftl">
+<#include "console/common/header_start.ftl">
 
-	<link rel="stylesheet" href="${ctx}/adm/style/pages/tag/tag.css" />
+	<link rel="stylesheet" href="${ctx}/console/style/pages/tag/tag.css" />
 	
 	<link href="http://static.codealy.com/plugins/nprogress/nprogress.css" rel="stylesheet">
 	<link href="http://static.codealy.com/plugins/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
@@ -9,9 +9,9 @@
 	<link href="http://static.codealy.com/plugins/starrr/dist/starrr.css" rel="stylesheet">
 	<link href="http://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	
-<#include "admin/common/header_end.ftl">
+<#include "console/common/header_end.ftl">
 
-<#include "admin/common/body_start.ftl">
+<#include "console/common/body_start.ftl">
 
 	<#-- title start -->
 	<div class="page-title">
@@ -44,7 +44,7 @@
 			<div class="x_panel tile">
 	            <div class="x_title">
 	            		全站文章分类
-	            		<#include "admin/common/comp/panel_for_nav.ftl">
+	            		<#include "console/common/comp/panel_for_nav.ftl">
 	            </div>
 	            
 	            <#-- x_content start -->
@@ -344,9 +344,9 @@
 	</div>
 	<#-- row end -->
 	
-	<#include "admin/common/body_end.ftl">
+	<#include "console/common/body_end.ftl">
 	
-	<script src="${ctx}/adm/javascript/pages/tag/categories_tag.js"></script>
+	<script src="${ctx}/console/javascript/pages/tag/categories_tag.js"></script>
 	
 	<script src="http://static.codealy.com/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 	<script src="http://static.codealy.com/plugins/icheck/icheck.min.js"></script>

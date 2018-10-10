@@ -1,10 +1,10 @@
-<#include "../common/header.ftl">
+<#include "console/common/header.ftl">
 
 <body class="no-skin">
-<#include "../common/navbar.ftl">
+<#include "console/common/include/navbar.ftl">
 
 <div class="main-container ace-save-state" id="main-container">
-<#include "../common/sidebar.ftl">
+<#include "console/common/include/sidebar-menu.ftl">
 
     <div class="main-content">
         <div class="main-content-inner">
@@ -12,7 +12,7 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="/adm/index">Home</a>
+                        <a href="/admin/">Home</a>
                     </li>
                     <li>
                         <a href="#">标签管理</a>
@@ -90,10 +90,10 @@
             </div>
         </div>
     </div>
-<#include "../common/footer.ftl">
+<#include "console/common/include/footer_for_common.ftl">
 </div>
 
-<#include  "../common/endjs.ftl">
+<#include  "console/common/include/endjs.ftl">
 
 <script>
 
@@ -143,7 +143,7 @@
                         type: 2,
                         area: ['900px', '600px'],
                         offset: ['5%', ''],
-                        content: ['/adm/upload/selectimg', 'no']
+                        content: ['/admin/upload/selectimg', 'no']
                     });
 
                 }
@@ -173,10 +173,10 @@
             data._intro = _intro;
             data._img = _img;
 
-            $.post("/adm/tag_mgr/doaddup/?t=" + new Date().getTime(), data, function (rs) {
+            $.post("/admin/tag_mgr/doaddup/?t=" + new Date().getTime(), data, function (rs) {
                 console.log("返回结果" + rs);
                 if (rs["status"] == "ok") {
-                    window.location.href = "/adm/listtag";
+                    window.location.href = "/admin/listtag";
                 } else {
                     layer.msg(rs["status"], {icon: 0});
                 }

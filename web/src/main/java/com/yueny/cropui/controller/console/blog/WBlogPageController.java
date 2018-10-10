@@ -88,34 +88,6 @@ public class WBlogPageController extends BaseController {
 	}
 
 	/**
-	 * 博客MD发布页面<br>
-	 * 此页面存在两种情况：<br>
-	 * 写博客，此时页面只存在初始化加载数据<br>
-	 * 编辑博客，此时页面初始化加载，并加载博文数据
-	 */
-	@RequestMapping(value = "/wblog_md.html", method = RequestMethod.GET)
-	public String wblogMdPage(@RequestParam(value = "articleBlogId", defaultValue = "") final String articleBlogId,
-			final HttpServletResponse response) {
-
-		/*
-		 * 存在文章则获取文章数据
-		 *
-		 * mode模式: 0新增, 1修改
-		 */
-		// 是否是草稿
-		setModelAttribute("isdraft", false);
-		setModelAttribute("html", false);
-
-		final boolean rs = assemblyMdeditorContext(articleBlogId);
-		if (!rs) {
-			// 出现异常，回首页
-			return redirectAction("/");
-		}
-
-		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "blog/wblog_md";
-	}
-
-	/**
 	 * 博客HTML发布页面<br>
 	 * 此页面存在两种情况：<br>
 	 * 写博客，此时页面只存在初始化加载数据<br>
@@ -139,7 +111,7 @@ public class WBlogPageController extends BaseController {
 			return redirectAction("/");
 		}
 
-		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "blog/wblog";
+		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "blog/wblog_md";
 	}
 
 }

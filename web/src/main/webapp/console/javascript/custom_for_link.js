@@ -3,10 +3,10 @@
 /* 退出登陆按钮 */
 $(function () {
     $("#a_logout").bind("click", function () {
-        $.post(ctx+"/console/login/dologout", function (ret) {
+        $.post(ctx+"/admin/login/dologout", function (ret) {
         	ret = tools.toJSON(ret);
         	if (ret.data) {
-        		window.location.href = ctx+"/console/login/login.html";
+        		window.location.href = ctx+"/admin/login/login.html";
         	}else {
         		 $.dialog.tips("当前退出失败！");
         	}

@@ -13,7 +13,7 @@
 	</div>
 	
 	<form id="categoriesTagEditForm" class="form-horizontal form-label-left input_mask" role="form" enctype="multipart/form-data"
-		 action="${ctx}/admin/categories_tag/update/" 
+		 action="${ctx}/admin/categories_tag/update/"
 		 data-toggle="validator" data-parsley-validate>
 		<input type="hidden" name="categoriesTagCode" value="${categoriesTag.categoriesTagCode}"/>
 		
@@ -126,10 +126,10 @@
 	<!-- Bootstrap -->
 	<script src="http://static.codealy.com/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 	
-	<script src="${ctx}/adm/javascript/pages/tag/categories_tag-form.js"></script>
+	<script src="${ctx}/console/javascript/pages/tag/categories_tag-form.js"></script>
 	
 	<!-- jQuery Tags Input -->
-	<script src="${ctx}/adm/javascript/custom_public.js"></script>
+	<script src="${ctx}/console/javascript/custom_public.js"></script>
     <script src="http://static.codealy.com/plugins/jquery.tagsinput/src/jquery.tagsinput.js"></script>
     
     <#-- tips -->

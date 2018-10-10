@@ -21,7 +21,7 @@
         	src="<#if (distUser.userBaseInfoExp)?? && (distUser.userBaseInfoExp.headTinyImageIoId)??>
 	        		${distUser.userBaseInfoExp.headTinyImageIoUrl}
 	        	<#else>
-	            	${ctx}/adm/images/img.jpg
+	            	${ctx}/admin/images/img.jpg
 	            </#if>
 	        	" 
 	        alt="${distUser.displayName}'s Photo" 
@@ -60,7 +60,7 @@
 					</a>
 					<ul class="nav child_menu animated zoomIn">
 						<li>
-							<a href="${ctx}/admin/list_blog.html" 
+							<a href="${ctx}/admin/list_blog.html"
 								data-tooltip-toggle="tooltip" 
 								data-placement="right">
 								<span class="sidebar-nav-item">博客列表</span>

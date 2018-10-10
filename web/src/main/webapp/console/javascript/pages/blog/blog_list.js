@@ -82,7 +82,7 @@ var historys = function()
     this.del = function(articleBlogId) {
         if (confirm("确定删除该文章吗?")) {
         		$.ajax({
-				url: ctx + "/console/del.json?articleBlogId=" + articleBlogId + "",
+				url: ctx + "/admin/del.json?articleBlogId=" + articleBlogId + "",
 				type: 'DELETE',
 				success: function(rs) {
 					if (rs["data"] == true) {
@@ -104,7 +104,7 @@ var historys = function()
         {
             /**/
             //组件创建完成之后请求数据的url
-            url: ctx + "/console/service/do_show_list.json",
+            url: ctx + "/admin/service/do_show_list.json",
             //向后台请求数据的ajax的类型。可选 post,get
             mtype : "POST",
 			//请求数据返回的类型。可选json,xml,txt, local
@@ -183,7 +183,7 @@ var historys = function()
 					var rowid = ids[i];
 					var ret = $("#jsDataGrid").jqGrid('getRowData', rowid);
 					
-					ee = "<a target='_blank' class='fa fa-pencil' href='" + ctx + "/console/wblog.html?articleBlogId=" + ret.articleBlogId + "'>编辑</a>";
+					ee = "<a target='_blank' class='fa fa-pencil' href='" + ctx + "/admin/wblog.html?articleBlogId=" + ret.articleBlogId + "'>编辑</a>";
 					de = "<a href='#' class='fa fa-trash' onclick='del(" + ret.articleBlogId +")'>删除</a>";
        				//re = '<a target="_blank" href="' + ctx + '/article/' + ret.articleBlogId + '.html">预览</a>';
             			

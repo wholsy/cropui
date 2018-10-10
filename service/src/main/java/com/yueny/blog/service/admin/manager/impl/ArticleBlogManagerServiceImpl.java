@@ -90,7 +90,6 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 		articleBlogBo.setUid(uid);
 		articleBlogBo.setArticleAlias(HtmlRegexpUtil.filterHtmlTag(condition.getArticleAlias()));
 		articleBlogBo.setArticleTitle(HtmlRegexpUtil.filterHtmlTag(condition.getArticleTitle()));
-		// TODO 后续协商为前端传递的均为MD
 		articleBlogBo.setArticleContext(condition.getArticleContext());
 		articleBlogBo.setArticleContextForMd(condition.getArticleContextForMd());
 		articleBlogBo.setArticleMore(condition.getArticleMore());
@@ -100,12 +99,15 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 		// 如果'摘要'为空,则取文章标题
 		if (StringUtils.isEmpty(condition.getArticleDigest())) {
 			// 过滤html
-			final String articleDigest = HtmlRegexpUtil.filterHtmlTag(articleBlogBo.getArticleTitle(), true);
+//			final String articleDigest = HtmlRegexpUtil.filterHtmlTag(articleBlogBo.getArticleContextForMd(), true);
+			final String articleDigest = articleBlogBo.getArticleContextForMd();
 			articleBlogBo.setArticleDigest(StringUtils.trim(articleDigest));
 		} else {
 			// 过滤html和空格
+//			articleBlogBo
+//					.setArticleDigest(StringUtils.trim(HtmlRegexpUtil.filterHtmlTag(condition.getArticleDigest())));
 			articleBlogBo
-					.setArticleDigest(StringUtils.trim(HtmlRegexpUtil.filterHtmlTag(condition.getArticleDigest())));
+					.setArticleDigest(StringUtils.trim(condition.getArticleDigest()));
 		}
 
 		// 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love'
@@ -202,12 +204,14 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 		// 如果'摘要'为空,则取文章标题
 		if (StringUtils.isEmpty(condition.getArticleDigest())) {
 			// 过滤html
-			final String articleDigest = HtmlRegexpUtil.filterHtmlTag(articleBlogBo.getArticleTitle(), true);
+//			final String articleDigest = HtmlRegexpUtil.filterHtmlTag(articleBlogBo.getArticleContextForMd(), true);
+			final String articleDigest = articleBlogBo.getArticleContextForMd();
 			articleBlogBo.setArticleDigest(StringUtils.trim(articleDigest));
 		} else {
 			// 过滤html和空格
-			articleBlogBo
-					.setArticleDigest(StringUtils.trim(HtmlRegexpUtil.filterHtmlTag(condition.getArticleDigest())));
+//			articleBlogBo
+//					.setArticleDigest(StringUtils.trim(HtmlRegexpUtil.filterHtmlTag(condition.getArticleDigest())));
+			articleBlogBo.setArticleDigest(StringUtils.trim(condition.getArticleDigest()));
 		}
 
 		/* 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love' */

@@ -15,12 +15,12 @@
 <!-- NProgress -->
 <script src="http://static.codealy.com/plugins/nprogress/nprogress.js"></script>
 <#-- 自定义短信验证码发送按钮 -->
-<script src="${ctx}/assets/js/captical.js"></script>
+<script src="${ctx}/web/js/captical.js"></script>
 
 <#-- tips -->
 <!-- lhg dialog js -->
 <script src="http://static.codealy.com/plugins/lhgdialog/4.2.0/lhgdialog.js?skin=bootstrap2"></script>
-<script src="${ctx}/assets/javascript/jquery.sobox.js"></script>
+<script src="${ctx}/web/javascript/jquery.sobox.js"></script>
 <#-- mask -->
 <script src="http://static.codealy.com/plugins/mask/documentMask/documentMask.js"></script>
 <script src="http://static.codealy.com/plugins/mask/blockui/jquery.blockUI.js"></script>
@@ -32,10 +32,10 @@
 <script src="http://static.codealy.com/plugins/layer/3.1.1/layer.js"></script>
 
 <!-- Custom Theme Scripts -->
-<script src="${ctx}/assets/javascript/public.js"></script>
-<script src="${ctx}/assets/javascript/tools.js"></script>
-<script src="${ctx}/adm/javascript/custom_for_link.js"></script>
-<script src="${ctx}/adm/javascript/custom_public.js"></script>
+<script src="${ctx}/web/javascript/public.js"></script>
+<script src="${ctx}/web/javascript/tools.js"></script>
+<script src="${ctx}/console/javascript/custom_for_link.js"></script>
+<script src="${ctx}/console/javascript/custom_public.js"></script>
 
-<script src="${ctx}/adm/js/custom.js"></script>
+<script src="${ctx}/console/js/custom.js"></script>
 		

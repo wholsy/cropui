@@ -1,28 +1,32 @@
-$(pageInit);
-
-
+// 默认初始化数据
 var jsonData = { articleBlogId: '0' };
 //正文编辑器
-var editor = null;
+var editor;
 var editormdDigest;
 
 function pageInit() {
-	editor = new_md_editor("editormd-context");
-	editormdDigest = new_md_editor("editormd-digest");
+	editor = new_md_editor("editormd-context", {
+        watch : true
+    });
+	editormdDigest = new_md_editor("editormd-digest", {
+        height: 300,
+        watch : false
+    });
 	
 	tags_init();
 
     if (jsonData.isDeleted) {
         topNote("该文章已被删除，无法编辑。");
-        editor.setSource('');
+        //editor.setSource('');
     } else {
         edit_init();
     }
     if (jsonData.isClientUser) {
     	$('#p_desc,#d_desc').show();
     }
-    
-    $("#btnPublish,#btnToPublishBole").click(
+
+    // 发表文章
+    $("#btnPublish").click(
         function () {
             if( $(this).attr("id") == "btnToPublishBole")
             {
@@ -30,9 +34,10 @@ function pageInit() {
             }else{
                 publish(false);
             }
-        }
-        );
+    });
+    // 立即保存
     $("#btnDraft").click(draft);
+    // 舍弃
     $("#btnCancel").click(cancelSave);
     
     window.onbeforeunload = function () {
@@ -47,70 +52,80 @@ function pageInit() {
         checkcodeRefesh();
     });
 
-    $(".radioBox.channel input").click(function () {
-        value=$(this).val()+"";
-        if (value == "1" || value == "16" || value == "3" || value == "2") {
-            $("#joinblogcontest").show();
-            //$("#joinblogcontest").attr("checked", true);
-            $("#joinblogcontesttext").show();
-        }
-        else {
-            $("#joinblogcontest").hide();
-            $("#joinblogcontest").attr("checked", false);
-            $("#joinblogcontesttext").hide();
-        }
-    });
+    //$(".radioBox.channel input").click(function () {
+    //    value=$(this).val()+"";
+    //    if (value == "1" || value == "16" || value == "3" || value == "2") {
+    //        $("#joinblogcontest").show();
+    //        //$("#joinblogcontest").attr("checked", true);
+    //        $("#joinblogcontesttext").show();
+    //    }
+    //    else {
+    //        $("#joinblogcontest").hide();
+    //        $("#joinblogcontest").attr("checked", false);
+    //        $("#joinblogcontesttext").hide();
+    //    }
+    //});
 }
 
 /**
- * neweditor new_md_editor
+ * neweditor new_md_editor  Markdown 编辑器
  */
-function new_md_editor(id) {
-	return editormd(id, {
+function new_md_editor(id, o) {
+    // 获取 test.md文件的数据
+    //$.get('test.md', function(md){
+    //}
+    var o = $.extend({
         width: "100%",
-        height: 300,
-        toolbarAutoFixed: true,
-        autoFocus: false,
-        //autoHeight: true,
-        watch: false, // 关闭实时预览
-        //searchReplace : true,
-        syncScrolling: "single",
-        //theme : "dark",
-        //previewTheme : "dark",
-        //editorTheme : "pastel-on-dark",
-//        markdown : md, //markdown数据
+        height: 740,
+        //watch : false,    // 关闭实时预览。默认开启
+        placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览',  //默认显示的文字
+        // TODO
+        path : '/console/plugins/editor.md/lib/',
+        theme : "dark",
+        previewTheme : "dark",
+        editorTheme : "pastel-on-dark",
+        //markdown : md, //markdown数据
+        codeFold : true,
 //        htmlDecode : "style,script,iframe|on*",            // 开启 HTML 标签解析，为了安全性，默认不开启
 //        toolbar  : false,             //关闭工具栏
 //        previewCodeHighlight : false, // 关闭预览 HTML 的代码块高亮，默认开启
-//        emoji : true,
-//        taskList : true,
-//        tocm            : true,         // Using [TOCM]
-//        tex : true,                   // 开启科学公式TeX语言支持，默认关闭
-//        flowChart : true,             // 开启流程图支持，默认关闭
-//        sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
+        emoji : true,
+        taskList : true,
+        tocm            : true,         // Using [TOCM]
+        tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+        flowChart : true,             // 开启流程图支持，默认关闭
+        sequenceDiagram : true,       // 开启时序/序列图支持，默认关闭,
 //        dialogLockScreen : false,   // 设置弹出层对话框不锁屏，全局通用，默认为true
 //        dialogShowMask : false,     // 设置弹出层对话框显示透明遮罩层，全局通用，默认为true
 //        dialogDraggable : false,    // 设置弹出层对话框不可拖动，全局通用，默认为true
 //        dialogMaskOpacity : 0.4,    // 设置透明遮罩层的透明度，全局通用，默认值为0.1
 //        dialogMaskBgColor : "#000", // 设置透明遮罩层的背景颜色，全局通用，默认为#fff
-        codeFold : true,
+        //autoHeight: true,
+        //syncScrolling: "single",
+        //syncScrolling : false,
         saveHTMLToTextarea: true,  // 保存 HTML 到 Textarea
-        path: ctx + "/adm/assets/js/editor.md/lib/",
+        searchReplace : true,
+
+        toolbarAutoFixed: true,
+        autoFocus: false,
+
         imageUpload: true,
         imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-        imageUploadURL: ctx + "/upload_json",
+        imageUploadURL: ctx + "/upload_md",
         htmlDecode: true,
-//        onload : function() {
-//            console.log('onload', this);
-//            //this.fullscreen();
-//            //this.unwatch();
-//            //this.watch().fullscreen();
-//
-//            //this.setMarkdown("#PHP");
-//            //this.width("100%");
-//            //this.height(480);
-//            //this.resize("100%", 640);
-//        },
+        onload : function() {
+            console.log('onload', this);
+            //alert("onload");
+
+            //this.fullscreen();
+            //this.unwatch();
+            //this.watch().fullscreen();
+
+            //this.setMarkdown("#PHP");
+            this.width("100%");
+            this.height(480);
+            //this.resize("100%", 640);
+        },
         toolbarIcons: function () {
             return [
                 "undo", "redo", "|",
@@ -121,10 +136,181 @@ function new_md_editor(id) {
                 "link", "image", "code-block", "table", "datetime", "html-entities",
                 "help", "info"
             ];
+            // return editormd.toolbarModes['simple']; // full, simple, mini
         }
+    }, o || {});
+
+    return editormd(id, o);
+}
+
+/*==tag start==*/
+function tags_init() {
+//    $("#owenerTag").autocomplete(tags);
+    $("#owenerTag").blur(resetChksShowByOwenerTag);
+
+    resetChksByTagbox();
+}
+/*根据已经输入的个人分类tags重置tagbox div选择框状态*/
+function resetChksShowByOwenerTag() {
+    var arr = $("#owenerTag").val().toLowerCase().split(/[,，]+/g);
+    $("#tagbox input").each(function () {
+        var has = false;
+        var val = $(this).next().text().toLowerCase();
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == val) {has = true; break; }
+        }
+        this.checked = has;
+    })
+
+    //重置ids
+}
+/* 根据tagbox选择框状态重置个人分类输入框 */
+function resetChksByTagbox() {
+    //清空重置
+    $("#owenerTag").val('');
+
+    $("#tagbox input").each(function () {
+        chkTag(this);
     });
 }
 
+/**
+ * 表单验证
+ */
+function checkForm(auto) {
+    if (auto) {
+        auto = true;
+    } else {
+        auto = false;
+    }
+
+    if ($("#selType").val()=='0') {
+        showErr("请选择文章类型。");
+        return false;
+    }
+    if (!tools.hasVal("articleTitle")) {
+        if (!auto) {
+            showErr("请输入文章标题。");
+        }
+        return false;
+    }
+
+    var articleContextForMd = editor.getMarkdown();
+    if(articleContextForMd.replace(/(^s*)|(s*$)/g, "").length == 0){
+        if (!auto) {
+            showErr("请输入文章内容。");
+        }
+        return false;
+    }
+    return true;
+}
+
+/* 获取表单数据 */
+function getPostData() {
+    var selTypeCode = $("#selType").val();
+    var articleBlogId = $("input[name=articleBlogId]").val();
+    var articleTitle = tools.val("articleTitle");
+
+    var articleContext_html = editor.getHTML();
+    var articleContextForMd = editor.getMarkdown();
+
+    //摘要editor
+    var articleDigest_html = editormdDigest.getHTML();
+    //个人分类
+    var owenerTag = $("#owenerTag").data("ids");
+    //文章标签 xxxx
+    var articleTag = encodeURIComponent(function () {
+        var s = [];
+        $('#d_tag2 span').each(function () {
+            s.push(this.innerHTML);
+        });
+        return s.join(',');
+    }());
+
+    //文章别名
+    var articleAlias = tools.val2("articleAliasName");
+    //文章分类（到分类首页）
+    var categoryTagCode = $("input[name=categoryTagCode]:checked").val() || 0;
+    //是否允许评论
+    var comm = $("input[name=allowcomment]:checked").val();
+
+    var isdraft=1;
+    if (articleBlogId != 0) {
+        isdraft = $("#isdraft").val();
+    }
+
+    var data = "selTypeCode=" + selTypeCode + "&articleBlogId=" + articleBlogId + "&articleTitle=" + articleTitle
+        + "&articleContext=" + articleContext_html + "&articleContextForMd=" + articleContextForMd;
+    data += "&articleDigest=" + articleDigest_html + "&isdraft=" + isdraft;
+    data += "&articleTag=" + articleTag + "&owenerTag=" + owenerTag;
+    data += "&articleAlias=" + articleAlias + "&categoryTagCode=" + categoryTagCode + "&comm=" + comm + "&level=" + 0;
+    //data += "&checkcode=" + $("#txtCheckCode").val();
+    //data += "&userinfo1=" + $("#userinfo2").val();
+
+    return data;
+}
+
+/** 数据保存 */
+// 立即保存
+function draft() {
+    save(0,false);
+    checkcodeRefesh();
+}
+
+$(document).ready(function() {
+    pageInit();
+
+    $("#btn_digest_view").click(function () {
+        // 0 标识当前预览为关闭状态
+        var flag = $(this).val();
+        if(flag == 0){ // 预览打开动作
+            $(this).val(1);
+            $(this).text("关闭预览");
+            editormdDigest.watch();
+        }else{ // 预览关闭动作
+            $(this).val(0);
+            $(this).text("预览");
+            editormdDigest.unwatch();
+        }
+    });
+    $("#btn_context_view").click(function () {
+        // 0 标识当前预览为关闭状态
+        var flag = $(this).val();
+        if(flag == 0){ // 预览打开动作
+            $(this).val(1);
+            $(this).text("关闭预览");
+            editor.watch();
+        }else{ // 预览关闭动作
+            $(this).val(0);
+            $(this).text("预览");
+            editor.unwatch();
+        }
+    });
+
+    $("#btn_digest_hide").click(function () {
+        // 0 标识当前预览为隐藏状态
+        var flag = $(this).val();
+        if(flag == 0){ // 显示动作
+            $(this).val(1);
+            $(this).text("隐藏");
+            editormdDigest.show();
+        }else{
+            $(this).val(0);
+            $(this).text("显示");
+            editormdDigest.hide();
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+// del
 /* 验证码 */
 function checkcodeRefesh()
 {
@@ -132,8 +318,8 @@ function checkcodeRefesh()
         var imagecode = $("#imagecode");
         if (imagecode.length > 0) {
             $("#imagecode").attr("src", "/image/index?r=" + Math.random());
-        }       
-    },500);    
+        }
+    },500);
 }
 
 
@@ -150,14 +336,10 @@ function topNote(text) {
 
 var showConfirm = true;
 
-
 function publish() {
     save(1);
 }
-function draft() {
-    save(0,false);
-    checkcodeRefesh();
-}
+
 var saveInter = null;
 var saving = false; /*标识文章正在保存*/
 /**
@@ -211,7 +393,7 @@ function save(isPub, auto) {
 	}
 	var _form = _form_parents[0];
 	
-    var link = ctx + '/console/article/postedit/'; // _form.action;
+    var link = ctx + '/admin/article/postedit/'; // _form.action;
     link += "?edit=1";
     if (isPub) {
         link += "&isPub=1";
@@ -259,7 +441,7 @@ function save(isPub, auto) {
                         }
                         
                         $.dialog.tips("博文发布成功！");
-                        window.location.href = ctx + "/console/list_blog.html";
+                        window.location.href = ctx + "/admin/list_blog.html";
                     }
                 }
             }
@@ -311,50 +493,6 @@ function autoSave() {
     });
 }
 
-/* 获取表单数据 */
-function getPostData() {
-    var selTypeCode = $("#selType").val();
-    var articleBlogId = $("input[name=articleBlogId]").val();
-    var articleTitle = tools.val("articleTitle");
-    
-    var articleContext_html = editor.html();
-    var articleContextForMd = editor.getMarkdown();
-    
-	//摘要editor
-    var articleDigest_html = editormdDigest.html();
-    //个人分类
-    var owenerTag = $("#owenerTag").data("ids");
-    //文章标签 xxxx
-    var articleTag = encodeURIComponent(function () {
-    	var s = []; 
-    	$('#d_tag2 span').each(function () {
-    		s.push(this.innerHTML); 
-    	});
-    	return s.join(',');
-    }());
-    //文章别名
-    var articleAlias = tools.val2("articleAliasName");
-    //文章分类（到分类首页）
-    var categoryTagCode = $("input[name=categoryTagCode]:checked").val() || 0;
-    //是否允许评论
-    var comm = $("input[name=allowcomment]:checked").val();
-    
-    var isdraft=1;
-    if (articleBlogId != 0) {
-	  isdraft = $("#isdraft").val();
-    }
-    
-    var data = "selTypeCode=" + selTypeCode + "&articleBlogId=" + articleBlogId + "&articleTitle=" + articleTitle 
-    + "&articleContext=" + articleContext_html + "&articleContextForMd=" + articleContextForMd;;
-    data += "&articleDigest=" + articleDigest_html + "&isdraft=" + isdraft;
-    data += "&articleTag=" + articleTag + "&owenerTag=" + owenerTag;
-    data += "&articleAlias=" + articleAlias + "&categoryTagCode=" + categoryTagCode + "&comm=" + comm + "&level=" + 0;
-    //data += "&checkcode=" + $("#txtCheckCode").val();
-    //data += "&userinfo1=" + $("#userinfo2").val();   
-
-    return data;
-}
-
 /**
  * 取消保存， 取消后回后台主页
  */
@@ -363,48 +501,11 @@ function cancelSave() {
     var  articleBlogId = tools.val("articleBlogId");
     if (articleBlogId) {
         $.get("?del=1&articleBlogId=" + articleBlogId, function (ret) {
-            location = ctx+"/console/";
+            location = ctx+"/admin/";
         });
     } else {
-        location = ctx+"/console/";
+        location = ctx+"/admin/";
     }
-}
-
-/**
- * 表单验证
- */
-function checkForm(auto) {
-	if (auto) {
-        auto = true;
-    } else {
-        auto = false;
-    }
-	
-    if ($("#selType").val()=='0') {
-        showErr("请选择文章类型。");
-        return false;
-    }
-    if (!tools.hasVal("articleTitle")) {
-    	if (!auto) {
-    		showErr("请输入文章标题。");
-        }
-        return false;
-    }
-  
-    var content_html = editor.html(); //editor.text();
-//    if (!$.trim(con)) {
-    if(editor.isEmpty()){
-    	if (!auto) {
-    		showErr("请输入文章内容。");
-        }
-        return false;
-//    }else if(content_html.indexOf("<h2") < 0){
-//    	if (!auto) {
-//            alert("至少要有1个h2标签");
-//        }
-//        return false;
-    }
-    return true;
 }
 
 /*提示信息*/
@@ -448,14 +549,6 @@ function edit_init() {
     }
 }
 
-/*==tag start==*/
-function tags_init() {
-//    $("#owenerTag").autocomplete(tags);
-    $("#owenerTag").blur(resetChksShowByOwenerTag);
-    
-    resetChksByTagbox();
-}
-
 
 function chkTag(e) {
     var val = "";
@@ -477,32 +570,6 @@ function chkTag(e) {
     
     $("#owenerTag").val(val.trim(','));
     $("#owenerTag").data("ids", ids);
-}
-
-/*根据已经输入的个人分类tags重置tagbox div选择框状态*/
-function resetChksShowByOwenerTag() {
-    var arr = $("#owenerTag").val().toLowerCase().split(/[,，]+/g);
-    $("#tagbox input").each(function () {
-        var has = false;
-        var val = $(this).next().text().toLowerCase();
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i] == val) {has = true; break; }
-        }
-        this.checked = has;
-    })
-    
-    //重置ids
-    
-}
-
-/* 根据tagbox选择框状态重置个人分类输入框 */
-function resetChksByTagbox() {
-	//清空重置
-	$("#owenerTag").val('');
-	
-    $("#tagbox input").each(function () {
-        chkTag(this);
-    });
 }
 
 var valArray = ['', '', ''];

@@ -1,13 +1,12 @@
-<#include "admin/common/header_start.ftl">
+<#include "console/common/header_start.ftl">
 	<#-- jqGrid组件基础样式包-必要 -->
 	<link rel="stylesheet" href="http://static.codealy.com/plugins/jqgrid/4.6.0/css/ui.jqgrid.css" />
 	<#-- jqGrid主题包-非必要 --> 
 	<#-- 在jqgrid/css/css这个目录下还有其他的主题包，可以尝试更换看效果 -->
 	<link rel="stylesheet" href="http://static.codealy.com/plugins/jqgrid/4.6.0/css/css/ui-lightness/jquery-ui-1.8.16.custom.css" />
 	
-<#include "admin/common/header_end.ftl">
-ß
-<#include "admin/common/body_start.ftl">
+<#include "console/common/header_end.ftl">
+<#include "console/common/body_start.ftl">
 
 		<!-- top tiles -->
 		<div class="row tile_count">
@@ -41,7 +40,7 @@
 		        <div class="x_panel">
 					<div class="x_title">
 			            <h2>博文信息列表 <small>已发布博文</small></h2>
-			            <#include "admin/common/comp/panel_for_nav.ftl">
+			            <#include "${ctx}/console/common/comp/panel_for_nav.ftl">
 						<div class="clearfix"></div>
 					</div>
 		
@@ -59,7 +58,7 @@
 		</div>
 		<#-- row end -->
 		
-	<script src="${ctx}/adm/javascript/pages/blog/blog_list.js"></script>
+	<script src="${ctx}/console/javascript/pages/blog/blog_list.js"></script>
 	
 	<#-- jqGrid插件包-必要 -->
 	<script type="text/javascript" src="http://static.codealy.com/plugins/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
@@ -68,6 +67,6 @@
 	<script type="text/javascript" src="http://static.codealy.com/plugins/jqgrid/4.6.0/js/i18n/grid.locale-cn.js"></script>
 	
     
-<#include "admin/common/body_end.ftl">
+<#include "console/common/body_end.ftl">
 
 </html>

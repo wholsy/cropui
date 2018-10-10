@@ -4,7 +4,7 @@
   	描述：include end js
 -->
     
-<#include "admin/common/comp/endjs_for_ctx.ftl">
+<#include "console/common/comp/endjs_for_ctx.ftl">
 
 <#-- basic scripts
 <script type="text/javascript">
