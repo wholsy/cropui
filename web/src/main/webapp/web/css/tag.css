@@ -34,6 +34,11 @@
   background-position: 0 -25px;
   padding-left: 24px;
 }
+/*  */
+.article_meta .link_no_view {
+	background-position: 0 -25px;
+	padding-left: 24px;
+}
 /* 评论 */
 .article_meta .link_comments {
   background-image: url("../images/skin-type-icon.png");

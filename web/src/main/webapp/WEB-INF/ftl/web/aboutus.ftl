@@ -1,4 +1,4 @@
-<#import "../../macro.ftl" as m>
+<#import "macro.ftl" as m>
 
 <@m.page_header title='${title}'/>
 

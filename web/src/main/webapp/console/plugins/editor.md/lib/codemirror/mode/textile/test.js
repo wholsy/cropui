@@ -332,8 +332,8 @@
       '[atom obj = {foo: :bar}]',
       '[atom puts obj]',
       '',
-      '[atom obj[[:love]] = "*love*"]',
-      '[atom puts obj.love.upcase]',
+      '[atom obj[[:things]] = "*things*"]',
+      '[atom puts obj.things.upcase]',
       '',
       'p. Normal text.');
 

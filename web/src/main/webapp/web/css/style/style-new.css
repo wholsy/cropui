@@ -46,7 +46,7 @@ body {
 /*
  BASSCSS
  Next-level CSS toolkit - http://jxnblk.github.io/basscss
- Made with love by Jxnblk - ©2014 Brent Jackson MIT License http://opensource.org/licenses/MIT
+ Made with things by Jxnblk - ©2014 Brent Jackson MIT License http://opensource.org/licenses/MIT
 
 */
 body, button, input, select, textarea, pre { margin: 0; }
@@ -57,7 +57,9 @@ button, input, select, textarea { font-family: inherit; font-size: 100%; }
 
 article, aside, details, figcaption, figure, footer, header, main, nav, section, summary { display: block; }
 
-body { font-family: 'Helvetica Neue', Helvetica, sans-serif; line-height: 1.5rem; font-weight: 400; }
+body {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif; line-height: 0.5rem; font-weight: 400;
+}
 
 h1, .h1, .f1 { font-size: 2rem; line-height: 2.5rem; }
 
@@ -102,9 +104,15 @@ pre { padding: 1.125em; font-size: 1.125rem; line-height: 1.11; overflow-x: scro
 
 blockquote { padding: 1.33em; font-style: italic; border-left: 5px solid #7a7a7a; }
 
-blockquote footer { font-size: .85rem; font-style: normal; background-color: #fff; color: #7a7a7a; border-color: transparent; }
+blockquote footer { font-size: .85rem; font-style: normal;
+  background-color: #fff; color: #7a7a7a;
+  border-color: transparent; }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif; font-weight: 900; line-height: 1.2; margin: 1em 0 0.5em; }
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 { font-family: "Lato", 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 900;
+  line-height: 1.2;
+  /*margin: 1em 0 0.5em;*/
+}
 
 footer { border-top: thin solid #f3f3f3; }
 
@@ -462,10 +470,10 @@ strong, .bold { font-weight: bold; }
 
 @media screen and (min-width: 48em) { .site-header .site-title { float: left; }
   .meta, .post-meta { margin: 0; padding: 0; font-size: 1.25rem; }
-  .h1, h1 { font-size: 3.250rem; }
-  .h2, h2 { font-size: 2.298rem; }
-  .h3, h3 { font-size: 1.625rem; }
-  .h4, h4 { font-size: 1.150rem; }
+  /*.h1, h1 { font-size: 3.250rem; }*/
+  /*.h2, h2 { font-size: 2.298rem; }*/
+  /*.h3, h3 { font-size: 1.625rem; }*/
+  /*.h4, h4 { font-size: 1.150rem; }*/
   .p, p, li { font-size: 1.25rem; line-height: 1.8; }
   .small { font-size: 1rem; }
   table { font-size: 1.25rem; }

@@ -11,8 +11,6 @@
 		<!-- 引入头样式 -->
 		<#include "include/comp-body-nav.ftl">
 
-		<#-- 增加目录页面 -->
-
 		<#-- 2、 页面内容 post Start -->
         <div class="post p2 p-responsive wrap" role="main">
             <div class="measure">
@@ -22,13 +20,15 @@
 
 						<#list articleBlogs as articleBlog>
 							<div class="post">
+                                <p class="post-meta">${articleBlog.createTime?date}</p>
 								<a href="${ctx}/article/${articleBlog.articleBlogId}.html" class="post-link">
-                                    <p class="post-meta">${articleBlog.createTime?date}</p>
 									<h3 class="h2 post-title">${articleBlog.articleTitle}</h3>
-									<p class="post-summary">
-									${articleBlog.articleDigest}
-									</p>
 								</a>
+                                <a href="${ctx}/article/${articleBlog.articleBlogId}.html" class="post-link">
+                                    <p class="post-summary">
+										${articleBlog.articleDigest}
+                                    </p>
+                                </a>
 							</div>
 						</#list>
                     </div>
@@ -57,14 +57,6 @@
 					});
 				</script>
         </div> --><#-- 2、 页面内容content End -->
-
-        <p>
-            <a href="#">回到顶部</a>
-        </p>
-
-		<#-- 分割线
-		<hr>
- 		-->
 
 		<#include "include/comp-body-footer.ftl">
 

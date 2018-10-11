@@ -40,7 +40,7 @@ public class HelpController extends BaseController {
 		final List<AboutUsInfoBo> us = aboutUsInfoService.queryAll();
 		setModelAttribute("us", us);
 
-		return BlogConstant.WEB_PAGE_URI_PREFIX + "help/aboutus";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "aboutus";
 	}
 
 	// /**

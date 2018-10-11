@@ -55,7 +55,7 @@ public class IndexController extends BaseController {
 		final List<ArticleBlogBo> articleBlogs = articleBlogService.findPageList(pageable);
 		setModelAttribute("articleBlogs", articleBlogs);
 
-		return BlogConstant.WEB_PAGE_URI_PREFIX + "home/welcome";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "welcome";
 		//return BlogConstant.WEB_PAGE_URI_PREFIX + "nothings/retry";
 	}
 

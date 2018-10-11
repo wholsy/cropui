@@ -110,7 +110,7 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 					.setArticleDigest(StringUtils.trim(condition.getArticleDigest()));
 		}
 
-		// 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love'
+		// 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,things'
 		final Map<String, OwenerTagBo> owenerTags = operationOwenerTagIdsBySave(uid, condition.getOwenerTag());
 		articleBlogBo.setOwenerTagIds(owenerTags.keySet());
 
@@ -214,7 +214,7 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 			articleBlogBo.setArticleDigest(StringUtils.trim(condition.getArticleDigest()));
 		}
 
-		/* 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,love' */
+		/* 个人分类,多个分类之间用“,”分隔,eg: '1,3,6,8,things' */
 		// 原分类信息下的使用次数首先全部减一
 		for (final Object owenerTagId : articleBlogBo.getOwenerTagIds()) {
 			if (!owenerTagService.plusCorrelaArticle(Long.parseLong(owenerTagId.toString()), -1)) {
@@ -292,7 +292,7 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 	 * @param uid
 	 *            UID
 	 * @param owenerTagIds
-	 *            个人分类,多个分类之间用“,”分隔,包含已存在分类的主键,和新增分类,eg: '1,3,6,8,love'
+	 *            个人分类,多个分类之间用“,”分隔,包含已存在分类的主键,和新增分类,eg: '1,3,6,8,things'
 	 * @return
 	 * @throws DataVerifyAnomalyException
 	 */

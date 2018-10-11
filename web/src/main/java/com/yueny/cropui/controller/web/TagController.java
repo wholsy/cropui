@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.blog;
+package com.yueny.cropui.controller.web;
 
 import java.util.List;
 import java.util.Map;
