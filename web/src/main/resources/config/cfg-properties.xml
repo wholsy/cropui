@@ -24,16 +24,17 @@
 
 	<!-- 配置中心的配置   -->
 	<bean id="cfgConfigProperties" class="com.taobao.diamond.extend.ExtendPropertiesFactoryBean">
-		<property name="printCfgResults" value="true"></property>
         <property name="configs">
             <list>
             	<!-- groupId  dataId -->
                 <value>common, redis</value>
 
                 <value>blog, app</value>
+                <value>blog, things</value>
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true"/>
+        <property name="printCfgResults" value="true"/>
     </bean>
 
     <!-- 多个 properties加载  -->
@@ -45,6 +46,7 @@
                <ref bean="cfgConfigProperties"/>
            </list>
        </property>
+       <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
     
 </beans>
