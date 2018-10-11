@@ -226,7 +226,7 @@ public final class FileUploadHelper {
 			}
 
 			final SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-			final String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "_" + fileName + "." + fileExtension;
+			final String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "_" + FilenameUtils.getBaseName(fileName) + "." + fileExtension;
 			try {
 				final File uploadedFile = new File(updoadFilePath, newFileName);
 				// 将文件写入服务器上的目录，文件名问newFileName
