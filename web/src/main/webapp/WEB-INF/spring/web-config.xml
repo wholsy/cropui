@@ -197,7 +197,7 @@
 	    	<mvc:exclude-mapping path="/web/**"/>
 			<mvc:exclude-mapping path="/console/**"/>
 			<bean class="com.yueny.rapid.util.web.core.interceptor.WebLoginCheckInterceptor"
-				p:loginDistName="distUser" p:loginUrl="/console/login/login.html">
+				p:loginDistName="distUser" p:loginUrl="/admin/login/login.html">
 			</bean>
 		</mvc:interceptor>
 		

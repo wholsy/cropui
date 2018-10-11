@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.console.blog;
+package com.yueny.cropui.controller.admin.blog;
 
 import java.util.Collections;
 import java.util.List;

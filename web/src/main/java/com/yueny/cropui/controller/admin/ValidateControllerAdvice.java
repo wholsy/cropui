@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.yueny.cropui.controller.console;
+package com.yueny.cropui.controller.admin;
 
 import java.io.Serializable;
 import java.util.HashMap;

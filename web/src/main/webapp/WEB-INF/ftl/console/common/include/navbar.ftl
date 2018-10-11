@@ -16,14 +16,17 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="">
           <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-	            <img src="<#if (distUser.userBaseInfoExp)?? && (distUser.userBaseInfoExp.headTinyImageIoId)??>
+	          <#-- 头像设置 -->
+              <img src="<#if (distUser.userBaseInfoExp)?? && (distUser.userBaseInfoExp.headTinyImageIoId)??>
 		        			${distUser.userBaseInfoExp.headTinyImageIoUrl}
 			        	<#else>
-			            	${ctx}/admin/images/img.jpg
+			            	${ctx}/console/images/img.jpg
 			            </#if>
 			        	" 
 			        alt="${distUser.displayName}'s Photo" 
 			        title="${distUser.displayName}'s Photo">
+                </img>
+
 	            ${distUser.displayName}
 	            <span class="fa fa-angle-down"></span>
           </a>

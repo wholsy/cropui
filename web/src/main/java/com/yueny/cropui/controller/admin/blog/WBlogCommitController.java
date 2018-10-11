@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.console.blog;
+package com.yueny.cropui.controller.admin.blog;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;

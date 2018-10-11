@@ -1,4 +1,4 @@
-package com.yueny.cropui.controller.console;
+package com.yueny.cropui.controller.admin;
 
 import java.util.List;
 
