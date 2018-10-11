@@ -19,6 +19,10 @@
 			<groupId>com.yueny.rapid.lang</groupId>
 			<artifactId>rapid-lang-util</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.yueny.rapid.lang</groupId>
+			<artifactId>rapid-lang-thread</artifactId>
+		</dependency>
 		
 		<!-- 添加Servlet支持 -->
 		<dependency>

@@ -26,8 +26,12 @@ public class UploadResponse extends AbstractMaskBo implements Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = -7149522705294143510L;
-	/** 结果码,0为正常,1为错误 */
-	private int error = 0;
+
+	/** 结果码,1为正常,0为错误 */
+	private int error = 1;
+	// editormd 使用
+	private int success = 1;
+
 	/** 结果描述 */
 	private String message = "";
 	/**

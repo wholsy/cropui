@@ -12277,7 +12277,7 @@
 		 * Note that prior to DataTables 1.9.2 `data` was called `mDataProp`. The
 		 * name change reflects the flexibility of this property and is consistent
 		 * with the naming of mRender. If 'mDataProp' is given, then it will still
-		 * be used by DataTables, as it automatically maps the old name to the new
+		 * be used by DataTables, as it automatically mapper the old name to the new
 		 * if required.
 		 *
 		 *  @type string|int|function|null

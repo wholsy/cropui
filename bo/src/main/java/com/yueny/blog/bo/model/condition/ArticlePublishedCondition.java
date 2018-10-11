@@ -56,7 +56,7 @@ public class ArticlePublishedCondition extends BaseRequest {
 	@NotEmpty(message = "全站文章分类不能为空！")
 	private String categoryTagCode;
 
-	/** 个人分类,多个分类之间用“,”分隔,包含已存在分类的主键,和新增分类,eg: '1,3,6,8,love' */
+	/** 个人分类,多个分类之间用“,”分隔,包含已存在分类的主键,和新增分类,eg: '1,3,6,8,things' */
 	@NotEmpty(message = "个人分类类型不能为空！")
 	private String owenerTag;
 

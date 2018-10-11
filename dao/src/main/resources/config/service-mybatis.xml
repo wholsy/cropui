@@ -4,20 +4,25 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-			http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/beans/spring-beans.xsd
 			http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
-	
-	<mybatis:scan annotation="org.springframework.stereotype.Repository" 
+
+	<!--
+	<mybatis:scan annotation="org.springframework.stereotype.Repository"
 		base-package="com.yueny.kapo.core;com.yueny.blog.dao;"
-		factory-ref="sqlSessionFactory" 
+		factory-ref="sqlSessionFactory"
 		marker-interface="com.yueny.kapo.api.biz.ISqlMapper"/>
-	
+	-->
+	<mybatis:scan base-package="com.yueny.blog.mapper;com.yueny.kapo.core.maps"
+				  factory-ref="sqlSessionFactory"
+				  marker-interface="com.yueny.kapo.api.biz.ISqlMapper"/>
+
 	<!-- 加载myBatis-config.xml配置文件，以及扫描myBatis/目录下每个DAO对应的SQL配置的XML文件 -->  
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="mapperLocations">
 			<list>
-				<value>classpath*:com/yueny/kapo/maps/singleTable-**-Mapping.xml</value>
-				<value>classpath*:com/yueny/blog/**/maps/*Mapping.xml</value>
+				<value>classpath*:/com/yueny/kapo/core/maps/ISingleTableMapper.xml</value>
+				<value>classpath*:com/yueny/blog/mapper/**Mapping.xml</value>
 			</list>
 		</property>
 		<!--  mybatis的核心配置文件 -->

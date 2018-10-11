@@ -42,7 +42,7 @@ public class TagAdminController extends BaseController {
 			return redirectAction("/");
 		}
 
-		return "admin/tag/listtag";
+		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "tag/listtag";
 	}
 
 }

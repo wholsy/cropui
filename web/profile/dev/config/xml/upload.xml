@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
-    <root>F:\workspace\Java\yueny-gitosc\blog\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\blog-web</root>
-    <uri>http://localhost:8090/blog</uri>
-	<upload-base>upload</upload-base>
-    
+	<!-- blog站点的静态资源地址  -->
+    <root>D:\workspace\Java\yueny-gitosc\blog\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\blog-web</root>
+	<!-- 图片服务器根服务-->
+	<uri>file://D:\workspace\Java\yueny-gitosc\blog\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\blog-web</uri>
+	<!-- 图片上传根文件夹-->
+	<upload-base>uploads</upload-base>
+
     <uploads>
 		<upload>
 	        <type>image</type>

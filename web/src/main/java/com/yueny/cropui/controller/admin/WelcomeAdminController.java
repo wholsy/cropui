@@ -29,7 +29,7 @@ public class WelcomeAdminController extends BaseController {
 		setModelAttribute(WebAttributes.ACTION, "INDEX");
 		setModelAttribute("title", "正值少年");
 
-		return "admin/index";
+		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "index";
 	}
 
 }

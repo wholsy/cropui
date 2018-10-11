@@ -119,7 +119,7 @@ public class BlogListController extends BaseController {
 		// 上月新增博文数
 		setModelAttribute("incrForLastMonth", 2);
 
-		return "admin/blog/listblog";
+		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "blog/listblog";
 	}
 
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd ">
+
+	<description>dubbo主配置文件</description>
+	
+	<!--  服务配置   -->
+	<dubbo:application name="${dubbo.application.name}"
+		owner="${dubbo.application.owner}" 
+		organization="${dubbo.application.organization}" />
+		
+	<!-- registry address, used for service to register itself -->
+	<dubbo:registry protocol="${dubbo.provider.registry.protocol}" 
+		address="${dubbo.provider.registry.address}" />
+		
+	<dubbo:protocol name="${dubbo.provider.protocol.name}" 
+		host="${dubbo.provider.protocol.host}"
+		port="${dubbo.provider.protocol.port}"/>
+	
+	<!-- 
+    <dubboDel:protocol name="http" port="8889"/>
+    <dubboDel:protocol name="hessian" port="8890"/>
+    <dubboDel:protocol name="webservice" port="8892"/>
+	 -->
+    
+    <!--  -->
+	<dubbo:consumer timeout="${dubbo.registry.server.timeout}"
+		filter="${dubbo.consumer.filter}"/>
+	
+</beans>

@@ -109,7 +109,7 @@ public class LoginAdminController extends BaseController {
 		setModelAttribute("profile", profileService.profileType().getDesc());
 
 		// 定向到页面
-		return "admin/login";
+		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "login";
 	}
 
 }

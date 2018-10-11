@@ -62,10 +62,10 @@
 	 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving
         up static resources  -->
-    <mvc:resources mapping="/admin/**" location="/admin/"/>
+    <mvc:resources mapping="/console/**" location="/console/"/>
     <mvc:resources mapping="/plug-ins/**" location="/plug-ins/"/>
-    <mvc:resources mapping="/assets/**" location="/assets/"/>
-    <mvc:resources mapping="/upload/**" location="/upload/"/>
+    <mvc:resources mapping="/web/**" location="/web/"/>
+    <mvc:resources mapping="/uploads/**" location="/uploads/"/>
      
 	<!-- or ContentNegotiating  -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
@@ -133,9 +133,9 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
-			<mvc:exclude-mapping path="/adm/**"/>
+			<mvc:exclude-mapping path="/web/**"/>
 			<mvc:exclude-mapping path="/plug-ins/**"/>
-			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/console/**"/>
 			<bean class="com.yueny.rapid.data.log.trace.web.filter.mdc.WebLogMdcHandlerInterceptor"
 				p:generateLogId="true"/>
 		</mvc:interceptor>
@@ -154,8 +154,8 @@
 		<mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/static/**"/>
-			<mvc:exclude-mapping path="/content/**"/>
-			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/console/**"/>
+			<mvc:exclude-mapping path="/web/**"/>
             <bean class="com.yueny.rapid.adapter.digest.web.interceptor.WebDigestLogHandlerInterceptor"
                   c:loggerName="SLOWLY-SERVICE-DIGEST-LOGGER" 
                   p:slowDumpThreshold="100" p:printDigstPigeonhole="true"/>
@@ -194,14 +194,14 @@
 	    	<mvc:exclude-mapping path="/admin/login/**"/>
 	    	<mvc:exclude-mapping path="/admin/service/**"/><!-- 数据服务 -->
 	    	<mvc:exclude-mapping path="/plug-ins/**"/>
-	    	<mvc:exclude-mapping path="/assets/**"/>
-	    	<mvc:exclude-mapping path="/adm/**"/>
+	    	<mvc:exclude-mapping path="/web/**"/>
+			<mvc:exclude-mapping path="/console/**"/>
 			<bean class="com.yueny.rapid.util.web.core.interceptor.WebLoginCheckInterceptor"
 				p:loginDistName="distUser" p:loginUrl="/admin/login/login.html">
 			</bean>
 		</mvc:interceptor>
 		
-		<!-- 8、admin IAccessOpts  -->
+		<!-- 8、console IAccessOpts  -->
 		<mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
             <bean class="com.yueny.rapid.util.web.core.interceptor.AccessHandlerInterceptor"
@@ -214,16 +214,16 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
-			<mvc:exclude-mapping path="/content/**"/>
-			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/web/**"/>
+			<mvc:exclude-mapping path="/console/**"/>
 			<bean class="com.yueny.superclub.util.web.security.interceptors.MeasurementTimesInterceptor"/>
 		</mvc:interceptor>
 		<!-- 4、UserAgent  -->
 		<mvc:interceptor>
 		 	<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
-			<mvc:exclude-mapping path="/content/**"/>
-			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/web/**"/>
+			<mvc:exclude-mapping path="/console/**"/>
 		 	<bean class="com.yueny.rapid.lang.agent.handler.UserAgentResolverHandlerInterceptor"/>
 		</mvc:interceptor>
 
@@ -231,16 +231,16 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
-			<mvc:exclude-mapping path="/content/**"/>
-			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/web/**"/>
+			<mvc:exclude-mapping path="/console/**"/>
 			<bean class="com.yueny.cropui.controller.intercepter.CsrfIntercepter"/>
 		</mvc:interceptor>
 		<!-- 访客统计 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
-			<mvc:exclude-mapping path="/content/**"/>
-			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/web/**"/>
+			<mvc:exclude-mapping path="/console/**"/>
 			<bean class="com.yueny.cropui.controller.intercepter.ViewerIntercepter"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

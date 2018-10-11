@@ -155,7 +155,7 @@ var requirejs, require, define;
 
     /**
      * Constructs an error with a pointer to an URL with more information.
-     * @param {String} id the error ID that maps to an ID on a web page.
+     * @param {String} id the error ID that mapper to an ID on a web page.
      * @param {String} message human readable error.
      * @param {Error} [err] the original error, if there is one.
      *
@@ -287,7 +287,7 @@ var requirejs, require, define;
                 if (name[0].charAt(0) === '.' && baseParts) {
                     //Convert baseName to array, and lop off the last part,
                     //so that . matches that 'directory' and not name of the baseName's
-                    //module. For instance, baseName of 'one/two/three', maps to
+                    //module. For instance, baseName of 'one/two/three', mapper to
                     //'one/two/three.js', but we want the directory, 'one/two' for
                     //this normalization.
                     normalizedBaseParts = baseParts.slice(0, baseParts.length - 1);
@@ -1362,7 +1362,7 @@ var requirejs, require, define;
                 }
 
                 //If there are any "waiting to execute" modules in the registry,
-                //update the maps for them, since their info, like URLs to load,
+                //update the mapper for them, since their info, like URLs to load,
                 //may have changed.
                 eachProp(registry, function (mod, id) {
                     //If module already has init called, since it is too

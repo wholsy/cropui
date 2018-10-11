@@ -2,6 +2,7 @@ package com.yueny.cropui.controller.common;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.yueny.blog.common.BlogConstant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,8 +25,7 @@ public class ErrorController extends BaseController {
 	 */
 	@RequestMapping(value = "/403")
 	public String to403(final HttpServletResponse response) {
-
-		return "110/404";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "110/404";
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class ErrorController extends BaseController {
 	@RequestMapping(value = "/404")
 	public String to404(final HttpServletResponse response) {
 
-		return "110/404";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "110/404";
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class ErrorController extends BaseController {
 	 */
 	@RequestMapping(value = "/error")
 	public String toError(final HttpServletResponse response) {
-		return "110/502";
+		return BlogConstant.WEB_PAGE_URI_PREFIX + "110/502";
 	}
 
 }

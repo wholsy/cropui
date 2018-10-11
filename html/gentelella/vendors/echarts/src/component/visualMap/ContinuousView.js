@@ -20,9 +20,9 @@ define(function(require) {
 
     // Notice:
     // Any "interval" should be by the order of [low, high].
-    // "handle0" (handleIndex === 0) maps to
+    // "handle0" (handleIndex === 0) mapper to
     // low data value: this._dataInterval[0] and has low coord.
-    // "handle1" (handleIndex === 1) maps to
+    // "handle1" (handleIndex === 1) mapper to
     // high data value: this._dataInterval[1] and has high coord.
     // The logic of transform is implemented in this._createBarGroup.
 

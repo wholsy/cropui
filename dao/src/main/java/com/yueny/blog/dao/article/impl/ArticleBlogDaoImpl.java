@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yueny.blog.dao.article.IArticleBlogDao;
-import com.yueny.blog.dao.article.IArticleBlogMapper;
+import com.yueny.blog.mapper.IArticleBlogMapper;
 import com.yueny.blog.dao.cd.ArticleBlogCondition;
 import com.yueny.blog.entry.article.ArticleBlogEntry;
 import com.yueny.kapo.api.annnotation.DbSchemaType;

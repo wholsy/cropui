@@ -3,11 +3,11 @@ $(function () {
             var username = $("#txt_username").val();
             var password = $("#txt_password").val();
             if (username && password) {
-                $.post("${ctx}/admin/login/dologin", {username: username, password: password}, function (rs) {
+                $.post("${ctx}/console/login/dologin", {username: username, password: password}, function (rs) {
                     if (rs["data"] == false) {
                     	$.dialog.alert(rs["message"]);
                     } else {
-                        window.location.href = "${ctx}/admin/welcome.html";
+                        window.location.href = "${ctx}/console/welcome.html";
                     }
                 });
             }

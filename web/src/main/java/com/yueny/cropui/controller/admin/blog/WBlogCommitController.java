@@ -38,10 +38,6 @@ public class WBlogCommitController extends BaseController {
 	/**
 	 * 提交发布文章操作
 	 *
-	 * @param articlePublishedRequest
-	 *            文章发布请求实体
-	 * @param response
-	 *            HttpServletResponse
 	 * @return url
 	 */
 	@RequestMapping(value = "/article/postedit/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

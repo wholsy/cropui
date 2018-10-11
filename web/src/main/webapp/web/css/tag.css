@@ -1,0 +1,48 @@
+.article_meta{
+	color:#999;
+	padding-bottom:5px;
+	border-bottom:1px dashed #d3d3d3;
+	font-size:14px
+}
+.article_meta .from .icon-globe{
+	margin-right:0
+}
+.article_meta span{
+	margin-right:5px
+}
+.article_meta span a{
+	color:#333
+}
+.article_meta span a:hover{
+	color:#009461
+}
+.article_meta span .cut{
+	display:inline
+}
+.article_meta .topics a:hover{
+	background:#CCC
+}
+
+.article_meta .link_view,
+.article_meta .link_comments {
+  display: inline-block;
+}
+/* n人已阅读 */
+.article_meta .link_view {
+  background-image: url("../images/skin-type-icon.png");
+  background-repeat: no-repeat;
+  background-position: 0 -25px;
+  padding-left: 24px;
+}
+/*  */
+.article_meta .link_no_view {
+	background-position: 0 -25px;
+	padding-left: 24px;
+}
+/* 评论 */
+.article_meta .link_comments {
+  background-image: url("../images/skin-type-icon.png");
+  background-repeat: no-repeat;
+  background-position: 0 -43px;
+  padding-left: 17px;
+}

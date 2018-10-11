@@ -178,6 +178,11 @@ public final class FileUploadHelper {
 	// @SneakyThrows(value = DataVerifyAnomalyException.class)
 	public static final List<String> upload(final String uid, final String rootPath, final String uploadType,
 			final Collection<MultipartFile> multFiles) throws DataVerifyAnomalyException {
+		if (StringUtil.isEmpty(rootPath)) {
+			logger.error("根路径配置不存在:{}!", rootPath);
+			throw new DataVerifyAnomalyException(BlogResultCodeType.FILE_UPLOAD_DIRECTORY_NOT_EXIST);
+		}
+
 		if (!getExtMap().containsKey(uploadType)) {
 			logger.error("不支持的上传类型:{}!", uploadType);
 			throw new DataVerifyAnomalyException(BlogResultCodeType.FILE_UPLOAD_TYPE_UNSUPPORT);
@@ -221,7 +226,7 @@ public final class FileUploadHelper {
 			}
 
 			final SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-			final String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExtension;
+			final String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "_" + fileName + "." + fileExtension;
 			try {
 				final File uploadedFile = new File(updoadFilePath, newFileName);
 				// 将文件写入服务器上的目录，文件名问newFileName

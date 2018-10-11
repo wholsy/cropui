@@ -74,7 +74,7 @@ public class CategoriesTagAdminController extends BaseController {
 
 		setModelAttribute("categoriesTag", categoriesTag);
 
-		return "admin/tag/modal/categories_tag_edit_modal";
+		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "tag/modal/categories_tag_edit_modal";
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class CategoriesTagAdminController extends BaseController {
 			return redirectAction("/");
 		}
 
-		return "admin/tag/categories_tag_list";
+		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "tag/categories_tag_list";
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class CategoriesTagAdminController extends BaseController {
 		final OwenerTagBo owenerTag = owenerTagService.queryByCode(owenerTagCode);
 		setModelAttribute("owenerTag", owenerTag);
 
-		return "admin/tag/modal/owener_tag_edit_modal";
+		return BlogConstant.ADMIN_PAGE_URI_PREFIX + "tag/modal/owener_tag_edit_modal";
 	}
 
 	/**

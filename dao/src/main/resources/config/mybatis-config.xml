@@ -12,7 +12,7 @@
 	 -->
 	 
 	<plugins>
-		<plugin interceptor="com.yueny.kapo.core.ibatis.interceptor.PaginationInterceptor">
+		<plugin interceptor="com.yueny.fw.ibatis.interceptor.PaginationInterceptor">
 			<property name="dialect" value="${database.style.config}" />
 		</plugin>
 	</plugins>

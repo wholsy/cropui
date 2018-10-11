@@ -65,7 +65,7 @@ public class ValidateControllerAdvice {
 			/**
 			 * attrMap is
 			 *
-			 * {currentURL=http://localhost:8080/admin/categories_tag/update/,
+			 * {currentURL=http://localhost:8080/console/categories_tag/update/,
 			 * hiddenHttpMethodFilter.FILTERED=true, fieldErrors=[Field error in object
 			 * 'tagsForCategoriesModifyRequest' on field 'tagsForUpategoriesCode': rejected
 			 * value []; codes
@@ -75,12 +75,12 @@ public class ValidateControllerAdvice {
 			 * [tagsForCategoriesModifyRequest.tagsForUpategoriesCode,tagsForUpategoriesCode];
 			 * arguments []; default message [tagsForUpategoriesCode]]; default message
 			 * [不能为空]],
-			 * org.springframework.web.servlet.HandlerMapping.bestMatchingPattern=/admin/categories_tag/update/,
+			 * org.springframework.web.servlet.HandlerMapping.bestMatchingPattern=/console/categories_tag/update/,
 			 * ctx=, encodingFilter.FILTERED=true,
 			 * org.springframework.web.servlet.DispatcherServlet.OUTPUT_FLASH_MAP=FlashMap
 			 * [attributes={}, targetRequestPath=null, targetRequestParams={}],
 			 * measurementStartTime=1516190775827,
-			 * org.springframework.web.servlet.HandlerMapping.pathWithinHandlerMapping=/admin/categories_tag/update/,
+			 * org.springframework.web.servlet.HandlerMapping.pathWithinHandlerMapping=/console/categories_tag/update/,
 			 * org.springframework.web.servlet.HandlerMapping.uriTemplateVariables={}}
 			 *
 			 */

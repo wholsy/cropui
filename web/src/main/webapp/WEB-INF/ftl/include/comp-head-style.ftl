@@ -14,16 +14,16 @@
 	    
 	    <link href="http://static.codealy.com/plugins/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
 	    <link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
-        <link href="${ctx}/assets/plug-ins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://static.codealy.com/plugins/Font-Awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
-        <!-- Fonts -->
-        <link href='${ctx}/assets/css/style/Merriweather_font.css' rel='stylesheet' type='text/css'>
+		<!-- Fonts -->
+        <link href='${ctx}/web/css/style/Merriweather_font.css' rel='stylesheet' type='text/css'>
 
 		<#--
-	    <link href="${ctx}/assets/css/theme/gloal.css" rel="stylesheet" type="text/css">
-		<link href="${ctx}/assets/css/theme/gloal.y.css" rel="stylesheet" type="text/css">
+	    <link href="${ctx}/web/css/theme/gloal.css" rel="stylesheet" type="text/css">
+		<link href="${ctx}/web/css/theme/gloal.y.css" rel="stylesheet" type="text/css">
 		-->
-	    <link href="${ctx}/assets/css/style/style-new.css" rel="stylesheet" type="text/css">
+	    <link href="${ctx}/web/css/style/style-new.css" rel="stylesheet" type="text/css">
 	    
 	    <!-- HTML5 Shim and Respond.js, for IE6-8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
