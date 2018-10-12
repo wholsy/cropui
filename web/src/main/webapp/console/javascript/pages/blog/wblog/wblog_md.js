@@ -212,6 +212,8 @@ function getPostData() {
     var articleTitle = tools.val("articleTitle");
 
     var articleContext_html = editor.getHTML();
+    //alert(articleContext_html);
+
     var articleContextForMd = editor.getMarkdown();
 
     //摘要editor

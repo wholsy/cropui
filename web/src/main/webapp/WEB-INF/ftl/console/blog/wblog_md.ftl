@@ -1,9 +1,7 @@
 <#include "console/common/header_start.ftl">
 	<#-- kindeditor -->
 	<link href="http://static.codealy.com/plugins/markdown/editor.md/css/editormd.css" rel="stylesheet"/>
-
-	<#--<link href="${ctx}/console/style/pages/blog/write/write.css" rel="stylesheet" type="text/css">-->
-
+	<link href="http://static.codealy.com/plugins/markdown/editor.md/css/editormd.preview.css" rel="stylesheet">
 <#include "console/common/header_end.ftl">
 
 <#include "console/common/body_start.ftl">
@@ -200,6 +198,7 @@
 	
 		<script src="${ctx}/console/javascript/pages/blog/wblog/wblog_md.js"></script>
 		<script src="http://static.codealy.com/plugins/markdown/editor.md/editormd.min.js"></script>
+
 		<script type="text/javascript">
 			jsonData={articleBlogId:'0',point:'False',max_point:'100',tohome_max_cnt:'5',isClientUser:0,_0:'0'};
 			var utag2 = "Java".split(',');
