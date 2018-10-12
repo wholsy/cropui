@@ -70,7 +70,7 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 	@Value("${blog.article.digest.sub.length:50}")
 	private Integer blogArticleDigestSubLength;
 	@Value("${blog.article.digest.sub.append.suffix:''}")
-	private Integer blogArticleDigestSubAppendSuffix;
+	private String blogArticleDigestSubAppendSuffix;
 
 	/*
 	 * (non-Javadoc)
