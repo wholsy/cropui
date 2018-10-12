@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.yueny.blog.common.util.markdowntohtml.Markdown2HtmlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,6 +64,14 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 	@Autowired
 	private IOwenerTagService owenerTagService;
 
+	/**
+	 * 博文编辑时，如果摘要为空，则取文章标题的长度
+	 */
+	@Value("${blog.article.digest.sub.length:50}")
+	private Integer blogArticleDigestSubLength;
+	@Value("${blog.article.digest.sub.append.suffix:''}")
+	private String blogArticleDigestSubAppendSuffix;
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -101,7 +111,8 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 			// 过滤html
 //			final String articleDigest = HtmlRegexpUtil.filterHtmlTag(articleBlogBo.getArticleContextForMd(), true);
 			final String articleDigest = articleBlogBo.getArticleContextForMd();
-			articleBlogBo.setArticleDigest(StringUtils.trim(articleDigest));
+			String digMD = StringUtil.substrings(StringUtils.trim(articleDigest), blogArticleDigestSubLength);
+			articleBlogBo.setArticleDigest(Markdown2HtmlUtils.markdownToHtml(digMD) + blogArticleDigestSubAppendSuffix);
 		} else {
 			// 过滤html和空格
 //			articleBlogBo
@@ -201,12 +212,13 @@ public class ArticleBlogManagerServiceImpl extends BaseBiz implements IArticleBl
 		articleBlogBo.setArticleMore(condition.getArticleMore());
 		articleBlogBo.setSelTypeCode(ArticleSelType.getTypeByValue(condition.getSelTypeCode()));
 
-		// 如果'摘要'为空,则取文章标题
+		// 如果'摘要'为空,则取文章内容的前50字，并追加...
 		if (StringUtils.isEmpty(condition.getArticleDigest())) {
 			// 过滤html
 //			final String articleDigest = HtmlRegexpUtil.filterHtmlTag(articleBlogBo.getArticleContextForMd(), true);
 			final String articleDigest = articleBlogBo.getArticleContextForMd();
-			articleBlogBo.setArticleDigest(StringUtils.trim(articleDigest));
+			String digMD = StringUtil.substrings(StringUtils.trim(articleDigest), blogArticleDigestSubLength);
+			articleBlogBo.setArticleDigest(Markdown2HtmlUtils.markdownToHtml(digMD) + blogArticleDigestSubAppendSuffix);
 		} else {
 			// 过滤html和空格
 //			articleBlogBo

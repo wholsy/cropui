@@ -38,7 +38,10 @@
     
     <!-- Animate.css -->
     <link href="http://static.codealy.com/plugins/animate.css/animate.min.css" rel="stylesheet">
-    <link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
+
+    <#--<link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>-->
+    <#--or-->
+    <#--<link href="http://static.codealy.com/plugins/markdown/editor.md/css/editormd.preview.css" rel="stylesheet">-->
 
     <!-- Custom Theme Style -->
     <link href="${ctx}/console/style/custom.css" rel="stylesheet">
