@@ -29,18 +29,21 @@ public class ArticlePublishedCondition extends BaseRequest {
 	private String articleAlias;
 	/** 文章对外ID */
 	private String articleBlogId;
+
 	// @Email(message = "邮箱格式不合法,请输入合法邮箱")
-	/** 文章内容 */
+
+	/** 文章内容， Base64.encode 加密 */
 	@NotEmpty(message = "文章内容不能为空！")
 	@Mask(left = 80, right = 20)
 	private String articleContext;
-	/** 文章MARKDOWN内容 */
+	/** 文章MARKDOWN内容， Base64.encode 加密 */
 	@NotEmpty(message = "文章内容不能为空！")
 	@Mask(left = 80, right = 20)
 	private String articleContextForMd;
-	/** 文章摘要 */
+	/** 文章摘要， Base64.encode 加密 */
 	@Mask(left = 50, right = 20)
 	private String articleDigest;
+
 	/** 更多文章（添加关联的文章url），多个文章地址之间用“,”分隔 */
 	private String articleMore;
 

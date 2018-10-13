@@ -302,11 +302,12 @@ function getPostData() {
     
     var articleContext_html = editor.html();
     //var text = editor.text();
+
     var articleContextForMd = toMarkdown(articleContext_html);
     $.dialog.tips(articleContextForMd);
     
 	//摘要
-    var articleDigest = tools.val("articleDigest");
+    var articleDigest_html = tools.val("articleDigest");
     //个人分类
     var owenerTag = $("#owenerTag").data("ids");
     //文章标签 xxxx
@@ -328,10 +329,10 @@ function getPostData() {
     if (articleBlogId != 0) {
 	  isdraft = $("#isdraft").val();
     }
-    
+
     var data = "selTypeCode=" + selTypeCode + "&articleBlogId=" + articleBlogId + "&articleTitle=" + articleTitle 
-    + "&articleContext=" + articleContext_html + "&articleContextForMd=" + articleContextForMd;
-    data += "&articleDigest=" + articleDigest + "&isdraft=" + isdraft;
+        + "&articleContext=" + Base.encode(articleContext_html) + "&articleContextForMd=" + Base.encode(articleContextForMd);
+    data += "&articleDigest=" + Base.encode(articleDigest_html) + "&isdraft=" + isdraft;
     data += "&articleTag=" + articleTag + "&owenerTag=" + owenerTag;
     data += "&articleAlias=" + articleAlias + "&categoryTagCode=" + categoryTagCode + "&comm=" + comm + "&level=" + 0;
     data += "&isHtml=" + "true";
