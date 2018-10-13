@@ -402,7 +402,7 @@ function save(isPub, auto) {
         link += "&isPub=1";
     }
     link += "&r="+Math.random();
-    alert(data);
+    //alert(data);
 
     $.ajax({
         type:  _form.method,
