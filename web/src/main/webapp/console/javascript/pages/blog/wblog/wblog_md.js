@@ -134,7 +134,7 @@ function new_md_editor(id, o) {
                 "list-ul", "list-ol", "hr", "|",
                 "watch", "preview", "fullscreen", "|",
                 "link", "image", "code-block", "table", "datetime", "html-entities",
-                "help", "info"
+                "help"
             ];
             // return editormd.toolbarModes['simple']; // full, simple, mini
         }
@@ -215,6 +215,7 @@ function getPostData() {
     //alert(articleContext_html);
 
     var articleContextForMd = editor.getMarkdown();
+    //alert(articleContextForMd);
 
     //摘要editor
     var articleDigest_html = editormdDigest.getHTML();
@@ -242,8 +243,8 @@ function getPostData() {
     }
 
     var data = "selTypeCode=" + selTypeCode + "&articleBlogId=" + articleBlogId + "&articleTitle=" + articleTitle
-        + "&articleContext=" + articleContext_html + "&articleContextForMd=" + articleContextForMd;
-    data += "&articleDigest=" + articleDigest_html + "&isdraft=" + isdraft;
+        + "&articleContext=" + Base.encode(articleContext_html) + "&articleContextForMd=" + Base.encode(articleContextForMd);
+    data += "&articleDigest=" + Base.encode(articleDigest_html) + "&isdraft=" + isdraft;
     data += "&articleTag=" + articleTag + "&owenerTag=" + owenerTag;
     data += "&articleAlias=" + articleAlias + "&categoryTagCode=" + categoryTagCode + "&comm=" + comm + "&level=" + 0;
     //data += "&checkcode=" + $("#txtCheckCode").val();
@@ -401,7 +402,8 @@ function save(isPub, auto) {
         link += "&isPub=1";
     }
     link += "&r="+Math.random();
-    
+    alert(data);
+
     $.ajax({
         type:  _form.method,
         url: link,

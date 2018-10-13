@@ -92,7 +92,7 @@
                         </div>
 
 						<#-- 摘要 -->
-						<pre class="prettyprint linenums">
+						<pre class="prettyprint lang-js">
 							<code>
 							${articleBlog.articleDigest}
 							</code>

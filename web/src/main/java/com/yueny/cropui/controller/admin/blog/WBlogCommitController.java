@@ -3,6 +3,7 @@ package com.yueny.cropui.controller.admin.blog;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.yueny.superclub.util.crypt.core.Base64Coder;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -56,6 +57,11 @@ public class WBlogCommitController extends BaseController {
 			}
 
 			final UserAgentResource agent = getCurrentUserAgent();
+
+			// 密文解密
+			condition.setArticleContext(Base64Coder.decryptVal(condition.getArticleContext()));
+			condition.setArticleContextForMd(Base64Coder.decryptVal(condition.getArticleContextForMd()));
+			condition.setArticleDigest(Base64Coder.decryptVal(condition.getArticleDigest()));
 
 			// 从session中获取uid
 			final String uid = "yuanyang";

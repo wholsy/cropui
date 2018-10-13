@@ -33,5 +33,4 @@
 	    <![endif]-->
 
         <script src="http://static.codealy.com/plugins/jquery/v2.1.4/dist/jquery.js"></script>
-
-			
+        <script type="text/javascript" src="${ctx}/web/javascript/js-base64.js"></script>
