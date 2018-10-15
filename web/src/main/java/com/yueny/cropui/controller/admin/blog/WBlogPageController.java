@@ -103,6 +103,8 @@ public class WBlogPageController extends BaseController {
 	@RequestMapping(value = "/wblog.html", method = RequestMethod.GET)
 	public String wblogPage(@RequestParam(value = "articleBlogId", defaultValue = "") final String articleBlogId,
 			final HttpServletResponse response) {
+		logger.info("【博客HTML发布页面】入参:{}", articleBlogId);
+
 		/*
 		 * 存在文章则获取文章数据
 		 *
