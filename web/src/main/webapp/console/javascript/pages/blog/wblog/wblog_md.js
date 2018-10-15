@@ -209,7 +209,7 @@ function checkForm(auto) {
 function getPostData() {
     var secretKeyVal = $("#key").val();
     var key = CryptoJS.enc.Utf8.parse(secretKeyVal);
-    alert("加密密钥：" + secretKeyVal + "-->"+ key);
+    //alert("加密密钥：" + secretKeyVal + "-->"+ key);
 
     var selTypeCode = $("#selType").val();
     var articleBlogId = $("input[name=articleBlogId]").val();
