@@ -86,10 +86,14 @@ public class WBlogCommitController extends BaseController {
 			response.setData(articleBlogId);
 		} catch (final DataVerifyAnomalyException e) {
 			logger.error("【发布文章】出现错误!", e);
+			e.printStackTrace();
+
 			response.setCode(e.getErrorCode());
 			response.setMessage(e.getErrorMsg());
 		} catch (final InvalidException e) {
 			logger.error("【发布文章】出现错误!", e);
+			e.printStackTrace();
+
 			response.setCode(e.getErrorCode());
 			response.setMessage(e.getErrorMsg());
 		}

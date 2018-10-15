@@ -37,6 +37,8 @@ public class ArticleBlogDetailShowActionController extends BaseController {
 	 */
 	@RequestMapping(value = "/article/{articleBlogId}.html", method = { RequestMethod.GET })
 	public String getArticleInfoPage(@PathVariable final String articleBlogId, final HttpServletResponse response) {
+		logger.info("【查看 html 文章详细页面】入参:{}", articleBlogId);
+
 //		return redirectAction("/article/"+articleBlogId+".htm");
 
 		setModelAttribute(WebAttributes.ACTION, "articleInfo");
@@ -122,6 +124,8 @@ public class ArticleBlogDetailShowActionController extends BaseController {
 	@ResponseBody
 	@Deprecated
 	public NormalResponse<ArticleBlogViewBo> getArticleInfoMdData(@PathVariable final String articleBlogId, final HttpServletResponse response) {
+		logger.info("【查看 md 文章数据】入参:{}", articleBlogId);
+
 		setModelAttribute(WebAttributes.ACTION, "articleInfo");
 
 		NormalResponse<ArticleBlogViewBo> resp = new NormalResponse<>();
@@ -138,6 +142,7 @@ public class ArticleBlogDetailShowActionController extends BaseController {
 			resp.setMessage(e.getMessage());
 		}
 
+		logger.info("【查看 md 文章数据】响应:{}", resp);
 		return resp;
 	}
 
