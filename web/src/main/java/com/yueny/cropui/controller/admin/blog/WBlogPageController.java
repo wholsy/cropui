@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +35,12 @@ import com.yueny.superclub.util.web.security.contanst.WebAttributes;
 @Controller
 @RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
 public class WBlogPageController extends BaseController {
+	/**
+	 * 博文编辑时，AES 加解密时的密钥
+	 */
+	@Value("${blog.article.publish.aes.secret.key}")
+	private String blogArticlePublishAesSecretKey;
+
 	@Autowired
 	private IArticleBlogService articleBlogService;
 	@Autowired
@@ -104,6 +111,8 @@ public class WBlogPageController extends BaseController {
 		// 是否是草稿
 		setModelAttribute("isdraft", false);
 		setModelAttribute("html", true);
+
+		setModelAttribute("secretKey", blogArticlePublishAesSecretKey);
 
 		final boolean rs = assemblyMdeditorContext(articleBlogId);
 		if (!rs) {

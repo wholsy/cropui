@@ -207,15 +207,21 @@ function checkForm(auto) {
 
 /* 获取表单数据 */
 function getPostData() {
+    var secretKeyVal = $("#key").val();
+    var key = CryptoJS.enc.Utf8.parse(secretKeyVal);
+    alert("加密密钥：" + secretKeyVal + "-->"+ key);
+
     var selTypeCode = $("#selType").val();
     var articleBlogId = $("input[name=articleBlogId]").val();
     var articleTitle = tools.val("articleTitle");
 
-    var articleContext_html = editor.getHTML();
+    //var articleContext_html = editor.getHTML();
     //alert(articleContext_html);
+    var articleContext_html_post = encrypt(editor.getHTML(), key);
 
-    var articleContextForMd = editor.getMarkdown();
+    //var articleContextForMd = editor.getMarkdown();
     //alert(articleContextForMd);
+    var articleContextForMd_post = encrypt(editor.getMarkdown(), key);
 
     //摘要editor
     var articleDigest_html = editormdDigest.getHTML();
@@ -243,8 +249,10 @@ function getPostData() {
     }
 
     var data = "selTypeCode=" + selTypeCode + "&articleBlogId=" + articleBlogId + "&articleTitle=" + articleTitle
-        + "&articleContext=" + Base.encode(articleContext_html) + "&articleContextForMd=" + Base.encode(articleContextForMd);
-    data += "&articleDigest=" + Base.encode(articleDigest_html) + "&isdraft=" + isdraft;
+        + "&articleContext=" + encodeURIComponent(articleContext_html_post)
+        + "&articleContextForMd=" + encodeURIComponent(articleContextForMd_post)
+        + "&articleDigest=" + encodeURIComponent(encrypt(articleDigest_html, key))
+        + "&isdraft=" + isdraft;
     data += "&articleTag=" + articleTag + "&owenerTag=" + owenerTag;
     data += "&articleAlias=" + articleAlias + "&categoryTagCode=" + categoryTagCode + "&comm=" + comm + "&level=" + 0;
     //data += "&checkcode=" + $("#txtCheckCode").val();
