@@ -82,6 +82,12 @@
 		<dependency>
 			<groupId>com.yueny.rapid.message</groupId>
 			<artifactId>rapid-message-email</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>asm</artifactId>
+					<groupId>asm</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
