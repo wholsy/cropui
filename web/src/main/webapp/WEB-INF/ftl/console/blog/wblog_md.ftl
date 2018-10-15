@@ -23,8 +23,11 @@
 					<div class="x_content">
 			                    
 					            <form method="post" action="" class="form-horizontal">
+									<#-- 加密密钥 -->
+                                    <input id="key" type="hidden" value="${secretKey}"/>
+
 									<input type="hidden" id="articleBlogId" name="articleBlogId" value="${(item.articleBlogId)!''}"/>
-		                            	<input type="hidden" name="isdraft" value="${isdraft?string('1','0')}">
+									<input type="hidden" name="isdraft" value="${isdraft?string('1','0')}">
 									<div id="editType" style="display:none">0</div>
 									
 		                            <p class="subtit">
@@ -195,9 +198,11 @@
 			<#-- 列表信息结束 -->
 		</div>
 		<#-- row end -->
-	
+
+		<script type="text/javascript" src="${ctx}/web/javascript/js-cryptoJS.js"></script>
 		<script src="${ctx}/console/javascript/pages/blog/wblog/wblog_md.js"></script>
 		<script src="http://static.codealy.com/plugins/markdown/editor.md/editormd.min.js"></script>
+
 
 		<script type="text/javascript">
 			jsonData={articleBlogId:'0',point:'False',max_point:'100',tohome_max_cnt:'5',isClientUser:0,_0:'0'};

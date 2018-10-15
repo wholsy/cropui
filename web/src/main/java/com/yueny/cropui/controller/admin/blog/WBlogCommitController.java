@@ -3,9 +3,11 @@ package com.yueny.cropui.controller.admin.blog;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.yueny.superclub.util.crypt.core.AESCoder;
 import com.yueny.superclub.util.crypt.core.Base64Coder;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +35,12 @@ import com.yueny.rapid.lang.util.StringUtil;
 @RestController
 @RequestMapping(value = BlogConstant.ADMIN_URL_PREFIX)
 public class WBlogCommitController extends BaseController {
+	/**
+	 * 博文编辑时，AES 加解密时的密钥
+	 */
+	@Value("${blog.article.publish.aes.secret.key}")
+	private String blogArticlePublishAesSecretKey;
+
 	@Autowired
 	private IArticleBlogManagerService articleManageService;
 
@@ -59,9 +67,9 @@ public class WBlogCommitController extends BaseController {
 			final UserAgentResource agent = getCurrentUserAgent();
 
 			// 密文解密
-			condition.setArticleContext(Base64Coder.decryptVal(condition.getArticleContext()));
-			condition.setArticleContextForMd(Base64Coder.decryptVal(condition.getArticleContextForMd()));
-			condition.setArticleDigest(Base64Coder.decryptVal(condition.getArticleDigest()));
+			condition.setArticleContext(AESCoder.decrypt(condition.getArticleContext(), blogArticlePublishAesSecretKey));
+			condition.setArticleContextForMd(AESCoder.decrypt(condition.getArticleContextForMd(), blogArticlePublishAesSecretKey));
+			condition.setArticleDigest(AESCoder.decrypt(condition.getArticleDigest(), blogArticlePublishAesSecretKey));
 
 			// 从session中获取uid
 			final String uid = "yuanyang";
