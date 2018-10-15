@@ -51,12 +51,6 @@
         <dependency>
 		    <groupId>org.pegdown</groupId>
 		    <artifactId>pegdown</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>parboiled-java</artifactId>
-					<groupId>org.parboiled</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		
 		<dependency>
