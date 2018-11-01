@@ -24,24 +24,24 @@
 	<meta name="format-detection" content="address=no">
 		
     <title>${title}</title>
-    <link rel="shortcut icon" href="http://static.codealy.com/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://static.codealy.com/favicon.ico" type="image/x-icon">
     
     <!-- Bootstrap -->
-    <link href="http://static.codealy.com/plugins/bootstrap/3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://static.codealy.com/plugins/bootstrap/3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="http://static.codealy.com/plugins/Font-Awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://static.codealy.com/plugins/Font-Awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="http://static.codealy.com/plugins/nprogress/nprogress.css" rel="stylesheet">
+    <link href="https://static.codealy.com/plugins/nprogress/nprogress.css" rel="stylesheet">
     
     <#-- Parsley validator -->
-    <link href="http://static.codealy.com/plugins/parsleyjs/src/parsley.css" rel="stylesheet">
+    <link href="https://static.codealy.com/plugins/parsleyjs/src/parsley.css" rel="stylesheet">
     
     <!-- Animate.css -->
-    <link href="http://static.codealy.com/plugins/animate.css/animate.min.css" rel="stylesheet">
+    <link href="https://static.codealy.com/plugins/animate.css/animate.min.css" rel="stylesheet">
 
-    <#--<link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>-->
+    <#--<link href="https://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>-->
     <#--or-->
-    <#--<link href="http://static.codealy.com/plugins/markdown/editor.md/css/editormd.preview.css" rel="stylesheet">-->
+    <#--<link href="https://static.codealy.com/plugins/markdown/editor.md/css/editormd.preview.css" rel="stylesheet">-->
 
     <!-- Custom Theme Style -->
     <link href="${ctx}/console/style/custom.css" rel="stylesheet">

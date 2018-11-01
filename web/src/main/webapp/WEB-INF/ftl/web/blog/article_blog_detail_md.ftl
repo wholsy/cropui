@@ -5,8 +5,8 @@
 	<head>
 		<#--引入公共样式-->
 		<#include "include/comp-head-style.ftl">
-        <link href="http://static.codealy.com/plugins/highlight/styles/default.css" rel="stylesheet">
-        <link href="http://static.codealy.com/plugins/markdown/editor.md/css/editormd.preview.css" rel="stylesheet">
+        <link href="https://static.codealy.com/plugins/highlight/styles/default.css" rel="stylesheet">
+        <link href="https://static.codealy.com/plugins/markdown/editor.md/css/editormd.preview.css" rel="stylesheet">
 
 		<link href="${ctx}/web/css/tag.css" rel="stylesheet" type="text/css">
 	</head>
@@ -135,17 +135,17 @@
 
 	<#include "include/comp-body-footer.ftl">
 
-    <script src="http://static.codealy.com/plugins/markdown/editor.md/lib/marked.min.js"></script>
-    <script src="http://static.codealy.com/plugins/markdown/editor.md/lib/prettify.min.js"></script>
-    <script src="http://static.codealy.com/plugins/markdown/editor.md/lib/raphael.min.js"></script>
-    <script src="http://static.codealy.com/plugins/markdown/editor.md/lib/underscore.min.js"></script>
-    <script src="http://static.codealy.com/plugins/markdown/editor.md/lib/sequence-diagram.min.js"></script>
-    <script src="http://static.codealy.com/plugins/markdown/editor.md/lib/flowchart.min.js"></script>
-    <script src="http://static.codealy.com/plugins/markdown/editor.md/lib/jquery.flowchart.min.js"></script>
+    <script src="https://static.codealy.com/plugins/markdown/editor.md/lib/marked.min.js"></script>
+    <script src="https://static.codealy.com/plugins/markdown/editor.md/lib/prettify.min.js"></script>
+    <script src="https://static.codealy.com/plugins/markdown/editor.md/lib/raphael.min.js"></script>
+    <script src="https://static.codealy.com/plugins/markdown/editor.md/lib/underscore.min.js"></script>
+    <script src="https://static.codealy.com/plugins/markdown/editor.md/lib/sequence-diagram.min.js"></script>
+    <script src="https://static.codealy.com/plugins/markdown/editor.md/lib/flowchart.min.js"></script>
+    <script src="https://static.codealy.com/plugins/markdown/editor.md/lib/jquery.flowchart.min.js"></script>
 
-    <script src="http://static.codealy.com/plugins/markdown/editor.md/editormd.min.js"></script>
+    <script src="https://static.codealy.com/plugins/markdown/editor.md/editormd.min.js"></script>
 
-    <script src="http://static.codealy.com/plugins/highlight/highlight.pack.js"></script>
+    <script src="https://static.codealy.com/plugins/highlight/highlight.pack.js"></script>
 
     <script>
         $(function() {

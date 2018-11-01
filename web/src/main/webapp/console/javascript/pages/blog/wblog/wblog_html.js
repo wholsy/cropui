@@ -8,7 +8,7 @@ var editor = null;
 function pageInit() {
 	KindEditor.ready(function(K) {
 		editor = K.create('textarea[name="articleContext"]', {
-			cssPath : ['http://static.yueny.website/plugins/prettify/prettify.css'],
+			cssPath : ['https://static.codealy.com/plugins/prettify/prettify.css'],
 			allowFileManager : true,
 			fileManagerJson : ctx + '/file_manager_json',
 			allowImageUpload : true,

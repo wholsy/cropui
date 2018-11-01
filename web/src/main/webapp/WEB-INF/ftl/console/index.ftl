@@ -1,12 +1,12 @@
 <#include "console/common/header_start.ftl">
     <!-- 可选 bootstrap-daterangepicker -->
-    <link href="http://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="https://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <!-- bootstrap-progressbar -->
-    <link href="http://static.codealy.com/plugins/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="https://static.codealy.com/plugins/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
    	<!-- icheck -->
-    <link href="http://static.codealy.com/plugins/icheck/skins/flat/green.css" rel="stylesheet">
+    <link href="https://static.codealy.com/plugins/icheck/skins/flat/green.css" rel="stylesheet">
     <!-- JQVMap -->
-    <link href="http://static.codealy.com/plugins/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <link href="https://static.codealy.com/plugins/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 <#include "console/common/header_end.ftl">
 
 <#include "console/common/body_start.ftl">
@@ -534,34 +534,34 @@
 	
 	
 	<!-- Chart.js -->
-    <script src="http://static.codealy.com/plugins/Chart.js/dist/Chart.min.js"></script>
+    <script src="https://static.codealy.com/plugins/Chart.js/dist/Chart.min.js"></script>
     <!-- gauge.js -->
-    <script src="http://static.codealy.com/plugins/gauge.js/dist/gauge.min.js"></script>
+    <script src="https://static.codealy.com/plugins/gauge.js/dist/gauge.min.js"></script>
     <!-- bootstrap-progressbar -->
-    <script src="http://static.codealy.com/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="https://static.codealy.com/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <!-- icheck -->
-    <script src="http://static.codealy.com/plugins/icheck/icheck.js"></script>
+    <script src="https://static.codealy.com/plugins/icheck/icheck.js"></script>
     <!-- Skycons -->
-    <script src="http://static.codealy.com/plugins/skycons/skycons.js"></script>
+    <script src="https://static.codealy.com/plugins/skycons/skycons.js"></script>
     <!-- Flot -->
-    <script src="http://static.codealy.com/plugins/flot/jquery.flot.js"></script>
-    <script src="http://static.codealy.com/plugins/flot/jquery.flot.pie.js"></script>
-    <script src="http://static.codealy.com/plugins/flot/jquery.flot.time.js"></script>
-    <script src="http://static.codealy.com/plugins/flot/jquery.flot.stack.js"></script>
-    <script src="http://static.codealy.com/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="https://static.codealy.com/plugins/flot/jquery.flot.js"></script>
+    <script src="https://static.codealy.com/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="https://static.codealy.com/plugins/flot/jquery.flot.time.js"></script>
+    <script src="https://static.codealy.com/plugins/flot/jquery.flot.stack.js"></script>
+    <script src="https://static.codealy.com/plugins/flot/jquery.flot.resize.js"></script>
     <!-- Flot plugins -->
-    <script src="http://static.codealy.com/plugins/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="http://static.codealy.com/plugins/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="http://static.codealy.com/plugins/flot.curvedlines/curvedLines.js"></script>
+    <script src="https://static.codealy.com/plugins/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="https://static.codealy.com/plugins/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="https://static.codealy.com/plugins/flot.curvedlines/curvedLines.js"></script>
     <!-- DateJS -->
-    <script src="http://static.codealy.com/plugins/DateJS/build/date.js"></script>
+    <script src="https://static.codealy.com/plugins/DateJS/build/date.js"></script>
     <!-- JQVMap -->
-    <script src="http://static.codealy.com/plugins/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="http://static.codealy.com/plugins/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="http://static.codealy.com/plugins/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <script src="https://static.codealy.com/plugins/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="https://static.codealy.com/plugins/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="https://static.codealy.com/plugins/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
-    <script src="http://static.codealy.com/plugins/moment/min/moment.min.js"></script>
-    <script src="http://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="https://static.codealy.com/plugins/moment/min/moment.min.js"></script>
+    <script src="https://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
 <#include "console/common/body_end.ftl">
 

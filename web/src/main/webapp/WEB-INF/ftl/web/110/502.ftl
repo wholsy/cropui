@@ -6,15 +6,15 @@
 
     <title>oh~ 我勒个去！服务呢 T.T</title>
 
-	<link rel="shortcut icon" href="http://static.yueny.website/favicon.ico"/>
+	<link rel="shortcut icon" href="https://static.codealy.com/favicon.ico"/>
     <!-- Bootstrap-->
-    <link rel="stylesheet" href="http://static.yueny.website/js/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://static.codealy.com/js/bootstrap/3.3.5/css/bootstrap.min.css"/>
 	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="http://static.yueny.website/plugins/libs/html5shiv.min.js"></script>
-        <script src="http://static.yueny.website/plugins/libs/respond.min.js"></script>
+        <script src="https://static.codealy.com/plugins/libs/html5shiv.min.js"></script>
+        <script src="https://static.codealy.com/plugins/libs/respond.min.js"></script>
     <![endif]-->
 
     <style>

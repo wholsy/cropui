@@ -2,12 +2,12 @@
 
 	<link rel="stylesheet" href="${ctx}/console/style/pages/tag/tag.css" />
 	
-	<link href="http://static.codealy.com/plugins/nprogress/nprogress.css" rel="stylesheet">
-	<link href="http://static.codealy.com/plugins/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-	<link href="http://static.codealy.com/plugins/select2/dist/css/select2.min.css" rel="stylesheet">
-	<link href="http://static.codealy.com/plugins/switchery/dist/switchery.min.css" rel="stylesheet">
-	<link href="http://static.codealy.com/plugins/starrr/dist/starrr.css" rel="stylesheet">
-	<link href="http://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+	<link href="https://static.codealy.com/plugins/nprogress/nprogress.css" rel="stylesheet">
+	<link href="https://static.codealy.com/plugins/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+	<link href="https://static.codealy.com/plugins/select2/dist/css/select2.min.css" rel="stylesheet">
+	<link href="https://static.codealy.com/plugins/switchery/dist/switchery.min.css" rel="stylesheet">
+	<link href="https://static.codealy.com/plugins/starrr/dist/starrr.css" rel="stylesheet">
+	<link href="https://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 	
 <#include "console/common/header_end.ftl">
 
@@ -348,26 +348,26 @@
 	
 	<script src="${ctx}/console/javascript/pages/tag/categories_tag.js"></script>
 	
-	<script src="http://static.codealy.com/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-	<script src="http://static.codealy.com/plugins/icheck/icheck.min.js"></script>
+	<script src="https://static.codealy.com/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+	<script src="https://static.codealy.com/plugins/icheck/icheck.min.js"></script>
 	<#-- bootstrap-daterangepicker -->
-	<script src="http://static.codealy.com/plugins/moment/2.13.0/min/moment.min.js"></script>
-    <script src="http://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<script src="https://static.codealy.com/plugins/moment/2.13.0/min/moment.min.js"></script>
+    <script src="https://static.codealy.com/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
     <#-- bootstrap-wysiwyg -->
-	<script src="http://static.codealy.com/plugins/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-	<script src="http://static.codealy.com/plugins/jquery.hotkeys/jquery.hotkeys.js"></script>
-	<script src="http://static.codealy.com/plugins/google-code-prettify/src/prettify.js"></script>
+	<script src="https://static.codealy.com/plugins/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+	<script src="https://static.codealy.com/plugins/jquery.hotkeys/jquery.hotkeys.js"></script>
+	<script src="https://static.codealy.com/plugins/google-code-prettify/src/prettify.js"></script>
 	
 	<#-- Switchery -->
-    <script src="http://static.codealy.com/plugins/switchery/dist/switchery.min.js"></script>
+    <script src="https://static.codealy.com/plugins/switchery/dist/switchery.min.js"></script>
     <#-- Select2 -->
-    <script src="http://static.codealy.com/plugins/select2/4.0.3/dist/js/select2.full.min.js"></script>
+    <script src="https://static.codealy.com/plugins/select2/4.0.3/dist/js/select2.full.min.js"></script>
     <#-- Autosize -->
-    <script src="http://static.codealy.com/plugins/autosize/dist/autosize.min.js"></script>
+    <script src="https://static.codealy.com/plugins/autosize/dist/autosize.min.js"></script>
     <#-- jQuery autocomplete -->
-    <script src="http://static.codealy.com/plugins/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <script src="https://static.codealy.com/plugins/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
     <#-- starrr -->
-    <script src="http://static.codealy.com/plugins/starrr/dist/starrr.js"></script>
+    <script src="https://static.codealy.com/plugins/starrr/dist/starrr.js"></script>
 	
 
 </html>

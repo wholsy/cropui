@@ -11,11 +11,11 @@
     <meta name="author" content="云少">
 
     <title>${title}</title>
-    <link rel="shortcut icon" href="http://static.codealy.com/favicon.ico">
+    <link rel="shortcut icon" href="https://static.codealy.com/favicon.ico">
 
     <link href="${ctx}/web/things/love/css/default.css" rel="stylesheet">
 
-    <script src="http://static.codealy.com/plugins/jquery/v2.1.4/dist/jquery.js"></script>
+    <script src="https://static.codealy.com/plugins/jquery/v2.1.4/dist/jquery.js"></script>
 </head>
 
 <body>

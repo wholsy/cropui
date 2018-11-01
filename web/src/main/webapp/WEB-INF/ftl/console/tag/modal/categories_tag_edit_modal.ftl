@@ -122,20 +122,20 @@
 	</form>
 
 		
-	<script src="http://static.codealy.com/plugins/jquery/v2.2.3/dist/jquery.min.js"></script>
+	<script src="https://static.codealy.com/plugins/jquery/v2.2.3/dist/jquery.min.js"></script>
 	<!-- Bootstrap -->
-	<script src="http://static.codealy.com/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="https://static.codealy.com/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
 	
 	<script src="${ctx}/console/javascript/pages/tag/categories_tag-form.js"></script>
 	
 	<!-- jQuery Tags Input -->
 	<script src="${ctx}/console/javascript/custom_public.js"></script>
-    <script src="http://static.codealy.com/plugins/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <script src="https://static.codealy.com/plugins/jquery.tagsinput/src/jquery.tagsinput.js"></script>
     
     <#-- tips -->
 	<!-- lhg dialog js -->
-	<script src="http://static.codealy.com/plugins/lhgdialog/4.2.0/lhgdialog.js?skin=bootstrap2"></script>
+	<script src="https://static.codealy.com/plugins/lhgdialog/4.2.0/lhgdialog.js?skin=bootstrap2"></script>
 	<#-- mask -->
-	<script src="http://static.codealy.com/plugins/mask/blockui/jquery.blockUI.js"></script>
+	<script src="https://static.codealy.com/plugins/mask/blockui/jquery.blockUI.js"></script>
  	<#-- Parsley validator -->
-    <script src="http://static.codealy.com/plugins/parsleyjs/dist/parsley.js"></script>
+    <script src="https://static.codealy.com/plugins/parsleyjs/dist/parsley.js"></script>

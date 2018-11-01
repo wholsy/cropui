@@ -2,7 +2,7 @@
 
 <#include "console/common/header_start.ftl">
 <#-- kindeditor -->
-<link href="http://static.codealy.com/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
+<link href="https://static.codealy.com/plugins/kindeditor/themes/default/default.css" rel="stylesheet"/>
 
 <link href="${ctx}/console/style/pages/blog/write/write.css" rel="stylesheet" type="text/css">
 <link href="${ctx}/console/style/pages/blog/write/main.css" rel="stylesheet" type="text/css">
@@ -203,14 +203,14 @@
 <#-- kindeditor
 <script src="${ctx}/web/plug-ins-del/kindeditor/kindeditor-all.js"></script>
  -->
-<script src="http://static.codealy.com/plugins/kindeditor/kindeditor-all.js"></script>
+<script src="https://static.codealy.com/plugins/kindeditor/kindeditor-all.js"></script>
 
-<script src="http://static.codealy.com/plugins/kindeditor/lang/zh-CN.js"></script>
+<script src="https://static.codealy.com/plugins/kindeditor/lang/zh-CN.js"></script>
 
-<script src="http://static.codealy.com/plugins/markdown/to-markdown.js"></script>
-<script src="http://static.codealy.com/plugins/markdown/markdown.min.js"></script>
+<script src="https://static.codealy.com/plugins/markdown/to-markdown.js"></script>
+<script src="https://static.codealy.com/plugins/markdown/markdown.min.js"></script>
 
-<script src='http://static.codealy.com/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
+<script src='https://static.codealy.com/plugins/jquery/jquery.autocomplete.min.js' type="text/javascript"></script>
 
 <#include "console/common/body_end.ftl">
 

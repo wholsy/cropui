@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+pre[name=code] {
+  margin:6px 0px;
+  padding:10px;
+  background-color:#ffffec;
+}
+
+pre {
+  margin: 0;
+  background-color:#f0f0f0;
+}
+
+/* pre in prettify */
+pre.prettyprint {
+  white-space: pre-wrap
+}
+
+
+/* pre, code */
+pre, code {
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  /*display: block;*/
+  /*font-size: 14px;*/
+  /*line-height: 22px;*/
+  /*overflow-x: auto;*/
+  /*white-space: pre;*/
+  /*border-radius: 4px;*/
+  /*padding: 8px;*/
+  /*font-family: 'Source Code Pro','DejaVu Sans Mono','Ubuntu Mono','Anonymous Pro','Droid Sans Mono',Menlo,Monaco,Consolas,Inconsolata,Courier,monospace,"PingFang SC","Microsoft YaHei",sans-serif;*/
+}
+
+code { color: #7a7a7a; }
+
+pre { padding: 1.125em; font-size: 1.125rem; line-height: 1.11; overflow-x: scroll; margin-bottom: 0.88em; }

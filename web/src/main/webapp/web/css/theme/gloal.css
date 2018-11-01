@@ -162,16 +162,7 @@ select {
 	padding:2px; border:solid 1px #ccc; 
 }
 
-pre[name=code] { 
-	margin:6px 0px; 
-	padding:10px; 
-	background-color:#ffffec; 
-}
-pre { 
-	margin:4px 0px; 
-	background-color:#f0f0f0;
-}
-p { 
+p {
 	margin:4px 0px; 
 	padding:2px 0px; 
 }

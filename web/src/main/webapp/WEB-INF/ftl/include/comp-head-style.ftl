@@ -10,11 +10,11 @@
 	    <meta name="author" content="云少">
 	    
 	    <title>${title}</title>
-	    <link rel="shortcut icon" href="http://static.codealy.com/favicon.ico">
+	    <link rel="shortcut icon" href="https://static.codealy.com/favicon.ico">
 	    
-	    <link href="http://static.codealy.com/plugins/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
-	    <link href="http://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
-        <link href="http://static.codealy.com/plugins/Font-Awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+	    <link href="https://static.codealy.com/plugins/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="https://static.codealy.com/plugins/prettify/prettify.css" rel="stylesheet" type="text/css"/>
+        <link href="https://static.codealy.com/plugins/Font-Awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 		<!-- Fonts -->
         <link href='${ctx}/web/css/style/Merriweather_font.css' rel='stylesheet' type='text/css'>
@@ -24,13 +24,14 @@
 		<link href="${ctx}/web/css/theme/gloal.y.css" rel="stylesheet" type="text/css">
 		-->
 	    <link href="${ctx}/web/css/style/style-new.css" rel="stylesheet" type="text/css">
+        <link href="${ctx}/web/css/style/code.css" rel="stylesheet" type="text/css">
 	    
 	    <!-- HTML5 Shim and Respond.js, for IE6-8 support of HTML5 elements and media queries -->
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	    <!--[if lt IE 9]>
-	        <script src="http://static.codealy.com/plugins/libs/html5shiv.min.js"></script>
-	        <script src="http://static.codealy.com/plugins/libs/respond.min.js"></script>
+	        <script src="https://static.codealy.com/plugins/libs/html5shiv.min.js"></script>
+	        <script src="https://static.codealy.com/plugins/libs/respond.min.js"></script>
 	    <![endif]-->
 
-        <script src="http://static.codealy.com/plugins/jquery/v2.1.4/dist/jquery.js"></script>
+        <script src="https://static.codealy.com/plugins/jquery/v2.1.4/dist/jquery.js"></script>
         <script type="text/javascript" src="${ctx}/web/javascript/js-base64.js"></script>
